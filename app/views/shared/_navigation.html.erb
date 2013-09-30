@@ -1,0 +1,13 @@
+<nav class="nav">
+	<ul>
+		<li><%= link_to "Home", photos_path %></li>
+		<% if current_user %>
+			<li><%= link_to "Upload", new_photo_path %></li>
+			<li><%= link_to "Tags", tags_path %></li>
+			<li><%= link_to "Log Out", logout_path %></li>
+		<% else %>
+			<li><%= link_to "Log in", login_path %></li>
+			<li><%= link_to "Register", register_path %></li>
+		<% end %>
+	</ul>
+</nav>

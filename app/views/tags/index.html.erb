@@ -1,0 +1,11 @@
+<div id="tag-index">
+	<% @tags.each do |tag| %>
+
+	<span class="tag"><%= tag.name %></span> | 
+	<%= link_to 'Edit', edit_tag_path(tag) %> | 
+	<%= link_to 'Delete', tag, :method => :delete %>
+	<br>
+
+
+	<% end %>
+</div>

@@ -1,0 +1,12 @@
+--- 
+cursor_positions: 
+  - :path: app/models/photo.rb
+    :cursor_offset: 151
+    :timestamp: 2013-09-19 20:13:12 +02:00
+  - :path: app/models/tagging.rb
+    :cursor_offset: 72
+    :timestamp: 2013-09-24 22:31:42 +02:00
+  - :path: app/models/tag.rb
+    :cursor_offset: 0
+    :timestamp: 2013-09-17 14:49:18 +02:00
+files_to_retain: 0

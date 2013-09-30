@@ -1,0 +1,32 @@
+<%= form_for @user do |f| %>
+
+	<%= render partial: 'shared/form_errors', :locals => {:item => @user} %>
+
+	<div class="form-fields">
+		<div class="field clearfix">
+			<%= f.label :username, "Username:" %>
+			<%= f.text_field :username %>
+		</div>
+		<div class="field clearfix">
+			<%= f.label :subdomain, "Subdomain:" %>
+			<%= f.text_field :subdomain %>
+		</div>
+		<br>
+		<div class="field clearfix">
+			<%= f.label :email, "Email:" %>
+			<%= f.text_field :email %>
+		</div>
+		<div class="field clearfix">
+			<%= f.label :password, "Password:" %>
+			<%= f.password_field :password %>
+		</div>
+		<div class="field clearfix">
+			<%= f.label :password_confirmation, "Password again:" %>
+			<%= f.password_field :password_confirmation %>
+		</div>
+		<div class="clearfix">
+			<%= f.submit "Register", class: "register submit" %>
+		</div>
+	</div>
+
+<% end %>

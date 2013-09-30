@@ -1,0 +1,100 @@
+1380054702
+#send_password_reset	/Users/ohenrik/Sites/imagesite/spec/modules/user_spec.rb	describe "#send_password_reset" do
+AddAuthTokenToUsers	/Users/ohenrik/Sites/imagesite/db/migrate/20130922180642_add_auth_token_to_users.rb	class AddAuthTokenToUsers 
+AddPasswordResetToUsers	/Users/ohenrik/Sites/imagesite/db/migrate/20130922172420_add_password_reset_to_users.rb	class AddPasswordResetToUsers 
+Application	/Users/ohenrik/Sites/imagesite/config/application.rb	  class Application 
+ApplicationController	/Users/ohenrik/Sites/imagesite/app/controllers/application_controller.rb	class ApplicationController 
+ApplicationHelper	/Users/ohenrik/Sites/imagesite/app/helpers/application_helper.rb	module ApplicationHelper
+CreatePhotos	/Users/ohenrik/Sites/imagesite/db/migrate/20130831143746_create_photos.rb	class CreatePhotos 
+CreateTaggings	/Users/ohenrik/Sites/imagesite/db/migrate/20130916112553_create_taggings.rb	class CreateTaggings 
+CreateTags	/Users/ohenrik/Sites/imagesite/db/migrate/20130916112441_create_tags.rb	class CreateTags 
+CreateUsers	/Users/ohenrik/Sites/imagesite/db/migrate/20130920123633_create_users.rb	class CreateUsers 
+ImageUploader	/Users/ohenrik/Sites/imagesite/app/uploaders/image_uploader.rb	class ImageUploader 
+Imagesite	/Users/ohenrik/Sites/imagesite/config/application.rb	module Imagesite
+MailerMacros	/Users/ohenrik/Sites/imagesite/spec/support/mailer_macros.rb	module MailerMacros
+PasswordResets	/Users/ohenrik/Sites/imagesite/spec/requests/password_resets_spec.rb	describe "PasswordResets" do
+PasswordResetsController	/Users/ohenrik/Sites/imagesite/app/controllers/password_resets_controller.rb	class PasswordResetsController 
+PasswordResetsHelper	/Users/ohenrik/Sites/imagesite/app/helpers/password_resets_helper.rb	module PasswordResetsHelper
+Photo	/Users/ohenrik/Sites/imagesite/app/models/photo.rb	class Photo 
+PhotoTest	/Users/ohenrik/Sites/imagesite/test/models/photo_test.rb	class PhotoTest 
+PhotosController	/Users/ohenrik/Sites/imagesite/app/controllers/photos_controller.rb	class PhotosController 
+PhotosControllerTest	/Users/ohenrik/Sites/imagesite/test/controllers/photos_controller_test.rb	class PhotosControllerTest 
+PhotosHelper	/Users/ohenrik/Sites/imagesite/app/helpers/photos_helper.rb	module PhotosHelper
+PhotosHelperTest	/Users/ohenrik/Sites/imagesite/test/helpers/photos_helper_test.rb	class PhotosHelperTest 
+RemoveTagFromPhotos	/Users/ohenrik/Sites/imagesite/db/migrate/20130916114231_remove_tag_from_photos.rb	class RemoveTagFromPhotos 
+Sends user password reset url	/Users/ohenrik/Sites/imagesite/spec/mailers/user_mailer_spec.rb	it "Sends user password reset url" do
+SessionsController	/Users/ohenrik/Sites/imagesite/app/controllers/sessions_controller.rb	class SessionsController 
+SessionsControllerTest	/Users/ohenrik/Sites/imagesite/test/controllers/sessions_controller_test.rb	class SessionsControllerTest 
+SessionsHelper	/Users/ohenrik/Sites/imagesite/app/helpers/sessions_helper.rb	module SessionsHelper
+SessionsHelperTest	/Users/ohenrik/Sites/imagesite/test/helpers/sessions_helper_test.rb	class SessionsHelperTest 
+Tag	/Users/ohenrik/Sites/imagesite/app/models/tag.rb	class Tag 
+TagTest	/Users/ohenrik/Sites/imagesite/test/models/tag_test.rb	class TagTest 
+Tagging	/Users/ohenrik/Sites/imagesite/app/models/tagging.rb	class Tagging 
+TaggingTest	/Users/ohenrik/Sites/imagesite/test/models/tagging_test.rb	class TaggingTest 
+TagsController	/Users/ohenrik/Sites/imagesite/app/controllers/tags_controller.rb	class TagsController 
+TagsControllerTest	/Users/ohenrik/Sites/imagesite/test/controllers/tags_controller_test.rb	class TagsControllerTest 
+TagsHelper	/Users/ohenrik/Sites/imagesite/app/helpers/tags_helper.rb	module TagsHelper
+TagsHelperTest	/Users/ohenrik/Sites/imagesite/test/helpers/tags_helper_test.rb	class TagsHelperTest 
+TestCase	/Users/ohenrik/Sites/imagesite/test/test_helper.rb	class ActiveSupport::TestCase
+User	/Users/ohenrik/Sites/imagesite/app/models/user.rb	class User 
+UserMailer	/Users/ohenrik/Sites/imagesite/app/mailers/user_mailer.rb	class UserMailer 
+UsersController	/Users/ohenrik/Sites/imagesite/app/controllers/users_controller.rb	class UsersController 
+UsersControllerTest	/Users/ohenrik/Sites/imagesite/test/controllers/users_controller_test.rb	class UsersControllerTest 
+UsersHelper	/Users/ohenrik/Sites/imagesite/app/helpers/users_helper.rb	module UsersHelper
+UsersHelperTest	/Users/ohenrik/Sites/imagesite/test/helpers/users_helper_test.rb	class UsersHelperTest 
+authorize	/Users/ohenrik/Sites/imagesite/app/controllers/application_controller.rb		def authorize
+change	/Users/ohenrik/Sites/imagesite/db/migrate/20130922180642_add_auth_token_to_users.rb	  def change
+change	/Users/ohenrik/Sites/imagesite/db/migrate/20130922172420_add_password_reset_to_users.rb	  def change
+change	/Users/ohenrik/Sites/imagesite/db/migrate/20130920123633_create_users.rb	  def change
+change	/Users/ohenrik/Sites/imagesite/db/migrate/20130916114231_remove_tag_from_photos.rb	  def change
+change	/Users/ohenrik/Sites/imagesite/db/migrate/20130916112553_create_taggings.rb	  def change
+change	/Users/ohenrik/Sites/imagesite/db/migrate/20130916112441_create_tags.rb	  def change
+change	/Users/ohenrik/Sites/imagesite/db/migrate/20130831143746_create_photos.rb	  def change
+create	/Users/ohenrik/Sites/imagesite/app/controllers/users_controller.rb		def create 
+create	/Users/ohenrik/Sites/imagesite/app/controllers/sessions_controller.rb	  def create
+create	/Users/ohenrik/Sites/imagesite/app/controllers/photos_controller.rb	  def create
+create	/Users/ohenrik/Sites/imagesite/app/controllers/password_resets_controller.rb	  def create
+current_user	/Users/ohenrik/Sites/imagesite/app/controllers/application_controller.rb		def current_user
+delivers email to user	/Users/ohenrik/Sites/imagesite/spec/modules/user_spec.rb	it "delivers email to user" do
+destroy	/Users/ohenrik/Sites/imagesite/app/controllers/users_controller.rb		def destroy
+destroy	/Users/ohenrik/Sites/imagesite/app/controllers/tags_controller.rb		def destroy
+destroy	/Users/ohenrik/Sites/imagesite/app/controllers/sessions_controller.rb	  def destroy
+destroy	/Users/ohenrik/Sites/imagesite/app/controllers/photos_controller.rb	  def destroy
+does not email invalid user when requesting password reset	/Users/ohenrik/Sites/imagesite/spec/requests/password_resets_spec.rb	it "does not email invalid user when requesting password reset" do
+edit	/Users/ohenrik/Sites/imagesite/app/controllers/photos_controller.rb	  def edit
+edit	/Users/ohenrik/Sites/imagesite/app/controllers/password_resets_controller.rb	  def edit
+edit_tag_list	/Users/ohenrik/Sites/imagesite/app/models/photo.rb		def edit_tag_list
+edit_tag_list=	/Users/ohenrik/Sites/imagesite/app/models/photo.rb		def edit_tag_list=(names)
+emails user when requesting password reset	/Users/ohenrik/Sites/imagesite/spec/requests/password_resets_spec.rb	it "emails user when requesting password reset" do
+extension_white_list	/Users/ohenrik/Sites/imagesite/app/uploaders/image_uploader.rb	  def extension_white_list
+generate_token	/Users/ohenrik/Sites/imagesite/app/models/user.rb		def generate_token(column)
+generates a unique password_reset_token each time	/Users/ohenrik/Sites/imagesite/spec/modules/user_spec.rb	it "generates a unique password_reset_token each time" do
+imgLoaded	/Users/ohenrik/Sites/imagesite/app/assets/javascripts/jquery.isotope.js	function imgLoaded( event )
+index	/Users/ohenrik/Sites/imagesite/app/controllers/tags_controller.rb		def index
+index	/Users/ohenrik/Sites/imagesite/app/controllers/photos_controller.rb	  def index
+last_email	/Users/ohenrik/Sites/imagesite/spec/support/mailer_macros.rb		def last_email
+new	/Users/ohenrik/Sites/imagesite/app/controllers/users_controller.rb		def new 
+new	/Users/ohenrik/Sites/imagesite/app/controllers/sessions_controller.rb	  def new
+new	/Users/ohenrik/Sites/imagesite/app/controllers/photos_controller.rb	  def new
+new	/Users/ohenrik/Sites/imagesite/app/controllers/password_resets_controller.rb	  def new
+password_reset	/Users/ohenrik/Sites/imagesite/spec/mailers/user_mailer_spec.rb	describe "password_reset" do
+password_reset	/Users/ohenrik/Sites/imagesite/app/mailers/user_mailer.rb	  def password_reset(user)
+photo_params	/Users/ohenrik/Sites/imagesite/app/controllers/photos_controller.rb	    def photo_params
+reset_email	/Users/ohenrik/Sites/imagesite/spec/support/mailer_macros.rb		def reset_email
+saves the time the password reset was sent	/Users/ohenrik/Sites/imagesite/spec/modules/user_spec.rb	it "saves the time the password reset was sent" do
+send_password_reset	/Users/ohenrik/Sites/imagesite/app/models/user.rb		def send_password_reset
+session_params	/Users/ohenrik/Sites/imagesite/app/controllers/sessions_controller.rb		def session_params
+set_photo	/Users/ohenrik/Sites/imagesite/app/controllers/photos_controller.rb	    def set_photo
+set_session	/Users/ohenrik/Sites/imagesite/app/controllers/sessions_controller.rb		def set_session
+set_tag	/Users/ohenrik/Sites/imagesite/app/controllers/tags_controller.rb	    def set_tag
+set_user	/Users/ohenrik/Sites/imagesite/app/controllers/users_controller.rb		def set_user
+show	/Users/ohenrik/Sites/imagesite/app/controllers/photos_controller.rb	  def show
+store_dir	/Users/ohenrik/Sites/imagesite/app/uploaders/image_uploader.rb	  def store_dir
+tag_counts	/Users/ohenrik/Sites/imagesite/app/models/photo.rb		def self.tag_counts
+tag_list	/Users/ohenrik/Sites/imagesite/app/models/photo.rb		def tag_list
+tagged_with	/Users/ohenrik/Sites/imagesite/app/models/photo.rb		def self.tagged_with(name)
+triggerCallback	/Users/ohenrik/Sites/imagesite/app/assets/javascripts/jquery.isotope.js	function triggerCallback()
+update	/Users/ohenrik/Sites/imagesite/app/controllers/photos_controller.rb	  def update
+update	/Users/ohenrik/Sites/imagesite/app/controllers/password_resets_controller.rb	  def update
+user_params	/Users/ohenrik/Sites/imagesite/app/controllers/users_controller.rb		def user_params
+user_reset_params	/Users/ohenrik/Sites/imagesite/app/controllers/password_resets_controller.rb		def user_reset_params

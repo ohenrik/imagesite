@@ -1,0 +1,23 @@
+<%= form_tag sessions_path do %>
+
+	<div class="form-fields">
+		<div class="field clearfix">	
+		<%= label_tag :username, "Username:" %>
+		<%= text_field_tag :username, params[:username] %>
+		</div>
+		<div class="field clearfix">
+		<%= label_tag :password, "Password:" %>
+		<%= password_field_tag :password %>
+		</div>
+		<div class="remember-me clearfix">
+		<%= check_box_tag :remember_me, 1, params[:remember_me], class: "remember-me-checkbox" %>
+		<%= label_tag :remember_me, "Remember me", class: "remember-me-label" %>
+		<%= submit_tag "Log in", class: "login-button submit"  %>
+		</div>
+
+		<div class="clearfix password-reset-link">
+			<%= link_to "Whoops! Forgot your password?", new_password_reset_path %>
+		</div>
+	</div>
+
+<% end %>

@@ -1,0 +1,71 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables";
+
+.form-fields {
+	font-size: 18px;
+	font-family: $font;
+	color: $gray4;
+	width: 320px;
+	margin: 50px auto 100px;
+	label {
+		margin-right: 15px;
+		float: left;
+	}
+	input {
+		float: left;
+		color: $gray1;
+		&[type="submit"] {
+			color: $gray4;
+			float: right;
+			background-color: transparent;
+			&:hover {
+				color: $gray1;
+			}
+		}
+	}
+	.field {
+		margin-bottom: 30px;
+		border-bottom: 1px solid $gray4;
+		text-wrap: none;
+	}
+	.password-reset-link {
+		display: table;
+		margin: 50px auto;
+		font-size: 14px;
+		a, a:link, a:visited {
+			color: $gray4;
+		}
+		a:hover, a:active {
+			color: $gray1;
+			text-decoration: none;
+		}
+	}
+	.remember-me {
+		.remember-me-checkbox {
+			display: none;	
+		}
+		.remember-me-label {
+			line-height: 21px;
+			font-size: 14px;
+			padding-left: 20px;
+			cursor: pointer;
+			-webkit-user-select: none; /* Chrome/Safari */        
+			-moz-user-select: none; /* Firefox */
+			-ms-user-select: none; /* IE10+ */
+		}
+		input[type=checkbox] + label {
+				background-image: url(image_path('checkbox.png'));
+				background-position: 0 -2px;
+				background-repeat: no-repeat;
+				color: $gray5;
+		}
+		input[type=checkbox]:checked + label {
+				background-image: url(image_path('checkbox-checked.png'));
+				background-position: 0 -2px;
+				background-repeat: no-repeat;
+				color: $gray4;
+		}
+	}
+}

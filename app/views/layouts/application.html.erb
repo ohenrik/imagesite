@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Imagesite</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+	<div id="header" class="header">
+
+		<div class="container">
+			<%= link_to root_path do %>
+				<div class="logo">
+					<table>
+						<tr>
+							<td>
+								IM
+							</td>
+						</tr>
+					</table>					
+				</div>
+			<% end %>
+
+			<%= render 'shared/navigation' %>
+
+		</div> <!-- container -->
+
+	</div>
+
+
+	<div class="main">
+		<div class="container">
+			<%= render 'shared/notice' %>
+			<%= yield %>
+		</div>
+	</div>
+	<div id="footer" class="footer">  </div>
+
+</body>
+</html>

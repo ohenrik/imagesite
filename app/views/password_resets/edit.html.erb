@@ -1,0 +1,17 @@
+<%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
+
+<% if @user.errors.any? %>
+	
+	<% @user.errors.full_message.each do |message| %>
+		<p><%= message %></p>
+	<% end %>
+<% end %>
+
+<%= f.label :password %>
+<%= f.password_field :password %>
+<br>
+<%= f.label :password_confirmation %>
+<%= f.password_field :password_confirmation %>
+<br>
+<%= f.submit "Update Password" %>
+<% end %>

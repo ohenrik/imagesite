@@ -1,0 +1,13 @@
+<%= form_tag password_resets_path, :method => :post do %>
+
+	<div class="form-fields">
+		<div class="field clearfix">	
+			<%= label_tag :email, "Your email:" %>
+			<%= text_field_tag :email, params[:email] %>
+		</div>
+		<div class="clearfix">
+			<%= submit_tag "Reset Password" %>
+		</div>
+	</div>
+
+<% end %>

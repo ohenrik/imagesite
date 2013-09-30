@@ -1,0 +1,107 @@
+@import "variables";
+@font-face {
+  font-family: 'neutra';
+  src:font-url('NeutraText-Demi.eot');
+  src:font-url('NeutraText-Demi.eot?#iefix') format('embedded-opentype'),
+    font-url('NeutraText-Demi.svg#neutra') format('svg'),
+    font-url('NeutraText-Demi.woff') format('woff'),
+    font-url('NeutraText-Demi.ttf') format('truetype');
+}
+body {
+	background-color: $gray1;
+	font-family: $font;
+	color: $gray1;
+	font-size: 14px;
+}
+p {
+	font-family: $font;
+	font-size: 14px;
+	color: $gray1;
+	line-height: 150%;
+}
+a {
+	background-color: transparent;
+	line-height: 150%;
+	&:visited, &:link { 
+		text-decoration: none;
+		font-family: $font;
+		font-size: 14px;
+		color: $gray1;
+	}
+	&:hover, &:active { 
+		text-decoration: underline;
+		background-color: transparent;
+		color: $gray1;
+	}
+}
+.container {
+	max-width: 1030px;
+	margin: 0 auto;
+}
+#header {
+	height: 100px;
+	background-color: $gray1;
+}
+.alert {
+	background-image: url(image_path('alert.png'));
+}
+.notice {
+	background-image: url(image_path('notice.png'));
+}
+.notice, .alert {
+	display: table;
+	margin: 0 auto 15px;
+	padding-left: 41px;
+	font-size: 18px;
+	color: $gray5;
+	background-position: 0 center;
+	background-repeat: no-repeat;
+	line-height: 26px;
+	&:hover {
+		background-image: url(image_path('remove-notice.png'));
+	}
+}
+.nav {
+	float: right;
+	margin: 40px 15px 0;
+	a {
+		font-family: neutra;
+		color: white;
+		font-size: 18px;
+		font-weight: 100;
+		text-decoration: none;
+		&:hover, &:visited, &:active {
+			color: white;
+			background-color: transparent;
+		}
+	}
+	li {
+		display: inline;
+		margin-left: 25px;
+	}
+}
+.main {
+	padding: 50px 0 50px;
+	background-color: white;
+}
+.logo {
+	float: left;
+	width: 90px;
+	height: 85px;
+	margin: 0 15px;
+	padding: 10px 5px 5px;
+	background-color: $red;
+	position: relative;
+	td {
+		font-family: "neutra", sans-serif;
+		width: 90px;
+		height: 90px;
+		text-align: center;
+		vertical-align: middle;
+		color: white;
+		font-size: 55px;
+	}
+}
+#footer {
+	
+}

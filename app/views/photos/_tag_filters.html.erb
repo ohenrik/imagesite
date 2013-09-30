@@ -1,0 +1,6 @@
+<ul id="filters">
+  <li><a href="#" data-filter="*">show all</a></li>
+    <% Tag.all.each do |tag| %>
+      <li><a href="#" data-filter=".<%= tag.name %>"><%= tag.name %></a></li>
+    <% end %>
+</ul>
