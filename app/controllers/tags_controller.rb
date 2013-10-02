@@ -3,6 +3,9 @@ class TagsController < ApplicationController
 
 	before_filter :authorize
 
+	# Find the tenant
+	around_filter :scope_current_tenant
+
 	def index
 		@tags = Tag.all
 	end

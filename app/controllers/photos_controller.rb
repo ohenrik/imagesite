@@ -2,9 +2,26 @@ class PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
   before_filter :authorize, except: [:show, :index]
 
+  # Find the tenant
+  around_filter :scope_current_tenant
+
+  # Check if the tenant is in his own subdomain
+  
+
   # GET /photos
   # GET /photos.json
   def index
+    if params[:tag] 
+      @photos = Tag.find_by_name(params[:tag]).try(:photos)
+      #@photo = Photo.tagged_with(params[:tag])
+    else     
+      @photos = Photo.all
+    end
+  end
+
+  # GET /photos
+  # GET /photos.json
+  def list
     if params[:tag] 
       @photos = Tag.find_by_name(params[:tag]).try(:photos)
       #@photo = Photo.tagged_with(params[:tag])

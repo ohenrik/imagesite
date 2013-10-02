@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       else
         cookies[:auth_token] = user.auth_token
       end
-  		redirect_to root_url, notice: "You are now loged in."
+  		redirect_to root_url(:subdomain => "#{current_user.subdomain}"), notice: "You are now loged in."
   	else
   		flash.now.alert = "Email or password is invalid"
   		render "new"
@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
   def destroy
   	#session[:user_id] = nil
     cookies.delete(:auth_token)
-  	redirect_to root_url, notice: "Loged out"
+  	redirect_to root_url(:subdomain => false), notice: "Loged out"
   end
 
 private
