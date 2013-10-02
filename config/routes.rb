@@ -4,7 +4,7 @@ Imagesite::Application.routes.draw do
   get 'register', to: 'users#new', as: 'register'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
-
+  get 'home', to: 'static_pages#home', as: 'home'
   
   resources :sessions
   resources :users
@@ -15,7 +15,7 @@ Imagesite::Application.routes.draw do
   get 'photos/tags/:tag' => 'photos#index', as: :filter_tag
 
 
-  root :to => 'photos#index'
+  root :to => 'static_pages#home'
   
   
 
