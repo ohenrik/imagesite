@@ -28,6 +28,10 @@ Imagesite::Application.configure do
   config.assets.debug = true
 
   # Update before deploy
-  config.action_mailer.default_url_options = { :host => "imagesite.dev" }
+  config.action_mailer.default_url_options = { :host => "imagesite.local" }
+
+
+  # Solving the custom session problem
+  config.middleware.use "CustomDomainCookie", ".imagesite.dev"
   
 end

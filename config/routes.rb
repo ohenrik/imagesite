@@ -8,17 +8,20 @@ Imagesite::Application.routes.draw do
   
   resources :sessions
   resources :users
-  resources :photos
-  get 'photo/list' => 'photos#list', as: :list
-  resources :tags
   resources :password_resets
 
-  get 'photos/tags/:tag' => 'photos#index', as: :filter_tag
+ 
 
-  scope :constraints => lambda {|req| req.subdomain.present? && !%w(subdomain www).include?(req.subdomain) } do
-    get "/" => 'photos#index'  
+
+  #Check for subdomain
+  constraints(Subdomain) do
+    resources :photos
+    get 'photo/list' => 'photos#list', as: :list
+    resources :tags
+    get 'photos/tags/:tag' => 'photos#index', as: :filter_tag
+    get "/" => 'photos#index' 
   end
-  root :to => 'static_pages#home', :constraints => lambda {|req| !req.subdomain.present? || %w(subdomain www).include?(req.subdomain) }
+  root :to => 'static_pages#home'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

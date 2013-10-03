@@ -19,5 +19,14 @@ module Imagesite
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    
+    config.autoload_paths += %W(#{config.root}/lib/assets)
+
+    # We use a cookie_store for session data
+    config.session_store :cookie_store,
+                         :key => '_imagesite_session',
+                         :domain => '.imagesite.dev'
+
   end
 end
+
