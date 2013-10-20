@@ -28,10 +28,8 @@ Imagesite::Application.configure do
   config.assets.debug = true
 
   # Update before deploy
-  config.action_mailer.default_url_options = { :host => "imagesite.local" }
+  config.action_mailer.default_url_options = { :host => ".lvh.me" }
 
 
-  # Solving the custom session problem
-  config.middleware.use "CustomDomainCookie", ".imagesite.dev"
   
 end

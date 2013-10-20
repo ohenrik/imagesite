@@ -1,10 +1,11 @@
 class TagsController < ApplicationController
-	before_action :set_tag, only: [:edit, :destroy]
-
-	before_filter :authorize
 
 	# Find the tenant
 	around_filter :scope_current_tenant
+
+	before_action :set_tag, only: [:edit, :destroy]
+
+	before_filter :authorize
 
 	def index
 		@tags = Tag.all

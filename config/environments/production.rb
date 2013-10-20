@@ -85,10 +85,8 @@ Imagesite::Application.configure do
   config.assets.precompile += %w( .svg .eot .woff .ttf )
 
   # Update before deployment!
-  config.action_mailer.default_url_options = { :host => "imagesite.dev" }
+  config.action_mailer.default_url_options = { :host => ".lvh.me" }
 
 
-  # Solving the shared session problem
-  config.middleware.use "CustomDomainCookie", ".imagesite.dev"
 
 end

@@ -6,6 +6,8 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
+
+
 module Imagesite
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -23,10 +25,10 @@ module Imagesite
     config.autoload_paths += %W(#{config.root}/lib/assets)
 
     # We use a cookie_store for session data
-    config.session_store :cookie_store,
-                         :key => '_imagesite_session',
-                         :domain => '.imagesite.dev'
-
+    #config.session_store :cookie_store,
+    #                     :key => '_imagesite_session',
+    #                     :domain => ".imagesite.dev"
+    
   end
 end
 
