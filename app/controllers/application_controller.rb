@@ -11,13 +11,14 @@ private
 	end
 	helper_method :current_user
 
-	def authorize
-		redirect_to login_url, alert: "Not Authorized" if current_user.nil?
+	def current_permission
+	  @current_permission ||= Permission.new(current_user)
 	end
 
-	def authorized?
-		return false if current_user.nil?
-		return true
+	def authorize
+		if !current_permission.allow?(params[:controller], params[:action])
+			redirect_to login_url, alert: "Not Authorized."
+		end
 	end
 
 	def current_tenant
