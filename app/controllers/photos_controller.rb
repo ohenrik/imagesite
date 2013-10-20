@@ -4,7 +4,7 @@ class PhotosController < ApplicationController
   around_filter :scope_current_tenant
 
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
-  before_filter :authorize, except: [:show, :index]
+  
 
   # Check if the tenant is in his own subdomain
   

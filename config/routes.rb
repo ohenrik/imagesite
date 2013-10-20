@@ -10,10 +10,7 @@ Imagesite::Application.routes.draw do
   resources :users
   resources :password_resets
 
- 
-
-
-  #Check for subdomain
+   #Check for subdomain
   constraints(Subdomain) do
     resources :photos
     get 'photo/list' => 'photos#list', as: :list

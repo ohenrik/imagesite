@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-	before_filter :authorize, except: [:new, :create]
+	skip_before_filter :authorize, :only => [:create, :new]
 
 	before_action :set_user, only: [:show, :edit, :update, :destroy]
 
