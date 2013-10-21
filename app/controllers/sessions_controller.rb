@@ -12,9 +12,9 @@ class SessionsController < ApplicationController
   	if user && user.authenticate(params[:password])
       # session[:user_id] = user.id
   		if params[:remember_me]
-        cookies.permanent[:auth_token] = { value: user.auth_token, domain: ".lvh.me" }
+        cookies.permanent[:auth_token] = { value: user.auth_token, domain: "."+request.domain }
       else
-        cookies[:auth_token] = { value: user.auth_token, domain: ".lvh.me" }
+        cookies[:auth_token] = { value: user.auth_token, domain: "."+request.domain }
       end
   		redirect_to root_url(:subdomain => "#{current_user.subdomain}"), notice: "You are now loged in."
   	else
@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
 
   def destroy
   	#session[:user_id] = nil
-    cookies.delete(:auth_token, :domain => '.lvh.me')
+    cookies.delete(:auth_token, :domain => "."+request.domain )
   	redirect_to root_url(:subdomain => false), notice: "Loged out"
   end
 

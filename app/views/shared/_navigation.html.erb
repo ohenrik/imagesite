@@ -4,6 +4,7 @@
 			<li><%= link_to "Home", root_url(:subdomain => current_user.subdomain) %></li>
 			<li><%= link_to "Upload", new_photo_url(:subdomain => current_user.subdomain) %></li>
 			<li><%= link_to "Tags", tags_url(:subdomain => current_user.subdomain) %></li>
+			<li><%= link_to "Edit User", edit_user_path(current_user) %></li>
 			<li><%= link_to "Log Out", logout_url(:subdomain => false) %></li>
 		<% else %>
 			<li><%= link_to "Home", root_url() %></li>
