@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
 
 	def show_allowed(controller, action)
-		return true if allow?(controller, action, request.subdomain)
+		return true if allow?(controller, action, current_resource)
 	end
 
 private
@@ -23,11 +23,15 @@ private
 	helper_method :current_user
 
 	def current_permission
-	  @current_permission ||= Permission.new(current_user)
+	  @current_permission ||= Permission.new(current_user, request.subdomain)
+	end
+
+	def current_resource
+		nil
 	end
 
 	def authorize
-		if !current_permission.allow?(params[:controller], params[:action], request.subdomain)
+		if !current_permission.allow?(params[:controller], params[:action], current_resource)
 			redirect_to login_url, alert: "Not Authorized."
 		end
 	end
