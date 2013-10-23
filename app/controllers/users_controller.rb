@@ -1,18 +1,24 @@
 class UsersController < ApplicationController
 
-	skip_before_filter :authorize, :only => [:create, :new]
-
 	before_action :set_user, only: [:show, :edit, :update, :destroy]
 
 	def new 
 		@user = User.new
 	end
 
-	def edit 
+	def edit
+	end
+
+	def update
+		if @user.update(params[:user])
+			redirect_to edit_user_url, notice: "Success!"
+		else
+			render "edit"
+		end
 	end
 
 	def create 
-		@user = User.new(user_params)
+		@user = User.new(params[:user])
 		if @user.save
 			redirect_to root_url, notice: "Thank you for registering."
 		else
@@ -39,9 +45,10 @@ private
 	  @user = User.find(params[:id])
 	end
 
+	## Moved string parametres into permitt class
 	# Never trust parameters from the scary internet, only allow the white list through.
-	def user_params
-	  params.require(:user).permit(:first_name, :last_name, :username, :subdomain, :email, :password, :password_confirmation)
-	end
+	#def user_params
+	#  params.require(:user).permit(:first_name, :last_name, :username, :subdomain, :email, :password, :password_confirmation)
+	#end
 
 end

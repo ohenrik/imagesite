@@ -6,14 +6,16 @@ class Permission
 		allow :sessions, [:new, :create, :destroy]
 		allow :photos, [:list, :show]
 		allow :tags, [:show]
-		if user 
+		if user
+			allow_param :user, [:first_name, :last_name, :username, :subdomain, :email, :password, :password_confirmation]
 			allow :users, [:edit, :update] do |inst|
 				inst.id == user.id 
 			end
 		end
 		if user && user.subdomain == subdomain
-			allow :photos, [:index, :new, :create, :edit, :update, :destroy]
-			allow :tags, [:index, :new, :create, :edit, :update, :destroy]
+			allow_param :photo, [:name, :image, :edit_tag_list, :description]
+			allow :photos, [:index, :new, :create, :edit, :update, :delete, :destroy]
+			allow :tags, [:index, :new, :create, :edit, :update, :delete, :destroy]
 		end
 	end
 
@@ -43,12 +45,33 @@ class Permission
 		end
 	end
 
+	  def allow_param(resources, attributes)
+	    @allowed_params ||= {}
+	    Array(resources).each do |resource|
+	      @allowed_params[resource] ||= []
+	      @allowed_params[resource] += Array(attributes)
+	    end
+	  end
 
-	private
+	  def allow_param?(resource, attribute)
+	    if @allow_all
+	      true
+	    elsif @allowed_params && @allowed_params[resource]
+	      @allowed_params[resource].include? attribute
+	    end
+	  end
 
-	def is_my_subdomain?(subdomain)
-		if subdomain
-			user.subdomain == subdomain
-		end
-	end
+
+	  def permit_params!(params)
+	    if @allow_all
+	      params.permit!
+	    elsif @allowed_params
+	      @allowed_params.each do |resource, attributes|
+	        if params[resource].respond_to? :permit
+	          params[resource] = params[resource].permit(*attributes)
+	        end
+	      end
+	    end
+	  end
+
 end

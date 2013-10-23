@@ -8,12 +8,9 @@ class ApplicationController < ActionController::Base
 	#enable to check for allowed action
 	delegate :allow?, to: :current_permission
 	helper_method :allow?
-	helper_method :show_allowed
 
-
-	def show_allowed(controller, action)
-		return true if allow?(controller, action, current_resource)
-	end
+	delegate :allow_param?, to: :current_permission
+	helper_method :allow_param?
 
 private
 
@@ -31,7 +28,9 @@ private
 	end
 
 	def authorize
-		if !current_permission.allow?(params[:controller], params[:action], current_resource)
+		if current_permission.allow?(params[:controller], params[:action], current_resource)
+			current_permission.permit_params! params	
+		else
 			redirect_to login_url, alert: "Not Authorized."
 		end
 	end

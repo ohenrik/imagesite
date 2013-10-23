@@ -34,9 +34,9 @@
       <%= f.text_field :name, class: "photo-name-field", :placeholder => "Title" %>
 
       <%= f.text_field :edit_tag_list, class: "photo-tag-field", :placeholder => "Tags" %>
-
-      <%= f.text_area :description, class: "description-field", :placeholder => "Short description" %>
-
+      <% #if allow_param? :photos, :description %>
+        <%= f.text_area :description, class: "description-field", :placeholder => "Short description" %>
+      <% #end %>
       <div class="actions">
         <%= f.submit "Submit", class: "submit-photo" %>
         <%= link_to "Delete", @photo, method: :delete, class: "delete-photo", data: { confirm: 'Are you shure?' } %>

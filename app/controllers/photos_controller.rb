@@ -49,7 +49,7 @@ class PhotosController < ApplicationController
   # POST /photos
   # POST /photos.json
   def create
-    @photo = Photo.new(photo_params)
+    @photo = Photo.new(params[:photo])
 
     respond_to do |format|
       if @photo.save
@@ -66,7 +66,7 @@ class PhotosController < ApplicationController
   # PATCH/PUT /photos/1.json
   def update
     respond_to do |format|
-      if @photo.update(photo_params)
+      if @photo.update(params[:photo])
         format.html { redirect_to photos_url, notice: 'Photo was successfully updated.' }
         format.json { head :no_content }
       else
@@ -92,8 +92,9 @@ class PhotosController < ApplicationController
       @photo = Photo.find(params[:id])
     end
 
+    ## Moved the Strong parametres into the permitt class
     # Never trust parameters from the scary internet, only allow the white list through.
-    def photo_params
-      params.require(:photo).permit(:name, :image, :edit_tag_list, :description)
-    end
+    #def photo_params
+    #  params.require(:photo).permit(:name, :image, :edit_tag_list, :description)
+    #end
 end
