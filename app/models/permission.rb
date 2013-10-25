@@ -4,7 +4,7 @@ class Permission
 		allow :static_pages, :home
 		allow :users, [:new, :create]
 		allow :sessions, [:new, :create, :destroy]
-		allow :photos, [:list, :show]
+		allow :photos, [:all, :show]
 		allow :tags, [:show]
 		if user
 			allow_param :user, [:first_name, :last_name, :username, :subdomain, :email, :password, :password_confirmation]
@@ -24,14 +24,6 @@ class Permission
     	allowed && (allowed == true || resource && allowed.call(resource))
 	end
 
-
-		#	return true if controller.in?(%w[static_pages sessions])
-		#return true if	controller == "photos" && action.in?(%w[show list])
-		#return true if	controller == "static_pages" && action.in?(%w[home])
-		#if !user.nil? && is_my_subdomain?(subdomain)
-		#	return true if controller.in?(%w[photos tags]) && action.in?(%w[index new show list edit delete])
-		#end
-
 	def allow_all(controller, action)
 		@allow_all = true
 	end
@@ -45,33 +37,33 @@ class Permission
 		end
 	end
 
-	  def allow_param(resources, attributes)
-	    @allowed_params ||= {}
-	    Array(resources).each do |resource|
-	      @allowed_params[resource] ||= []
-	      @allowed_params[resource] += Array(attributes)
-	    end
-	  end
+	def allow_param(resources, attributes)
+		@allowed_params ||= {}
+		Array(resources).each do |resource|
+		  @allowed_params[resource] ||= []
+		  @allowed_params[resource] += Array(attributes)
+		end
+	end
 
-	  def allow_param?(resource, attribute)
-	    if @allow_all
-	      true
-	    elsif @allowed_params && @allowed_params[resource]
-	      @allowed_params[resource].include? attribute
-	    end
-	  end
+	def allow_param?(resource, attribute)
+		if @allow_all
+		  true
+		elsif @allowed_params && @allowed_params[resource]
+		  @allowed_params[resource].include? attribute
+		end
+	end
 
 
-	  def permit_params!(params)
-	    if @allow_all
-	      params.permit!
-	    elsif @allowed_params
-	      @allowed_params.each do |resource, attributes|
-	        if params[resource].respond_to? :permit
-	          params[resource] = params[resource].permit(*attributes)
-	        end
-	      end
-	    end
-	  end
+	def permit_params!(params)
+		if @allow_all
+		  params.permit!
+		elsif @allowed_params
+		  @allowed_params.each do |resource, attributes|
+		    if params[resource].respond_to? :permit
+		      params[resource] = params[resource].permit(*attributes)
+		    end
+		  end
+		end
+	end
 
 end

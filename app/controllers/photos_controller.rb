@@ -22,13 +22,14 @@ class PhotosController < ApplicationController
 
   # GET /photos
   # GET /photos.json
-  def list
+  def all
     if params[:tag] 
       @photos = Tag.find_by_name(params[:tag]).try(:photos)
       #@photo = Photo.tagged_with(params[:tag])
     else     
       @photos = Photo.all
     end
+    render layout: "theme"
   end
 
   # GET /photos/1
