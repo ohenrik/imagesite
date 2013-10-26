@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131025161115) do
+ActiveRecord::Schema.define(version: 20131026123050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,15 +24,21 @@ ActiveRecord::Schema.define(version: 20131025161115) do
     t.datetime "updated_at"
   end
 
-  #create_table "sessions", force: true do |t|
-  #  t.string   "session_id", null: false
-  #  t.text     "data"
-  #  t.datetime "created_at"
-  #  t.datetime "updated_at"
-  #end
-#
-  #add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", using: :btree
-  #add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
+  create_table "roles", force: true do |t|
+    t.string   "role"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sessions", force: true do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
@@ -63,6 +69,11 @@ ActiveRecord::Schema.define(version: 20131025161115) do
     t.string   "auth_token"
     t.string   "username"
     t.string   "privileges"
+  end
+
+  create_table "users_roles", force: true do |t|
+    t.integer "user_id", null: false
+    t.integer "role_id", null: false
   end
 
 end
