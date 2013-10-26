@@ -6,16 +6,16 @@ class UsersHasAndBelongsToManyRoles < ActiveRecord::Migration
 				t.timestamps
 			end
 
-			create_table :users_roles do |t|
+			create_table :roles_users do |t|
 				t.belongs_to :user, :null => false
 				t.belongs_to :role, :null => false
 			end
 
 		    Role.create :role => "admin"
-    		Role.create :role => "premium"
-    		Role.create :role => "member"
-    		Role.create :role => "guest"
-    		Role.create :role => "trail"
+			Role.create :role => "premium"
+			Role.create :role => "member"
+			Role.create :role => "guest"
+			Role.create :role => "trail"
 		end
 	end
 end

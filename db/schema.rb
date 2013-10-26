@@ -30,6 +30,11 @@ ActiveRecord::Schema.define(version: 20131026123050) do
     t.datetime "updated_at"
   end
 
+  create_table "roles_users", force: true do |t|
+    t.integer "user_id", null: false
+    t.integer "role_id", null: false
+  end
+
   create_table "sessions", force: true do |t|
     t.string   "session_id", null: false
     t.text     "data"
@@ -69,11 +74,6 @@ ActiveRecord::Schema.define(version: 20131026123050) do
     t.string   "auth_token"
     t.string   "username"
     t.string   "privileges"
-  end
-
-  create_table "users_roles", force: true do |t|
-    t.integer "user_id", null: false
-    t.integer "role_id", null: false
   end
 
 end
