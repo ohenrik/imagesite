@@ -21,6 +21,7 @@
           
           <span class="fake-file-field">
             <%= f.file_field :image, class: "upload-photo-field" %>
+            <%= f.hidden_field :image_cache %>
           </span>
         </span>
       <% else %>
