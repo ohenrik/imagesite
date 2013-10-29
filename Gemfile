@@ -49,6 +49,8 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 #My gems
 gem 'carrierwave'
+
+# remember to install Image Magic for this gem to work! Or you will recieve "No such file or directory error"
 gem 'mini_magick'
 
 ## Test gems

@@ -3,11 +3,11 @@ class Permission
 	def initialize(user, subdomain)
 		allow :static_pages, :home
 		allow :users, [:new, :create]
+		allow_param :user, [:first_name, :last_name, :username, :subdomain, :email, :password, :password_confirmation]
 		allow :sessions, [:new, :create, :destroy]
 		allow :photos, [:all, :show]
 		allow :tags, [:show]
 		if user
-			allow_param :user, [:first_name, :last_name, :username, :subdomain, :email, :password, :password_confirmation]
 			allow :users, [:edit, :update] do |inst|
 				inst.id == user.id 
 			end
