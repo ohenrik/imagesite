@@ -6,6 +6,8 @@ class PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
   
 
+  
+
   # Check if the tenant is in his own subdomain
   
 

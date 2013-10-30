@@ -6,6 +6,12 @@ class Photo < ActiveRecord::Base
 	has_many :tags, through: :taggings
 	belongs_to :user
 
+	liquid_methods :name, :image, :all
+
+	def thumbnail
+	photo(:thumb)
+	end
+
 	def self.tagged_with(name)
 		Tag.find_by_name(name).photos
 	end
