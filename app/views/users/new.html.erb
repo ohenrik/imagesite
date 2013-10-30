@@ -1,8 +1,9 @@
 <%= form_for @user do |f| %>
 
-	<%= render partial: 'shared/form_errors', :locals => {:item => @user} %>
+	
 
 	<div class="form-fields">
+		<%= render partial: 'shared/form_errors', :locals => {:item => @user}, class: "form-errors" %>
 		<div class="field clearfix">
 			<%= f.label :username, "Username:" %>
 			<%= f.text_field :username %>

@@ -68,4 +68,15 @@
 				color: $gray4;
 		}
 	}
+	.form-errors {
+		font-size: 12px;
+		color: $red;
+		line-height: 150%;
+		margin-bottom: 30px;
+	}
+	.field_with_errors {
+		input {
+			
+		}
+	}
 }

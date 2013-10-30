@@ -53,6 +53,8 @@ gem 'carrierwave'
 # remember to install Image Magic for this gem to work! Or you will recieve "No such file or directory error"
 gem 'mini_magick'
 
+gem 'liquid'
+
 ## Test gems
 gem "rspec-rails", :group => [:test, :development]
 group :test do 
