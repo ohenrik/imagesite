@@ -23,5 +23,4 @@
 <%= link_to 'Edit', edit_photo_path(@photo) %> |
 <%= link_to 'Back', photos_path %> -->
 
-<%= @photo.to_json %>
-<%= @photo.tags.to_json %>
+<%= liquidize 'photo' => @photo %>
