@@ -1,4 +1,4 @@
-
+<!--
 <% render 'tag_filters' %>
 
 <div id="thumbnails" class="clearfix">
@@ -24,4 +24,6 @@
     <% end %>
 
 </div>
+-->
 
+<%= raw liquidize( {'photos' => @photos}, "index") %>

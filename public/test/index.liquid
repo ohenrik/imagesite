@@ -1,1 +1,8 @@
-This image is named {{photo.name}}
+{% for photo in photos %}
+<a href="{{photo.link}}">{{ photo.name }}</a>
+<img src="{{ photo.thumbnail }}" alt="{{ photo.name }}">
+	Tags:
+	{% for tag in photo.tag_to_list %}
+		{{ tag }}
+	{% endfor %}
+{% endfor %}

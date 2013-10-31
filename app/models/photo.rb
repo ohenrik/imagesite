@@ -6,10 +6,18 @@ class Photo < ActiveRecord::Base
 	has_many :tags, through: :taggings
 	belongs_to :user
 
-	liquid_methods :name, :image, :all
+	liquid_methods :name, :thumbnail, :index, :tag_to_list, :link
 
 	def thumbnail
-	photo(:thumb)
+		image_url(:thumb)
+	end
+
+	def tag_to_list
+		tag_list
+	end
+
+	def link
+		"/photos/#{id}"
 	end
 
 	def self.tagged_with(name)
