@@ -5,7 +5,7 @@ class Permission
 		allow :users, [:new, :create]
 		allow_param :user, [:first_name, :last_name, :username, :subdomain, :email, :password, :password_confirmation]
 		allow :sessions, [:new, :create, :destroy]
-		allow :photos, [:all, :show]
+		allow :photos, [:index, :show]
 		allow :tags, [:show]
 		if user
 			allow :users, [:edit, :update] do |inst|
@@ -14,7 +14,7 @@ class Permission
 		end
 		if user && user.subdomain == subdomain
 			allow_param :photo, [:name, :image, :edit_tag_list, :description]
-			allow :photos, [:index, :new, :create, :edit, :update, :delete, :destroy]
+			allow :photos, [:all, :new, :create, :edit, :update, :delete, :destroy]
 			allow :tags, [:index, :new, :create, :edit, :update, :delete, :destroy]
 		end
 	end

@@ -1,16 +1,13 @@
-<!--
+
 <% render 'tag_filters' %>
 
 <div id="thumbnails" class="clearfix">
+    
     <% @photos.try(:each) do |photo| %>
       <div class="thumb">
         <span class="thumb-meta rounded">
-            <% if allow?(:photos, :edit, photo) %>
             <%= link_to 'Edit', edit_photo_path(photo), class: "thumb-meta-edit" %> |
-            <% end %>
-            <% if allow?(:photos, :delete, photo)  %>
             <%= link_to 'Delete', photo, method: :delete, class: "thumb-meta-delete", data: { confirm: 'Are you sure?' } %>
-            <% end %>
         </span>
         <p>
             <%= link_to photo do %>
@@ -27,5 +24,4 @@
     <% end %>
 
 </div>
--->
-<%= @photos.to_json %>
+

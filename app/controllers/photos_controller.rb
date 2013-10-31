@@ -20,6 +20,7 @@ class PhotosController < ApplicationController
     else     
       @photos = Photo.all
     end
+    render layout: "theme"
   end
 
   # GET /photos
@@ -31,7 +32,6 @@ class PhotosController < ApplicationController
     else     
       @photos = Photo.all
     end
-    render layout: "theme"
   end
 
   # GET /photos/1
