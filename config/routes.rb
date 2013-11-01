@@ -13,8 +13,8 @@ Imagesite::Application.routes.draw do
    #Check for subdomain
   constraints(Subdomain) do
     get 'photos/all' => 'photos#all', as: :all
-    get 'photos/tags/:tag' => 'photos#all', as: :filter_tag
-    get 'photos/all/tags/:tag' => 'photos#all', as: :public_filter_tag
+    get 'photos/tags/:tag' => 'photos#index', as: :public_filter_tag
+    get 'photos/all/tags/:tag' => 'photos#all', as: :filter_tag
     resources :photos
     resources :tags
     get "/" => 'photos#index' 
