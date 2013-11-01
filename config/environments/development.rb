@@ -28,7 +28,7 @@ Imagesite::Application.configure do
   config.assets.debug = true
 
   # Update before deploy
-  config.action_mailer.default_url_options = { :host => ".lvh.me" }
+  config.action_mailer.default_url_options = { :host => "lvh.me:3000" }
 
 
   
