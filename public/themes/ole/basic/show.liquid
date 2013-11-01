@@ -1,0 +1,7 @@
+<h1>{{photo.name}}</h1>
+<img src="{{photo.large}}" alt="{{photo.name}}">
+<p>Tagged with: 	
+	{% for tag in photo.tag_to_list %}
+		<a href="/photos/tags/{{tag}}">{{ tag }}</a>
+	{% endfor %}
+</p>

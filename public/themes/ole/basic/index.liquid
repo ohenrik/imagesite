@@ -1,0 +1,16 @@
+<h1>Ole's themes</h1>
+{% for photo in photos %}
+<div>
+<a href="{{photo.link}}">
+	{{ photo.name }}
+	<br>
+	<img src="{{ photo.thumbnail }}" alt="{{ photo.name }}">
+</a>
+<br>
+	Tags:
+	{% for tag in photo.tag_to_list %}
+		<a href="/photos/tags/{{tag}}">{{ tag }}</a>
+	{% endfor %}
+</div>
+<br>
+{% endfor %}
