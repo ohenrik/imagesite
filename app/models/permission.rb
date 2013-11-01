@@ -3,6 +3,8 @@ class Permission
 	def initialize(user, subdomain)
 		allow :static_pages, :home
 		allow :users, [:new, :create]
+		allow :password_resets, [:new, :create, :update, :edit]
+		allow_param :password_reset, [:email, :password, :password_confirmation]
 		allow_param :user, [:first_name, :last_name, :username, :subdomain, :email, :password, :password_confirmation]
 		allow :sessions, [:new, :create, :destroy]
 		allow :photos, [:index, :show]
