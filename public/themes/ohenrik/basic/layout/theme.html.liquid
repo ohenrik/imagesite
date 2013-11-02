@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+
+<head>
+	
+	<title>Basic Theme</title>
+	<meta charset = "UTF-8" />
+	{{ 'style.css' | asset_url | stylesheet_tag }}
+</head>
+
+<body>
+	<div class="center">
+		{{ content_for_layout }}
+	</div>
+</body>
+
+</html>
