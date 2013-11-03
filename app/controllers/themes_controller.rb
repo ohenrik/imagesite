@@ -87,7 +87,7 @@ class ThemesController < ApplicationController
       file_path = File.join(Rails.public_path, @theme.zip_url)
       Zip::File.open(file_path) do |zip_file|
         zip_file.each do |file|
-          f_path = File.join(File.dirname(file_path), "theme_files")
+          f_path = File.join(File.dirname(file_path), "theme_files", file.name)
           FileUtils.mkdir_p(File.dirname(f_path))
           zip_file.extract(file, f_path){ true }
         end
@@ -96,11 +96,13 @@ class ThemesController < ApplicationController
 
 
     def extract_new_zip
-      
+      delete_extract
+      extract_zip
     end
 
 
     def delete_extract
+      file_path = File.join(Rails.public_path, @theme.zip_url)
       FileUtils.rm_rf(File.join(File.dirname(file_path), "theme_files"))
     end
 
