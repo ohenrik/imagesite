@@ -24,12 +24,12 @@ class ThemesController < ApplicationController
   # POST /themes
   # POST /themes.json
   def create
-    @theme = Theme.new(theme_params)
-
+    @theme = Theme.new(params[:theme])
+    @theme.user_id = current_user.id
     respond_to do |format|
       if @theme.save
         format.html { redirect_to @theme, notice: 'Theme was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @theme }
+        format.json { render action: 'index', status: :created, location: @theme }
       else
         format.html { render action: 'new' }
         format.json { render json: @theme.errors, status: :unprocessable_entity }
@@ -41,7 +41,7 @@ class ThemesController < ApplicationController
   # PATCH/PUT /themes/1.json
   def update
     respond_to do |format|
-      if @theme.update(theme_params)
+      if @theme.update(params[:theme])
         format.html { redirect_to @theme, notice: 'Theme was successfully updated.' }
         format.json { head :no_content }
       else
@@ -67,8 +67,9 @@ class ThemesController < ApplicationController
       @theme = Theme.find(params[:id])
     end
 
+    # permissions file has taken over this part
     # Never trust parameters from the scary internet, only allow the white list through.
-    def theme_params
-      params.require(:theme).permit(:name, :zip)
-    end
+    #def theme_params
+    #  params.require(:theme).permit(:name, :zip)
+    #end
 end
