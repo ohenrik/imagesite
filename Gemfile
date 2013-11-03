@@ -54,6 +54,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 
 gem 'liquid'
+gem 'rubyzip'
 
 ## Test gems
 gem "rspec-rails", :group => [:test, :development]

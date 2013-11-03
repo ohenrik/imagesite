@@ -1,5 +1,20 @@
+require 'zip'
 class ThemesController < ApplicationController
+
+  # Scope current tenant
+  around_filter :scope_current_tenant
+
   before_action :set_theme, only: [:show, :edit, :update, :destroy]
+
+  # After uploaded zip file extract the content of the file
+  after_action :extract_zip, only: [:create]
+
+  # After uploaded a new zip file delete old exctract and extract the content of the new file.
+  after_action :extract_new_zip, only: [:edit]
+
+  # After deletion of the zip file, delete the theme as well.
+  after_action :delete_extract, only: [:destroy]
+
 
   # GET /themes
   # GET /themes.json
@@ -66,6 +81,29 @@ class ThemesController < ApplicationController
     def set_theme
       @theme = Theme.find(params[:id])
     end
+
+
+    def extract_zip
+      file_path = File.join(Rails.public_path, @theme.zip_url)
+      Zip::File.open(file_path) do |zip_file|
+        zip_file.each do |file|
+          f_path = File.join(File.dirname(file_path), "theme_files")
+          FileUtils.mkdir_p(File.dirname(f_path))
+          zip_file.extract(file, f_path){ true }
+        end
+      end
+    end
+
+
+    def extract_new_zip
+      
+    end
+
+
+    def delete_extract
+      FileUtils.rm_rf(File.join(File.dirname(file_path), "theme_files"))
+    end
+
 
     # permissions file has taken over this part
     # Never trust parameters from the scary internet, only allow the white list through.
