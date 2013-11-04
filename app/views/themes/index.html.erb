@@ -1,17 +1,31 @@
-<h1>Your Themes</h1>
+<div id="themes" class="clearfix">
+    <h1 class="themes-index-header">Your Themes</h1>
 
 
-    <div>
-        <% @themes.each do |theme| %>
-            <div class="theme">
-                <%= theme.name %>
-                <%= theme.zip_url %>
-                <%= link_to 'Select', theme %>
-                <%= link_to 'Edit', edit_theme_path(theme) %>
-                <%= link_to 'Destroy', theme, method: :delete, data: { confirm: 'Are you sure?' } %>
-            </div>
+        <div>
+            <% @themes.each do |theme| %>
+                <div class="theme">
+                    <% theme.zip_url %>
+                    <%= image_tag theme_preview_image(theme), class: "theme-preview-image", size: "480x270" %>
+                    <h2 class="theme-header"><%= theme.name %></h2>
+                    <div class="theme-controls">
+                        <%= link_to 'Activate theme', theme, data: { confirm: 'Are you sure you want to activate this Theme?' } %> |
+                        <%= link_to 'Edit', edit_theme_path(theme) %> |
+                        <%= link_to 'Destroy', theme, method: :delete, data: { confirm: 'Are you sure?' } %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+
+    <div class="theme">
+        <%= link_to new_theme_path, class: "new-theme-link" do %>
+        <table>
+            <tr>
+                <td>
+                    Upload new theme
+                </td>
+            </tr>
+        </table>
         <% end %>
     </div>
-
-
-<%= link_to 'New Theme', new_theme_path, class: "new-theme-link" %>
+</div>

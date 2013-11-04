@@ -13,13 +13,13 @@ class Permission
 			allow :users, [:edit, :update] do |inst|
 				inst.id == user.id 
 			end
-			allow :themes, [:show, :index, :edit, :update, :create, :new, :destroy]
-			allow_param :theme, [:zip, :name]
 		end
 		if user && user.subdomain == subdomain
 			allow_param :photo, [:name, :image, :edit_tag_list, :description]
 			allow :photos, [:all, :new, :create, :edit, :update, :delete, :destroy]
 			allow :tags, [:index, :new, :create, :edit, :update, :delete, :destroy]
+			allow :themes, [:show, :index, :edit, :update, :create, :new, :destroy]
+			allow_param :theme, [:zip, :name]
 		end
 	end
 

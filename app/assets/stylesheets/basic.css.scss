@@ -34,6 +34,14 @@ a {
 		color: $gray1;
 	}
 }
+h1{
+	font-size: 30px;
+	line-height: 150%;
+} 
+h2 {
+	font-size: 24px;
+	line-height: 150%;
+}
 .container {
 	max-width: 1030px;
 	margin: 0 auto;
@@ -103,5 +111,5 @@ a {
 	}
 }
 #footer {
-	
+	height: 300px;
 }

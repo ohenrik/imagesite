@@ -1,20 +1,33 @@
+<div id="themes" class="clearfix">
 <%= form_for(@theme) do |f| %>
 
   <%= render partial: 'shared/form_errors', :locals => {:item => @theme} %>
 
-  <div class="fields">
-    <div class="field">
-      <%= f.label :name %><br>
-      <%= f.text_field :name %>
+  <div>
+    <div class="theme">
+      <%= f.label :zip, class: "theme-file-field-label" do %>
+        <table>
+            <tr>
+                <td>
+                    "Select theme zip file... (click here)"
+                </td>
+            </tr>
+        </table>
+        <% end %>
     </div>
-    <div class="field">
-      <%= f.label :zip %><br>
-      <%= f.file_field :zip %>
-      <%= f.hidden_field :zip_cache %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
+    <div class="theme">
+      <div class="field">
+        <%= f.text_field :name, placeholder: "Theme name", class: "new-theme-name" %>
+        <%= f.file_field :zip, class: "theme-file-field" %>
+        <%= f.hidden_field :zip_cache %>
+      </div>
+      <div class="field">
+      </div>
+      <div class="actions">
+        <%= f.submit "Upload theme", class: "submit-theme-button" %>
+      </div>
     </div>
   </div>
     
 <% end %>
+</div>

@@ -1,3 +1,67 @@
 // Place all the styles related to the themes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables";
+
+.theme-preview-image {
+	border: 2px solid $gray4;
+	margin-bottom: 5px;
+}
+.themes-index-header {
+	margin-bottom: 10px;
+	margin-left: 15px;
+}
+.theme {
+	width: 485px;
+	margin: 0 15px 30px;
+	float: left;
+	table {
+		border: 2px solid $gray5;
+		width: 485px;
+		height: 270px;
+		td {
+			&:hover {
+				text-decoration: underline;
+			}
+			color: $gray5;
+			font-size: 18px;
+			text-align: center;
+			vertical-align: middle;
+		}
+	}
+}
+.theme-controls {
+	color: $gray5;
+	a {
+		color: $gray5;
+		font-style: normal;
+		font-size: 16px;
+	}
+}
+.theme-header {
+	margin-bottom: 0;
+	line-height: 24px;
+}
+.theme-file-field-label {
+	width: 485px;
+	height: 270px;
+}
+.theme-file-field {
+	display: none;
+}
+.new-theme-name {
+	font-size: 30px;
+	border-bottom: 1px solid $gray5;
+	width: 100%;
+}
+.submit-theme-button {
+	background-color: transparent;
+	color: $gray1;
+	margin-top: 220px;
+	font-size: 18px;
+	&:hover, &:active {
+		border-bottom: 1px solid $gray1;
+	}
+}
+
+

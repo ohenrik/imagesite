@@ -43,7 +43,7 @@ class ThemesController < ApplicationController
     @theme.user_id = current_user.id
     respond_to do |format|
       if @theme.save
-        format.html { redirect_to @theme, notice: 'Theme was successfully created.' }
+        format.html { redirect_to themes_path, notice: 'Theme was successfully created.' }
         format.json { render action: 'index', status: :created, location: @theme }
       else
         format.html { render action: 'new' }
@@ -57,7 +57,7 @@ class ThemesController < ApplicationController
   def update
     respond_to do |format|
       if @theme.update(params[:theme])
-        format.html { redirect_to @theme, notice: 'Theme was successfully updated.' }
+        format.html { redirect_to @themes_url, notice: 'Theme was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -82,7 +82,7 @@ class ThemesController < ApplicationController
       @theme = Theme.find(params[:id])
     end
 
-
+    # Extract the zip file
     def extract_zip
       file_path = File.join(Rails.public_path, @theme.zip_url)
       Zip::File.open(file_path) do |zip_file|
@@ -94,13 +94,13 @@ class ThemesController < ApplicationController
       end
     end
 
-
+    # Dele old theme files and extract the new zip file
     def extract_new_zip
       delete_extract
       extract_zip
     end
 
-
+    # Delete old theme files
     def delete_extract
       file_path = File.join(Rails.public_path, @theme.zip_url)
       FileUtils.rm_rf(File.join(File.dirname(file_path), "theme_files"))
