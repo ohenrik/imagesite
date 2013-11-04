@@ -5,15 +5,19 @@
 
   <div>
     <div class="theme">
-      <%= f.label :zip, class: "theme-file-field-label" do %>
-        <table>
-            <tr>
-                <td>
-                    "Select theme zip file... (click here)"
-                </td>
-            </tr>
-        </table>
-        <% end %>
+      <% if @theme.new_record? %>
+        <%= f.label :zip, class: "theme-file-field-label" do %>
+          <table>
+              <tr>
+                  <td>
+                      "Select theme zip file... (click here)"
+                  </td>
+              </tr>
+          </table>
+          <% end %>
+      <% else %>
+        <%= image_tag theme_preview_image(@theme), class: "theme-preview-image", size: "480x270" %>
+      <% end %>
     </div>
     <div class="theme">
       <div class="field">
@@ -24,7 +28,12 @@
       <div class="field">
       </div>
       <div class="actions">
-        <%= f.submit "Upload theme", class: "submit-theme-button" %>
+        <% if @theme.new_record? %>
+          <%= f.submit "Upload theme", class: "submit-theme-button" %>
+        <% else %>
+          <%= f.submit "Save changes", class: "submit-theme-button" %>
+          <span class="delete-theme-link">| <%= link_to 'Delete theme', @theme, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+        <% end %>
       </div>
     </div>
   </div>

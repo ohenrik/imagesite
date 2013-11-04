@@ -63,5 +63,12 @@
 		border-bottom: 1px solid $gray1;
 	}
 }
-
+.delete-theme-link {
+	color: $gray5;
+	font-size: 18px;
+	a {
+		color: $gray5;
+		font-size: 18px;
+	}
+}
 
