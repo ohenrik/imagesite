@@ -1,6 +1,11 @@
 <div id="themes" class="clearfix">
-    <h1 class="themes-index-header">Your Themes</h1>
+    
+    <div class="theme">
+        <%= image_tag theme_preview_image(current_user.theme), class: "theme-preview-image" %>
+        <h1 class="current-theme-header"><%= current_user.theme.name %></h1>
+    </div>
 
+    <h1 class="themes-index-header">Your Themes</h1>
 
         <div>
             <% @themes.each do |theme| %>
@@ -9,9 +14,13 @@
                     <%= image_tag theme_preview_image(theme), class: "theme-preview-image", size: "480x270" %>
                     <h2 class="theme-header"><%= theme.name %></h2>
                     <div class="theme-controls">
-                        <%= link_to 'Activate theme', select_theme_path(theme), data: { confirm: 'Are you sure you want to activate this Theme?' } %> |
-                        <%= link_to 'Edit', edit_theme_path(theme) %> |
-                        <%= link_to 'Destroy', theme, method: :delete, data: { confirm: 'Are you sure?' } %>
+                        <% if theme.user.theme_id != theme.id %>
+                            <%= link_to 'Activate theme', select_theme_path(theme), data: { confirm: 'Are you sure you want to activate this Theme?' } %> |
+                        <% end %>
+                        <%= link_to 'Edit', edit_theme_path(theme) %> 
+                        <% if theme.user.theme_id != theme.id %>
+                            | <%= link_to 'Destroy', theme, method: :delete, data: { confirm: 'Are you sure?' } %>
+                        <% end %>
                     </div>
                 </div>
             <% end %>

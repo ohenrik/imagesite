@@ -30,10 +30,12 @@ class ThemesController < ApplicationController
 
   def select_theme
     # Set the current theme and save it!
-    @theme.user.current_theme = @theme.id
-    @theme.user.current_theme_folder = File.join(Rails.public_path, File.dirname(@theme.zip_url), "theme_files")
+    #@theme.user.current_theme = @theme.id
+    #@theme.user.current_theme_folder = File.join(Rails.public_path, File.dirname(@theme.zip_url), "theme_files")
+    #@theme.user.save
+    @theme.user.theme_id = @theme.id
     @theme.user.save
-    redirect_to themes_path, notice: 'Theme activated!'
+    redirect_to themes_path, notice: "Theme activated!"
   end
 
   # GET /themes/new
