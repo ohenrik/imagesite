@@ -11,14 +11,15 @@ class Permission
 		allow :tags, [:show]
 		if user
 			allow :users, [:edit, :update] do |inst|
-				inst.id == user.id 
+				inst.id == user.id
 			end
 		end
 		if user && user.subdomain == subdomain
+			allow_param :user, [:current_theme]
 			allow_param :photo, [:name, :image, :edit_tag_list, :description]
 			allow :photos, [:all, :new, :create, :edit, :update, :delete, :destroy]
 			allow :tags, [:index, :new, :create, :edit, :update, :delete, :destroy]
-			allow :themes, [:show, :index, :edit, :update, :create, :new, :destroy]
+			allow :themes, [:show, :index, :edit, :update, :create, :new, :destroy, :select_theme]
 			allow_param :theme, [:zip, :name]
 		end
 	end

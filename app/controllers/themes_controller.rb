@@ -4,7 +4,7 @@ class ThemesController < ApplicationController
   # Scope current tenant
   around_filter :scope_current_tenant
 
-  before_action :set_theme, only: [:show, :edit, :update, :destroy]
+  before_action :set_theme, only: [:show, :edit, :update, :destroy, :select_theme]
 
   # After uploaded zip file extract the content of the file
   after_action :extract_zip, only: [:create]
@@ -25,6 +25,15 @@ class ThemesController < ApplicationController
   # GET /themes/1
   # GET /themes/1.json
   def show
+
+  end
+
+  def select_theme
+    # Set the current theme and save it!
+    @theme.user.current_theme = @theme.id
+    @theme.user.current_theme_folder = File.join(Rails.public_path, File.dirname(@theme.zip_url), "theme_files")
+    @theme.user.save
+    redirect_to themes_path, notice: 'Theme activated!'
   end
 
   # GET /themes/new

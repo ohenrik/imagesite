@@ -17,6 +17,7 @@ Imagesite::Application.routes.draw do
     get 'photos/all' => 'photos#all', as: :all
     get 'photos/tags/:tag' => 'photos#index', as: :public_filter_tag
     get 'photos/all/tags/:tag' => 'photos#all', as: :filter_tag
+    get 'themes/select_theme/:id' => 'themes#select_theme', as: :select_theme
     resources :photos
     resources :tags
     get "/" => 'photos#index' 
