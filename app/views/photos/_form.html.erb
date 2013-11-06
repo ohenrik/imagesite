@@ -17,13 +17,15 @@
     <div class="photo">
 
       <% if @photo.new_record? %>
-        <span class="file-field-container"> 
-          
-          <span class="fake-file-field">
-            <%= f.file_field :image, class: "upload-photo-field" %>
-            <%= f.hidden_field :image_cache %>
-          </span>
-        </span>
+        <%= f.label :image, class: "file-field-container" do %>   
+            <table>
+                <tr>
+                    <td>
+                        Select image (click here)
+                    </td>
+                </tr>
+            </table>
+        <% end %>
       <% else %>
         <%= image_tag @photo.image_url(:medium).to_s %><br>
       <% end %>
@@ -31,6 +33,10 @@
     </div>
   
     <div class="fields">
+      
+      <%= f.file_field :image, class: "upload-photo-field" %>
+      <%= f.hidden_field :image_cache %>
+
 
       <%= f.text_field :name, class: "photo-name-field", :placeholder => "Title" %>
 

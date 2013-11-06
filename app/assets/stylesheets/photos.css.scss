@@ -2,37 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "variables";
-@mixin transparent($color, $alpha) {
-  $rgba: rgba($color, $alpha);
-  $ie-hex-str: ie-hex-str($rgba);
-  background-color: transparent;
-  background-color: $rgba;
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
-  zoom: 1;
-}
-@mixin roundcorners($radius) {
--moz-border-radius: $radius; // firefox
--webkit-border-radius: $radius; // safari/chrome
-border-radius: $radius; // CSS3, works in IE9
-}
- 
-@mixin roundcorner1($radius, $corner: "top-left") {
--moz-border-#{$corner}-radius: $radius ; // firefox
--webkit-border-#{$corner}-radius: $radius; // safari/chrome
-border-#{$corner}-radius: $radius; // CSS3, works in IE9
-}
-@mixin squarecorner1($corner: "top-left") {
-@include roundcorner1(0px, $corner);
-}
- 
-@mixin roundcornerTL($radius:5px) { @include roundcorner1($radius, "top-left"); }
-@mixin roundcornerTR($radius:5px) { @include roundcorner1($radius, "top-right"); }
-@mixin roundcornerBL($radius:5px) { @include roundcorner1($radius, "bottom-left"); }
-@mixin roundcornerBR($radius:5px) { @include roundcorner1($radius, "bottom-right"); }
-@mixin squarecornerTL() { @include roundcornerTL(0px); }
-@mixin squarecornerTR() { @include roundcornerTR(0px); }
-@mixin squarecornerBL() { @include roundcornerBL(0px); }
-@mixin squarecornerBR() { @include roundcornerBR(0px); }
 #thumbnails {
 
 }
@@ -103,10 +72,10 @@ border-#{$corner}-radius: $radius; // CSS3, works in IE9
     font-family: $font;
     padding-bottom: 2px;
     width: 100%;
-    color: $gray5;
+    color: $gray1;
     font-size: 14px;
     margin-bottom: 10px;
-    border-bottom: 1px dashed $gray5;
+    border-bottom: 1px solid $gray5;
   }
   textarea {
     &:empty { height: 24px; }
@@ -114,17 +83,26 @@ border-#{$corner}-radius: $radius; // CSS3, works in IE9
   }
 }
 .file-field-container {
-  display: table;
   vertical-align: middle;
   position: relative;
   width: 797px;
   height: 510px;
   margin-bottom: 10px;
   font-family: $font;
-  border: 2px dashed $gray4;
-  background-image: url(image_path('Select_file.png'));
-  background-position: center center;
-  background-repeat: no-repeat;
+  table {
+    border: 2px solid $gray5;
+    width: 797px;
+    height: 510px;
+    td {
+      &:hover {
+        text-decoration: underline;
+      }
+      color: $gray5;
+      font-size: 18px;
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
   input {
     border: none;
     width: 797px;
@@ -148,7 +126,7 @@ input.photo-tag-field {
 input.photo-name-field {
   font-size: 18px;
   color: $gray1;
-  border-bottom: 1px dashed $gray1;
+  border-bottom: 1px solid $gray5;
 }
 input.submit-photo {
   float: right;
