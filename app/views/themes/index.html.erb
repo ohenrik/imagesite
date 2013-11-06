@@ -8,6 +8,10 @@
         <div class="current-theme-text clearfix">
             <h1 class="current-theme-header"><%= current_user.theme.name %></h1>
             <h2 class="current-theme-sub">Current theme</h2>
+            <div class="current-theme-controls">
+                <%= link_to 'Edit', edit_theme_path(current_user.theme) %> 
+                | <%= link_to  "Upload new theme...", new_theme_path, class: "new-theme-link" %>
+            </div>
         </div>
     </div>
         <div>

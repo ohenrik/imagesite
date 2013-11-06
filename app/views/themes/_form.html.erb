@@ -10,13 +10,15 @@
           <table>
               <tr>
                   <td>
-                      "Select theme zip file... (click here)"
+                      Select theme zip file... (click here)
                   </td>
               </tr>
           </table>
           <% end %>
       <% else %>
-        <%= image_tag theme_preview_image(@theme), class: "theme-preview-image", size: "480x270" %>
+        <%= f.label :zip, class: "theme-file-field-label hover-preview-theme-edit" do %>
+          <%= image_tag theme_preview_image(@theme), class: "theme-preview-image", size: "480x270" %>
+        <% end %>
       <% end %>
     </div>
     <div class="theme">

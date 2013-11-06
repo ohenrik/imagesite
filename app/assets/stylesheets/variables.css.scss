@@ -12,3 +12,10 @@ $font: neutra, sans-serif;
   line-height: 0;
   height: 0;
 }
+@mixin hp-opacity($trans) {
+  filter: alpha(opactiy=($trans * 100));
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$trans * 100})";
+  -moz-opacity: $trans;
+  -khtml-opacity: $trans;
+  opacity: $trans;
+}

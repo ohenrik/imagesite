@@ -35,7 +35,7 @@
 	a {
 		color: $gray5;
 		font-style: normal;
-		font-size: 16px;
+		font-size: 18px;
 	}
 }
 .theme-header {
@@ -88,5 +88,18 @@
 	}
 }
 .current-theme-sub {
-	
+
+}
+
+.current-theme-controls {
+	color: $gray5;
+	margin-top: 205px;
+	a {
+		color: $gray5;
+		font-style: normal;
+		font-size: 18px;
+	}
+}
+.hover-preview-theme-edit:hover {
+	 @include hp-opacity(0.8)
 }
