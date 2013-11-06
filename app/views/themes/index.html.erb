@@ -1,13 +1,17 @@
 <div id="themes" class="clearfix">
-    
-    <div class="theme">
-        <%= image_tag theme_preview_image(current_user.theme), class: "theme-preview-image" %>
-        <h1 class="current-theme-header"><%= current_user.theme.name %></h1>
+
+    <div class="current-theme clearfix">
+        <div class="theme">
+            <%= image_tag theme_preview_image(current_user.theme), class: "theme-preview-image" %>
+            
+        </div>
+        <div class="current-theme-text clearfix">
+            <h1 class="current-theme-header"><%= current_user.theme.name %></h1>
+            <h2 class="current-theme-sub">Current theme</h2>
+        </div>
     </div>
-
-    <h1 class="themes-index-header">Your Themes</h1>
-
         <div>
+            <h1 class="themes-index-header">Your Themes</h1>
             <% @themes.each do |theme| %>
                 <div class="theme">
                     <% theme.zip_url %>

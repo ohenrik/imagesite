@@ -71,4 +71,22 @@
 		font-size: 18px;
 	}
 }
-
+.current-theme {
+	width: 1000px;
+	margin:15px 0 30px;
+}
+.current-theme-text {
+	float: left;
+	margin: 0 15px;
+	h1 {
+		margin-bottom: 0;
+		line-height: 30px;
+	}
+	h2 {
+		line-height: 18px;
+		color: $gray5; 
+	}
+}
+.current-theme-sub {
+	
+}
