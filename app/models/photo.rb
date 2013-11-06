@@ -2,6 +2,8 @@ class Photo < ActiveRecord::Base
 
 	mount_uploader :image, ImageUploader
 
+	validates :image, presence: true
+
 	has_many :taggings, dependent: :destroy
 	has_many :tags, through: :taggings
 	belongs_to :user

@@ -6,14 +6,6 @@ class ThemesController < ApplicationController
 
   before_action :set_theme, only: [:show, :edit, :update, :destroy, :select_theme]
 
-  # After uploaded zip file extract the content of the file
-  after_action :extract_zip, only: [:create]
-
-  # After uploaded a new zip file delete old exctract and extract the content of the new file.
-  after_action :extract_new_zip, only: [:edit]
-
-  # After deletion of the zip file, delete the theme as well.
-  after_action :delete_extract, only: [:destroy]
 
 
   # GET /themes
@@ -34,8 +26,11 @@ class ThemesController < ApplicationController
     #@theme.user.current_theme_folder = File.join(Rails.public_path, File.dirname(@theme.zip_url), "theme_files")
     #@theme.user.save
     @theme.user.theme_id = @theme.id
-    @theme.user.save
-    redirect_to themes_path, notice: "Theme activated!"
+    if @theme.user.save
+      redirect_to themes_path, notice: "Theme activated!"
+    else
+      redirect_to themes_path, notice: "Theme not activated, something went wrong"
+    end
   end
 
   # GET /themes/new
