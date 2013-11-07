@@ -6,7 +6,14 @@ class ThemesController < ApplicationController
 
   before_action :set_theme, only: [:show, :edit, :update, :destroy, :select_theme]
 
+  # After uploaded zip file extract the content of the file
+  after_action :extract_zip, only: [:create]
 
+  # After uploaded a new zip file delete old exctract and extract the content of the new file.
+  after_action :extract_new_zip, only: [:edit]
+
+  # After deletion of the zip file, delete the theme as well.
+  after_action :delete_extract, only: [:destroy]
 
   # GET /themes
   # GET /themes.json
@@ -88,7 +95,8 @@ class ThemesController < ApplicationController
       @theme = Theme.find(params[:id])
     end
 
-    # Extract the zip file
+
+# Extract the zip file
     def extract_zip
       file_path = File.join(Rails.public_path, @theme.zip_url)
       Zip::File.open(file_path) do |zip_file|

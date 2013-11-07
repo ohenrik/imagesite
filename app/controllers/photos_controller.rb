@@ -79,6 +79,9 @@ class PhotosController < ApplicationController
     end
   end
 
+
+
+
   # DELETE /photos/1
   # DELETE /photos/1.json
   def destroy
@@ -94,6 +97,12 @@ class PhotosController < ApplicationController
     def set_photo
       @photo = Photo.find(params[:id])
     end
+
+    
+
+
+
+
 
     ## Moved the Strong parametres into the permitt class
     # Never trust parameters from the scary internet, only allow the white list through.
