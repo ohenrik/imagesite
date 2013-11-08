@@ -8,6 +8,8 @@ class Photo < ActiveRecord::Base
 	has_many :tags, through: :taggings
 	belongs_to :user
 
+
+	# Liquid methods
 	liquid_methods :name, :index, :tag_to_list, :link, :large, :medium, :small, :thumbnail
 
 	def thumbnail
@@ -41,6 +43,9 @@ class Photo < ActiveRecord::Base
 	def paramns?
 		params[:action]
 	end
+
+
+
 
 	def self.tagged_with(name)
 		Tag.find_by_name(name).photos
