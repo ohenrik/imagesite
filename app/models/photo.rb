@@ -34,6 +34,13 @@ class Photo < ActiveRecord::Base
 		"/photos/#{id}"
 	end
 
+	def action?
+		params[:action]
+	end
+
+	def paramns?
+		params[:action]
+	end
 
 	def self.tagged_with(name)
 		Tag.find_by_name(name).photos

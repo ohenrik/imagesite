@@ -4,13 +4,10 @@ class PhotosController < ApplicationController
   around_filter :scope_current_tenant
 
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
-  
 
-  
 
   # Check if the tenant is in his own subdomain
   
-
   # GET /photos
   # GET /photos.json
   def index
@@ -98,7 +95,6 @@ class PhotosController < ApplicationController
       @photo = Photo.find(params[:id])
     end
 
-    
 
 
 

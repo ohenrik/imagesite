@@ -57,10 +57,10 @@
 .submit-theme-button {
 	background-color: transparent;
 	color: $gray1;
-	margin-top: 220px;
+	margin-top: 225px;
 	font-size: 18px;
 	&:hover, &:active {
-		border-bottom: 1px solid $gray1;
+		text-decoration: underline;/* border-bottom: 1px solid $gray1; */
 	}
 }
 .delete-theme-link {
