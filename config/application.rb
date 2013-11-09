@@ -1,5 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 
+
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
@@ -23,6 +24,12 @@ module Imagesite
     # config.i18n.default_locale = :de
     
     config.autoload_paths += %W(#{config.root}/lib/assets)
+
+
+    #config.assets.paths << "#{Rails.root}/public/uploads/themes/#{User.subdomain}/#{User.theme.id}/assets/stylesheets"
+    #config.assets.paths << "#{Rails.root}/public/uploads/themes/#{User.subdomain}/#{User.theme.id}/assets/images"
+    #config.assets.paths << "#{Rails.root}/public/uploads/themes/#{User.subdomain}/#{User.theme.id}/assets/javascripts"
+
 
     # We use a cookie_store for session data
     #config.session_store :cookie_store,
