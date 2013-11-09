@@ -1,12 +1,9 @@
-#Import extra tags
-
-
 module ApplicationHelper
 
 	def liquidize(model_content, view = nil, content = nil)
 		
 
-		theme_root_path = "#{Rails.root}/themes/#{current_user.subdomain}/current_theme"
+		theme_root_path = "#{Rails.root}/themes/#{request.subdomain}/current_theme"
 		theme_file = "/templates/#{view}.html.liquid"
 
 		if File.exist?(theme_root_path + theme_file)
