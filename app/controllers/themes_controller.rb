@@ -7,10 +7,10 @@ class ThemesController < ApplicationController
   before_action :set_theme, only: [:show, :edit, :update, :destroy, :select_theme]
 
   # After uploaded zip file extract the content of the file
-  after_action :extract_zip, only: [:create]
+  after_action :extract_preview, only: [:create]
 
   # After uploaded a new zip file delete old exctract and extract the content of the new file.
-  after_action :extract_new_zip, only: [:edit]
+  after_action :extract_new_preview, only: [:edit]
 
   # After deletion of the zip file, delete the theme as well.
   after_action :delete_extract, only: [:destroy]
@@ -34,6 +34,7 @@ class ThemesController < ApplicationController
     #@theme.user.save
     @theme.user.theme_id = @theme.id
     if @theme.user.save
+      extract_theme
       redirect_to themes_path, notice: "Theme activated!"
     else
       redirect_to themes_path, notice: "Theme not activated, something went wrong"
@@ -97,27 +98,67 @@ class ThemesController < ApplicationController
 
 
 # Extract the zip file
-    def extract_zip
+    def extract_preview
       file_path = File.join(Rails.public_path, @theme.zip_url)
+
+      # Original zip function
+      #Zip::File.open(file_path) do |zip_file|
+      #  zip_file.each do |file|
+      #    f_path = File.join(File.dirname(file_path), "theme_files", file.name)
+      #    FileUtils.mkdir_p(File.dirname(f_path))
+      #    zip_file.extract(file, f_path){ true }
+      #  end
+      #end
+
+
       Zip::File.open(file_path) do |zip_file|
         zip_file.each do |file|
-          f_path = File.join(File.dirname(file_path), "theme_files", file.name)
-          FileUtils.mkdir_p(File.dirname(f_path))
-          zip_file.extract(file, f_path){ true }
+          if file.name == 'preview.png' # remember to add other possible file extentions
+            f_path = File.join(File.dirname(file_path), file.name)
+            #FileUtils.mkdir_p(File.dirname(f_path))
+            zip_file.extract(file, f_path){ true }
+          end
         end
       end
     end
 
     # Dele old theme files and extract the new zip file
-    def extract_new_zip
+    def extract_new_preview
       delete_extract
-      extract_zip
+      extract_preview
     end
 
     # Delete old theme files
     def delete_extract
       file_path = File.join(Rails.public_path, @theme.zip_url)
-      FileUtils.rm_rf(File.join(File.dirname(file_path), "theme_files"))
+      FileUtils.rm(File.join(File.dirname(file_path), "preview.png"))
+    end
+
+    def extract_theme
+      #delete old theme files
+      delete_theme
+      
+      # Original Zip-file
+      file_path = File.join(Rails.public_path, @theme.zip_url)
+      
+      # Theme directory
+      theme_path = File.join(Rails.root.join('themes', @theme.user.subdomain, 'current_theme'))
+      
+      Zip::File.open(file_path) do |zip_file|
+        zip_file.each do |file|
+          # set the unzip path
+          f_path = File.join(theme_path, file.name)
+          # Create the folder if it does not exists
+          FileUtils.mkdir_p(File.dirname(f_path))
+          # Unzip it!
+          zip_file.extract(file, f_path){ true }
+        end
+      end
+    end
+
+    def delete_theme
+      theme_path = File.join(Rails.root.join('themes', @theme.user.subdomain, 'current_theme'))
+      FileUtils.rm_rf(theme_path)
     end
 
 
