@@ -1,5 +1,5 @@
 <div id="themes" class="clearfix">
-
+    <% if current_user.theme %>
     <div class="current-theme clearfix">
         <div class="theme">
             <%= image_tag theme_preview_image(current_user.theme), class: "theme-preview-image" %>
@@ -14,6 +14,13 @@
             </div>
         </div>
     </div>
+    <% else %>
+    <div class="current-theme clearfix">
+        <div class="theme">
+            <p>No themes Uploaded yet</p>
+        </div>
+    </div>
+    <% end %>
         <div>
             <h1 class="themes-index-header">Your Themes</h1>
             <% @themes.each do |theme| %>
