@@ -68,7 +68,6 @@ module LiquidTagsHelper
 
 		# Include the stylesheet tag link helper
 		include ActionView::Helpers::AssetTagHelper
-		include ActionDispatch::Http::URL
 
 
 		def initialize(tag_name, markup, tokens)
@@ -81,12 +80,16 @@ module LiquidTagsHelper
 
 	    def render(context)
 
-	    	@path = Liquid::Template.file_system
+	    	@path = Liquid::Template.file_system.root
 	    	css_file = "style.css"
 	    	
+	    	#derrive request subdomain from Liquid filesystem! 
+	    	@path_array = @path.to_s.split("/")
+	    	@subdomain = @path_array[-2]
 
-	    	stylesheet_link_tag "/assets/#{subdomain}/javascripts/style.css"
 
+	    	stylesheet_link_tag "/assets/#{@subdomain}/javascripts/style.css"
+			
 	    end
 
 	end

@@ -17,3 +17,4 @@
 # Ignore local uploads
 /public/uploads/
 /themes/
+/assets/themes/.
