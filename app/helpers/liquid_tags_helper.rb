@@ -70,9 +70,9 @@ module LiquidTagsHelper
 		include ActionView::Helpers::AssetTagHelper
 
 
-		def initialize(tag_name, markup, tokens)
+		def initialize(tag_name, sheet, tokens)
 
-			user = Rails.root
+			@sheet = sheet
 
 			super
 		end
@@ -88,7 +88,7 @@ module LiquidTagsHelper
 	    	@subdomain = @path_array[-2]
 
 
-	    	stylesheet_link_tag "/assets/#{@subdomain}/javascripts/style.css"
+	    	stylesheet_link_tag "/assets/#{@subdomain}/stylesheets/#{@sheet.strip}"
 			
 	    end
 
