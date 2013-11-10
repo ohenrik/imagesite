@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
 
 	after_create :create_schema
 
+
+	validates :username, :subdomain, :email, presence: true
 	validates_uniqueness_of :email
 	validates_uniqueness_of :subdomain
 

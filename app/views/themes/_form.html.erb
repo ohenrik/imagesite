@@ -1,8 +1,10 @@
 <div id="themes" class="clearfix">
 <%= form_for(@theme) do |f| %>
 
-  <%= render partial: 'shared/form_errors', :locals => {:item => @theme} %>
-
+  <div class="error-container">
+    <%= render partial: 'shared/form_errors', :locals => {:item => @theme} %>
+  </div>
+  
   <div>
     <div class="theme">
       <% if @theme.new_record? %>
