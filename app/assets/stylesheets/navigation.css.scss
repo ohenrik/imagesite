@@ -1,0 +1,65 @@
+@import "variables";
+.nav {
+	float: right;
+	margin: 40px 15px 0;
+	a {
+		font-family: neutra;
+		text-decoration: none;
+		&:hover, &:visited, &:active {
+			color: white;
+			background-color: transparent;
+		}
+	}
+}
+.navlist {
+	li {
+		display: block;
+		float: left;
+		margin: 0 15px 0;
+		a {
+			text-decoration: none;
+			color: white;
+			font-size: 18px;
+			font-weight: 100;
+			&:hover {border-bottom: 1px solid $white; }
+		}
+		a.dropdown-toggle {
+			text-decoration: none;
+			&:hover {border-bottom: 1px solid $white; }
+		}
+		.dropdown-menu {
+			width: 180px;
+			background-color: $gray1;
+			color: $white;
+			display: none;
+			float: left;
+			position: absolute;
+			z-index: 100;
+			left: 0;
+			top: 100%;
+			li {
+				margin: 0;
+				padding: 5px 5px 3px 10px;
+				display: block;
+				float: none;
+				&:hover { 
+					background-color: $gray4;
+				}
+			}
+			a {
+				color: $white;
+				&:hover { 
+					border-bottom: none;
+				}
+			}
+		}
+	}
+	.dropdown {
+		float: left;
+		display: block;
+		position: relative;
+	}
+}
+.caret {
+	@include caret-sign(white);
+}

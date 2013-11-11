@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
 	def update
 		if @user.update(params[:user])
-			redirect_to edit_user_url, notice: "Success!"
+			redirect_to edit_user_url, notice: "Success! Information saved. Thank you!"
 		else
 			render "edit"
 		end
@@ -32,10 +32,8 @@ class UsersController < ApplicationController
 		# Destroy the Roles assosiations to this user in the join table.
 		# user.roles.clear
 
-		
+
 		# Destroy the user details
-
-
 		
 	end
 
