@@ -4,6 +4,15 @@
 			<li><%= link_to "Home", root_url(:subdomain => current_user.subdomain) %></li>
 			<li class="dropdown">
 		     	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			    	Pages <span class="caret"></span>
+			    </a>
+			    <ul class="dropdown-menu">
+					<%= link_to pages_url(:subdomain => current_user.subdomain) do %><li>- All pages</li><% end %>
+					<%= link_to new_page_url(:subdomain => current_user.subdomain) do %><li>- New page</li><% end %>
+				</ul>
+		  	</li>
+			<li class="dropdown">
+		     	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 			    	Photos <span class="caret"></span>
 			    </a>
 			    <ul class="dropdown-menu">

@@ -1,6 +1,6 @@
 Imagesite::Application.routes.draw do
 
-  resources :themes
+  
 
   get "password_resets/new"
   get 'register', to: 'users#new', as: 'register'
@@ -11,6 +11,8 @@ Imagesite::Application.routes.draw do
   resources :sessions
   resources :users
   resources :password_resets
+  resources :pages
+  resources :themes
 
    #Check for subdomain
   constraints(Subdomain) do
