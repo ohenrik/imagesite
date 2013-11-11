@@ -4,8 +4,4 @@ class StaticPagesController < ApplicationController
 
 	end
 
-	def navigation
-
-	end
-
 end
