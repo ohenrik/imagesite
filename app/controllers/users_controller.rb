@@ -19,6 +19,7 @@ class UsersController < ApplicationController
 
 	def create 
 		@user = User.new(params[:user])
+		@user.roles << Role.find_by_role("member")
 		if @user.save
 			redirect_to root_url, notice: "Thank you for registering."
 		else
@@ -27,6 +28,14 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
+
+		# Destroy the Roles assosiations to this user in the join table.
+		# user.roles.clear
+
+		
+		# Destroy the user details
+
+
 		
 	end
 
