@@ -29,24 +29,27 @@
 		}
 		.dropdown-menu {
 			width: 180px;
-			background-color: $gray1;
-			color: $white;
+			background-color: $white;
+			color: $gray1;
 			display: none;
 			float: left;
 			position: absolute;
 			z-index: 100;
 			left: 0;
 			top: 100%;
+			border: 1px solid $gray5;
 			li {
+				color: $gray1;
 				margin: 0;
 				padding: 5px 5px 3px 10px;
 				display: block;
 				float: none;
 				&:hover { 
-					background-color: $gray4;
+					background-color: $gray5;
 				}
 			}
 			a {
+				color: $gray1;
 				color: $white;
 				&:hover { 
 					border-bottom: none;
