@@ -30,7 +30,7 @@
       <%= f.hidden_field :image_cache %>
 
 
-      <%= f.text_field :name, class: "photo-name-field", :placeholder => "Title" %>
+      <%= f.text_field :name, class: "photo-name-field", :placeholder => "Title", autofocus: "true" %>
 
       <%= f.text_field :edit_tag_list, class: "photo-tag-field", :placeholder => "Tags" %>
       <% #if allow_param? :photos, :description %>

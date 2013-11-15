@@ -58,6 +58,7 @@ gem 'rubyzip'
 
 # HTml editor
 gem 'wysihtml5-rails'
+gem 'font-awesome-sass'
 
 ## Test gems
 gem "rspec-rails", :group => [:test, :development]

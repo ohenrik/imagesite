@@ -42,6 +42,10 @@ h2 {
 	font-size: 24px;
 	line-height: 150%;
 }
+h3 {
+	font-size: 18px;
+	line-height: 150%;
+}
 .container {
 	max-width: 1030px;
 	margin: 0 auto;
@@ -102,4 +106,7 @@ h2 {
 	color: $red;
 	line-height: 150%;
 	margin-bottom: 30px;
+}
+.back {
+	margin: 15px;
 }

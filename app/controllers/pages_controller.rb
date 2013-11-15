@@ -28,7 +28,8 @@ class PagesController < ApplicationController
   # POST /pages
   # POST /pages.json
   def create
-    @page = Page.new(page_params)
+    @page = Page.new(params[:page])
+    @page.status ||= "draft"
 
     respond_to do |format|
       if @page.save
@@ -45,7 +46,7 @@ class PagesController < ApplicationController
   # PATCH/PUT /pages/1.json
   def update
     respond_to do |format|
-      if @page.update(page_params)
+      if @page.update(params[:page])
         format.html { redirect_to @page, notice: 'Page was successfully updated.' }
         format.json { head :no_content }
       else

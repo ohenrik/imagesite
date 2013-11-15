@@ -18,7 +18,7 @@ class Permission
 			allow_param :user, [:current_theme]
 			allow_param :photo, [:name, :image, :edit_tag_list, :description]
 			allow_param :page, [:title, :content, :excerpt, :status]
-			allow :pages, [:index, :new, :create, :edit, :update, :delete, :destroy]
+			allow :pages, [:index, :show, :new, :create, :edit, :update, :delete, :destroy]
 			allow :photos, [:all, :new, :create, :edit, :update, :delete, :destroy]
 			allow :tags, [:index, :new, :create, :edit, :update, :delete, :destroy]
 			allow :themes, [:show, :index, :edit, :update, :create, :new, :destroy, :select_theme]

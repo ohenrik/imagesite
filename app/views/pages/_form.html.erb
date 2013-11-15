@@ -1,53 +1,46 @@
 <%= form_for(@page) do |f| %>
 
-  <div class="error-container">
-    <%= render partial: 'shared/form_errors', :locals => {:item => @page} %>
-  </div>
+<div class="clearfix">
 
+  <div class="left-column">
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-
-
-
-  <div class="field">
-    <%= f.label :content %><br>
-  <div id="wysihtml5-toolbar" style="display: none;">
-    <a data-wysihtml5-command="bold">bold</a>
-    <a data-wysihtml5-command="italic">italic</a>
-    <a data-wysihtml5-command="underline">underline</a>
-    <a data-wysihtml5-command="justifyLeft">align left</a>
-    <a data-wysihtml5-command="justifyCenter">align center</a>
-    <a data-wysihtml5-command="justifyRight">align right</a>
-
-    <a data-wysihtml5-command="insertOrderedList">insert ordered list</a>
-    <a data-wysihtml5-command="insertUnorderedList">insert unordered list</a>
-
-    <a data-wysihtml5-command="createLink">insert link</a>
-    <div data-wysihtml5-dialog="createLink" style="display: none;">
-      <label>
-        Link: <input data-wysihtml5-dialog-field="href" value="http://" class="text">
-      </label>
-      <a data-wysihtml5-dialog-action="save">OK</a>
-      <a data-wysihtml5-dialog-action="cancel">Cancel</a>
+    <div class="error-container">
+        <%= render partial: 'shared/form_errors', :locals => {:item => @page} %>
     </div>
-    <a data-wysihtml5-action="change_view" href="javascript:;" unselectable="on">switch to html view</a>
-    <a data-wysihtml5-command="insertImage" data-wysihtml5-command-value="http://url.com/foo.jpg">insert example image</a>
-    <a data-wysihtml5-command="insertImage" data-wysihtml5-command-value="http://url.com/foo2.jpg">insert example image2</a>
+
+    <div class="field">
+        <h1 class="page-title-header"><%= f.text_field :title, placeholder: "Enter title", autofocus: true, class: "page-title-field" %></h1>
+    </div>
+
+
+    <div class="field">
+        <%= render 'rich_content_toolbar' %>
+        <%= f.text_area :content, id: 'wysihtml5-content', placeholder: "Enter content here", class: "rich-editor content-editor" %>
+    </div>
+
+    <div class="field">
+        <h3 class="page-excerpt-heading">Page excerpt</h3>
+        <%= render 'rich_excerpt_toolbar' %>
+        <%= f.text_area :excerpt, id: 'wysihtml5-excerpt', placeholder: "Enter excerpt here", class: "rich-editor excerpt-editor"  %>
+    </div>
+
   </div>
-    <%= f.text_area :content, id: 'wysihtml5-textarea' %>
-  </div>
-  <div class="field">
-    <%= f.label :excerpt %><br>
-    <%= f.text_area :excerpt %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= select_tag(:status, options_for_select(available_statuses)) %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+
+    <div class="right-column">
+        <div class="field">
+            <%= select_tag :status, options_for_select(available_statuses), selected: :status, class: "page-status-select" %>
+        </div>
+        <div class="actions">
+            <% if @page.new_record? %>
+                <%= f.submit "Create page", class: "submit-page" %>
+            <% else %>
+                <%= f.submit "Update page", class: "submit-page" %>
+            <% end %>
+            <%= link_to 'Cancel', pages_path, class: "cancel-page" %>
+        </div>
+    </div>
+
+</div>
+
 <% end %>
