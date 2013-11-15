@@ -29,6 +29,10 @@
 	border: 2px solid $gray5;
 	padding: 10px 10px;
 }
+.wysihtml5-commands-disabled + textarea{
+	font-family: monospace !important;
+	font-size: 14px;
+}
 .content-editor{
 	height: 400px;
 	margin-bottom: 30px;
