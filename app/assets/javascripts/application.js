@@ -13,4 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require wysihtml5
+//= require parser_rules/advanced
 //= require_tree .

@@ -56,6 +56,9 @@ gem 'mini_magick'
 gem 'liquid'
 gem 'rubyzip'
 
+# HTml editor
+gem 'wysihtml5-rails'
+
 ## Test gems
 gem "rspec-rails", :group => [:test, :development]
 group :test do 

@@ -1,23 +1,43 @@
 <%= form_for(@page) do |f| %>
-  <% if @page.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
 
-      <ul>
-      <% @page.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <div class="error-container">
+    <%= render partial: 'shared/form_errors', :locals => {:item => @page} %>
+  </div>
+
 
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
+
+
+
   <div class="field">
     <%= f.label :content %><br>
-    <%= f.text_area :content %>
+  <div id="wysihtml5-toolbar" style="display: none;">
+    <a data-wysihtml5-command="bold">bold</a>
+    <a data-wysihtml5-command="italic">italic</a>
+    <a data-wysihtml5-command="underline">underline</a>
+    <a data-wysihtml5-command="justifyLeft">align left</a>
+    <a data-wysihtml5-command="justifyCenter">align center</a>
+    <a data-wysihtml5-command="justifyRight">align right</a>
+
+    <a data-wysihtml5-command="insertOrderedList">insert ordered list</a>
+    <a data-wysihtml5-command="insertUnorderedList">insert unordered list</a>
+
+    <a data-wysihtml5-command="createLink">insert link</a>
+    <div data-wysihtml5-dialog="createLink" style="display: none;">
+      <label>
+        Link: <input data-wysihtml5-dialog-field="href" value="http://" class="text">
+      </label>
+      <a data-wysihtml5-dialog-action="save">OK</a>
+      <a data-wysihtml5-dialog-action="cancel">Cancel</a>
+    </div>
+    <a data-wysihtml5-action="change_view" href="javascript:;" unselectable="on">switch to html view</a>
+    <a data-wysihtml5-command="insertImage" data-wysihtml5-command-value="http://url.com/foo.jpg">insert example image</a>
+    <a data-wysihtml5-command="insertImage" data-wysihtml5-command-value="http://url.com/foo2.jpg">insert example image2</a>
+  </div>
+    <%= f.text_area :content, id: 'wysihtml5-textarea' %>
   </div>
   <div class="field">
     <%= f.label :excerpt %><br>
@@ -25,7 +45,7 @@
   </div>
   <div class="field">
     <%= f.label :status %><br>
-    <%= f.text_field :status %>
+    <%= select_tag(:status, options_for_select(available_statuses)) %>
   </div>
   <div class="actions">
     <%= f.submit %>
