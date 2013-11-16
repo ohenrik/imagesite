@@ -29,7 +29,7 @@
 
     <div class="right-column">
         <div class="field">
-            <%= f.select :status, options_for_select(available_statuses, @page.status || 'draft'), class: "page-status-select" %>
+            <%= f.select :status, options_for_select(available_statuses, @page.status || 'draft'), {} , :class => "page-status-select"  %>
         </div>
         <div class="actions">
             <% if @page.new_record? %>

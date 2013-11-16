@@ -93,3 +93,55 @@
 .page-excerpt-heading {
 	margin-bottom: 15px;
 }
+.listed-page {
+
+}
+.listed-page-thumbnail {
+	margin: 50px 15px;
+	border: 2px solid $gray5;
+	float: left;
+	width: 285px;
+	height: 204px;
+	td {
+		width: 285px;
+		height: 204px;
+		text-align: center;
+		vertical-align: middle;
+		i {
+
+			font-size: 102px;
+			color: $gray5;
+			
+		}
+	}
+}
+.listed-page-text {
+	float: left;
+	width: 370px;
+	margin: 50px 15px;
+	p {
+		color: $gray4;
+	}
+}
+.listed-page-header {
+	line-height: 100%;
+}
+.listed-page-status {
+	color: $gray5;
+	font-weight: normal;
+	margin-bottom: 15px;
+	line-height: 100%;
+}
+.listed-page-controlls {
+	margin-top: 30px;
+	font-size: 18px;
+	color: $gray5;
+	a {
+		font-size: 18px;
+		color: $gray5;
+	}
+}
+
+
+
+

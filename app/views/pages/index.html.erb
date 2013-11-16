@@ -1,33 +1,30 @@
-<h1>Listing pages</h1>
+<div class="list-pages">
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th>Excerpt</th>
-      <th>Status</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
     <% @pages.each do |page| %>
-      <tr>
-        <td><%= page.title %></td>
-        <td><%= page.content %></td>
-        <td><%= page.excerpt %></td>
-        <td><%= page.status %></td>
-        <td><%= link_to 'Show', page %></td>
-        <td><%= link_to 'Edit', edit_page_path(page) %></td>
-        <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <div class ="listed-page clearfix">
+            <div class="listed-page-thumbnail">
+                <table>
+                    <tr>
+                        <td>
+                            <i class="fa fa-picture-o"></i>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="listed-page-text">
+                <h1 class="listed-page-header"><%= page.title %></h1>
+                <h3 class="listed-page-status"><%= page.status.titlecase %></h3>
+                <p><%=h truncate(page.excerpt, :length => 220) %></p>
+                <div class="listed-page-controlls">
+                    <%= link_to 'Show', page %> |
+                    <%= link_to 'Edit', edit_page_path(page) %> |
+                    <%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %>
+                </div>
+            </div>
+        </div>
     <% end %>
-  </tbody>
-</table>
 
+</div>
 <br>
 
 <%= link_to 'New Page', new_page_path %>

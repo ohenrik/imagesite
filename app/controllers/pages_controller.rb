@@ -14,6 +14,7 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.json
   def show
+    render layout: "theme"
   end
 
   # GET /pages/new
