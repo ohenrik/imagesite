@@ -1,5 +1,7 @@
 <%= form_for(@page) do |f| %>
 
+<%= render 'photo_manager' %>
+
 <div class="clearfix">
 
   <div class="left-column">
@@ -35,7 +37,8 @@
             <% if @page.new_record? %>
                 <%= f.submit "Create page", class: "submit-page" %>
             <% else %>
-                <%= f.submit "Update page", class: "submit-page" %>
+                <%= f.submit "Update page", class: "submit-page" %> |
+                <%= link_to 'Show', @page %>
             <% end %>
             <%= link_to 'Cancel', pages_path, class: "cancel-page" %>
         </div>

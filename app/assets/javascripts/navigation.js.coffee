@@ -10,10 +10,11 @@ ready = ->
 		$(".dropdown-menu").hide() != $(".dropdown-toggle").click
 
 
-	# Listen for escape key to close menu 
+	# Listen for escape key to close menu and close photo manager if visible
 	document.onkeydown = (evt) ->
 		evt = evt or window.event
 		$(".dropdown-menu").hide()  if evt.keyCode is 27
+		$('.page-photo-manager-background').hide()  if evt.keyCode is 27 & $('.page-photo-manager-background').css('display') == 'block'
 	
 
 

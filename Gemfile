@@ -59,6 +59,7 @@ gem 'rubyzip'
 # HTml editor
 gem 'wysihtml5-rails'
 gem 'font-awesome-sass'
+gem 'sanitize-rails', :require => 'sanitize/rails'
 
 ## Test gems
 gem "rspec-rails", :group => [:test, :development]

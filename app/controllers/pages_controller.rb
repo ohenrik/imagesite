@@ -34,8 +34,8 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       if @page.save
-        format.html { redirect_to @page, notice: 'Page was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @page }
+        format.html { redirect_to pages_path, notice: 'Page was successfully created.' }
+        format.json { render action: 'index', status: :created, location: @page }
       else
         format.html { render action: 'new' }
         format.json { render json: @page.errors, status: :unprocessable_entity }
@@ -48,7 +48,7 @@ class PagesController < ApplicationController
   def update
     respond_to do |format|
       if @page.update(params[:page])
-        format.html { redirect_to @page, notice: 'Page was successfully updated.' }
+        format.html { redirect_to pages_path, notice: 'Page was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

@@ -1,0 +1,15 @@
+<div class="page-photo-manager-background">
+    <div class="page-photo-manager">
+        <div class="clearfix"><a href="#" class="close-photo-manager">close</a></div>
+        <div class="page-upload-image">
+
+        </div>
+        <div class="page-select-image">
+            <% Photo.all.each do |photo| %>
+                <a href="#" class="select-photo-link" data-url="http://<%= request.host_with_port+ photo.image_url(:large) %>" >
+                    <%= image_tag photo.image_url(:thumb) %>
+                </a>
+            <% end %>
+        </div>
+    </div>
+</div>
