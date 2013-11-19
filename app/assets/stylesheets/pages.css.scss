@@ -145,25 +145,49 @@
 }
 .page-photo-manager-background {
 	display: none;
-	position: fixed;
+	position: absolute;
 	z-index: 500;
 	width: 100%;
-	height: 100%;
 	@include transparent($gray1, 0.7);
 	top: 0;
 	left: 0;
 	.page-photo-manager {
 		z-index: 600;
 		padding: 15px;
-		width: 670px;
-		height: 600px;
+		width: 840px;
 		background-color: $white;
-		margin: 30px auto;
+		margin: 100px auto;
 		border: 2px solid $gray5;
+		.page-select-image {
+			float: left;
+			width: 630px;
+		}
 	}
 }
-.close-photo-manager {
+.page-photo-manager-links {
+	a {
+		color: $gray4;
+	}
+	width: 590px;
+	float: left;
+	margin: 0 15px -5px;
+	position: relative;
+}
+a.close-photo-manager {
+	position: absolute;
+	right: -245px;
+	top: -40px;
+	color: $white;
+}
+.page-manager-controls {
+	width: 180px;
+	margin: 0 15px 0;
+	height: 200px;
 	float: right;
 }
-
-
+.search-page-photos {
+	color: $gray4;
+	border-bottom: 2px solid $gray5;
+	line-height: 21px;
+	padding-bottom: 10px;
+}

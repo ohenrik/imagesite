@@ -10,6 +10,9 @@
   margin: 15px;
   position: relative;
   width: 176px;
+  img {
+    border: 2px solid $gray4;
+  }
 }
 .thumb-meta {
   display: none;

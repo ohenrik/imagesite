@@ -1,14 +1,41 @@
 <div class="page-photo-manager-background">
-    <div class="page-photo-manager">
-        <div class="clearfix"><a href="#" class="close-photo-manager">close</a></div>
+    <div class="page-photo-manager clearfix">
+        <div class="page-photo-manager-links">
+            <a href="#" class="upload-new-photo">Upload new photo</a> |
+            <a href="#" class="select-existing-photo">Insert existing photo</a> |
+            <a href="#" class="select-page-thumbnail">Page thumbnail</a>
+            <a href="#" class="close-photo-manager">Close</a>
+        </div>
+        <div class="page-manager-controls">
+            <div class="search-page-photos">
+                <%= form_tag  do %>
+                    <%= label_tag 'search:' %>
+                    <%= search_field_tag 'search', "", :placeholder => "Tag or search term..." %>
+                <% end %>
+            </div>
+            <div class="">
+                <%= form_tag do %>
+                    <%= label_tag 'title' %>
+                    <%= text_field_tag 'title', "", :placeholder => "Type title" %>
+                    <%= label_tag 'alt' %>
+                    <%= text_field_tag 'alt', "", :placeholder => "Type alt text" %>
+                    <%= label_tag 'description' %>
+                    <%= text_area_tag 'description', "", :placeholder => "Typedescription" %>
+                    <% #sizes here %>
+                    <%= button_tag 'Insert photo' %>
+                <% end %>
+            </div>
+        </div>
         <div class="page-upload-image">
 
         </div>
         <div class="page-select-image">
             <% Photo.all.each do |photo| %>
-                <a href="#" class="select-photo-link" data-url="http://<%= request.host_with_port+ photo.image_url(:large) %>" >
+            <div class="thumb">
+                <a href="#" class="select-photo-link" data-url="http://<%= request.host_with_port + photo.image_url(:large) %>" >
                     <%= image_tag photo.image_url(:thumb) %>
                 </a>
+            </div>
             <% end %>
         </div>
     </div>

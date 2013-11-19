@@ -7,11 +7,15 @@
     font-url('NeutraText-Demi.woff') format('woff'),
     font-url('NeutraText-Demi.ttf') format('truetype');
 }
+html {
+	height: 100%;
+}
 body {
 	background-color: $gray1;
 	font-family: $font;
 	color: $gray1;
 	font-size: 14px;
+	height: 100%;
 }
 p {
 	font-family: $font;

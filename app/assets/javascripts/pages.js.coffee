@@ -18,6 +18,7 @@ ready = ->
 
 	$('#wysihtml5-content-images').click (event) ->
 		$('.page-photo-manager-background').toggle()
+		$('.page-photo-manager-background').css('height', $(document).height())
 		$(".rich-link").css('position', 'aboslute')
 		event.preventDefault()
 
