@@ -2,28 +2,50 @@
     <div class="page-photo-manager clearfix">
         <div class="page-photo-manager-links">
             <a href="#" class="upload-new-photo">Upload new photo</a> |
-            <a href="#" class="select-existing-photo">Insert existing photo</a> |
+            <a href="#" class="select-existing-photo current">Insert existing photo</a> |
             <a href="#" class="select-page-thumbnail">Page thumbnail</a>
             <a href="#" class="close-photo-manager">Close</a>
         </div>
         <div class="page-manager-controls">
             <div class="search-page-photos">
                 <%= form_tag  do %>
-                    <%= label_tag 'search:' %>
+                    <%= label_tag 'search', 'Search:', class: "page-photos-manager-search-label" %>
                     <%= search_field_tag 'search', "", :placeholder => "Tag or search term..." %>
                 <% end %>
             </div>
             <div class="">
                 <%= form_tag do %>
-                    <%= label_tag 'title' %>
-                    <%= text_field_tag 'title', "", :placeholder => "Type title" %>
-                    <%= label_tag 'alt' %>
-                    <%= text_field_tag 'alt', "", :placeholder => "Type alt text" %>
-                    <%= label_tag 'description' %>
-                    <%= text_area_tag 'description', "", :placeholder => "Typedescription" %>
+                    <table>
+                        <tr>
+                            <td class="photo-manager-controll-label">
+                                <%= label_tag 'title', 'Title:' %>
+                            </td>
+                            <td>
+                                <%= text_field_tag 'title', "", :placeholder => "Type title", class: "photo-manager-controll-input", id: "controll-photo-title-input" %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="photo-manager-controll-label">
+                                <%= label_tag 'alt', 'Alt:' %>
+                            </td>
+                            <td>
+                                <%= text_field_tag 'alt', "", :placeholder => "Type alt text", class: "photo-manager-controll-input", id: "controll-photo-alt-input" %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="photo-manager-controll-label">
+                                <%= label_tag 'size', 'Size:' %>
+                            </td>
+                            <td>
+                                <%= select_tag 'size', options_for_select([['Large', 'large_'], ['Medium', 'medium_'], ['Small', 'small_'], ['Thumbnail', 'thumb_'], ['Original size', '']]), class: "photo-manager-controll-input", id: "controll-photo-size-input" %>
+                            </td>
+                        </tr>
+                    </table>
+                    <%= label_tag 'description', 'Description:', class: "photo-manager-controll-label descriptoin-label" %>
+                    <%= text_area_tag 'description', "", :placeholder => "Type description", class: "photo-manager-controll-input" %>
                     <% #sizes here %>
-                    <%= button_tag 'Insert photo' %>
-                <% end %>
+                    <%= link_to "Insert image", '#', id: "controll-insert-image-link"  %>
+                    <% end %>
             </div>
         </div>
         <div class="page-upload-image">
@@ -32,9 +54,15 @@
         <div class="page-select-image">
             <% Photo.all.each do |photo| %>
             <div class="thumb">
-                <a href="#" class="select-photo-link" data-url="http://<%= request.host_with_port + photo.image_url(:large) %>" >
+                <a href="#" class="select-photo-link" data-url="http://<%= request.host_with_port + photo.image_url() %>" >
                     <%= image_tag photo.image_url(:thumb) %>
+                    <%= photo.name %>
                 </a>
+                <p class="photo-tags">
+                        <% photo.tag_list.each do |tag| %>
+                            <span class="tag"><%= tag %></span>
+                        <% end %>
+                </p>
             </div>
             <% end %>
         </div>

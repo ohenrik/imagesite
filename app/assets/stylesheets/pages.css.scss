@@ -168,6 +168,9 @@
 	a {
 		color: $gray4;
 	}
+	a.current {
+		color: $gray5;
+	}
 	width: 590px;
 	float: left;
 	margin: 0 15px -5px;
@@ -184,10 +187,34 @@ a.close-photo-manager {
 	margin: 0 15px 0;
 	height: 200px;
 	float: right;
+	label {
+		
+	}
+	textarea {
+		width: 180px;
+		resize: vertical;
+		border-bottom: 2px solid $gray5;
+	}
+	.photo-manager-controll-input {
+		width: 100%;
+		line-height: 21px;
+	}
+	table {
+		width: 100%;
+	}
+}
+.descriptoin-label {
+	margin-top: 15px;
+}
+.photo-manager-controll-label {
+	width: 35px;
+	color: $gray5;
+	line-height: 21px;
 }
 .search-page-photos {
 	color: $gray4;
 	border-bottom: 2px solid $gray5;
 	line-height: 21px;
 	padding-bottom: 10px;
+	margin-bottom: 15px;
 }
