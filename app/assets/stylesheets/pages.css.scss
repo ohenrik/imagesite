@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "variables";
+.full-column {
+	width: 1000px;
+	margin: 0 15px;
+}
 .left-column {
 	float: left;
 	width: 685px;
@@ -11,7 +15,7 @@
 	float: left;
 	width: 285px;
 	border-top: 2px solid $gray5;
-	margin: 102px 15px 0;
+	margin: 74px 15px 0;
 }
 .page-title-header {
 	margin-bottom: 15px;
@@ -25,7 +29,6 @@
 	margin: 0 0 5px 2px;
 }
 .rich-editor {
-	width: 661px;
 	border: 2px solid $gray5;
 	padding: 10px 10px;
 }
@@ -34,10 +37,12 @@
 	font-size: 14px;
 }
 .content-editor{
+	width: 976px;
 	height: 400px;
 	margin-bottom: 30px;
 }
 .excerpt-editor{
+	width: 661px;
 	height: 200px;
 }
 .wysihtml5-editor {
