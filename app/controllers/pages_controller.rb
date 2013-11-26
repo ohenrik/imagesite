@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   # Find the tenant
   around_filter :scope_current_tenant
   
-  before_action :set_page, only: [:show, :edit, :update, :destroy]
+  before_action :set_page, only: [:show, :edit, :update, :destroy, :set_thumbnail]
 
   # GET /pages
   # GET /pages.json
@@ -24,6 +24,11 @@ class PagesController < ApplicationController
 
   # GET /pages/1/edit
   def edit
+  end
+
+  def set_thumbnail
+    @page.photo_id = params[:photo_id]
+    @page.save
   end
 
   # POST /pages

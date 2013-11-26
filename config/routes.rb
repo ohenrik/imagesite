@@ -11,8 +11,7 @@ Imagesite::Application.routes.draw do
   resources :sessions
   resources :users
   resources :password_resets
-  resources :pages
-  resources :themes
+
 
    #Check for subdomain
   constraints(Subdomain) do
@@ -20,9 +19,13 @@ Imagesite::Application.routes.draw do
     get 'photos/tags/:tag' => 'photos#index', as: :public_filter_tag
     get 'photos/all/tags/:tag' => 'photos#all', as: :filter_tag
     get 'themes/select_theme/:id' => 'themes#select_theme', as: :select_theme
+    post 'pages/set_thumbnail/:id' => 'pages#set_thumbnail', as: :set_thumbnail
+    resources :pages
     resources :photos
     resources :tags
-    get "/" => 'photos#index' 
+    resources :themes
+    get "/" => 'photos#index'
+
   end
   root :to => 'static_pages#home'
 

@@ -30,19 +30,19 @@
 }
 .rich-editor {
 	border: 2px solid $gray5;
-	padding: 10px 10px;
+	padding: 10px 15px 10px 15px;
 }
 .wysihtml5-commands-disabled + textarea{
 	font-family: monospace !important;
 	font-size: 14px;
 }
 .content-editor{
-	width: 976px;
+	width: 966px;
 	height: 400px;
 	margin-bottom: 30px;
 }
 .excerpt-editor{
-	width: 661px;
+	width: 651px;
 	height: 200px;
 }
 .wysihtml5-editor {
@@ -215,6 +215,14 @@ a.close-photo-manager {
 	width: 35px;
 	color: $gray5;
 	line-height: 21px;
+}
+#controll-insert-image-link {
+	display: none;
+	font-size: 18px;
+}
+a.page-set-thumbnail {
+	display: none;
+	&:hover, &:link { color: $gray5; }
 }
 .search-page-photos {
 	color: $gray4;

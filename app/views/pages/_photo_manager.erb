@@ -2,8 +2,7 @@
     <div class="page-photo-manager clearfix">
         <div class="page-photo-manager-links">
             <a href="#" class="upload-new-photo">Upload new photo</a> |
-            <a href="#" class="select-existing-photo current">Insert existing photo</a> |
-            <a href="#" class="select-page-thumbnail">Page thumbnail</a>
+            <a href="#" class="select-existing-photo current">Insert existing photo</a>
             <a href="#" class="close-photo-manager">Close</a>
         </div>
         <div class="page-manager-controls">
@@ -46,6 +45,7 @@
                     <% #sizes here %>
                     <%= link_to "Insert image", '#', id: "controll-insert-image-link"  %>
                     <% end %>
+                    <%= link_to "Set as thumbnail", "no_image_chosen", :method => :post, :remote => true, class: "page-set-thumbnail" unless @page.new_record?%>
             </div>
         </div>
         <div class="page-upload-image">
@@ -54,10 +54,10 @@
         <div class="page-select-image">
             <% Photo.all.each do |photo| %>
             <div class="thumb">
-                <a href="#" class="select-photo-link" data-url="http://<%= request.host_with_port + photo.image_url() %>" >
+                <a href="#" class="select-photo-link" data-url="http://<%= request.host_with_port + photo.image_url() %>", data-set-thumbnail="<%= set_thumbnail_path(@page , :photo_id => photo.id) unless @page.new_record? %>" >
                     <%= image_tag photo.image_url(:thumb) %>
-                    <%= photo.name %>
                 </a>
+                <span class="page-manager-photo-name"><%= photo.name %></span>
                 <p class="photo-tags">
                         <% photo.tag_list.each do |tag| %>
                             <span class="tag"><%= tag %></span>
