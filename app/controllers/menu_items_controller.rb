@@ -28,7 +28,7 @@ class MenuItemsController < ApplicationController
   # POST /menu_items
   # POST /menu_items.json
   def create
-    @menu_item = MenuItem.new(menu_item_params)
+    @menu_item = MenuItem.new(params[:menu_item])
 
     respond_to do |format|
       if @menu_item.save
@@ -45,7 +45,7 @@ class MenuItemsController < ApplicationController
   # PATCH/PUT /menu_items/1.json
   def update
     respond_to do |format|
-      if @menu_item.update(menu_item_params)
+      if @menu_item.update(params[:menu_item])
         format.html { redirect_to @menu_item, notice: 'Menu item was successfully updated.' }
         format.json { head :no_content }
       else
@@ -72,7 +72,7 @@ class MenuItemsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def menu_item_params
-      params.require(:menu_item).permit(:menu_id)
-    end
+    #def menu_item_params
+    #  params.require(:menu_item).permit(:menu_id)
+    #end
 end

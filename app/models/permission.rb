@@ -17,7 +17,7 @@ class Permission
 		if user && user.subdomain == subdomain
 			allow_param :user, [:current_theme]
 			allow_param :menu, [:name, :menu_item_id]
-			allow_param :menu_item, [:name, :menu_item_id]
+			allow_param :menu_item, [:menu_id, :item_id, :name, :description, :new_page, :ancestry]
 			allow_param :photo, [:name, :image, :edit_tag_list, :description]
 			allow_param :page, [:title, :content, :excerpt, :status, :photo_id]
 			allow :pages, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :set_thumbnail]
