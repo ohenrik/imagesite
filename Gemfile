@@ -61,6 +61,9 @@ gem 'wysihtml5-rails'
 gem 'font-awesome-sass'
 gem 'sanitize-rails', :require => 'sanitize/rails'
 
+# Navigation
+gem 'ancestry'
+
 ## Test gems
 gem "rspec-rails", :group => [:test, :development]
 group :test do 

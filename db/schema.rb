@@ -11,10 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131123183912) do
+ActiveRecord::Schema.define(version: 20131205181101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "menu_items", force: true do |t|
+    t.integer  "menu_id"
+    t.integer  "item_id"
+    t.string   "item_type"
+    t.string   "name"
+    t.string   "description"
+    t.boolean  "new_page"
+    t.string   "ancestry"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "menu_items", ["menu_id"], name: "index_menu_items_on_menu_id", using: :btree
+
+  create_table "menus", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pages", force: true do |t|
     t.string   "title"
