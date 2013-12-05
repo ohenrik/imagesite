@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Imagesite</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+  <%= csrf_meta_tags %>
+</head>
+<body id="purple">
+
+
+	<div id="outer-container">
+		<div id="inner-container">
+			<div class="col12">
+				<%= render 'shared/notice' %>
+				<%= yield %>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

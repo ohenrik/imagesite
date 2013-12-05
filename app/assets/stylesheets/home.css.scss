@@ -1,0 +1,18 @@
+$BGColor: #f1f1f1;
+#purple {
+	background-color: $BGColor;
+}
+#inner-container {
+	max-width: 1000px;
+	margin: 0 10px;
+	min-height: 400px;
+	background-color: #000; 
+}
+.col12 {
+	width: 65px * 12 + 20px * 11 ;
+	min-height: 100px;
+	background-color: #fff; 
+}
+@mixin col {
+	width: 65px;
+}
