@@ -2,7 +2,11 @@
 
 <p>
   <strong>Menu:</strong>
-  <%= @menu_item.menu %>
+  <%= @menu_item.name %>
+  <br>
+  <%= @menu_item.description %>
+  <br>
+  <%= link_to "go to item", polymorphic_path(@menu_item.menuable)%>
 </p>
 
 <%= link_to 'Edit', edit_menu_item_path(@menu_item) %> |

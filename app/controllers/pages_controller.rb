@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   around_filter :scope_current_tenant
   
   before_action :set_page, only: [:show, :edit, :update, :destroy, :set_thumbnail]
+  
 
   # GET /pages
   # GET /pages.json

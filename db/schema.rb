@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 20131205181101) do
 
   create_table "menu_items", force: true do |t|
     t.integer  "menu_id"
-    t.integer  "item_id"
-    t.string   "item_type"
+    t.integer  "menuable_id"
+    t.string   "menuable_type"
     t.string   "name"
     t.string   "description"
     t.boolean  "new_page"
