@@ -21,7 +21,7 @@
 			color: $btext;
 			font-size: 18px;
 			font-weight: 100;
-			&:hover {border-bottom: 1px solid $white; }
+			&:hover { border-bottom: 1px solid $btext; }
 		}
 		a.dropdown-toggle {
 			text-decoration: none;

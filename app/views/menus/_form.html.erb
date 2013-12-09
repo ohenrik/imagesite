@@ -15,6 +15,14 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+
+  <%= f.fields_for :menu_items do |menu_item| %>
+      <div class="field">
+        <%= menu_item.label :name,  "Menu item name" %><br>
+        <%= menu_item.text_field :name %>
+      </div>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
