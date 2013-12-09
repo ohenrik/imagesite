@@ -1,8 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @menu.name %>
+  <h1><%= @menu.name %></h1>
+  <% @menu.menu_items.each do |menu_item| %>
+  	<%= link_to menu_item.name, polymorphic_url(menu_item.menuable)%><br>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_menu_path(@menu) %> |

@@ -4,7 +4,6 @@
   <title>Imagesite</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -14,13 +13,7 @@
 		<div class="container">
 			<%= link_to root_url(:subdomain => false) do %>
 				<div class="logo">
-					<table>
-						<tr>
-							<td>
-								IM
-							</td>
-						</tr>
-					</table>					
+					<h1><span class="theatrical-logo">t</span>Theatrical.co</h1>	
 				</div>
 			<% end %>
 

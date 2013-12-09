@@ -20,7 +20,7 @@ Imagesite::Application.routes.draw do
    #Check for subdomain
   constraints(Subdomain) do
     get 'photos/all' => 'photos#all', as: :all
-    get 'photos/tags/:tag' => 'photos#index', as: :public_filter_tag
+    get 'tags/:tag' => 'photos#index', as: :public_filter_tag
     get 'photos/all/tags/:tag' => 'photos#all', as: :filter_tag
     get 'themes/select_theme/:id' => 'themes#select_theme', as: :select_theme
     post 'pages/set_thumbnail/:id' => 'pages#set_thumbnail', as: :set_thumbnail

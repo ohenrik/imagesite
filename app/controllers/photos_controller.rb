@@ -13,6 +13,7 @@ class PhotosController < ApplicationController
   def index
     if params[:tag] 
       @photos = Tag.find_by_name(params[:tag]).try(:photos)
+      @photos ||= Tag.find_by_id(params[:tag]).try(:photos)
       #@photo = Photo.tagged_with(params[:tag])
     else     
       @photos = Photo.all
@@ -25,6 +26,7 @@ class PhotosController < ApplicationController
   def all
     if params[:tag] 
       @photos = Tag.find_by_name(params[:tag]).try(:photos)
+      @photos ||= Tag.find_by_id(params[:tag]).try(:photos)
       #@photo = Photo.tagged_with(params[:tag])
     else     
       @photos = Photo.all

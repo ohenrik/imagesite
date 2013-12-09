@@ -6,7 +6,7 @@
 		font-family: neutra;
 		text-decoration: none;
 		&:hover, &:visited, &:active {
-			color: white;
+			color: $btext;
 			background-color: transparent;
 		}
 	}
@@ -18,7 +18,7 @@
 		margin: 0 15px 0;
 		a {
 			text-decoration: none;
-			color: white;
+			color: $btext;
 			font-size: 18px;
 			font-weight: 100;
 			&:hover {border-bottom: 1px solid $white; }
@@ -64,5 +64,5 @@
 	}
 }
 .caret {
-	@include caret-sign(white);
+	@include caret-sign($btext);
 }
