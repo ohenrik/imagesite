@@ -79,10 +79,6 @@ h3 {
 	font-size: 18px;
 	line-height: 150%;
 }
-.container {
-	width: 1030px;
-	margin: 0 auto;
-}
 #header {
 	height: 100px;
 	background-color: $bg;
@@ -107,7 +103,6 @@ h3 {
 	}
 }
 .main {
-	padding: 50px 0 50px;
 	background-color: $bg;
 	border-bottom: 5px solid darken($bg, 10)
 }

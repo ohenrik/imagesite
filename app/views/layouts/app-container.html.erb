@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Imagesite</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+	<div id="header" class="header">
+
+		<div class="container">
+			<%= link_to root_url(:subdomain => false) do %>
+				<div class="logo">
+					<h1><span class="theatrical-logo">t</span>Theatrical.co</h1>	
+				</div>
+			<% end %>
+
+			<%= render 'shared/navigation' %>
+
+		</div> <!-- container -->
+
+	</div>
+
+
+	<div class="main">
+			<%= render 'shared/notice' %>
+			<%= yield %>
+	</div>
+	<div id="footer" class="footer">  </div>
+
+</body>
+</html>
