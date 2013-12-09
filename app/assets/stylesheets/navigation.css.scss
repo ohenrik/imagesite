@@ -1,68 +1,45 @@
 @import "variables";
+@import "bootstrap-custom";
+@import "twitter/bootstrap";
+
 .nav {
-	float: right;
-	margin: 40px 15px 0;
-	a {
-		font-family: neutra;
-		text-decoration: none;
-		&:hover, &:visited, &:active {
-			color: $btext;
-			background-color: transparent;
-		}
-	}
+	display: none;
 }
-.navlist {
-	li {
+.navbar-toggle {
+	display: auto;
+}
+
+
+@media (min-width: $screen-lg-min), (min-width: $screen-md-min), (min-width: $screen-sm-min)  { 
+	.nav {
 		display: block;
-		float: left;
-		margin: 0 15px 0;
+		float: right;
+		margin: 40px 15px 0;
 		a {
+			font-family: neutra;
 			text-decoration: none;
-			color: $btext;
-			font-size: 18px;
-			font-weight: 100;
-			&:hover { border-bottom: 1px solid $btext; }
+			&:hover, &:visited, &:active {
+				color: $btext;
+				background-color: transparent;
+			}
 		}
-		a.dropdown-toggle {
-			text-decoration: none;
-			&:hover {border-bottom: 1px solid $white; }
-		}
-		.dropdown-menu {
-			width: 180px;
-			background-color: $white;
-			color: $gray1;
-			display: none;
+	}
+	.navlist {
+		li {
+			display: block;
 			float: left;
-			position: absolute;
-			z-index: 100;
-			left: 0;
-			top: 100%;
-			border: 1px solid $gray5;
-			li {
-				color: $gray1;
-				margin: 0;
-				padding: 5px 5px 3px 10px;
-				display: block;
-				float: none;
-				&:hover { 
-					background-color: $gray5;
-				}
-			}
+			margin: 0 15px 0;
 			a {
-				color: $gray1;
-				color: $white;
-				&:hover { 
-					border-bottom: none;
-				}
+				text-decoration: none;
+				color: $btext;
+				font-size: 18px;
+				font-weight: 100;
+				&:hover { border-bottom: 1px solid $btext; }
+			}
+			.dropdown-menu {
+				width: 180px;
 			}
 		}
+
 	}
-	.dropdown {
-		float: left;
-		display: block;
-		position: relative;
-	}
-}
-.caret {
-	@include caret-sign($btext);
 }

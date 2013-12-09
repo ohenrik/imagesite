@@ -1,6 +1,109 @@
 @import "variables";
+@import "bootstrap-custom";
+@import "twitter/bootstrap";
+
+	.jumbatron {
+		width: 100%;
+		height: 400px;
+		background-color: $purple;
+		background-image: url("home_grid.png");
+		background-attachment:fixed;
+		background-position:center;
+	}
+	.message {
+		position: relative;
+	}
+	.theatrical-logo-big {
+		margin: 0 auto;
+		font-family: theatrical;
+		width: 330px;
+		height: 345px;
+		font-size: 400px;
+		line-height: 100%;
+		color: $white;
+	}
+	.theatrical-big {
+		display: none;
+	} 
+
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: $screen-sm-min) { 
+
+	.jumbatron {
+		width: 100%;
+		height: 400px;
+		background-color: $purple;
+		background-image: url("home_grid.png");
+		background-attachment:fixed;
+		background-position:center;
+	}
+	.message {
+		position: relative;
+	}
+	.theatrical-logo-big {
+		position: absolute;
+		left: -40px;
+		top: 0;
+		font-family: theatrical;
+		width: 330px;
+		height: 345px;
+		font-size: 400px;
+		line-height: 100%;
+		color: $white;
+	}
+	.theatrical-big {
+		display: block;
+		position: absolute;
+		left: 310px;
+		top: 30px;
+		font-family: neutra, sans-serif;
+		font-size: 90px;
+		line-height: 100%;
+		font-weight: 100;
+		color: $white;
+	} 
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: $screen-md-min) { 
+	.jumbatron {
+		width: 100%;
+		height: 525px;
+		background-color: $purple;
+		background-image: url("home_grid.png");
+		background-attachment:fixed;
+		background-position:center;
+	}
+	.message {
+		position: relative;
+	}
+	.theatrical-logo-big {
+		position: absolute;
+		left: -40px;
+		top: 0;
+		font-family: theatrical;
+		width: 430px;
+		height: 445px;
+		font-size: 500px;
+		line-height: 100%;
+		color: $white;
+	}
+	.theatrical-big {
+		position: absolute;
+		left: 390px;
+		top: 50px;
+		font-family: neutra, sans-serif;
+		font-size: 110px;
+		line-height: 100%;
+		font-weight: 100;
+		color: $white;
+	} 
+}
+
 /* Large devices (large desktops, 1200px and up) */
-@media (min-width: @screen-lg-min) {
+@media (min-width: $screen-lg-min) { 
 	.jumbatron {
 		width: 100%;
 		height: 625px;
@@ -24,6 +127,7 @@
 		color: $white;
 	}
 	.theatrical-big {
+		display: block;
 		position: absolute;
 		left: 500px;
 		top: 80px;
@@ -33,29 +137,4 @@
 		font-weight: 100;
 		color: $white;
 	}
-}
-/* Small devices (tablets, 768px and up) */
-@media (min-width: @screen-sm-min) { 
-
-	.theatrical-big { 
-
-	}
-	.theatrical-logo-big {
-		width: 430px;
-		height: 445px;
-		font-size: 400px;
-	}
-
-}
-
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: @screen-md-min) { 
-
-	.theatrical-big { 
-
-	}
-	.theatrical-logo-big {
-
-	}
-
 }

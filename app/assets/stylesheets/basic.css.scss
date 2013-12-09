@@ -106,9 +106,11 @@ h3 {
 	background-color: $bg;
 	border-bottom: 5px solid darken($bg, 10)
 }
+.navigation {
+	height: 105px;
+}
 .logo {
 	float: left;
-	margin: 20px 15px 20px;
 	position: relative;
 	.theatrical-logo {
 		font-family: "theatrical";
