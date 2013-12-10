@@ -80,7 +80,6 @@ h3 {
 	line-height: 150%;
 }
 #header {
-	height: 100px;
 	background-color: $bg;
 }
 .alert {
@@ -105,28 +104,6 @@ h3 {
 .main {
 	background-color: $bg;
 	border-bottom: 5px solid darken($bg, 10)
-}
-.navigation {
-	height: 105px;
-}
-.logo {
-	float: left;
-	position: relative;
-	.theatrical-logo {
-		font-family: "theatrical";
-		color: $purple;
-		vertical-align: middle;
-		font-size: 69px;
-	}
-	h1 { 
-		color: $btext;
-		font-size: 36px;
-		line-height: 69	px;
-		font-family: "neutra", sans-serif;
-	}
-	&:hover {
-		.theatrical-logo { color: lighten($purple, 10) }
-	}
 }
 #footer {
 	height: 300px;

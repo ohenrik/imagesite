@@ -13,6 +13,12 @@
 
 // Customization
 // -------------------------
+
 $body-bg:               #fff;
 $text-color:            lighten(#000, 20%);
 
+$navbar-margin-bottom: 0;
+
+
+/* Leave at the bottom */
+@import "twitter/bootstrap";

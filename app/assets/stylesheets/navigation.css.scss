@@ -1,45 +1,41 @@
 @import "variables";
 @import "bootstrap-custom";
-@import "twitter/bootstrap";
 
+
+.navigation {
+
+}
+.logo {
+	float: left;
+	position: relative;
+	.theatrical-logo {
+		font-family: "theatrical";
+		color: $purple;
+		vertical-align: middle;
+		font-size: 69px;
+	}
+	h1 {
+		margin: 10px 0 0 0;
+		color: $btext;
+		font-size: 36px;
+		line-height: 69	px;
+		font-family: "neutra", sans-serif;
+	}
+	&:hover {
+		.theatrical-logo { color: lighten($purple, 10) }
+	}
+}
+.navbar-default {
+	background-color: transparent;
+	border: none;
+}
 .nav {
-	display: none;
+	margin: 20px;
+	a {
+		font-size: 16px;
+		font-weight: 100;
+	}
 }
 .navbar-toggle {
-	display: auto;
-}
-
-
-@media (min-width: $screen-lg-min), (min-width: $screen-md-min), (min-width: $screen-sm-min)  { 
-	.nav {
-		display: block;
-		float: right;
-		margin: 40px 15px 0;
-		a {
-			font-family: neutra;
-			text-decoration: none;
-			&:hover, &:visited, &:active {
-				color: $btext;
-				background-color: transparent;
-			}
-		}
-	}
-	.navlist {
-		li {
-			display: block;
-			float: left;
-			margin: 0 15px 0;
-			a {
-				text-decoration: none;
-				color: $btext;
-				font-size: 18px;
-				font-weight: 100;
-				&:hover { border-bottom: 1px solid $btext; }
-			}
-			.dropdown-menu {
-				width: 180px;
-			}
-		}
-
-	}
+	margin-top: 30px;
 }
