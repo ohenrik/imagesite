@@ -14,10 +14,50 @@
 // Customization
 // -------------------------
 
+$bg: #f1f1f1;
+$purple: #7d599f;
+$btext: #303030;
+$column: 50px;
+$gutter: 0 15px;
+$white: white;
+
+
+// Grays
+// -------------------------
+
+$gray-darker:            lighten(#000, 13.5%) !default; // #222
+$gray-dark:              lighten(#000, 20%) !default;   // #333
+$gray:                   lighten(#000, 33.5%) !default; // #555
+$gray-light:             lighten(#000, 60%) !default;   // #999
+$gray-lighter:           lighten(#000, 93.5%) !default; // #eee
+
+// Brand colors
+// -------------------------
+
+$brand-primary:         $purple !default;
+$brand-success:         #5cb85c !default;
+$brand-warning:         #f0ad4e !default;
+$brand-danger:          #d9534f !default;
+$brand-info:            #5bc0de !default;
+
+
+
+$gray1: #343434;
+$gray4: #636363;
+$gray5: #d5d6cb;
+$red: #ef3a00;
+
+$font: neutra, sans-serif;
+
+
 $body-bg:               #fff;
 $text-color:            lighten(#000, 20%);
 
 $navbar-margin-bottom: 0;
+
+.buffer {
+	margin: 40px 0 80px;
+}
 
 
 /* Leave at the bottom */

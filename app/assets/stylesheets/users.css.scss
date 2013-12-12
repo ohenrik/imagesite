@@ -3,7 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "variables";
 
-.form-fields {
+/*
+ .form-fields {
 	font-size: 18px;
 	font-family: $font;
 	color: $gray4;
@@ -31,6 +32,7 @@
 		text-wrap: none;
 	}
 	.password-reset-link {
+		text-align: center;
 		display: table;
 		margin: 50px auto;
 		font-size: 14px;
@@ -47,14 +49,15 @@
 			display: none;	
 		}
 		.remember-me-label {
+			font-family: $font;
 			line-height: 21px;
 			font-size: 14px;
 			padding-left: 20px;
 			cursor: pointer;
 			-webkit-user-select: none; /* Chrome/Safari */        
-			-moz-user-select: none; /* Firefox */
-			-ms-user-select: none; /* IE10+ */
-		}
+			/* -moz-user-select: none; /* Firefox */
+			/*-ms-user-select: none; /* IE10+ */
+		/*}
 		input[type=checkbox] + label {
 				background-image: url(image_path('checkbox.png'));
 				background-position: 0 -2px;
@@ -69,3 +72,5 @@
 		}
 	}
 }
+
+*/
