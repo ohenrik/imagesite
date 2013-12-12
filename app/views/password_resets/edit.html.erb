@@ -6,12 +6,14 @@
 		<p><%= message %></p>
 	<% end %>
 <% end %>
+<div class="row buffer">
+	<div class="col-xs-8 col-xs-offset-2  col-sm-6 col-sm-offset-3  col-lg-4 col-lg-offset-4">
+		<%= f.label :password %>
+		<%= f.password_field :password, class: "form-control"  %>
+		<%= f.label :password_confirmation %>
+		<%= f.password_field :password_confirmation, class: "form-control"  %>
+		<%= f.submit "Update Password", class: "btn btn-primary pull-right"  %>
+	</div>
+</div>
 
-<%= f.label :password %>
-<%= f.password_field :password %>
-<br>
-<%= f.label :password_confirmation %>
-<%= f.password_field :password_confirmation %>
-<br>
-<%= f.submit "Update Password" %>
 <% end %>
