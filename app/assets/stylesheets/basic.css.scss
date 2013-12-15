@@ -40,48 +40,10 @@ body {
 html {
 	height: 100%;
 }
-body {
-	font-family: $font;
-	color: $gray1;
-	font-size: 14px;
-	height: 100%;
-}
-p {
-	font-family: $font;
-	font-size: 14px;
-	color: $gray1;
-	line-height: 150%;
-}
-a {
-	background-color: transparent;
-	line-height: 150%;
-	&:visited, &:link { 
-		text-decoration: none;
-		font-family: $font;
-		font-size: 14px;
-		color: $gray1;
-	}
-	&:hover, &:active { 
-		text-decoration: underline;
-		background-color: transparent;
-		color: $gray1;
-	}
-}
-h1{
-	font-size: 30px;
-	line-height: 150%;
-} 
-h2 {
-	font-size: 24px;
-	line-height: 150%;
-}
-h3 {
-	font-size: 18px;
-	line-height: 150%;
-}
 #header {
 	background-color: $bg;
 }
+/*
 .alert {
 	background-image: url(image_path('alert.png'));
 }
@@ -101,6 +63,7 @@ h3 {
 		background-image: url(image_path('remove-notice.png'));
 	}
 }
+ */
 .main {
 	background-color: $bg;
 	border-bottom: 5px solid darken($bg, 10)

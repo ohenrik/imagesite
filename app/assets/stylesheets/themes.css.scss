@@ -1,8 +1,24 @@
 // Place all the styles related to the themes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-@import "variables";
+@import 'bootstrap-custom';
+.theme-preview-image {
+	border: 2px solid $gray-light;
+}
+.current-theme-header {
+	margin: 0;
+}
+.current-theme-sub {
+	margin: 0;
+}
+.current-theme {
+	margin-bottom: 60px;
+}
+.themes-index-header {
+	margin: 0 0 15px;
+}
 
+/*
 .theme-preview-image {
 	border: 2px solid $gray4;
 	margin-bottom: 5px;
@@ -60,7 +76,7 @@
 	margin-top: 225px;
 	font-size: 18px;
 	&:hover, &:active {
-		text-decoration: underline;/* border-bottom: 1px solid $gray1; */
+		text-decoration: underline;
 	}
 }
 .delete-theme-link {
@@ -103,3 +119,5 @@
 .hover-preview-theme-edit:hover {
 	 @include hp-opacity(0.8)
 }
+
+*/

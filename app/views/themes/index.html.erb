@@ -1,53 +1,59 @@
 <div id="themes" class="clearfix">
     <% if current_user.theme %>
-    <div class="current-theme clearfix">
-        <div class="theme">
-            <%= image_tag theme_preview_image(current_user.theme), class: "theme-preview-image" %>
-            
-        </div>
-        <div class="current-theme-text clearfix">
-            <h1 class="current-theme-header"><%= current_user.theme.name %></h1>
-            <h2 class="current-theme-sub">Current theme</h2>
-            <div class="current-theme-controls">
-                <%= link_to 'Edit', edit_theme_path(current_user.theme) %> 
-                | <%= link_to  "Upload new theme...", new_theme_path, class: "new-theme-link" %>
+        <div class="current-theme">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-8 current-theme-text pull-right">
+                    <h1 class="current-theme-header"><%= current_user.theme.name %></h1>
+                    <h3 class="current-theme-sub text-muted">Current theme</h3>
+                    <div class="current-theme-controls">
+                       <!-- <% link_to 'Edit', edit_theme_path(current_user.theme) %> 
+                        | <% link_to  "Upload new theme...", new_theme_path, class: "new-theme-link" %> -->
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 pull-left">
+                    <%= image_tag theme_preview_image(current_user.theme), class: "theme-preview-image img-responsive" %>
+                </div>
             </div>
         </div>
-    </div>
     <% else %>
-    <div class="current-theme clearfix">
-        <div class="theme">
-            <p>No themes Uploaded yet</p>
+        <div class="current-theme">
+            <div class="theme">
+                <p>No themes Uploaded yet</p>
+            </div>
         </div>
-    </div>
     <% end %>
-        <div>
-            <h1 class="themes-index-header">Your Themes</h1>
-            <% @themes.each do |theme| %>
-                <% if theme.user.theme_id != theme.id %>
-                    <div class="theme">
-                        <% theme.zip_url %>
-                        <%= image_tag theme_preview_image(theme), class: "theme-preview-image", size: "480x270" %>
-                        <h2 class="theme-header"><%= theme.name %></h2>
-                        <div class="theme-controls">
-                            <%= link_to 'Activate theme', select_theme_path(theme), data: { confirm: 'Are you sure you want to activate this Theme?' } %> | 
-                            <%= link_to 'Edit', edit_theme_path(theme) %> 
-                            | <%= link_to 'Destroy', theme, method: :delete, data: { confirm: 'Are you sure?' } %>
-                        </div>
-                    </div>
-                <% end %>
-            <% end %>
-        </div>
 
-    <div class="theme">
-        <%= link_to new_theme_path, class: "new-theme-link" do %>
-        <table>
-            <tr>
-                <td>
-                    Upload new theme
-                </td>
-            </tr>
-        </table>
+    <div class="clearfix"></div>
+
+    <div class="row all-themes space-down">
+
+        <div class="col-xs-8">
+            <h1 class="themes-index-header">Your Themes</h1>
+        </div>
+        <div class="col-xs-4">
+            <%= link_to "Upload new theme", new_theme_path, class: "btn btn-default  pull-right" %>
+        </div>
+        
+        <div class="clearfix"></div>
+        
+        <% @themes.each do |theme| %>
+            <% if theme.user.theme_id != theme.id %>
+                <div class="col-xs-12 col-sm-6  col-md-4">
+
+                    <% theme.zip_url %>
+                    <%= image_tag theme_preview_image(theme), class: "theme-preview-image img-responsive"%>
+
+                    <h3 class="theme-header"><%= theme.name %></h3>
+
+                    <div class="theme-controls text-muted">
+                        <%= link_to 'Activate theme', select_theme_path(theme), data: { confirm: 'Are you sure you want to activate this Theme?' }, class: "text-muted" %> | 
+                        <%= link_to 'Edit', edit_theme_path(theme), class: "text-muted" %> 
+                        | <%= link_to 'Delete', theme, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-muted" %>
+                    </div>
+
+                </div>
+            <% end %>
         <% end %>
     </div>
+
 </div>

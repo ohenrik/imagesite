@@ -14,6 +14,8 @@
 // Customization
 // -------------------------
 
+
+
 $bg: #f1f1f1;
 $purple: #7d599f;
 $btext: #303030;
@@ -40,6 +42,15 @@ $brand-warning:         #f0ad4e !default;
 $brand-danger:          #d9534f !default;
 $brand-info:            #5bc0de !default;
 
+// Typography
+// -------------------------
+
+$font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-serif:       neutra, Georgia, "Times New Roman", Times, serif !default;
+$font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default;
+$font-family-base:        $font-family-serif;
+
+
 // Headings
 // -------------------------
 $headings-font-family:  neutra, sans-serif;
@@ -55,12 +66,40 @@ $font: neutra, sans-serif;
 
 
 $body-bg:               #fff;
-$text-color:            lighten(#000, 20%);
+$text-color:            lighten(#000, 30%);
 
-$navbar-margin-bottom: 0;
+
+// Basics of a navbar
+$navbar-height:                    90px !default;
+
+$navbar-default-color:             #777 !default;
+$navbar-default-bg:                #fff;
+$navbar-default-border: none;
+
+// Navbar links
+$navbar-default-link-color:                #777 !default;
+$navbar-default-link-hover-color:          #333 !default;
+$navbar-default-link-hover-bg:             transparent !default;
+$navbar-default-link-active-color:         #555 !default;
+$navbar-default-link-active-bg:            darken($navbar-default-bg, 6.5%) !default;
+$navbar-default-link-disabled-color:       #ccc !default;
+$navbar-default-link-disabled-bg:          transparent !default;
+
+// Navbar brand label
+$navbar-default-brand-color:               $navbar-default-link-color !default;
+$navbar-default-brand-hover-color:         darken($navbar-default-brand-color, 10%) !default;
+$navbar-default-brand-hover-bg:            transparent !default;
+
+// Navbar toggle
+$navbar-default-toggle-hover-bg:           #ddd !default;
+$navbar-default-toggle-icon-bar-bg:        #ccc !default;
+$navbar-default-toggle-border-color:       #ddd !default;
 
 .buffer {
 	margin: 40px 0 80px;
+}
+.space-down {
+	margin-bottom: 30px;
 }
 
 

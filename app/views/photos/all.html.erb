@@ -1,25 +1,29 @@
 
 <% render 'tag_filters' %>
 
-<div id="thumbnails" class="clearfix">
+<div class="row">
     
     <% @photos.try(:each) do |photo| %>
-      <div class="thumb">
-        <span class="thumb-meta rounded">
-            <%= link_to 'Edit', edit_photo_path(photo), class: "thumb-meta-edit" %> |
-            <%= link_to 'Delete', photo, method: :delete, class: "thumb-meta-delete", data: { confirm: 'Are you sure?' } %>
-        </span>
-        <p>
+      <div class="col-xs-6 col-sm-4 col-lg-3 photos">
+        <div class="thumb">
             <%= link_to photo do %>
-                <%= image_tag photo.image_url(:thumb).to_s %>
+                <%= image_tag photo.image_url(:large_thumb).to_s, class: "img-responsive" %>
             <% end %>
-            <p><%= link_to photo.name, photo, class: "photo-name" %></p>
+        </div>
+
+        <div class="caption">
+            <p><%= link_to photo.name, photo %></p>
             <p class="photo-tags">
                 <% photo.tag_list.each do |tag| %>
-                    <span class="tag"><%= link_to tag, filter_tag_url(tag) %></span>
+                    <%= link_to filter_tag_url(tag) do %><span class="label label-default"><%= tag%></span><% end %>
                 <% end %>
             </p>
-        </p>
+            <p>
+                <%= link_to 'Edit', edit_photo_path(photo), class: "btn btn-link btn-xs", role: "button" %>
+                <%= link_to 'Delete', photo, method: :delete, class: "btn btn-xs btn-link", role: "button", data: { confirm: 'Are you sure?' } %>
+            </p>
+        </div>
+
       </div>
     <% end %>
 
