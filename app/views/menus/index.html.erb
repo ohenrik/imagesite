@@ -1,27 +1,21 @@
-<h1>Listing menus</h1>
+<div class="col-sm-4">
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+        <%= link_to 'New Menu', new_menu_path, class: "btn btn-default pull-right" %>
 
-  <tbody>
-    <% @menus.each do |menu| %>
-      <tr>
-        <td><%= menu.name %></td>
-        <td><%= link_to 'Show', menu %></td>
-        <td><%= link_to 'Edit', edit_menu_path(menu) %></td>
-        <td><%= link_to 'Destroy', menu, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <div class="list-group">
+        <li class="list-group-item">Menus</li>
+        <% @menus.each do |menu| %>
+        <ul class="nav nav-tabs">
+          <li class="active"><%= link_to menu.name, menu_path(menu) %></li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Messages</a></li>
+        </ul>
+                    
+        <% end %>
+    </div>
+</div>
+<div class="col-sm-8">
 
-<br>
+</div>
 
-<%= link_to 'New Menu', new_menu_path %>
+

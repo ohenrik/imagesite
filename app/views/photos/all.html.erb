@@ -1,26 +1,29 @@
 
 <% render 'tag_filters' %>
 
-<div class="row">
+<div class="row photos">
     
     <% @photos.try(:each) do |photo| %>
-        <div class="col-xs-6 col-sm-4 col-lg-3 photos">
+        <div class="col-xs-6 col-sm-4 col-lg-3">
           <div class="thumb">
               <%= link_to photo do %>
                   <%= image_tag photo.image_url(:large_thumb).to_s, class: "img-responsive" %>
               <% end %>
           </div>
           <div class="caption">
-            <h3><%= link_to photo.name, photo %></h3>
+            <h3>
+                <%= link_to photo.name, photo %>
+            </h3>
             <p class="photo-tags">
+               <i class="fa fa-tags text-muted"></i>
                 <% photo.tag_list.each do |tag| %>
-                    <%= link_to filter_tag_url(tag) do %><span class="label label-default"><%= tag%></span><% end %>
+                    <%= link_to filter_tag_url(tag) do %><small class="text-muted"><%= tag%></small><% end %>
                 <% end %>
             </p>
-            <p>
-                <%= link_to 'Edit', edit_photo_path(photo), class: "btn btn-link btn-xs", role: "button" %>
-                <%= link_to 'Delete', photo, method: :delete, class: "btn btn-xs btn-link", role: "button", data: { confirm: 'Ar  you sure?' } %>
-            </p>
+          <div class="">
+                <%= link_to 'Edit', edit_photo_path(photo), role: "button", class: "btn btn-xs btn-default" %>
+                <%= link_to 'Delete', photo, method: :delete, role: "button", data: { confirm: 'Ar  you sure?' }, class: "btn btn-xs btn-default" %>
+            </div>
         </div>
 
       </div>
