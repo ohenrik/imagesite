@@ -17,17 +17,22 @@ class TagsController < ApplicationController
 		end
 	end
 
+	
 	def add_to_menu
+		item = @tag.menu_items.create(name: @tag.name, menu_id: params[:menu_id])
 		respond_to do |format|
-			if @tag.menu_items.create(name: @tag.name, menu_id: params[:menu_id])
+			if item
 				format.html { redirect_to menus_path, notice: 'Menu Item successfully added' }
-				format.json { head :no_content }
+				format.js { render locals: { menu_item: item } }
 			else
-			    format.html { redirect_to menus_path, notice: 'An error occured, item no added to menu.' }
-			    format.json { render json: @menu.errors, status: :unprocessable_entity }
-		  	end
+				format.html { redirect_to menus_path, notice: 'An error occured, item no added to menu.' }
+				format.json { render json: @menu.errors, status: :unprocessable_entity }
+			end
 		end
 	end
+
+
+
 
 	private
     # Use callbacks to share common setup or constraints between actions.

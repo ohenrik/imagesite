@@ -1,1 +1,1 @@
-$('.dd-list').prepend("<%= j render partial: 'page_item', locals: { menu_item: menu_item } %>");
+$('#menu_<%= menu_item.menu_id %>').append("<%= j render partial: 'page_item', locals: { menu_item: menu_item } %>");

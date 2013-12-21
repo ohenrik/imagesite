@@ -61,7 +61,7 @@ class MenuItemsController < ApplicationController
     @menu_item.destroy
     respond_to do |format|
       format.html { redirect_to menus_path, notice: 'Menu item deleted.'  }
-      format.json { }
+      format.js { }
     end
   end
 
