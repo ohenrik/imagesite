@@ -1,3 +1,67 @@
 // Place all the styles related to the menus controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap-custom";
+
+.menus {
+	.list-group-item:first-child, .list-group-item:last-child {
+		border-radius: 0;
+		border-radius: 0;
+	}
+	div.list-group-item {
+		padding: 0;
+	}
+	.badge {
+		margin: 10px 15px;
+	}
+	
+}
+.list-badge {
+	display: inline;
+}
+.dd {
+	margin-top: 15px;
+	padding: 15px;
+	border: 1px solid $gray-lighter;
+	display: none;
+}
+.dd:first-child {
+	display: block;
+}
+.dd-list {
+	 display: block; 
+	 position: relative; 
+	 margin: 0;
+	 padding: 0;
+	 list-style: none;
+}
+.dd-list .dd-list { 
+	padding-left: 30px; 
+}
+.dd-item {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.dd-handle {
+	cursor: move;
+	display: inline-block;
+	padding: 10px 15px;
+}
+.dd-placeholder {
+	background-color: transparent;
+}
+.dd-empty,
+.dd-placeholder {
+	min-height: 40px !important;
+	border: 2px dashed $gray-lighter;
+}
+.add-to-menu {
+
+	&:hover.hover-text {
+		color: $brand-primary;
+	}
+}

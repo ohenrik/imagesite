@@ -69,7 +69,9 @@ gem 'ancestry'
 #gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 #gem "twitter-bootstrap-rails"
 
+# Bootstrap gems
 gem 'bootstrap-sass-rails'
+gem 'jquery-ui-bootstrap-rails'
 
 ## Test gems
 gem "rspec-rails", :group => [:test, :development]

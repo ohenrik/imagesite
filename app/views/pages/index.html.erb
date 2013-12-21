@@ -4,7 +4,7 @@
         <div class ="listed-page clearfix">
             <%= link_to edit_page_path(page) do %>
                 <div class="listed-page-thumbnail">
-                    <% if page.photo.image_url(:large_thumb) %>
+                    <% if page.photo %>
                         <%= image_tag page.photo.image_url(:large_thumb).to_s %>
                     <% else %>
                         <table>

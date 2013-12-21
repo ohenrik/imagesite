@@ -2,12 +2,14 @@
 @import "bootstrap-custom";
 
 
-.navigation {
-
+.navbar {
+	margin-top: 20px;
+	li {
+		&:hover { background-color: $gray-lighter; }
+	}
 }
 .logo {
-	float: left;
-	position: relative;
+	
 	.theatrical-logo {
 		font-family: "theatrical";
 		color: $purple;
@@ -23,6 +25,10 @@
 	}
 	&:hover {
 		.theatrical-logo { color: lighten($purple, 10) }
+
+	}
+	a {
+		&:hover, &:active { text-decoration: none;}
 	}
 }
 .navbar-default {

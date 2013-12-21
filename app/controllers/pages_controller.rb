@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   # Find the tenant
   around_filter :scope_current_tenant
   
-  before_action :set_page, only: [:show, :edit, :update, :destroy, :set_thumbnail]
+  before_action :set_page, only: [:show, :edit, :update, :destroy, :set_thumbnail, :add_to_menu]
   
 
   # GET /pages
@@ -73,6 +73,19 @@ class PagesController < ApplicationController
     end
   end
 
+  def add_to_menu
+    item = @page.menu_items.create(name: @page.title, menu_id: params[:menu_id])
+    respond_to do |format|
+      if item
+        format.html { redirect_to menus_path, notice: 'Menu Item successfully added' }
+        format.js { render locals: { menu_item: item } }
+      else
+        format.html { redirect_to menus_path, notice: 'An error occured, item no added to menu.' }
+        format.json { render json: @menu.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+#render :locals => { menu_item_id: => 1 }
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_page

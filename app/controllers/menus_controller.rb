@@ -3,7 +3,7 @@ class MenusController < ApplicationController
   # Find the tenant
   around_filter :scope_current_tenant
 
-  before_action :set_menu, only: [:show, :edit, :update, :destroy]
+  before_action :set_menu, only: [:show, :edit, :update, :destroy, :add_item_to_menu]
 
   # GET /menus
   # GET /menus.json
@@ -64,6 +64,7 @@ class MenusController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

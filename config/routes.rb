@@ -24,6 +24,8 @@ Imagesite::Application.routes.draw do
     get 'photos/all/tags/:tag' => 'photos#all', as: :filter_tag
     get 'themes/select_theme/:id' => 'themes#select_theme', as: :select_theme
     post 'pages/set_thumbnail/:id' => 'pages#set_thumbnail', as: :set_thumbnail
+    post 'pages/add_to_menu/:id' => 'pages#add_to_menu', as: :add_page_to_menu 
+    post 'tags/add_to_menu/:id' => 'tags#add_to_menu', as: :add_tag_to_menu
     resources :pages
     resources :photos
     resources :tags

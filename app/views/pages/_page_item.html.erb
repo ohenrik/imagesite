@@ -1,0 +1,10 @@
+<li> 
+	<div class="dd-handle">
+	    <i class="fa fa-bars fa-fw text-muted"></i>
+	</div>
+
+	<%= @page.title %>
+
+	<%= link_to "remove", menu_item, method: :delete, :remote => true, class: "badge list-badge pull-right" %>
+
+</li>

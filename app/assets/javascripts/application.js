@@ -16,4 +16,5 @@
 //= require turbolinks
 //= require wysihtml5
 //= require parser_rules/advanced
+//= require jquery-nestable
 //= require_tree .

@@ -11,7 +11,16 @@
 	<div id="header" class="header">
 
 		<div class="container">
-			<%= render 'shared/navigation' %>
+			<div class="row">
+				<div class="col-xs-8 col-sm-3 pull-left">
+					<div class="logo">
+						<%= link_to root_url(:subdomain => false) do %>
+							<h1><span class="theatrical-logo">t</span>Theatrical.co</h1>	
+						<% end %>
+					</div>
+				</div>
+				<%= render 'shared/navigation' %>
+			</div>
 		</div> <!-- container -->
 
 	</div>
@@ -19,7 +28,11 @@
 
 	<div class="main">
 		<div class="container">
-			<%= render 'shared/notice' %>
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-4">
+					<%= render 'shared/notice' %>
+				</div>
+			</div>
 			<%= yield %>
 		</div>
 	</div>
