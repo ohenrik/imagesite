@@ -1,38 +1,5 @@
 <div class="row space-down menus">
 
-    <div class="col-xs-12 col-sm-8 pull-right">
-        <ul class="nav nav-pills">
-            <% @menus.each do |menu| %>
-            <li class="<%= "active" if @menus.first == menu %>">
-                <%= link_to menu.name, "#", class: "tab", :data => { :menu_id => menu.id, :menu => menu.name.gsub(' ', '_').downcase } %>
-            </li>   
-            <% end %>
-            <li><%= link_to 'New Menu', new_menu_path %></li>
-        </ul>
-    </div>
-
-    <div class="col-xs-12 col-sm-8 pull-right">
-        <% @menus.each do |menu| %>
-            <div class="dd <%= "#{menu.name.gsub(' ', '_').downcase}" %> tabbable">
-                <ol id="menu_<%= menu.id %>" class=" dd-list list-group">
-                    <% menu.menu_items.each do |item| %>
-                        
-                            <li class="dd-item" id="item_<%= item.id %>" data-id="<%= menu.menu_items.index(item) %>">
-                                <div class="dd-handle">
-                                    <i class="fa fa-bars fa-fw text-muted"></i>
-                                </div>
-                                
-                                <%= item.name %>
-                                
-                                <%= link_to "remove", item, method: :delete, :remote => true, class: "badge list-badge pull-right" %>
-                            </li>
-                        
-                    <% end %>
-                </ol>
-            </div>
-        <% end %>
-    </div>
-
     <div class="col-xs-12 col-sm-4 pull-left menu_item_list">
         <h3>Pages</h3>
         <div class="list-group">
@@ -56,5 +23,45 @@
         </div>
     </div>
 
+    <div class="col-xs-12 col-sm-8 pull-right">
+        <ul class="nav nav-pills">
+            <% @menus.each do |menu| %>
+            <li class="<%= "active" if @menus.first == menu %>">
+                <%= link_to menu.name, "#", class: "tab", :data => { :menu_id => menu.id, :menu => menu.name.gsub(' ', '_').downcase } %>
+            </li>   
+            <% end %>
+            <li><%= link_to 'New Menu', new_menu_path %></li>
+        </ul>
+    </div>
+
+    <div class="col-xs-12 col-sm-8 pull-right">
+        <% @menus.each do |menu| %>
+            <div class="dd <%= "#{menu.name.gsub(' ', '_').downcase}" %> tabbable" data-url="<%= sort_menu_items_path(menu) %>">
+                <ol id="menu_<%= menu.id %>" class=" dd-list list-group">
+                    <% menu.menu_items.each do |item| %>
+                        
+                            <li class="dd-item" id="item_<%= item.id %>" data-id="<%= item.id %>">
+                                <div class="dd-handle">
+                                    <i class="fa fa-bars fa-fw text-muted"></i>
+                                </div>
+                                
+                                <%= item.name %>
+                                
+                                <%= link_to item, method: :delete, :remote => true, class: "badge list-badge pull-right" do %>
+                                    <i class="fa fa-times"></i>
+                                <% end %>
+                            </li>
+                        
+                    <% end %>
+                    <%= nested_menu_items(menu.menu_items.arrange) %>
+                </ol>
+            </div>
+        <% end %>
+    </div>
+
+    
+    <div class="col-xs-12 col-sm-8 pull-right" id="tester">
+
+    </div>
 
 </div>

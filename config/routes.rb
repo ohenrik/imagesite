@@ -26,6 +26,7 @@ Imagesite::Application.routes.draw do
     post 'pages/set_thumbnail/:id' => 'pages#set_thumbnail', as: :set_thumbnail
     post 'pages/add_to_menu/:id' => 'pages#add_to_menu', as: :add_page_to_menu 
     post 'tags/add_to_menu/:id' => 'tags#add_to_menu', as: :add_tag_to_menu
+    post 'menu_items/sort_menu_items/:id' => 'menu_items#sort', as: :sort_menu_items
     resources :pages
     resources :photos
     resources :tags

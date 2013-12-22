@@ -19,6 +19,10 @@ ready = ->
 		event.preventDefault()
 
 
+	#$('.dd').on "change", ->
+	#	$("#tester").text JSON.stringify($(this).nestable('serialize'))
+	#	$.post($(this).data('update-url'), $(this).sortable('serialize'))
+
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
