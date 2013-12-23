@@ -1,10 +1,10 @@
 module MenusHelper
 
-	def nested_menu_items(item)
+	def nested_menu_items(menu)
 
-	  item.map do |item, sub_item|
-	    render(item) +
-	    	(content_tag(:lo, nested_menu_items(sub_item), class: "dd-list") if sub_item.present?)
+	  menu.map do |item, sub_item|
+	    render(item, :sub_item => sub_item )
+
 	  end.join.html_safe
 
 	end

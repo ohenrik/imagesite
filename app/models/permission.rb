@@ -17,14 +17,14 @@ class Permission
 		if user && user.subdomain == subdomain
 			allow_param :user, [:current_theme]
 			allow_param :menu, [:name, :menu_item_id]
-			allow_param :menu_item, [:menu_id, :menuable_id, :menuable_type, :name, :description, :new_page, :ancestry]
+			allow_param :menu_item, [:menu_id, :menuable_id, :menuable_type, :name, :description, :new_page, :ancestry, :position]
 			allow_param :photo, [:name, :image, :edit_tag_list, :description]
 			allow_param :page, [:title, :content, :excerpt, :status, :photo_id]
 			allow :pages, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :set_thumbnail, :add_to_menu]
 			allow :photos, [:all, :new, :create, :edit, :update, :delete, :destroy]
 			allow :tags, [:index, :new, :create, :edit, :update, :delete, :destroy, :add_to_menu]
 			allow :menus, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :add_item_to_menu]
-			allow :menu_items, [:index, :show, :new, :create, :edit, :update, :delete, :destroy]
+			allow :menu_items, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :sort]
 			allow :themes, [:show, :index, :edit, :update, :create, :new, :destroy, :select_theme]
 			allow_param :theme, [:zip, :name]
 		end

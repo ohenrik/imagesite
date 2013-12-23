@@ -19,9 +19,15 @@ ready = ->
 		event.preventDefault()
 
 
-	#$('.dd').on "change", ->
-	#	$("#tester").text JSON.stringify($(this).nestable('serialize'))
-	#	$.post($(this).data('update-url'), $(this).sortable('serialize'))
+	$('.save-menu').click (event) ->
+		order = $($(this).data('menu')).nestable('serialize')
+		$.ajax
+			type: 'post',
+			url: $(this).data('update-url'), 
+			data: { order: JSON.stringify(order) },
+			dataType: 'script'
+		$(this).button('loading')
+		event.preventDefault()
 
 
 $(document).ready(ready)
