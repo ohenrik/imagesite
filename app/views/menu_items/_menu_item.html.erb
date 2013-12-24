@@ -5,8 +5,8 @@
 	</div>
 	<%= menu_item.name %>
 
-	<%= link_to menu_item, method: :delete, :remote => true, class: "badge list-badge pull-right" do %>
-        <i class="fa fa-times"></i>
+	<%= link_to menu_item, method: :delete, :remote => true, class: "list-badge pull-right" do %>
+  		<i class="fa fa-trash-o text-muted fa-inverse"></i>
     <% end %>
     <%= content_tag(:ol, nested_menu_items(sub_item), class: "dd-list") if sub_item.present? %>
 </li>

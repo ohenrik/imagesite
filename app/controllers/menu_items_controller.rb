@@ -73,6 +73,7 @@ class MenuItemsController < ApplicationController
     # Updating position. This Code needs optimazation!
     update_position(@order)
 
+    #sleep 1.5
     render js: "$('.save-menu').button('reset')" 
 
   end
