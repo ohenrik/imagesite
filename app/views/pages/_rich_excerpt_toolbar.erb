@@ -1,9 +1,12 @@
-      <div id="wysihtml5-excerpt-toolbar" class="rich-editor-toolbar rich-editor-fa-size" style="display: none;">
-        <a data-wysihtml5-command="bold"><i class="fa fa-bold fa-3"></i></a>
-        <a data-wysihtml5-command="italic"><i class="fa fa-italic"></i></a>
-        <a data-wysihtml5-command="underline"><i class="fa fa-underline"></i></a>
-
-        <%= render 'rich_link_button' %>
-
-        <a data-wysihtml5-action="change_view" href="javascript:;" unselectable="on"><i class="fa fa-code"></i></a>
-      </div>
+<div id="wysihtml5-excerpt-toolbar" class="rich-editor-toolbar rich-editor-fa-size" style="display: none;">
+	<div class="btn-group">
+	    <a class="btn btn-default" data-wysihtml5-command="bold"><i class="fa fa-bold fa-3"></i></a>
+	    <a class="btn btn-default" data-wysihtml5-command="italic"><i class="fa fa-italic"></i></a>
+	    <a class="btn btn-default" data-wysihtml5-command="underline"><i class="fa fa-underline"></i></a>
+	    
+	</div>
+	<%= render 'rich_link_button' %>
+	<a class="btn btn-default" data-wysihtml5-action="change_view" href="javascript:;" unselectable="on">
+		<i class="fa fa-code"></i>
+	</a>
+</div>

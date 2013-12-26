@@ -2,52 +2,49 @@
 <%= form_for(@page) do |f| %>
 
 
-    <div class="full-column">
-        <div class="error-container">
-            <%= render partial: 'shared/form_errors', :locals => {:item => @page} %>
-        </div>
-
-        <div class="field">
-            <h1 class="page-title-header"><%= f.text_field :title, placeholder: "Enter title", autofocus: true, class: "page-title-field" %></h1>
-        </div>
-
-
-        <div class="field">
-            <%= render 'rich_content_toolbar' %>
-            <%= f.text_area :content, id: 'wysihtml5-content', placeholder: "Enter content here", class: "rich-editor content-editor" %>
-        </div>
+    <div class="error-container">
+        <%= render partial: 'shared/form_errors', :locals => {:item => @page} %>
     </div>
 
-    <div class="clearfix">
-        <div class="left-column">
+    <div class="form-group">
+        <h1 class="page-title-header"><%= f.text_field :title, placeholder: "Enter title", autofocus: true, class: "form-control input-lg" %></h1>
+    </div>
 
-            <div class="field">
+
+    <div class="form-group">
+        <%= render 'rich_content_toolbar' %>
+
+        <%= f.text_area :content, id: 'wysihtml5-content', placeholder: "Enter content here", class: "form-control rich-editor content-editor", rows: "20" %>
+    </div>
+
+    
+
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="form-group">
                 <h3 class="page-excerpt-heading">Page excerpt</h3>
                 <%= render 'rich_excerpt_toolbar' %>
-                <%= f.text_area :excerpt, id: 'wysihtml5-excerpt', placeholder: "Enter excerpt here", class: "rich-editor excerpt-editor"  %>
+                <%= f.text_area :excerpt, id: 'wysihtml5-excerpt', placeholder: "Enter excerpt here", class: "form-control rich-editor excerpt-editor", rows: "10"  %>
             </div>
-
         </div>
-
-
-
-
-        <div class="right-column">
-            <div class="field">
-                <%= f.select :status, options_for_select(available_statuses, @page.status || 'draft'), {} , :class => "page-status-select"  %>
+        
+        <div class="col-sm-4">
+            <div class="form-group">
+                <%= f.select :status, options_for_select(available_statuses, @page.status || 'draft'), {} , :class => "form-control"  %>
             </div>
 
-            <div class="actions">
+            <div class="form-group">
                 <% if @page.new_record? %>
-                    <%= f.submit "Create page", class: "submit-page" %>
+                    <%= f.submit "Create page", class: "btn btn-primary" %>
                 <% else %>
-                    <%= f.submit "Update page", class: "submit-page" %> |
-                    <%= link_to 'Show', @page %>
+                    <%= f.submit "Update page", class: "btn btn-primary" %>
+                    <%= link_to 'Show', @page, class: "btn btn-link" %>
                 <% end %>
-                <%= link_to 'Cancel', pages_path, class: "cancel-page" %>
+                <%= link_to 'Cancel', pages_path, class: "btn btn-link" %>
             </div>
-        </div>
 
+        </div>
+        
     </div>
 
 <% end %>

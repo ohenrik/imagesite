@@ -1,10 +1,60 @@
-      <div class="rich-link">
-        <a data-wysihtml5-command="createLink"><i class="fa fa-link"></i></a>
-        <div data-wysihtml5-dialog="createLink" style="display: none;">
-          <label>
-            Link url: <input data-wysihtml5-dialog-field="href" value="http://" class="text">
-          </label>
-          <a data-wysihtml5-dialog-action="save">OK</a>
-          <a data-wysihtml5-dialog-action="cancel">Cancel</a>
+<!--
+<a data-wysihtml5-command="createLink" class="btn btn-default"><i class="fa fa-link"></i></a>
+<div data-wysihtml5-dialog="createLink" style="display: none;">
+  <label>
+    Link url: <input data-wysihtml5-dialog-field="href" value="http://" class="text">
+  </label>
+  <a data-wysihtml5-dialog-action="save">OK</a>
+  <a data-wysihtml5-dialog-action="cancel">Cancel</a>
+</div>
+
+
+<a  type="button" class="btn btn-default dropdown-toggle" data-toggle="modal" href="#linkModal">
+    <i class="fa fa-link"></i>
+</a>
+
+
+<div class="modal fade" id="linkModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Add link</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <a data-wysihtml5-dialog-action="save" type="button" class="btn btn-primary">Save changes</a>
+      </div>
+    </div><!-- /.modal-content -->
+ <!-- </div><!-- /.modal-dialog -->
+ <!-- </div><!-- /.modal -->
+
+<!-- Button trigger modal -->
+<a class="btn btn-default" data-wysihtml5-command="createLink">
+  <i class="fa fa-link fa-fw"></i> Links
+</a>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" data-wysihtml5-dialog="createLink">
+      <div class="modal-header">
+        <a type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+            
+                Link url: <input data-wysihtml5-dialog-field="href" value="http://" class="form-control">
+            
         </div>
       </div>
+      <div class="modal-footer">
+        <a data-wysihtml5-dialog-action="cancel" type="button" class="btn btn-default" data-dismiss="modal">Close</a>
+        <a data-wysihtml5-dialog-action="save" class="btn btn-primary">Insert link</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
