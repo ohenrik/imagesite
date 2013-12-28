@@ -2,6 +2,10 @@
 <% render 'tag_filters' %>
 
 <div class="row photos">
+
+    <div class="col-xs-12 new">
+      <%= link_to 'New Photo', new_photo_path, class: "btn btn-default pull-right" %>
+    </div>
     
     <% @photos.try(:each) do |photo| %>
         <div class="col-xs-6 col-sm-4">
@@ -20,7 +24,7 @@
                     <%= link_to filter_tag_url(tag) do %><small class="text-muted"><%= tag %><%= "," unless tag == photo.tag_list.last %></small><% end %>
                 <% end %>
             </p>
-          <div class="">
+          <div class="btn-group">
                 <%= link_to 'Edit', edit_photo_path(photo), role: "button", class: "btn btn-xs btn-default" %>
                 <%= link_to 'Delete', photo, method: :delete, role: "button", data: { confirm: 'Ar  you sure?' }, class: "btn btn-xs btn-default" %>
             </div>
