@@ -30,6 +30,7 @@ class PagesController < ApplicationController
   def set_thumbnail
     @page.photo_id = params[:photo_id]
     @page.save
+    render js: "setTimeout(function () {$('#page-set-thumbnail').button('reset')}, 500);"
   end
 
   # POST /pages

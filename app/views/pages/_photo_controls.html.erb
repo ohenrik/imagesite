@@ -1,0 +1,25 @@
+<div id="page-manager-controls" class="page-manager-controls-width">
+    <div class="form-group">
+        <%= form_tag do %>
+            <div class="form-group">
+                <%= text_field_tag 'title', "", :placeholder => "Type title", class: "form-control input-sm", id: "controll-photo-title-input" %>
+            </div>
+            <div class="form-group">
+                <%= text_field_tag 'alt', "", :placeholder => "Type alt text", class: "form-control input-sm", id: "controll-photo-alt-input" %>
+            </div>
+            <div class="form-group">
+                <%= select_tag 'size', options_for_select([['Large', 'large_'], ['Medium', 'medium_'], ['Small', 'small_'], ['Thumbnail', 'thumb_'], ['Original size', '']]), class: "form-control input-sm", id: "controll-photo-size-input" %>
+            </div>
+
+            <div class="form-group">
+                <%= text_area_tag 'description', "", :placeholder => "Type description", class: "form-control input-sm" %>
+            </div>
+
+                <%= link_to "Insert image", '#', class: "btn btn-primary btn-xs", id: "controll-insert-image-link"  %>
+            
+
+                <%= link_to "Set thumbnail", "no_image_chosen", :method => :post, :remote => true, data: { loading_text: "Saving thumbnail..." }, id: "page-set-thumbnail" , class: "btn btn-default btn-xs" unless @page.new_record? %>
+            <% end %>
+
+    </div>
+</div>

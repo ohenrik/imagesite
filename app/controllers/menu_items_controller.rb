@@ -74,7 +74,7 @@ class MenuItemsController < ApplicationController
     update_position(@order)
 
     #sleep 1.5
-    render js: "$('.save-menu').button('reset')" 
+    render js: "setTimeout(function() { $('.save-menu').button('reset') }, 500);" 
 
   end
 

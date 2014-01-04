@@ -1,70 +1,44 @@
-<div class="page-photo-manager-background">
-    <div class="page-photo-manager clearfix">
-        <div class="page-photo-manager-links">
-            <a href="#" class="upload-new-photo">Upload new photo</a> |
-            <a href="#" class="select-existing-photo current">Insert existing photo</a>
-            <a href="#" class="close-photo-manager">Close</a>
-        </div>
-        <div class="page-manager-controls">
-            <div class="search-page-photos">
-                <%= form_tag  do %>
-                    <%= label_tag 'search', 'Search:', class: "page-photos-manager-search-label" %>
-                    <%= search_field_tag 'search', "", :placeholder => "Tag or search term..." %>
+
+
+<!-- Modal -->
+<div class="modal fade" id="mediaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4> 
+      </div>
+      <div class="modal-body">
+
+        <div class="page-select-image">
+            <div class="row">
+                <% Photo.all.each do |photo| %>
+                    <div class="thumb col-xs-6 col-sm-4 col-md-4 col-lg-3">
+                        <a href="#" class="select-photo-link" data-url="http://<%= request.host_with_port + photo.image_url() %>", data-set-thumbnail="<%= set_thumbnail_path(@page , :photo_id => photo.id) unless @page.new_record? %>" >
+                            <%= image_tag photo.image_url(:large_thumb), class: "img-responsive" %>
+                        </a>
+                        <span class="photo-controls-holder"></span>
+                            <span class="page-manager-photo-name"><%= photo.name %></span>
+                            <!-- <i class="fa fa-tags text-muted"></i>
+                            <% photo.tag_list.each do |tag| %>
+                                <small class="text-muted"><%= tag %></small>
+                            <% end %>
+
+                            -->
+                    </div>
                 <% end %>
             </div>
-            <div class="">
-                <%= form_tag do %>
-                    <table>
-                        <tr>
-                            <td class="photo-manager-controll-label">
-                                <%= label_tag 'title', 'Title:' %>
-                            </td>
-                            <td>
-                                <%= text_field_tag 'title', "", :placeholder => "Type title", class: "photo-manager-controll-input", id: "controll-photo-title-input" %>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="photo-manager-controll-label">
-                                <%= label_tag 'alt', 'Alt:' %>
-                            </td>
-                            <td>
-                                <%= text_field_tag 'alt', "", :placeholder => "Type alt text", class: "photo-manager-controll-input", id: "controll-photo-alt-input" %>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="photo-manager-controll-label">
-                                <%= label_tag 'size', 'Size:' %>
-                            </td>
-                            <td>
-                                <%= select_tag 'size', options_for_select([['Large', 'large_'], ['Medium', 'medium_'], ['Small', 'small_'], ['Thumbnail', 'thumb_'], ['Original size', '']]), class: "photo-manager-controll-input", id: "controll-photo-size-input" %>
-                            </td>
-                        </tr>
-                    </table>
-                    <%= label_tag 'description', 'Description:', class: "photo-manager-controll-label descriptoin-label" %>
-                    <%= text_area_tag 'description', "", :placeholder => "Type description", class: "photo-manager-controll-input" %>
-                    <% #sizes here %>
-                    <%= link_to "Insert image", '#', id: "controll-insert-image-link"  %>
-                    <% end %>
-                    <%= link_to "Set as thumbnail", "no_image_chosen", :method => :post, :remote => true, class: "page-set-thumbnail" unless @page.new_record?%>
-            </div>
         </div>
-        <div class="page-upload-image">
 
-        </div>
-        <div class="page-select-image">
-            <% Photo.all.each do |photo| %>
-            <div class="thumb">
-                <a href="#" class="select-photo-link" data-url="http://<%= request.host_with_port + photo.image_url() %>", data-set-thumbnail="<%= set_thumbnail_path(@page , :photo_id => photo.id) unless @page.new_record? %>" >
-                    <%= image_tag photo.image_url(:thumb) %>
-                </a>
-                <span class="page-manager-photo-name"><%= photo.name %></span>
-                <p class="photo-tags">
-                        <% photo.tag_list.each do |tag| %>
-                            <span class="tag"><%= tag %></span>
-                        <% end %>
-                </p>
-            </div>
-            <% end %>
-        </div>
-    </div>
-</div>
+        <%= render 'photo_controls' %>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+      
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

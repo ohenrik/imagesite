@@ -28,7 +28,7 @@
             </div>
         </div>
         
-        <div class="col-sm-4">
+        <div class="col-sm-4 page-form-controls">
             <div class="form-group">
                 <%= f.select :status, options_for_select(available_statuses, @page.status || 'draft'), {} , :class => "form-control"  %>
             </div>

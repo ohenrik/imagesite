@@ -9,6 +9,10 @@ ready = ->
 	) if $("#wysihtml5-content").length > 0
 
 
+	$('#contentModal-button').click (event) ->
+		alert editor.selected.getValue() #.exec("createLink", { href: "http://google.com", target: "_blank", rel: "nofollow", text: "Google" });
+		event.preventDefault()
+
 	excerpt = new wysihtml5.Editor("wysihtml5-excerpt", # id of textarea element
 	  toolbar: "wysihtml5-excerpt-toolbar" # id of toolbar element
 	  stylesheets: "<%= stylesheet_path('wysiwyg') %>" # optional, css to style the editor's content
@@ -39,21 +43,18 @@ ready = ->
 
 	# Select the image for further options
 	$(".select-photo-link").click (event) ->
-		$(".select-photo-link").find('img').css('width', '176px').css('height', '176px').css('border', '2px solid #636363').removeClass("selected-image") # reset all other images
-		$(this).find('img').css('width', '172px').css('height', '172px').css('border', '4px solid #d5d6cb').addClass("selected-image") # "select" image
-		$('.page-set-thumbnail').css('display', 'block').attr("href", $(".selected-image").parent().data("set-thumbnail"))
-		$('#controll-insert-image-link ').css('display', 'block')
-		$('#controll-photo-title-input').val($(".selected-image").parent().next().text().trim()) # get the title
+		$(".select-photo-link").removeClass("selected-link").find('img').removeClass("selected-image") # reset all other images
+		$(this).addClass("selected-link").find('img').addClass("selected-image") # "select" image
+		$('#page-manager-controls').css('display', 'block').appendTo($(this).next())
+		$('#page-manager-controls').css('width', $(this).find('img').width() )
+		$('#page-set-thumbnail').attr("href", $(".selected-image").parent().data("set-thumbnail"))
+		$('#controll-photo-title-input').val($(".selected-image").parent().next().next().text().trim()) # get the title
 		event.preventDefault() #prevent the browser from refreshing page
 		
 
-	# Close photo manager when close link is clicked
-	$(".close-photo-manager").click (event) ->
-		$('.page-photo-manager-background').hide()
-		event.preventDefault()
 
-
-	#$('')
+	$('#page-set-thumbnail').click (event) ->
+		$(this).button('loading')
 
 
 

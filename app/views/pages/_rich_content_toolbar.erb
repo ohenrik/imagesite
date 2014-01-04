@@ -12,9 +12,11 @@
         
         
     </div>
-    <a class="btn btn-default" href="#" id="wysihtml5-content-images"><i class="fa fa-picture-o"></i> Images</a>         
+    <button class="btn btn-default" data-toggle="modal" data-target="#mediaModal">
+        <i class="fa fa-picture-o"></i> Images
+    </button>        
     
-    <%= render 'rich_link_button' %>
+    <%= render 'rich_link_button', :modal => "contentModal" %>
 
     <a class="btn btn-default" data-wysihtml5-action="change_view" href="javascript:;" unselectable="on"><i class="fa fa-code"></i></a>
            
