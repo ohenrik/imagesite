@@ -60,7 +60,21 @@
 		font-weight: 100;
 		color: $white;
 	} 
-
+	.icon {
+		font-size: 200px;
+		color: $purple;
+	}
+	.sales-text {
+		margin: 70px 0;
+		h1 {
+			font-size: 48px;
+			margin-bottom: 0;
+		}
+		p {
+			font-size: 16px;
+			color: $gray-light;
+		}
+	} 
 }
 
 /* Medium devices (desktops, 992px and up) */
@@ -96,6 +110,21 @@
 		line-height: 100%;
 		font-weight: 100;
 		color: $white;
+	}
+	.icon {
+		font-size: 260px;
+		color: $purple;
+	}
+	.sales-text {
+		margin: 100px 0;
+		h1 {
+			font-size: 60px;
+			margin-bottom: 0;
+		}
+		p {
+			font-size: 20px;
+			color: $gray-light;
+		}
 	} 
 }
 
@@ -133,5 +162,20 @@
 		line-height: 100%;
 		font-weight: 100;
 		color: $white;
+	}
+	.icon {
+		font-size: 300px;
+		color: $purple;
+	}
+	.sales-text {
+		margin: 120px 0;
+		h1 {
+			font-size: 72px;
+			margin-bottom: 0;
+		}
+		p {
+			font-size: 24px;
+			color: $gray-light;
+		}
 	}
 }
