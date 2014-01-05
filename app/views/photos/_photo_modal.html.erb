@@ -1,0 +1,51 @@
+<div class="modal-header" >
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">Uploader</h4>
+</div>
+
+<%= form_for @photo, :html => { :multipart => true } do |f| %>
+   
+    <div class="modal-body" >
+
+        <div class="error-container">
+            <%= render partial: 'shared/form_errors', :locals => {:item => @photo} %>
+        </div>
+
+        <% if !@photo.new_record? %> 
+            <div class="form-group">
+                <%= image_tag @photo.image_url(:large_thumb).to_s, class: "img-responsive" %>
+            </div>
+        <% end %>
+
+        <div class="form-group">
+            <%= f.file_field :image, class: "hidden" %>
+            <%= f.label :image, (@photo.new_record? ? "Select photo" : "Change photo" ), class: "btn btn-default btn-block btn-lg", id: "photo_image_label" %> 
+            <%= f.hidden_field :image_cache %>
+        </div>
+        
+        <div class="form-group">
+            <%= f.text_field :name, class: "form-control", :placeholder => "Title", autofocus: "true" %>
+        </div>
+
+        <div class="form-group">
+            <%= f.text_field :edit_tag_list, class: "form-control", :placeholder => "Tags" %>
+        </div>
+        
+        <% #if allow_param? :photos, :description %>
+            <div class="form-group">
+                <%= f.text_area :description, class: "form-control", :placeholder => "Short description" %>
+            </div>
+        <% #end %>
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= f.submit (@photo.new_record? ? "Upload photo" : "Edit photo" ) , class: "btn btn-primary" %>
+    </div>
+
+
+  </div>
+
+
+<% end %>

@@ -17,4 +17,6 @@
 //= require wysihtml5
 //= require parser_rules/advanced
 //= require jquery-nestable
+//= require jquery.validate
+//= require jquery.validate.additional-methods
 //= require_tree .

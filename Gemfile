@@ -73,6 +73,9 @@ gem 'ancestry'
 gem 'bootstrap-sass-rails'
 gem 'jquery-ui-bootstrap-rails'
 
+# jquery validation
+gem 'jquery-validation-rails'
+
 ## Test gems
 gem "rspec-rails", :group => [:test, :development]
 group :test do 

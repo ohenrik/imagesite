@@ -42,10 +42,18 @@ class PhotosController < ApplicationController
   # GET /photos/new
   def new
     @photo = Photo.new
+    respond_to do |format|
+      format.html { render action: 'new' }
+      format.js { render 'launch-photo-modal'}
+    end
   end
 
   # GET /photos/1/edit
   def edit
+    respond_to do |format|
+      format.html { render action: 'edit' }
+      format.js { render 'launch-photo-modal'}
+    end
   end
 
   # POST /photos
@@ -53,12 +61,15 @@ class PhotosController < ApplicationController
   def create
     @photo = Photo.new(params[:photo])
     @photo.user_id = current_user.id
+
+    @photo.name =  @photo.image.file.filename if ( @photo.name = "" && @photo.image.file)
+
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @photo }
+        format.html { redirect_to all_url, notice: 'Photo was successfully created.' }
+        format.json { render action: 'all', status: :created, location: @photo }
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to all_url, alert: 'Error: Photo not uploaded please select a image file.' }
         format.json { render json: @photo.errors, status: :unprocessable_entity }
       end
     end
@@ -69,10 +80,10 @@ class PhotosController < ApplicationController
   def update
     respond_to do |format|
       if @photo.update(params[:photo])
-        format.html { redirect_to photos_url, notice: 'Photo was successfully updated.' }
+        format.html { redirect_to all_url, notice: 'Photo was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { redirect_to all_url, alert: 'Error: Photo not edited please select a image file.' }
         format.json { render json: @photo.errors, status: :unprocessable_entity }
       end
     end
@@ -86,7 +97,7 @@ class PhotosController < ApplicationController
   def destroy
     @photo.destroy
     respond_to do |format|
-      format.html { redirect_to photos_url }
+      format.html { redirect_to all_url }
       format.json { head :no_content }
     end
   end

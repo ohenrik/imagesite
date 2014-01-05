@@ -1,0 +1,30 @@
+<div class="modal-header" >
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">Manage tags</h4>
+</div>
+
+   
+    <div class="modal-body" >
+        <ul class="list-group">
+            <% @tags.each do |tag| %>
+                <li class="list-group-item">
+                    <%= link_to edit_tag_path(tag) do %>
+                        <%= tag.name %> <i class="fa fa-pencil fa-fw"></i> 
+                    <% end %>
+                    <%= link_to tag, :method => :delete, class: "pull-right" do %>
+                        <i class="fa fa-trash-o fa-fw"></i>
+                    <% end %>
+                </li>
+
+            <% end %>
+        </ul>
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+
+
+  </div>
+

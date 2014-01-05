@@ -7,14 +7,21 @@ class TagsController < ApplicationController
 
 	def index
 		@tags = Tag.all
+	    respond_to do |format|
+	      format.js { render 'launch-tags-modal'}
+	    end
 	end
 
 	def destroy
 		@tag.destroy
 		respond_to do |format|
-			format.html { redirect_to tags_url }
+			format.html { redirect_to all_url }
 			format.json { head :no_content }
 		end
+	end
+
+	def edit
+
 	end
 
 	

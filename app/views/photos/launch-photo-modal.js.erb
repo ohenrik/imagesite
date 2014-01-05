@@ -1,0 +1,6 @@
+$('#photo-modal-content').html('<%= escape_javascript(render( :partial => "photo_modal", :formats => [:html])) %>')
+$('#photo-modal').modal('show')
+
+$("#photo_image").change(function(e){
+	$("#photo_image_label").text( $("#photo_image").val().split("\\").pop() )
+});
