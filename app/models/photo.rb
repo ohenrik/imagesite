@@ -40,7 +40,7 @@ class Photo < ActiveRecord::Base
 		params[:action]
 	end
 
-	def paramns?
+	def params?
 		params[:action]
 	end
 
