@@ -10,13 +10,7 @@
                     <% if page.photo %>
                         <%= image_tag page.photo.image_url(:large_thumb).to_s, class: "thumb img-responsive" %>
                     <% else %>
-                        <table>
-                            <tr>
-                                <td>
-                                    <i class="fa fa-picture-o"></i>
-                                </td>
-                            </tr>
-                        </table>
+                        <%= image_tag "no-thumb.png", class: "thumb img-responsive" %>
                     <% end %>
                 </div>
             <% end %>
