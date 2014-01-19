@@ -132,3 +132,39 @@ module LiquidTagsHelper
 	Liquid::Template.register_tag('image_tag', ImageTag)
 
 end
+
+
+	#
+	# CSS
+	#
+	class GetMenu < Liquid::Tag
+
+		# Include the stylesheet tag link helper
+		include ActionView::Helpers::AssetTagHelper
+
+
+		def initialize(tag_name, variables, tokens)
+
+			@variables = variables.split(" ")
+
+			@menu_object = @variables[0]
+			@file_name = @variables[1]
+
+			super
+		end
+
+
+	    def render(context)
+	    	@path = Liquid::Template.file_system
+	    	header_file = @path.root.to_s + "/partials/#{@file_name.strip}.html.liquid"
+
+	    	content = File.read(header_file)
+
+	    	menu_items = MenuItem.where(menu_id: @menu_object).order(:position)
+
+	    	Liquid::Template.parse(content).render(context.merge('menu_items' => menu_items))
+	    end
+
+	end
+
+	Liquid::Template.register_tag('get_menu', GetMenu)

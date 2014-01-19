@@ -2,6 +2,8 @@ Imagesite::Application.routes.draw do
 
   
 
+  resources :galleries
+
   resources :menu_items
 
   resources :menus

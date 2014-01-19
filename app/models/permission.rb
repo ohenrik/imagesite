@@ -20,6 +20,8 @@ class Permission
 			allow_param :menu_item, [:menu_id, :menuable_id, :menuable_type, :name, :description, :new_page, :ancestry, :position]
 			allow_param :photo, [:name, :image, :edit_tag_list, :description]
 			allow_param :page, [:title, :content, :excerpt, :status, :photo_id]
+			allow_param :gallery, [:title, :subtitle, :description, :gallery_type]
+			allow :galleries, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :add_to_menu]
 			allow :pages, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :set_thumbnail, :add_to_menu]
 			allow :photos, [:all, :new, :create, :edit, :update, :delete, :destroy]
 			allow :tags, [:index, :new, :create, :edit, :update, :delete, :destroy, :add_to_menu]

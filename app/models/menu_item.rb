@@ -3,6 +3,8 @@ class MenuItem < ActiveRecord::Base
 	belongs_to :menuable, :polymorphic => true
 	has_ancestry
 
-	liquid_methods :name
+	liquid_methods :name, :ancestry, :position
+
+
 
 end
