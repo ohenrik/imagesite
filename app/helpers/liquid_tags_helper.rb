@@ -14,20 +14,19 @@ module LiquidTagsHelper
 
 	Liquid::Template.register_tag('random', Random)
 
-
 	#
-	# Header
+	# Layoutfiles
 	#
-	class Header < Liquid::Tag
-		def initialize(tag_name, markup, tokens)
+	class LayoutFile < Liquid::Tag
+		def initialize(tag_name, file_name, tokens)
 			super
-
+			@file_name = file_name
 		end
 
 
 	    def render(context)
 	    	@path = Liquid::Template.file_system
-	    	header_file = @path.root.to_s + "/layout/header.html.liquid"
+	    	header_file = @path.root.to_s + "/layout/#{@file_name.strip}.html.liquid"
 
 	    	content = File.read(header_file)
 
@@ -36,21 +35,22 @@ module LiquidTagsHelper
 
 	end
 
-	Liquid::Template.register_tag('header', Header)
+	Liquid::Template.register_tag('layout_file', LayoutFile)
+
 
 	#
-	# Footer
+	# Partials
 	#
-	class Footer < Liquid::Tag
-		def initialize(tag_name, markup, tokens)
+	class PartialFile < Liquid::Tag
+		def initialize(tag_name, file_name, tokens)
 			super
-
+			@file_name = file_name
 		end
 
 
 	    def render(context)
 	    	@path = Liquid::Template.file_system
-	    	header_file = @path.root.to_s + "/layout/footer.html.liquid"
+	    	header_file = @path.root.to_s + "/partials/#{@file_name.strip}.html.liquid"
 
 	    	content = File.read(header_file)
 
@@ -59,7 +59,8 @@ module LiquidTagsHelper
 
 	end
 
-	Liquid::Template.register_tag('footer', Footer)
+	Liquid::Template.register_tag('partial_file', PartialFile)
+
 
 	#
 	# CSS

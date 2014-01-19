@@ -58,7 +58,7 @@ class ThemesController < ApplicationController
     @theme.user_id = current_user.id
     respond_to do |format|
       if @theme.save
-        format.html { redirect_to themes_path, notice: 'Theme was successfully created.' }
+        format.html { redirect_to themes_url, notice: 'Theme was successfully created.' }
         format.json { render action: 'index', status: :created, location: @theme }
       else
         format.html { render action: 'new' }

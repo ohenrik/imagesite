@@ -13,7 +13,7 @@ class Photo < ActiveRecord::Base
 	liquid_methods :name, :index, :tag_to_list, :link, :large, :medium, :small, :thumbnail
 
 	def thumbnail
-		image_url(:thumb)
+		image_url(:small_thumb)
 	end
 
 	def small

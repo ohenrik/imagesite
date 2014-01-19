@@ -1,4 +1,88 @@
-a {
-	color: red;
-	text-decoration: none;
+/* 
+----------------------------
+-- General
+---------------------------- 
+*/ 
+
+#main {
+	margin: 30px 0 0px;
+	padding-bottom: 90px;
+}
+
+/* 
+----------------------------
+-- Home / Index
+---------------------------- 
+*/ 
+.front-circle {
+	font-size: 72px;
+	width: 144px;
+	line-height: 144px;
+	border: 3px solid;
+	border-radius: 50%;
+}
+
+/* 
+----------------------------
+-- Gallery
+---------------------------- 
+*/ 
+.gallery-heading {
+	border-bottom: 1px solid #dddddd;
+}
+.gallery-subheading {
+	margin-top: 0;
+	margin-bottom: 45px;
+}
+.gallery-subheading h1 {
+	margin-top: 0; 
+}
+.photo-title-and-tags {
+	margin: 0px 0 60px;
+}
+
+/* 
+----------------------------
+-- Gallery
+---------------------------- 
+*/ 
+.image-heading {
+	border-bottom: 1px solid #dddddd;
+}
+.image-subheading {
+	margin-top: -15px;
+}
+.image-subheading h1 {
+	margin-top: 0; 
+}
+
+/* 
+----------------------------
+-- Page
+---------------------------- 
+*/ 
+.page-content {
+	margin-bottom: 60px;
+}
+.page-heading {
+	border-bottom: 1px solid #dddddd;
+}
+.page-subheading {
+	margin-top: 0;
+	margin-bottom: 45px;
+}
+.page-subheading h1 {
+	margin-top: 0; 
+}
+
+/* 
+----------------------------
+-- Contact
+---------------------------- 
+*/ 
+.contact-content {
+	margin: 45px 0;
+}
+.contact-form {
+	
 }
