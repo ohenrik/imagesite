@@ -160,11 +160,15 @@ end
 
 	    	content = File.read(header_file)
 
-	    	menu_items = MenuItem.where(menu_id: @menu_object).order(:position)
+	    	menu = Menu.find(@menu_object)
 
-	    	Liquid::Template.parse(content).render(context.merge('menu_items' => menu_items))
+	    	Liquid::Template.parse(content).render(context.merge('menu' => menu))
 	    end
 
 	end
 
 	Liquid::Template.register_tag('get_menu', GetMenu)
+
+
+
+	
