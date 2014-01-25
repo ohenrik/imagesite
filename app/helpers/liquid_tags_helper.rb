@@ -97,6 +97,41 @@ module LiquidTagsHelper
 	Liquid::Template.register_tag('css_tag', CssTag)
 
 
+		#
+	# CSS
+	#
+	class JavaScriptiTag < Liquid::Tag
+
+		# Include the stylesheet tag link helper
+		include ActionView::Helpers::AssetTagHelper
+
+
+		def initialize(tag_name, sheet, tokens)
+
+			@sheet = sheet
+
+			super
+		end
+
+
+	    def render(context)
+
+	    	@path = Liquid::Template.file_system.root
+	    	
+	    	#derrive request subdomain from Liquid filesystem! 
+	    	@path_array = @path.to_s.split("/")
+	    	@subdomain = @path_array[-2]
+
+
+	    	javascript_include_tag "/assets/#{@subdomain}/javascripts/#{@sheet.strip}"
+			
+	    end
+
+	end
+
+	Liquid::Template.register_tag('javascript_tag', JavaScriptiTag)
+
+
 	#
 	# image_tag
 	#
@@ -171,4 +206,4 @@ end
 
 
 
-	
+

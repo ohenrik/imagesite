@@ -3,7 +3,7 @@ class MenuItem < ActiveRecord::Base
 	belongs_to :menuable, :polymorphic => true
 	has_ancestry
 
-	liquid_methods :name, :ancestry, :menuable_type, :menuable_id, :position, :item, :link
+	liquid_methods :name, :ancestry, :menuable_type, :menuable_id, :menuable, :position, :item, :link, :has_child
 
 
 	def item
@@ -11,7 +11,11 @@ class MenuItem < ActiveRecord::Base
 	end
 
 	def link
-		"/tags/1"
+		"#{menuable.link}"
+	end
+
+	def has_child
+		has_children?
 	end
 
 end
