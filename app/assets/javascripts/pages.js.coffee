@@ -30,14 +30,16 @@ ready = ->
 	# Insert selected image into the editor
 	$('#controll-insert-image-link').click (event) ->
 		size = $('#controll-photo-size-input').val().trim()
-		alt = $('#controll-photo-alt-input').val().trim()
+		alt_text = $('#controll-photo-alt-input').val().trim()
 		title = $('#controll-photo-title-input').val().trim()
 		#Find the image size and use that one
-		image_url = $(".selected-image").parent().data("url")
+		image_url = $(".selected-link").data("url")
 		filename = image_url.split('/').pop()
 		new_url =  image_url.replace(filename, size + filename)
 		editor.focus() 		#Make sure the editor is selevted. if not previously selected by the user.
-		editor.composer.commands.exec("insertImage", { src: new_url , alt: alt, title: title }) #Insert the image
+		editor.composer.commands.exec("insertImage", { src: new_url , alt: alt_text, title: title }) #Insert the image
+		$(".selected-link").removeClass("selected-link").find('img').removeClass("selected-image")
+		$('#page-manager-controls').hide()
 		event.preventDefault()
 
 
