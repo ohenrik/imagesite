@@ -18,7 +18,12 @@ class MenuItemsController < ApplicationController
 
   # GET /menu_items/new
   def new
-    @menu_item = MenuItem.new
+    @menu_item = MenuItem.new(:menu_id => params[:menu_id], :url => "http://")
+
+    respond_to do |format|
+      format.html { render action: 'new' }
+      format.js { render action: 'new', layout: false }
+    end
   end
 
   # GET /menu_items/1/edit
@@ -33,11 +38,12 @@ class MenuItemsController < ApplicationController
   # POST /menu_items.json
   def create
     @menu_item = MenuItem.new(params[:menu_item])
-
+    
     respond_to do |format|
       if @menu_item.save
         format.html { redirect_to @menu_item, notice: 'Menu item was successfully created.' }
         format.json { render action: 'show', status: :created, location: @menu_item }
+        format.js { render 'add_to_menu' }
       else
         format.html { render action: 'new' }
         format.json { render json: @menu_item.errors, status: :unprocessable_entity }

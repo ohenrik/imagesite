@@ -10,8 +10,12 @@
 <div class="row space-down menus">
 
 
-
     <div class="col-xs-12 col-sm-4 pull-left menu_item_list">
+
+        <h3>External links</h3>
+        <%= link_to new_menu_item_path(:menu_id => 1), :remote => true, class: "list-group-item add-to-menu" do %>
+           <i class="fa fa-link fa-fw text-muted"></i> New link
+        <% end %>
         <h3>Pages</h3>
         <div class="list-group">
             <% Page.all.each do |page| %>
