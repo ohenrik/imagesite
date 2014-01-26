@@ -3,10 +3,15 @@
 	    <i class="fa fa-bars fa-fw text-muted"></i>
 	</div>
 
-	<%= @tag.name %>
+	<span class="menu-item-name"><%= menu_item.name %></span>
 
-	<%= link_to menu_item, method: :delete, :remote => true, class: "list-badge pull-right" do %>
-        <i class="fa fa-trash-o text-muted fa-inverse"></i>
-    <% end %>
+	<span class="">
+		<%= link_to edit_menu_item_path(menu_item), :remote => true, class: "text-muted" do %>
+			<i class="fa fa-pencil-square"></i>
+		<% end %>
+		<%= link_to menu_item, method: :delete, :remote => true, class: "text-muted pull-right" do %>
+	  		<i class="fa fa-trash-o"></i>
+	    <% end %>
+	</span>
 
 </li>

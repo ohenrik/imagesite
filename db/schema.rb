@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140125235503) do
+ActiveRecord::Schema.define(version: 20140126105302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20140125235503) do
     t.string   "gallery_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "template"
   end
 
   create_table "menu_items", force: true do |t|
@@ -56,6 +57,8 @@ ActiveRecord::Schema.define(version: 20140125235503) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "photo_id"
+    t.string   "second_title"
+    t.string   "template"
   end
 
   add_index "pages", ["photo_id"], name: "index_pages_on_photo_id", using: :btree

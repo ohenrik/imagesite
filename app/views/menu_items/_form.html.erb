@@ -1,23 +1,21 @@
-<%= form_for(@menu_item) do |f| %>
-  <% if @menu_item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@menu_item.errors.count, "error") %> prohibited this menu_item from being saved:</h2>
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  <h4 class="modal-title">Menu Item</h4>
+</div>
+ <div class="modal-body">
+  <%= form_for(@menu_item, :remote => true) do |f| %>
+      <div class="error-container">
+          <%= render partial: 'shared/form_errors', :locals => {:item => @menu_item} %>
+      </div>
 
-      <ul>
-      <% @menu_item.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= f.submit class: "btn btn-primary", data: { menu_item_id: "#item_#{@menu_item.id}" } %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

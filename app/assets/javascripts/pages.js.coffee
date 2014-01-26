@@ -59,6 +59,11 @@ ready = ->
 		$(this).button('loading')
 
 
+	$('#second-title-link').click (event) ->
+		$('#second-title-holder').toggle()
+		$('#second-title-link').parent().toggle()
+		event.preventDefault()
+		
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

@@ -23,6 +23,10 @@ class MenuItemsController < ApplicationController
 
   # GET /menu_items/1/edit
   def edit
+    respond_to do |format|
+      format.html { render action: 'edit' }
+      format.js { render action: 'edit', layout: false }
+    end
   end
 
   # POST /menu_items
@@ -46,8 +50,9 @@ class MenuItemsController < ApplicationController
   def update
     respond_to do |format|
       if @menu_item.update(params[:menu_item])
-        format.html { redirect_to @menu_item, notice: 'Menu item was successfully updated.' }
+        format.html { redirect_to menus_path, notice: 'Menu item was successfully updated.' }
         format.json { head :no_content }
+        format.js { render 'update' }
       else
         format.html { render action: 'edit' }
         format.json { render json: @menu_item.errors, status: :unprocessable_entity }

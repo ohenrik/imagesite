@@ -7,9 +7,24 @@
     </div>
 
     <div class="form-group">
-        <h1 class="page-title-header"><%= f.text_field :title, placeholder: "Enter title", autofocus: true, class: "form-control input-lg" %></h1>
+        <h1 class="page-title-header">
+            <div class="input-group">
+                <%= f.text_field :title, placeholder: "Enter title", autofocus: true, class: "form-control input-lg" %>
+                <span class="input-group-addon">Primary Title</span>
+            </div>
+        </h1>
     </div>
+    
+    <div class="clearfix"><a href="#" class="btn btn-link btn-xs pull-right" id="second-title-link">Show Secondary title</a></div>
 
+    <div class="form-group" id="second-title-holder">
+        <h1 class="page-title-header">
+            <div class="input-group">
+                <%= f.text_field :second_title, placeholder: "Enter secondary title", autofocus: true, class: "form-control input-lg" %>
+                <span class="input-group-addon">Secondary Title</span>
+            </div>
+        </h1>
+    </div>
 
     <div class="form-group">
         <%= render 'rich_content_toolbar' %>

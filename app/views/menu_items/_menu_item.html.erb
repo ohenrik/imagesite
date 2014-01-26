@@ -3,10 +3,14 @@
 	<div class="dd-handle">
 	    <i class="fa fa-bars fa-fw text-muted"></i>
 	</div>
-	<%= menu_item.name %>
-
-	<%= link_to menu_item, method: :delete, :remote => true, class: "list-badge pull-right" do %>
-  		<i class="fa fa-trash-o text-muted fa-inverse"></i>
-    <% end %>
+	<span class="menu-item-name"><%= menu_item.name %></span>
+	<span class="">
+		<%= link_to edit_menu_item_path(menu_item), :remote => true, class: "text-muted" do %>
+			<i class="fa fa-pencil-square"></i>
+		<% end %>
+		<%= link_to menu_item, method: :delete, :remote => true, class: "text-muted pull-right" do %>
+	  		<i class="fa fa-trash-o"></i>
+	    <% end %>
+	</span>
     <%= content_tag(:ol, nested_menu_items(sub_item), class: "dd-list") if sub_item.present? %>
 </li>

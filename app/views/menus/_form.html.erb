@@ -1,15 +1,7 @@
 <%= form_for(@menu) do |f| %>
-  <% if @menu.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@menu.errors.count, "error") %> prohibited this menu from being saved:</h2>
-
-      <ul>
-      <% @menu.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="error-container">
+        <%= render partial: 'shared/form_errors', :locals => {:item => @menu} %>
     </div>
-  <% end %>
 
   <div class="field">
     <%= f.label :name %><br>
