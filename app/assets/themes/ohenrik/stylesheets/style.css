@@ -43,7 +43,7 @@
 
 /* 
 ----------------------------
--- Gallery
+-- Images
 ---------------------------- 
 */ 
 .image-heading {
@@ -54,6 +54,9 @@
 }
 .image-subheading h1 {
 	margin-top: 0; 
+}
+.img-center {
+	margin: 0 auto; 
 }
 
 /* 

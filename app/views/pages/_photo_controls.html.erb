@@ -14,7 +14,7 @@
             <div class="form-group">
                 <%= text_area_tag 'description', "", :placeholder => "Type description", class: "form-control input-sm" %>
             </div>
-            <div class="button-group">
+            <div class="btn-group">
                 <%= link_to "Insert", '#', class: "btn btn-primary btn-xs", id: "controll-insert-image-link"  %>
                 <%= link_to "Set thumbnail", "no_image_chosen", :method => :post, :remote => true, data: { loading_text: "Saving thumbnail..." }, id: "page-set-thumbnail" , class: "btn btn-default btn-xs" unless @page.new_record? %>
                 <%= link_to "Close", "#", class: "btn btn-xs btn-default" %>

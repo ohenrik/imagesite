@@ -67,6 +67,9 @@ gem 'sanitize-rails', :require => 'sanitize/rails'
 # Navigation
 gem 'ancestry'
 
+# Settings
+gem 'rails-settings-cached'
+
 
 #gem "therubyracer"
 #gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
