@@ -36,7 +36,7 @@ private
 	end
 
 	def current_tenant
-		@current_tenant ||= User.find_by_subdomain!(request.subdomain)
+		@current_tenant ||= User.includes(:home).find_by_subdomain!(request.subdomain)
 	end
 	helper_method :current_tenant
 

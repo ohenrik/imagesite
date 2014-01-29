@@ -19,10 +19,18 @@ class MenusController < ApplicationController
   # GET /menus/new
   def new
     @menu = Menu.new
+    respond_to do |format|
+      format.html { render action: 'new' }
+      format.js { render action: 'new', layout: false }
+    end
   end
 
   # GET /menus/1/edit
   def edit
+    respond_to do |format|
+      format.html { render action: 'edit' }
+      format.js { render action: 'edit', layout: false }
+    end
   end
 
   # POST /menus
@@ -32,8 +40,8 @@ class MenusController < ApplicationController
 
     respond_to do |format|
       if @menu.save
-        format.html { redirect_to @menu, notice: 'Menu was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @menu }
+        format.html { redirect_to menus_url, notice: 'Menu was successfully created.' }
+        format.json { render action: 'index', status: :created, location: @menu }
       else
         format.html { render action: 'new' }
         format.json { render json: @menu.errors, status: :unprocessable_entity }
@@ -46,10 +54,10 @@ class MenusController < ApplicationController
   def update
     respond_to do |format|
       if @menu.update(params[:menu])
-        format.html { redirect_to @menu, notice: 'Menu was successfully updated.' }
+        format.html { redirect_to menus_url, notice: 'Menu was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render action: 'index' }
         format.json { render json: @menu.errors, status: :unprocessable_entity }
       end
     end

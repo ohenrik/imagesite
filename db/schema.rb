@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140126134437) do
+ActiveRecord::Schema.define(version: 20140129165839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20140126134437) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
 
   create_table "pages", force: true do |t|
@@ -96,17 +97,6 @@ ActiveRecord::Schema.define(version: 20140126134437) do
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", using: :btree
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
-  create_table "settings", force: true do |t|
-    t.string   "var",                   null: false
-    t.text     "value"
-    t.integer  "thing_id"
-    t.string   "thing_type", limit: 30
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "settings", ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true, using: :btree
-
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
     t.integer  "photo_id"
@@ -146,6 +136,11 @@ ActiveRecord::Schema.define(version: 20140126134437) do
     t.string   "auth_token"
     t.string   "username"
     t.integer  "theme_id"
+    t.string   "site_title"
+    t.string   "site_tagline"
+    t.string   "alias_domain"
+    t.integer  "home_id"
+    t.string   "home_type"
   end
 
   add_index "users", ["theme_id"], name: "index_users_on_theme_id", using: :btree

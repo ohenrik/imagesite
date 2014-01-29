@@ -13,7 +13,7 @@
         <div class="page-select-image">
             <div class="row">
                 <% Photo.all.each do |photo| %>
-                    <div class="thumb col-xs-6 col-sm-4 col-md-4 col-lg-3">
+                    <div class="thumb col-xs-6 col-md-4">
                         <a href="#" class="select-photo-link" data-url="http://<%= request.host_with_port + photo.image_url() %>", data-set-thumbnail="<%= set_thumbnail_path(@page , :photo_id => photo.id) unless @page.new_record? %>" >
                             <%= image_tag photo.image_url(:large_thumb), class: "img-responsive" %>
                         </a>

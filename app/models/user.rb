@@ -3,12 +3,10 @@ class User < ActiveRecord::Base
 
 	after_create :create_schema
 
+	validates :username, :subdomain, :email, presence: true, uniqueness: true
 
-	validates :username, :subdomain, :email, presence: true
-	validates_uniqueness_of :email
-	validates_uniqueness_of :subdomain
-
-	validates :email, :username, :subdomain, presence: true
+	# Or with your own reserved names
+	validates  :subdomain, :subdomain  => { :reserved => %w(example documentation) }
 
 	before_create { generate_token(:auth_token) }
 
@@ -16,9 +14,10 @@ class User < ActiveRecord::Base
 	has_many :photos
 	has_many :themes
 	belongs_to :theme
+	belongs_to :home, polymorphic: true
 
 
-	liquid_methods :first_name, :last_name, :username, :email
+	liquid_methods :first_name, :last_name, :username, :email, :site_title
 
 
 	def send_password_reset

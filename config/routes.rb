@@ -1,7 +1,5 @@
 Imagesite::Application.routes.draw do
 
-  
-
   resources :galleries
 
   resources :menu_items
@@ -15,7 +13,7 @@ Imagesite::Application.routes.draw do
   get 'home', to: 'static_pages#home', as: 'home'
   
   resources :sessions
-  resources :users
+  
   resources :password_resets
 
 
@@ -33,9 +31,14 @@ Imagesite::Application.routes.draw do
     resources :photos
     resources :tags
     resources :themes
-    get "/" => 'photos#index'
+    
+    get "/settings/:id" => 'users#settings', as: :settings
+    get "/" => 'users#home'
 
   end
+
+  resources :users
+
   root :to => 'static_pages#home'
 
 

@@ -1,9 +1,26 @@
 class UsersController < ApplicationController
 
-	before_action :set_user, only: [:show, :edit, :update, :destroy]
+
+	# Find the tenant
+	# All users are in the public scema, hover all other date linked through assosiations need the tenant scema
+  	around_filter :scope_current_tenant
+
+
+	before_action :set_user, only: [:show, :edit, :update, :destroy, :settings]
 
 	def new 
 		@user = User.new
+	end
+
+	def setting
+
+	end
+
+	def home
+		@user = current_tenant
+
+		@page = @user.home_type.classify.constantize.find(@user.home_id)
+		render 'pages/show', layout: false
 	end
 
 	def edit
@@ -36,8 +53,6 @@ class UsersController < ApplicationController
 		# Destroy the user details
 		
 	end
-
-
 
 	def current_resource
 	  @current_resource ||= User.find(params[:id]) if params[:id]

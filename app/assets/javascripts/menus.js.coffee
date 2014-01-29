@@ -13,7 +13,8 @@ ready = ->
 		$('.add-to-menu').each ->
 			$(this).attr('href', $(this).attr('href').replace(/menu_id=./, "menu_id="+menu))
 
-		$('.tab').parent().toggleClass('active')
+		$('.tab').parent().removeClass('active')
+		$(this).parent().addClass('active')
 		$('.tabbable').css('display', 'none')
 		$('.'+item).css('display', 'block')
 		event.preventDefault()

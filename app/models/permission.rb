@@ -1,34 +1,36 @@
 class Permission
 
 	def initialize(user, subdomain)
-		allow :static_pages, [:home, :navigation]
-		allow :users, [:new, :create]
+		allow :static_pages, [:home, :navigation, :user_home]
+		allow :users, [:new, :create, :home]
 		allow :password_resets, [:new, :create, :update, :edit]
 		allow_param :password_reset, [:email, :password, :password_confirmation]
 		allow_param :user, [:first_name, :last_name, :username, :subdomain, :email, :password, :password_confirmation]
 		allow :sessions, [:new, :create, :destroy]
 		allow :photos, [:index, :show]
 		allow :tags, [:show]
+		allow :pages, [:show]
 		if user
 			allow :users, [:edit, :update] do |inst|
 				inst.id == user.id
 			end
 		end
 		if user && user.subdomain == subdomain
-			allow_param :user, [:current_theme]
-			allow_param :menu, [:name, :menu_item_id]
+			allow_param :user, [:current_theme, :site_title, :site_tagline, :alias_domain, :home_controller, :home_action, :home_id]
+			allow_param :menu, [:name, :menu_item_id, :slug]
 			allow_param :menu_item, [:menu_id, :menuable_id, :menuable_type, :name, :description, :new_page, :ancestry, :position, :url]
 			allow_param :photo, [:name, :image, :edit_tag_list, :description]
 			allow_param :page, [:title, :second_title, :content, :excerpt, :status, :photo_id]
 			allow_param :gallery, [:title, :subtitle, :description, :gallery_type]
+			allow_param :theme, [:zip, :name]
+			allow :users, [:settings]
 			allow :galleries, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :add_to_menu]
-			allow :pages, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :set_thumbnail, :add_to_menu]
+			allow :pages, [:index, :new, :create, :edit, :update, :delete, :destroy, :set_thumbnail, :add_to_menu]
 			allow :photos, [:all, :new, :create, :edit, :update, :delete, :destroy]
 			allow :tags, [:index, :new, :create, :edit, :update, :delete, :destroy, :add_to_menu]
 			allow :menus, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :add_item_to_menu]
 			allow :menu_items, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :sort]
 			allow :themes, [:show, :index, :edit, :update, :create, :new, :destroy, :select_theme]
-			allow_param :theme, [:zip, :name]
 		end
 	end
 

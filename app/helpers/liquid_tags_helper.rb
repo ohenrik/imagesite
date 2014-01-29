@@ -195,9 +195,9 @@ end
 
 	    	content = File.read(header_file)
 
-	    	menu = Menu.find(@menu_object)
+	    	@menu ||= Menu.find(@menu_object)
 
-	    	Liquid::Template.parse(content).render(context.merge('menu' => menu))
+	    	Liquid::Template.parse(content).render(context.merge('menu' => @menu))
 	    end
 
 	end

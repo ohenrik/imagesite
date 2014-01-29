@@ -14,7 +14,9 @@
 
         <h3>External links</h3>
         <%= link_to new_menu_item_path(:menu_id => 1), :remote => true, class: "list-group-item add-to-menu" do %>
-           <i class="fa fa-link fa-fw text-muted"></i> New link
+           <i class="fa fa-link fa-fw text-muted"></i> 
+           New link
+           <span class="pull-right text-muted"><i class="fa fa-plus-circle"></i></span>
         <% end %>
         <h3>Pages</h3>
         <div class="list-group">
@@ -45,20 +47,26 @@
                 <%= link_to menu.name, "#", class: "tab", :data => { :menu_id => menu.id, :menu => menu.name.gsub(' ', '_').downcase } %>
             </li>   
             <% end %>
-            <li><%= link_to 'New Menu', new_menu_path %></li>
+            <li><%= link_to 'New Menu', new_menu_path, remote: true %></li>
         </ul>
     </div>
 
     <div class="col-xs-12 col-sm-8 pull-right">
         <% @menus.each do |menu| %>
             <div class="dd <%= "#{menu.name.gsub(' ', '_').downcase}" %> tabbable" id="menu_container_<%= menu.id %>" >
-
+                <% if menu.menu_items.blank? %>
+                  <div class="alert alert-warning text-center">Menu is empty.</div>
+                <% else %>
                 <ol id="menu_<%= menu.id %>" class=" dd-list list-group">
                     <%= nested_menu_items(menu.menu_items.arrange(:order => :position)) %>
                 </ol>
-
+                <% end %>
                 <div class="menu-footer clearfix">
-                    <%= link_to 'Save menu', '#', class: "btn btn-primary pull-right save-menu", data: { menu: "\#menu_container_#{menu.id}", update_url: sort_menu_items_path(menu), loading_text: "Saving menu..." }%>
+                    <%= link_to 'Delete Menu', menu_path(menu), method: :delete, class: "btn btn-default", data: { confirm: 'Are you sure?' } %>
+                    <div class="pull-right">
+                        <%= link_to 'Edit Menu', edit_menu_path(menu), class: "btn btn-default", remote: true %>
+                        <%= link_to 'Save menu', '#', class: "btn btn-primary save-menu", data: { menu: "\#menu_container_#{menu.id}", update_url: sort_menu_items_path(menu), loading_text: "Saving menu..." }%>
+                    </div>
                 </div>
             </div>
 
