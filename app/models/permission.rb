@@ -16,16 +16,17 @@ class Permission
 			end
 		end
 		if user && user.subdomain == subdomain
-			allow_param :user, [:current_theme, :site_title, :site_tagline, :alias_domain, :home_controller, :home_action, :home_id]
+			allow_param :user, [:current_theme, :site_title, :site_tagline, :alias_domain, :home_type, :home_id]
 			allow_param :menu, [:name, :menu_item_id, :slug]
 			allow_param :menu_item, [:menu_id, :menuable_id, :menuable_type, :name, :description, :new_page, :ancestry, :position, :url]
 			allow_param :photo, [:name, :image, :edit_tag_list, :description]
 			allow_param :page, [:title, :second_title, :content, :excerpt, :status, :photo_id]
-			allow_param :gallery, [:title, :subtitle, :description, :gallery_type]
+			allow_param :gallery, [:title, :second_title, :description, :gallery_type]
 			allow_param :theme, [:zip, :name]
-			allow :users, [:settings]
+			allow_param :tag, [:name]
+			allow :users, [:settings, :edit, :update]
 			allow :galleries, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :add_to_menu]
-			allow :pages, [:index, :new, :create, :edit, :update, :delete, :destroy, :set_thumbnail, :add_to_menu]
+			allow :pages, [:index, :new, :create, :edit, :update, :delete, :destroy, :set_thumbnail, :set_home, :add_to_menu]
 			allow :photos, [:all, :new, :create, :edit, :update, :delete, :destroy]
 			allow :tags, [:index, :new, :create, :edit, :update, :delete, :destroy, :add_to_menu]
 			allow :menus, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :add_item_to_menu]

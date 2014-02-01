@@ -197,7 +197,9 @@ end
 
 	    	@menu ||= Menu.find(@menu_object)
 
-	    	Liquid::Template.parse(content).render(context.merge('menu' => @menu))
+	    	context.merge('menu' => @menu)
+
+	    	Liquid::Template.parse(content).render(context)
 	    end
 
 	end

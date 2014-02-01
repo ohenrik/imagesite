@@ -22,6 +22,7 @@
                 <div class="btn-group">
                     <%= link_to 'Show', page, class: "btn btn-default btn-xs" %>
                     <%= link_to 'Edit', edit_page_path(page), class: "btn btn-default btn-xs"  %>
+                    <%= link_to 'Set as home', set_home_page_path(page), method: :post, class: "btn btn-default btn-xs" %>
                 </div>
                 <%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs"  %>
             </div>

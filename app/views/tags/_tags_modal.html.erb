@@ -8,12 +8,16 @@
         <ul class="list-group">
             <% @tags.each do |tag| %>
                 <li class="list-group-item">
-                    <%= link_to edit_tag_path(tag) do %>
-                        <%= tag.name %> <i class="fa fa-pencil fa-fw"></i> 
-                    <% end %>
-                    <%= link_to tag, :method => :delete, class: "pull-right" do %>
-                        <i class="fa fa-trash-o fa-fw"></i>
-                    <% end %>
+                    <span class="tag-container" id="tag_<%= tag.id %>">
+                        <%= tag.name %> 
+                        <%= link_to edit_tag_path(tag), remote: true do %>
+                            <i class="fa fa-pencil fa-fw"></i> 
+                        <% end %>
+                    
+                        <%= link_to tag, :method => :delete, class: "pull-right" do %>
+                            <i class="fa fa-trash-o fa-fw"></i>
+                        <% end %>
+                    </span>
                 </li>
 
             <% end %>

@@ -7,7 +7,7 @@ class Page < ActiveRecord::Base
 
 
 	# Liquid methods
-	liquid_methods :page, :thumbnail, :title, :content, :excerpt, :link
+	liquid_methods :page, :thumbnail, :title, :second_title, :content, :excerpt, :link
 
 
 	def link

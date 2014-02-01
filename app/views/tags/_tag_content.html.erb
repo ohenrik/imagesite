@@ -1,0 +1,8 @@
+<%= tag.name %> 
+<%= link_to edit_tag_path(tag), remote: true do %>
+    <i class="fa fa-pencil fa-fw"></i> 
+<% end %>
+
+<%= link_to tag, :method => :delete, class: "pull-right" do %>
+    <i class="fa fa-trash-o fa-fw"></i>
+<% end %>

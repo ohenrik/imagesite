@@ -3,7 +3,7 @@ class TagsController < ApplicationController
 	# Find the tenant
 	around_filter :scope_current_tenant
 
-	before_action :set_tag, only: [:edit, :destroy, :add_to_menu]
+	before_action :set_tag, only: [:edit, :update, :destroy, :add_to_menu]
 
 	def index
 		@tags = Tag.all
@@ -21,9 +21,24 @@ class TagsController < ApplicationController
 	end
 
 	def edit
-
+		respond_to do |format|
+			format.js { render 'insert_form' }
+		end
 	end
 
+	def update
+	    respond_to do |format|
+	      if @tag.update(params[:tag])
+	        format.html { redirect_to photos_path, notice: 'Tag was successfully updated.' }
+	        format.json { head :no_content }
+	        format.js { render 'insert_result'}
+	      else
+	        format.html { render action: 'edit' }
+	        format.json { render json: @tag.errors, status: :unprocessable_entity }
+
+	      end
+	    end
+	end
 	
 	def add_to_menu
 		item = @tag.menu_items.create(name: @tag.name, menu_id: params[:menu_id])

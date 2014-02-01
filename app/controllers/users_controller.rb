@@ -2,8 +2,9 @@ class UsersController < ApplicationController
 
 
 	# Find the tenant
-	# All users are in the public scema, hover all other date linked through assosiations need the tenant scema
-  	around_filter :scope_current_tenant
+	# All users are in the public scema, hover all other date linked through assosiations need the tenant scema.
+	# So when the users home screen is requested the user must have schema = "tenant1,public"
+  	around_filter :scope_current_tenant, only: [:home]
 
 
 	before_action :set_user, only: [:show, :edit, :update, :destroy, :settings]
@@ -17,10 +18,21 @@ class UsersController < ApplicationController
 	end
 
 	def home
+		# Multitenant rails app. This refers to user who owns the subdomain visited.
 		@user = current_tenant
 
-		@page = @user.home_type.classify.constantize.find(@user.home_id)
-		render 'pages/show', layout: false
+		# This is not optimal, results in two queries.
+		if @user.home_type.classify.constantize.exists?(@user.home_id)
+
+			# This is the same as @page = Page.find(params[:id])
+			instance_variable_set("@#{@user.home_type.downcase}", @user.home_type.classify.constantize.find(@user.home_id))
+
+			# this is the same as render 'pages/show', layout: false
+			render "#{@user.home_type.downcase.pluralize}/show", layout: false
+		else
+			redirect_to photos_path
+		end
+
 	end
 
 	def edit

@@ -1,10 +1,8 @@
 Imagesite::Application.routes.draw do
 
-  resources :galleries
+  
 
-  resources :menu_items
 
-  resources :menus
 
   get "password_resets/new"
   get 'register', to: 'users#new', as: 'register'
@@ -31,8 +29,17 @@ Imagesite::Application.routes.draw do
     resources :photos
     resources :tags
     resources :themes
+    resources :menu_items
+    resources :menus
+    resources :galleries
     
     get "/settings/:id" => 'users#settings', as: :settings
+
+
+    # Set a page as the home screen
+    post 'pages/set_home/:id' => 'pages#set_home', as: :set_home_page
+
+    # User selected Home screen
     get "/" => 'users#home'
 
   end

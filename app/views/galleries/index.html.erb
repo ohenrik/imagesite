@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>Title</th>
-      <th>Subtitle</th>
+      <th>Second Title</th>
       <th>Description</th>
       <th>Gallery type</th>
       <th></th>
@@ -17,7 +17,7 @@
     <% @galleries.each do |gallery| %>
       <tr>
         <td><%= gallery.title %></td>
-        <td><%= gallery.subtitle %></td>
+        <td><%= gallery.second_title %></td>
         <td><%= gallery.description %></td>
         <td><%= gallery.gallery_type %></td>
         <td><%= link_to 'Show', gallery %></td>

@@ -16,8 +16,6 @@ module ApplicationHelper
 			content = "No theme chosen yet for this subdomain"
 		end
 
-		
-
 		#file_system = Liquid::LocalFileSystem.new(content)
 		Liquid::Template.parse(content).render(model_content.merge('settings' => current_tenant), :filters => [LiquidFilters])
 	end

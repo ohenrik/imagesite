@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   # Find the tenant
   around_filter :scope_current_tenant
   
-  before_action :set_page, only: [:show, :edit, :update, :destroy, :set_thumbnail, :add_to_menu]
+  before_action :set_page, only: [:show, :edit, :update, :destroy, :set_thumbnail, :add_to_menu, :set_home]
   
 
   # GET /pages
@@ -86,6 +86,17 @@ class PagesController < ApplicationController
       end
     end
   end
+
+  def set_home
+    @user = current_user
+    @user.home = @page
+    if @user.save
+      redirect_to pages_path, notice: "Home screen set to #{@page.title}"
+    else
+      redirect_to pages_path, alert: "An error occured. Home not set."
+    end
+  end
+
 #render :locals => { menu_item_id: => 1 }
   private
     # Use callbacks to share common setup or constraints between actions.
