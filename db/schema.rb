@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140131212910) do
+ActiveRecord::Schema.define(version: 20140201155216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,18 @@ ActiveRecord::Schema.define(version: 20140131212910) do
     t.datetime "updated_at"
     t.string   "slug"
   end
+
+  create_table "page_items", force: true do |t|
+    t.integer  "position"
+    t.integer  "page_id"
+    t.integer  "pagable_id"
+    t.string   "pagable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "page_items", ["pagable_id", "pagable_type"], name: "index_page_items_on_pagable_id_and_pagable_type", using: :btree
+  add_index "page_items", ["page_id"], name: "index_page_items_on_page_id", using: :btree
 
   create_table "pages", force: true do |t|
     t.string   "title"

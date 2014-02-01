@@ -1,0 +1,31 @@
+<h1>Listing page_items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Position</th>
+      <th>Page</th>
+      <th>Pagable</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @page_items.each do |page_item| %>
+      <tr>
+        <td><%= page_item.position %></td>
+        <td><%= page_item.page %></td>
+        <td><%= page_item.pagable %></td>
+        <td><%= link_to 'Show', page_item %></td>
+        <td><%= link_to 'Edit', edit_page_item_path(page_item) %></td>
+        <td><%= link_to 'Destroy', page_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Page item', new_page_item_path %>

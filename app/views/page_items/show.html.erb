@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @page_item.position %>
+</p>
+
+<p>
+  <strong>Page:</strong>
+  <%= @page_item.page %>
+</p>
+
+<p>
+  <strong>Pagable:</strong>
+  <%= @page_item.pagable %>
+</p>
+
+<%= link_to 'Edit', edit_page_item_path(@page_item) %> |
+<%= link_to 'Back', page_items_path %>
