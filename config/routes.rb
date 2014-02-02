@@ -33,7 +33,6 @@ Imagesite::Application.routes.draw do
     resources :themes
     resources :menu_items
     resources :menus
-    resources :galleries
     
     get "/settings/:id" => 'users#settings', as: :settings
 
