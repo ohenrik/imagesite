@@ -1,4 +1,12 @@
-<%= render 'photo_manager' %>
+<!-- Modal -->
+<div class="modal fade" id="mediaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog media-modal-dialog" id="media-modal-dialog">
+
+
+    </div>
+</div>
+
+
 <%= form_for(@page) do |f| %>
 
 
@@ -63,20 +71,9 @@
     </div>
 
     <div class="row">
-        <div class="col-xs-12">
-            <h3>Gallery</h3>
-            <hr>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-4">
-            <% @page.page_items.each do |page_item| %>
-                <% if page_item.pageable_type == "Page" %>
-                    <%= page_item.pageable.title %>
-                <% end %>
-                <% if page_item.pageable_type == "Photo" %>
-                    <%= page_item.pageable.name %>
-                <% end %>
-            <% end %>
-        </div>
+
+        <%= nested_page_items(@page.items) %>
+        
     </div>
 
 <% end %>

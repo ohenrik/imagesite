@@ -1,53 +1,53 @@
 Imagesite::Application.routes.draw do
 
-  
+    get "password_resets/new"
+    get 'register', to: 'users#new', as: 'register'
+    get 'login', to: 'sessions#new', as: 'login'
+    get 'logout', to: 'sessions#destroy', as: 'logout'
+    get 'home', to: 'static_pages#home', as: 'home'
 
+    resources :sessions
 
-
-  resources :page_items
-
-  get "password_resets/new"
-  get 'register', to: 'users#new', as: 'register'
-  get 'login', to: 'sessions#new', as: 'login'
-  get 'logout', to: 'sessions#destroy', as: 'logout'
-  get 'home', to: 'static_pages#home', as: 'home'
-  
-  resources :sessions
-  
-  resources :password_resets
+    resources :password_resets
 
 
    #Check for subdomain
-  constraints(Subdomain) do
-    get 'photos/all' => 'photos#all', as: :all
-    get 'tags/:tag' => 'photos#index', as: :public_filter_tag
-    get 'photos/all/tags/:tag' => 'photos#all', as: :filter_tag
-    get 'themes/select_theme/:id' => 'themes#select_theme', as: :select_theme
-    post 'pages/set_thumbnail/:id' => 'pages#set_thumbnail', as: :set_thumbnail
-    post 'pages/add_to_menu/:id' => 'pages#add_to_menu', as: :add_page_to_menu 
-    post 'tags/add_to_menu/:id' => 'tags#add_to_menu', as: :add_tag_to_menu
-    post 'menu_items/sort_menu_items/:id' => 'menu_items#sort', as: :sort_menu_items
-    resources :pages
-    resources :photos
-    resources :tags
-    resources :themes
-    resources :menu_items
-    resources :menus
-    
-    get "/settings/:id" => 'users#settings', as: :settings
+    constraints(Subdomain) do
+        get 'photos/all' => 'photos#all', as: :all
+        get 'tags/:tag' => 'photos#index', as: :public_filter_tag
+        get 'photos/all/tags/:tag' => 'photos#all', as: :filter_tag
+        get 'themes/select_theme/:id' => 'themes#select_theme', as: :select_theme
+        get 'photos/gallery_modal' => 'photos#gallery_modal', as: :gallery_modal
+        get 'photos/photos_modal' => 'photos#photo_manager_modal', as: :photo_manager_modal
+        post 'pages/set_thumbnail/:id' => 'pages#set_thumbnail', as: :set_thumbnail
+        post 'pages/add_to_menu/:id' => 'pages#add_to_menu', as: :add_page_to_menu 
+        post 'tags/add_to_menu/:id' => 'tags#add_to_menu', as: :add_tag_to_menu
+        post 'menu_items/sort_menu_items/:id' => 'menu_items#sort', as: :sort_menu_items
+        post 'photos/add_to_page/:id' => 'photos#add_to_page', as: :add_photo_to_page
+        resources :pages
+        resources :photos
+        resources :tags
+        resources :themes
+        resources :menu_items
+        resources :menus
+        resources :page_items
+        
+        resources :texts
+
+        get "/settings/:id" => 'users#settings', as: :settings
 
 
-    # Set a page as the home screen
-    post 'pages/set_home/:id' => 'pages#set_home', as: :set_home_page
+        # Set a page as the home screen
+        post 'pages/set_home/:id' => 'pages#set_home', as: :set_home_page
 
-    # User selected Home screen
-    get "/" => 'users#home'
+        # User selected Home screen
+        get "/" => 'users#home'
 
-  end
+    end
 
-  resources :users
+    resources :users
 
-  root :to => 'static_pages#home'
+    root :to => 'static_pages#home'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

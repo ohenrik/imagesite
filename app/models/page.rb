@@ -25,4 +25,8 @@ class Page < ActiveRecord::Base
 		photo.image_url(:large_thumb)
 	end
 
+	def items
+		page_items.arrange(order: :position)
+	end
+
 end

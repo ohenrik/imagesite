@@ -1,0 +1,31 @@
+
+	<% if page_item.pageable_type == "Page" %>
+		<div class="col-xs-12">
+			<div class="well">
+				<%= page_item.pageable.title %>
+			</div>
+		</div>
+	<% end %>
+
+	<% if page_item.pageable_type == "Photo" %>
+		<div class="col-xs-12 col-sm-6 col-md-4">
+			<%= image_tag page_item.pageable.image_url(:small_thumb), class: "img-responsive thumbnail" %>
+		</div>
+	<% end %>
+    
+	<% if page_item.gallery %>
+		<div class="col-xs-12">
+			<h3>Gallery</h3>
+			<hr>
+		</div>
+		<div class="col-xs-12">
+			<div class="row">
+				<%= nested_page_items(sub_item) %>
+			</div>
+		</div>
+		<div class="col-xs-12">
+			<%= link_to "Add Photos", gallery_modal_path(:page_id => page_item.page_id, :page_item_id => page_item.id ), remote: true, class: "btn btn-default" %>
+			<hr>
+		</div>
+
+	<% end %>

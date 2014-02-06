@@ -3,7 +3,7 @@ class PhotosController < ApplicationController
   # Find the tenant
   around_filter :scope_current_tenant
 
-  before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  before_action :set_photo, only: [:show, :edit, :update, :destroy, :add_to_page]
 
 
   # Check if the tenant is in his own subdomain
@@ -19,6 +19,35 @@ class PhotosController < ApplicationController
       @photos = Photo.all
     end
     render layout: "theme"
+  end
+
+  def photo_manager_modal
+    @photos = Photo.all.order(created_at: :desc)
+
+    # Passing page details right through 
+    @page_id = params[:page_id]
+    @page_item_id = params[:page_item_id]
+
+    respond_to do |format|
+      format.js {
+        render 'photo_manager_modal', layout: false
+      }
+    end
+  end
+
+  def gallery_modal
+    @photos = Photo.all.order(created_at: :desc)
+
+    # Passing page details right through 
+    @page_id = params[:page_id]
+    @page_item_id = params[:page_item_id]
+
+    
+    respond_to do |format|
+      format.js {
+        render 'gallery_modal', layout: false
+      }
+    end
   end
 
   # GET /photos
@@ -101,6 +130,22 @@ class PhotosController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+
+  def add_to_page
+    item = @photo.page_items.create(page_id: params[:page_id], position: params[:position], ancestry: params[:page_item_id])
+    respond_to do |format|
+      if item
+        format.html { redirect_to edit_page_path(params[:page_id]), notice: 'Item successfully added' }
+        format.js { } #render locals: { page_item: item } }
+      else
+        format.html { redirect_to edit_page_path(params[:page_id]), notice: 'An error occured, item no added to menu.' }
+        format.json { render json: @menu.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

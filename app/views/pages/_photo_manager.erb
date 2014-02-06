@@ -1,18 +1,16 @@
 
-
-<!-- Modal -->
-<div class="modal fade" id="mediaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog media-modal-dialog">
     <div class="modal-content">
+      
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel">Modal title</h4> 
       </div>
+
       <div class="modal-body">
 
         <div class="page-select-image">
             <div class="row">
-                <% Photo.all.each do |photo| %>
+                <% @photos.each do |photo| %>
                     <div class="thumb col-xs-6 col-md-4">
                         <a href="#" class="select-photo-link" data-url="http://<%= request.host_with_port + photo.image_url() %>", data-set-thumbnail="<%= set_thumbnail_path(@page , :photo_id => photo.id) unless @page.new_record? %>" >
                             <%= image_tag photo.image_url(:large_thumb), class: "img-responsive" %>
@@ -30,14 +28,12 @@
             </div>
         </div>
 
-        <%= render 'photo_controls' %>
-
+        <%= render 'pages/photo_controls' %>
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
       
 
     </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->

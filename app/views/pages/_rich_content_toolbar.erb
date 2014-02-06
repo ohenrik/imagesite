@@ -12,9 +12,9 @@
         
         
     </div>
-    <button class="btn btn-default" data-toggle="modal" data-target="#mediaModal">
+    <%= link_to photo_manager_modal_path(:page_id => @page.id ), remote: true, class: "btn btn-default" do %>
         <i class="fa fa-picture-o"></i> Images
-    </button>        
+    <% end %>    
     
     <%= render 'rich_link_button', :modal => "contentModal" %>
 

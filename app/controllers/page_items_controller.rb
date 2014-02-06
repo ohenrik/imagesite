@@ -2,8 +2,9 @@ class PageItemsController < ApplicationController
 
   # Find the tenant
   around_filter :scope_current_tenant
-  
+
   before_action :set_page_item, only: [:show, :edit, :update, :destroy]
+
 
   # GET /page_items
   # GET /page_items.json
