@@ -42,7 +42,7 @@ class PhotosController < ApplicationController
     @page_id = params[:page_id]
     @page_item_id = params[:page_item_id]
 
-    
+
     respond_to do |format|
       format.js {
         render 'gallery_modal', layout: false
@@ -134,11 +134,11 @@ class PhotosController < ApplicationController
 
 
   def add_to_page
-    item = @photo.page_items.create(page_id: params[:page_id], position: params[:position], ancestry: params[:page_item_id])
+    @page_item = @photo.page_items.create(page_id: params[:page_id], position: params[:position], ancestry: params[:page_item_id])
     respond_to do |format|
-      if item
+      if @page_item
         format.html { redirect_to edit_page_path(params[:page_id]), notice: 'Item successfully added' }
-        format.js { } #render locals: { page_item: item } }
+        format.js { render 'photo_added', layout: false } #render locals: { page_item: item } }
       else
         format.html { redirect_to edit_page_path(params[:page_id]), notice: 'An error occured, item no added to menu.' }
         format.json { render json: @menu.errors, status: :unprocessable_entity }

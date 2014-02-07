@@ -1,0 +1,1 @@
+$('#gallery_<%= @page_item.parent.id %>').append('<%= escape_javascript(render( :partial => "page_items/page_item", locals: { page_item: @page_item } , :formats => [:html])) %>');

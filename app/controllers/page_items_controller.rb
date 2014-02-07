@@ -29,7 +29,7 @@ class PageItemsController < ApplicationController
   # POST /page_items
   # POST /page_items.json
   def create
-    @page_item = PageItem.new(page_item_params)
+    @page_item = PageItem.new(params[:page_item])
 
     respond_to do |format|
       if @page_item.save
@@ -46,7 +46,7 @@ class PageItemsController < ApplicationController
   # PATCH/PUT /page_items/1.json
   def update
     respond_to do |format|
-      if @page_item.update(page_item_params)
+      if @page_item.update(params[:page_item])
         format.html { redirect_to @page_item, notice: 'Page item was successfully updated.' }
         format.json { head :no_content }
       else
@@ -59,10 +59,12 @@ class PageItemsController < ApplicationController
   # DELETE /page_items/1
   # DELETE /page_items/1.json
   def destroy
+    @page_id = @page_item.page_id
     @page_item.destroy
     respond_to do |format|
-      format.html { redirect_to page_items_url }
+      format.html { redirect_to edit_page_path(@page_id) }
       format.json { head :no_content }
+      format.js { render js: "$('#page_item_#{@page_item.id}').remove();" }
     end
   end
 
@@ -73,7 +75,7 @@ class PageItemsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def page_item_params
-      params.require(:page_item).permit(:position, :page_id, :pagable_id, :pagable_type)
-    end
+    #def page_item_params
+    #  params.require(:page_item).permit(:position, :page_id, :pagable_id, :pagable_type)
+    #end
 end
