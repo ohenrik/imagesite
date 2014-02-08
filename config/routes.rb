@@ -17,13 +17,15 @@ Imagesite::Application.routes.draw do
         get 'tags/:tag' => 'photos#index', as: :public_filter_tag
         get 'photos/all/tags/:tag' => 'photos#all', as: :filter_tag
         get 'themes/select_theme/:id' => 'themes#select_theme', as: :select_theme
-        get 'photos/gallery_modal' => 'photos#gallery_modal', as: :gallery_modal
+        get 'photos/gallery_modal' => 'photos#gallery_modal', as: :photos_gallery_modal
+        get 'pages/gallery_modal' => 'pages#gallery_modal', as: :pages_gallery_modal
         get 'photos/photos_modal' => 'photos#photo_manager_modal', as: :photo_manager_modal
         post 'pages/set_thumbnail/:id' => 'pages#set_thumbnail', as: :set_thumbnail
         post 'pages/add_to_menu/:id' => 'pages#add_to_menu', as: :add_page_to_menu 
         post 'tags/add_to_menu/:id' => 'tags#add_to_menu', as: :add_tag_to_menu
         post 'menu_items/sort_menu_items/:id' => 'menu_items#sort', as: :sort_menu_items
         post 'photos/add_to_page/:id' => 'photos#add_to_page', as: :add_photo_to_page
+        post 'pages/add_to_page/:id' => 'pages#add_to_page', as: :add_page_to_page
         resources :pages
         resources :photos
         resources :tags

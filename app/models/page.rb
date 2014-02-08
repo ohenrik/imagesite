@@ -4,8 +4,9 @@ class Page < ActiveRecord::Base
  	belongs_to :photo
  	has_many :menu_items, :as => :menuable, :dependent => :destroy
  	has_one :user, :as => :home
+
  	has_many :page_items, :as => :pageable, :dependent => :destroy
- 	has_many :page_items, :dependent => :destroy
+ 	has_many :sub_items, :foreign_key => "page_id", :class_name => "PageItem", :dependent => :destroy
  	
 
 
@@ -26,7 +27,7 @@ class Page < ActiveRecord::Base
 	end
 
 	def items
-		page_items.arrange(order: :position)
+		sub_items.arrange(order: :position)
 	end
 
 end

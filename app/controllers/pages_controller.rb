@@ -3,13 +3,28 @@ class PagesController < ApplicationController
   # Find the tenant
   around_filter :scope_current_tenant
   
-  before_action :set_page, only: [:show, :edit, :update, :destroy, :set_thumbnail, :add_to_menu, :set_home]
+  before_action :set_page, only: [:show, :edit, :update, :destroy, :set_thumbnail, :add_to_menu, :set_home, :add_to_page]
   
 
   # GET /pages
   # GET /pages.json
   def index
     @pages = Page.all
+  end
+
+  def gallery_modal
+    @pages = Page.all.order(updated_at: :desc)
+
+    # Passing page details right through 
+    @page_id = params[:page_id]
+    @page_item_id = params[:page_item_id]
+
+
+    respond_to do |format|
+      format.js {
+        render 'page_items/gallery_modal', layout: false
+      }
+    end
   end
 
   # GET /pages/1
@@ -86,6 +101,20 @@ class PagesController < ApplicationController
       end
     end
   end
+
+  def add_to_page
+    @page_item = @page.page_items.create(page_id: params[:page_id], position: params[:position], ancestry: params[:page_item_id])
+    respond_to do |format|
+      if @page_item
+        format.html { redirect_to edit_page_path(params[:page_id]), notice: 'Item successfully added' }
+        format.js { render 'page_items/page_item_added', layout: false } #render locals: { page_item: item } }
+      else
+        format.html { redirect_to edit_page_path(params[:page_id]), notice: 'An error occured, item no added to menu.' }
+        format.json { render json: @menu.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 
   def set_home
     @user = current_user

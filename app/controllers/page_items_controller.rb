@@ -74,6 +74,18 @@ class PageItemsController < ApplicationController
       @page_item = PageItem.find(params[:id])
     end
 
+    
+    def update_position(object, parent = nil)
+
+      object.each_with_index do |item, index|
+        @menu_item = MenuItem.find(item["id"])
+        @menu_item.parent_id = parent
+        @menu_item.update(:position => index + 1)
+        update_position(item["children"], item["id"]) if !item["children"].nil? 
+      end
+
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     #def page_item_params
     #  params.require(:page_item).permit(:position, :page_id, :pagable_id, :pagable_type)

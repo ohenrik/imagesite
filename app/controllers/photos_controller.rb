@@ -45,7 +45,7 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       format.js {
-        render 'gallery_modal', layout: false
+        render 'page_items/gallery_modal', layout: false
       }
     end
   end
@@ -138,7 +138,7 @@ class PhotosController < ApplicationController
     respond_to do |format|
       if @page_item
         format.html { redirect_to edit_page_path(params[:page_id]), notice: 'Item successfully added' }
-        format.js { render 'photo_added', layout: false } #render locals: { page_item: item } }
+        format.js { render 'page_items/page_item_added', layout: false } #render locals: { page_item: item } }
       else
         format.html { redirect_to edit_page_path(params[:page_id]), notice: 'An error occured, item no added to menu.' }
         format.json { render json: @menu.errors, status: :unprocessable_entity }

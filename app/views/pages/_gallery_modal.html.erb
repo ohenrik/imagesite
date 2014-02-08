@@ -1,0 +1,36 @@
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Select Pages</h4> 
+      </div>
+
+      <div class="modal-body">
+
+        <div class="gallery-photo">
+            <div class="row">
+                <% @pages.each do |page| %>
+                    
+                        <div class="thumb col-xs-6 col-md-4">
+                            <%= link_to add_page_to_page_path(id: page.id, page_id: @page_id, page_item_id: @page_item_id), remote: true, method: :post, class: "thumbnail" do %>
+                                <% if page.photo %>
+                                    <%= image_tag page.photo.image_url(:large_thumb).to_s, class: "img-responsive" %>
+                                <% else %>
+                                    <%= image_tag "no-thumb.png", class: "img-responsive" %>
+                                <% end %>
+                            <% end %>
+                            <span class="photo-name"><%= page.title %></span>
+                        </div>
+                <% end %>
+            </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+      
+
+    </div><!-- /.modal-content -->
