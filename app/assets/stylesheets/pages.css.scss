@@ -170,3 +170,24 @@
 		color: $gray5;
 	}
 }
+
+div.sortable-placeholder {
+	@extend .col-xs-12;
+	@extend .col-md-4;
+	@extend .col-sm-6;
+	min-height: 200px;
+	border: 1px dashed #ddd; 
+}
+div.sortable-dragging {
+	margin-bottom: 50px;
+}
+.sortable.grid {
+	overflow: hidden;
+	display: block;
+}
+.sortable li {
+
+}
+.sortable.grid li {
+
+}

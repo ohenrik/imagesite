@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   # Find the tenant
   around_filter :scope_current_tenant
   
-  before_action :set_page, only: [:show, :edit, :update, :destroy, :set_thumbnail, :add_to_menu, :set_home, :add_to_page]
+  before_action :set_page, only: [:show, :edit, :update, :destroy, :set_thumbnail, :add_to_menu, :set_home, :add_to_page, :add_gallery]
   
 
   # GET /pages
@@ -110,6 +110,20 @@ class PagesController < ApplicationController
         format.js { render 'page_items/page_item_added', layout: false } #render locals: { page_item: item } }
       else
         format.html { redirect_to edit_page_path(params[:page_id]), notice: 'An error occured, item no added to menu.' }
+        format.json { render json: @menu.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+  def add_gallery
+    @page_item = PageItem.create(page_id: @page.id, position: params[:position], gallery: 1)
+    respond_to do |format|
+      if @page_item
+        format.html { redirect_to edit_page_path(@page), notice: 'Item successfully added' }
+        format.js { render 'page_items/page_item_added', layout: false } #render locals: { page_item: item } }
+      else
+        format.html { redirect_to edit_page_path(@page), notice: 'An error occured, item no added to menu.' }
         format.json { render json: @menu.errors, status: :unprocessable_entity }
       end
     end

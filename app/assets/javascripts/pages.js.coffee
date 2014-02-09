@@ -63,6 +63,16 @@ ready = ->
 		$('#second-title-holder').toggle()
 		$('#second-title-link').parent().toggle()
 		event.preventDefault()
+
+
+	$('#page_items').sortable
+		items: 'div'
+		handle: '.handle'
+		connectWith: '.sortable_gallery'
+
+
+
+
 		
 
 $(document).ready(ready)
