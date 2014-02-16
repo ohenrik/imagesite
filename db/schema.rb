@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140202203422) do
+ActiveRecord::Schema.define(version: 20140210102855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,11 @@ ActiveRecord::Schema.define(version: 20140202203422) do
     t.datetime "updated_at"
     t.string   "ancestry"
     t.boolean  "gallery"
+    t.string   "title"
+    t.text     "description"
+    t.string   "item_class"
+    t.string   "item_link"
+    t.boolean  "item_link_boolean"
   end
 
   add_index "page_items", ["page_id"], name: "index_page_items_on_page_id", using: :btree

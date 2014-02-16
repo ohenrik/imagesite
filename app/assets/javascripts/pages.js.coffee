@@ -65,10 +65,10 @@ ready = ->
 		event.preventDefault()
 
 
-	$('#page_items').sortable
-		items: 'div'
-		handle: '.handle'
-		connectWith: '.sortable_gallery'
+	#$('#page_items').sortable
+	#	items: 'div'
+	#	handle: '.handle'
+	#	connectWith: '.sortable_gallery'
 
 
 

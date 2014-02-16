@@ -1,68 +1,101 @@
 
 	<% if page_item.pageable_type == "Page"  %>
-		
-			<div class="col-xs-12 col-sm-6 col-md-4" id="page_item_<%= page_item.id %>" data-position="<%= page_item.position %>">
 
-				
-				<div class="thumbnail">
-	                <% if page_item.pageable.photo %>
-	                    <%= image_tag page_item.pageable.photo.image_url(:small_thumb), class: "img-responsive handle"%>
-	                <% else %>
-	                    <%= image_tag "no-thumb.png", class:  page_item.root? ? "img-responsive handle"  : "img-responsive handle_gallery" %>
-	                <% end %>
-					<div class="caption">
+			<div class="list-group-item" id="page_item_<%= page_item.id %>" data-position="<%= page_item.position %>">
+				<div class="row">
+					<div class="col-xs-4 col-sm-3 col-lg-2 list-item-image">
+		                <% if page_item.pageable.photo %>
+		                    <%= image_tag page_item.pageable.photo.image_url(:small_thumb), class: "img-responsive"%>
+		                <% else %>
+		                    <%= image_tag "no-thumb.png", class:  page_item.root? ? "img-responsive"  : "img-responsive handle_gallery" %>
+		                <% end %>
+	                </div>
+	                <div class="col-xs-8 col-sm-9 col-lg-10">
+						<h4 class="list-group-item-heading"><%= page_item.pageable.title %>
+							<br>
+							<small>
+								<i class="fa fa-file-text-o fa-fw"></i> Page
+								<%= link_to page_item, method: :delete, remote: true do %>
+									<i class="fa fa-trash-o"></i>
+								<% end %>
+							</small>
 
-						<h3><%= page_item.pageable.title %></h3>
-						<%= link_to "Remove", page_item, method: :delete, remote: true, class: "btn btn-default btn-xs" %>
+						</h4>
+						
 					</div>
 				</div>
-
 			</div>
 		
 	<% end %>
 
 	<% if page_item.pageable_type == "Photo" %>
-		
-			<div class="col-xs-12 col-sm-6 col-md-4" id="page_item_<%= page_item.id %>" data-position="<%= page_item.position %>">
 
-				<div class="thumbnail">
-					
-					<%= image_tag page_item.pageable.image_url(:small_thumb), class: "img-responsive handle"  %>
-					<div class="caption">
-						<h3><%= page_item.pageable.name %></h3>
-						<%= link_to "Remove", page_item, method: :delete, remote: true, class: "btn btn-default btn-xs" %>
-					</div>
+		<div class="list-group-item" id="page_item_<%= page_item.id %>" data-position="<%= page_item.position %>">
+			<div class="row">
+				<div class="col-xs-4 col-sm-3 col-lg-2 list-item-image">
+					<%= image_tag page_item.pageable.image_url(:small_thumb), class: "img-responsive "  %>
+                </div>
+                <div class="col-xs-8 col-sm-9 col-lg-10">
+					<h4 class="list-group-item-heading"><%= page_item.pageable.name %>
+						<br>							
+						<small>
+							<i class="fa fa-file-text-o fa-fw"></i> Photo
+							<%= link_to page_item, method: :delete, remote: true do %>
+								<i class="fa fa-trash-o"></i>
+							<% end %>
+						</small>
 				</div>
-				
+
 			</div>
-			
+		</div>
+					
 	<% end %>
+
+
+	<% if page_item.pageable_type == "Text" %>
+
+		<div class="list-group-item" id="page_item_<%= page_item.id %>" data-position="<%= page_item.position %>">
+			<div class="page-header">
+				<h4 class="list-group-item-heading">Content</h4>
+			</div>
+
+
+			<%= render 'rich_content_toolbar' %>
+			
+			<div class="form-fields">
+				<%= text_area_tag page_item.pageable.content, "", class: "form-control"  %>
+  			</div>
+
+  			<br>
+
+			<div class="list-item-footer">
+				<%= link_to "Add Photos", photos_gallery_modal_path(:page_id => page_item.page_id, :page_item_id => page_item.id ), remote: true, class: "btn btn-default" %>
+				<%= link_to "Add Pages", pages_gallery_modal_path(:page_id => page_item.page_id, :page_item_id => page_item.id ), remote: true, class: "btn btn-default" %>
+				<%= link_to "Remove Gallery", page_item, method: :delete, remote: true, class: "btn btn-default" %>
+			</div>
+
+		</div>
+					
+	<% end %>
+
+
     
 	<% if page_item.gallery %>
 		
-			<div class="col-xs-12">
-				<div class="panel panel-default" id="page_item_<%= page_item.id %>" data-position="<%= page_item.position %>">
-
-					
-						<div class="panel-heading handle">
-							Gallery
-						</div>
-						
-						<div class="panel-body">
-							<div class="row sortable_gallery grid connected" id="gallery_<%= page_item.id %>">
-								
-									<%= nested_page_items(sub_item) if page_item.has_children? %>
-								
-							</div>
-						</div>
-
-						<div class="panel-footer">
-							<%= link_to "Add Photos", photos_gallery_modal_path(:page_id => page_item.page_id, :page_item_id => page_item.id ), remote: true, class: "btn btn-default" %>
-							<%= link_to "Add Pages", pages_gallery_modal_path(:page_id => page_item.page_id, :page_item_id => page_item.id ), remote: true, class: "btn btn-default" %>
-							<%= link_to "Remove Gallery", page_item, method: :delete, remote: true, class: "btn btn-default" %>
-						</div>
-
-				</div>
+			<div class="list-group-item" id="page_item_<%= page_item.id %>" data-position="<%= page_item.position %>">
+			
+			<div class="page-header">
+				<h4 class="list-group-item-heading">Gallery</h4>
 			</div>
-		
+
+			<span id="gallery_<%= page_item.id %>">
+				<%= nested_page_items(sub_item) if page_item.has_children? %>
+			</span>
+			<div class="list-item-footer">
+				<%= link_to "Add Photos", photos_gallery_modal_path(:page_id => page_item.page_id, :page_item_id => page_item.id ), remote: true, class: "btn btn-default" %>
+				<%= link_to "Add Pages", pages_gallery_modal_path(:page_id => page_item.page_id, :page_item_id => page_item.id ), remote: true, class: "btn btn-default" %>
+				<%= link_to "Remove Gallery", page_item, method: :delete, remote: true, class: "btn btn-default" %>
+			</div>
+
+			</div>
 	<% end %>
