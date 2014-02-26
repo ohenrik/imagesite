@@ -24,6 +24,7 @@ class Permission
 			allow_param :page, [:title, :second_title, :content, :excerpt, :status, :photo_id]
 			allow_param :theme, [:zip, :name]
 			allow_param :tag, [:name]
+			allow :texts, [:create, :add_to_page, :update, :delete, :destroy ]
 			allow :page_items, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :update_position ]
 			allow :users, [:settings, :edit, :update]
 			allow :pages, [:index, :new, :create, :edit, :update, :delete, :destroy, :add_to_page, :gallery_modal, :add_gallery, :set_thumbnail, :set_home, :add_to_menu]

@@ -33,6 +33,10 @@ Imagesite::Application.routes.draw do
         post 'photos/add_to_page/:id' => 'photos#add_to_page', as: :add_photo_to_page
         resources :photos
 
+        # Text items
+        post 'texts/add_to_page/:id' => 'texts#add_to_page', as: :add_text_item
+        resources :texts
+
         # Tags
         get 'tags/:tag' => 'photos#index', as: :public_filter_tag
         post 'tags/add_to_menu/:id' => 'tags#add_to_menu', as: :add_tag_to_menu
@@ -50,7 +54,7 @@ Imagesite::Application.routes.draw do
         resources :menus
 
         
-        resources :texts
+        
 
         get "/settings/:id" => 'users#settings', as: :settings
 

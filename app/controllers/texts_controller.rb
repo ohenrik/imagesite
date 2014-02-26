@@ -1,4 +1,8 @@
 class TextsController < ApplicationController
+
+  # Find the tenant
+  around_filter :scope_current_tenant
+
   before_action :set_text, only: [:show, :edit, :update, :destroy]
 
   # GET /texts
@@ -61,6 +65,24 @@ class TextsController < ApplicationController
     end
   end
 
+
+
+  def add_to_page
+    @text = Text.create
+    @page_item = PageItem.create(page_id: params[:id], position: params[:position], pageable: @text)
+    respond_to do |format|
+      if @page_item
+        format.html { redirect_to edit_page_path(params[:id]), notice: 'Item successfully added' }
+        format.js { render 'page_items/page_item_added', layout: false } #render locals: { page_item: item } }
+      else
+        format.html { redirect_to edit_page_path(params[:id]), notice: 'An error occured, item no added to menu.' }
+        format.json { render json: @page.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_text
@@ -68,7 +90,7 @@ class TextsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def text_params
-      params.require(:text).permit(:content)
-    end
+    #def text_params
+    #  params.require(:text).permit(:content)
+    #end
 end

@@ -56,22 +56,17 @@
 
 		<div class="list-group-item" id="page_item_<%= page_item.id %>" data-position="<%= page_item.position %>">
 			<div class="page-header">
-				<h4 class="list-group-item-heading">Content</h4>
+				<h4 class="list-group-item-heading">Text</h4>
 			</div>
-
-
-			<%= render 'rich_content_toolbar' %>
 			
-			<div class="form-fields">
-				<%= text_area_tag page_item.pageable.content, "", class: "form-control"  %>
+			<div class="text-content">
+				<%= page_item.pageable.content  %>
   			</div>
 
   			<br>
 
 			<div class="list-item-footer">
-				<%= link_to "Add Photos", photos_gallery_modal_path(:page_id => page_item.page_id, :page_item_id => page_item.id ), remote: true, class: "btn btn-default" %>
-				<%= link_to "Add Pages", pages_gallery_modal_path(:page_id => page_item.page_id, :page_item_id => page_item.id ), remote: true, class: "btn btn-default" %>
-				<%= link_to "Remove Gallery", page_item, method: :delete, remote: true, class: "btn btn-default" %>
+				<%= link_to "Remove", page_item, method: :delete, remote: true, class: "btn btn-default" %>
 			</div>
 
 		</div>
