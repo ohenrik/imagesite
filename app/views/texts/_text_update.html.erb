@@ -1,0 +1,8 @@
+<p>
+	<%= @text.content.try(:html_safe) %>
+</p>
+<br>
+<div class="list-item-footer">
+	<%= link_to "Edit", edit_text_path(@text, page_item_id: @page_item), remote: true, class: "btn btn-default edit-text-btn" %>
+	<%= link_to "Remove", page_item_path(@page_item), method: :delete, remote: true, class: "btn btn-default" %>
+</div>

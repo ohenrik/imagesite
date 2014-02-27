@@ -60,13 +60,17 @@
 			</div>
 			
 			<div class="text-content">
-				<%= page_item.pageable.content  %>
-  			</div>
+				<p>
+					<%= page_item.pageable.content.try(:html_safe)  %>
+  				</p>
 
-  			<br>
+	  			<br>
 
-			<div class="list-item-footer">
-				<%= link_to "Remove", page_item, method: :delete, remote: true, class: "btn btn-default" %>
+				<div class="list-item-footer">
+					<%= link_to "Edit", edit_text_path(page_item.pageable, page_item_id: page_item.id), remote: true, class: "btn btn-default edit-text-btn" %>
+					<%= link_to "Remove", page_item, method: :delete, remote: true, class: "btn btn-default" %>
+				</div>
+
 			</div>
 
 		</div>

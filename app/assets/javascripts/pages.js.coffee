@@ -2,11 +2,11 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 ready = ->
-	editor = new wysihtml5.Editor("wysihtml5-content", # id of textarea element
-	  toolbar: "wysihtml5-content-toolbar" # id of toolbar element
-	  stylesheets: "<%= stylesheet_path('wysiwyg') %>" # optional, css to style the editor's content
-	  parserRules: wysihtml5ParserRules # defined in parser rules set
-	) if $("#wysihtml5-content").length > 0
+	#editor = new wysihtml5.Editor("wysihtml5-content", # id of textarea element
+	#  toolbar: "wysihtml5-content-toolbar" # id of toolbar element
+	#  stylesheets: "<%= stylesheet_path('wysiwyg') %>" # optional, css to style the editor's content
+	#  parserRules: wysihtml5ParserRules # defined in parser rules set
+	#) if $("#wysihtml5-content").length > 0
 
 
 	$('#contentModal-button').click (event) ->

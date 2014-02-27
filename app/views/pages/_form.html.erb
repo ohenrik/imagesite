@@ -35,9 +35,9 @@
     </div>
 
     <div class="form-group">
-        <%= render 'rich_content_toolbar' %>
+        <% render 'rich_content_toolbar' %>
 
-        <%= f.text_area :content, id: 'wysihtml5-content', placeholder: "Enter content here", class: "form-control rich-editor content-editor", rows: "20" %>
+        <% f.text_area :content, id: 'wysihtml5-content', placeholder: "Enter content here", class: "form-control rich-editor content-editor", rows: "20" %>
     </div>
 
     
@@ -70,6 +70,8 @@
         
     </div>
 
+<% end %>
+
     <div class="list-group" id="page_items"> 
             <%= nested_page_items(@page.items) %>
     </div>
@@ -88,5 +90,3 @@
             <%= link_to "Add Pages", pages_gallery_modal_path(:page_id => @page.id ), remote: true, class: "btn btn-default btn-block" %>
         </div>
     </div>
-
-<% end %>

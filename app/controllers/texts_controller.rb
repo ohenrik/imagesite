@@ -23,12 +23,17 @@ class TextsController < ApplicationController
 
   # GET /texts/1/edit
   def edit
+    @page_item = params[:page_item_id]
+    @page = params[:page_id] 
+    respond_to do |format|
+      format.js { render :action => 'edit', :page_item => @page_item}
+    end
   end
 
   # POST /texts
   # POST /texts.json
   def create
-    @text = Text.new(text_params)
+    @text = Text.new(params[:text])
 
     respond_to do |format|
       if @text.save
@@ -44,10 +49,12 @@ class TextsController < ApplicationController
   # PATCH/PUT /texts/1
   # PATCH/PUT /texts/1.json
   def update
+    @page_item = params[:page_item]
     respond_to do |format|
-      if @text.update(text_params)
+      if @text.update(params[:text])
         format.html { redirect_to @text, notice: 'Text was successfully updated.' }
         format.json { head :no_content }
+        format.js   { render :action => 'text_update', :page_item => @page_item }
       else
         format.html { render action: 'edit' }
         format.json { render json: @text.errors, status: :unprocessable_entity }
