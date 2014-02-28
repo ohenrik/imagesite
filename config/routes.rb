@@ -35,6 +35,7 @@ Imagesite::Application.routes.draw do
 
         # Text items
         post 'texts/add_to_page/:id' => 'texts#add_to_page', as: :add_text_item
+        get 'texts/cancel_update/:id' => 'texts#cancel_update', as: :cancel_text_update
         resources :texts
 
         # Tags

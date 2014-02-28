@@ -24,6 +24,7 @@
     </div>
     <div class="list-item-footer">
         <%= f.submit class: "btn btn-default"  %>
-        <%= link_to "Remove", page_item_path(@page_item), method: :delete, remote: true, class: "btn btn-default" %>
+        <%= link_to "Cancel", cancel_text_update_path(@text, :page_item => @page_item), remote: true, class: "btn btn-default" %>
+        <% link_to "Remove", page_item_path(@page_item), method: :delete, remote: true, class: "btn btn-default" %>
     </div>
 <% end %>

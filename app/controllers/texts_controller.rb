@@ -3,7 +3,7 @@ class TextsController < ApplicationController
   # Find the tenant
   around_filter :scope_current_tenant
 
-  before_action :set_text, only: [:show, :edit, :update, :destroy]
+  before_action :set_text, only: [:show, :edit, :update, :destroy, :cancel_update]
 
   # GET /texts
   # GET /texts.json
@@ -60,6 +60,13 @@ class TextsController < ApplicationController
         format.json { render json: @text.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def cancel_update
+    @page_item = params[:page_item]
+    respond_to do |format|
+      format.js { render :action => 'text_update', :page_item => @page_item }
+    end 
   end
 
   # DELETE /texts/1
