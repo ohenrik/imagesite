@@ -35,7 +35,7 @@ class PagesController < ApplicationController
 
   # GET /pages/new
   def new
-    @page = Page.new
+    @page = Page.create(status: "draft", title: "Temporary title")
   end
 
   # GET /pages/1/edit

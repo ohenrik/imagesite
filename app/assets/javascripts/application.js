@@ -12,11 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
-//= require turbolinks
+//= require bootstrap
+//= require bootstrap/modal
 //= require wysihtml5
 //= require parser_rules/advanced
 //= require jquery-nestable
 //= require jquery.validate
 //= require jquery.validate.additional-methods
+
 //= require_tree .

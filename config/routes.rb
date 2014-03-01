@@ -57,7 +57,7 @@ Imagesite::Application.routes.draw do
         
         
 
-        get "/settings/:id" => 'users#settings', as: :settings
+        
 
 
         # Set a page as the home screen
@@ -68,6 +68,7 @@ Imagesite::Application.routes.draw do
 
     end
 
+    get "/settings/:id" => 'users#settings', as: :settings
     resources :users
 
     root :to => 'static_pages#home'

@@ -76,8 +76,11 @@ gem 'rails-settings-cached'
 #gem "twitter-bootstrap-rails"
 
 # Bootstrap gems
-gem 'bootstrap-sass-rails'
-gem 'jquery-ui-bootstrap-rails'
+gem 'bootstrap-sass', '~> 3.1.1'
+
+# Old sass bootstrap
+#gem 'bootstrap-sass-rails'
+#gem 'jquery-ui-bootstrap-rails'
 
 # jquery validation
 gem 'jquery-validation-rails'
