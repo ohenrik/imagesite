@@ -1,7 +1,7 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-ready = ->
+$(document).ready ->
 	#editor = new wysihtml5.Editor("wysihtml5-content", # id of textarea element
 	#  toolbar: "wysihtml5-content-toolbar" # id of toolbar element
 	#  stylesheets: "<%= stylesheet_path('wysiwyg') %>" # optional, css to style the editor's content
@@ -13,11 +13,11 @@ ready = ->
 		alert editor.selected.getValue() #.exec("createLink", { href: "http://google.com", target: "_blank", rel: "nofollow", text: "Google" });
 		event.preventDefault()
 
-	excerpt = new wysihtml5.Editor("wysihtml5-excerpt", # id of textarea element
-	  toolbar: "wysihtml5-excerpt-toolbar" # id of toolbar element
-	  stylesheets: "<%= stylesheet_path('wysiwyg') %>" # optional, css to style the editor's content
-	  parserRules: wysihtml5ParserRules # defined in parser rules set
-	) if $("#wysihtml5-excerpt").length > 0
+	#excerpt = new wysihtml5.Editor("wysihtml5-excerpt", # id of textarea element
+	#  toolbar: "wysihtml5-excerpt-toolbar" # id of toolbar element
+	#  stylesheets: "<%= stylesheet_path('wysiwyg') %>" # optional, css to style the editor's content
+	#  parserRules: wysihtml5ParserRules # defined in parser rules set
+	#) if $("#wysihtml5-excerpt").length > 0
 
 
 	$('#wysihtml5-content-images').click (event) ->
@@ -65,6 +65,23 @@ ready = ->
 		event.preventDefault()
 
 
+	#$('.page_items').nestable
+	#	rootClass: 'page_items'
+	#	handleClass: 'list-item-image'
+	#	expandBtnHTML: "" #'<button data-action="expand"><i class="fa fa-caret-square-o-right text-muted"></i></button>',
+	#	collapseBtnHTML: "" #'<button data-action="collapse"><i class="fa fa-caret-square-o-down text-muted"></i></button>'
+	#	maxDepth: 1
+	#	group: 1
+
+	#$('.page_sub_items').nestable
+	#	rootClass: 'page_sub_items'
+	#	handleClass: 'list-item-image'
+	#	expandBtnHTML: "" #'<button data-action="expand"><i class="fa fa-caret-square-o-right text-muted"></i></button>',
+	#	collapseBtnHTML: "" #'<button data-action="collapse"><i class="fa fa-caret-square-o-down text-muted"></i></button>'
+	#	maxDepth: 1
+	#	group: 1
+
+
 	#$('#page_items').sortable
 	#	items: 'div'
 	#	handle: '.handle'
@@ -75,5 +92,5 @@ ready = ->
 
 		
 
-$(document).ready(ready)
-$(document).on('page:load', ready)
+#$(document).ready(ready)
+#$(document).on('page:load', ready)

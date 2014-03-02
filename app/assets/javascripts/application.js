@@ -11,13 +11,12 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require bootstrap
-//= require bootstrap/modal
 //= require wysihtml5
 //= require parser_rules/advanced
-//= require jquery-nestable
 //= require jquery.validate
 //= require jquery.validate.additional-methods
-
+//= require turbolinks
 //= require_tree .

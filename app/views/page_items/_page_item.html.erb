@@ -1,100 +1,141 @@
 
 	<% if page_item.pageable_type == "Page"  %>
 
-			<div class="list-group-item" id="page_item_<%= page_item.id %>" data-position="<%= page_item.position %>">
-				<div class="row">
-					<div class="col-xs-4 col-sm-3 col-lg-2 list-item-image">
-		                <% if page_item.pageable.photo %>
-		                    <%= image_tag page_item.pageable.photo.image_url(:small_thumb), class: "img-responsive"%>
-		                <% else %>
-		                    <%= image_tag "no-thumb.png", class:  page_item.root? ? "img-responsive"  : "img-responsive handle_gallery" %>
-		                <% end %>
-	                </div>
-	                <div class="col-xs-8 col-sm-9 col-lg-10">
-						<h4 class="list-group-item-heading"><%= page_item.pageable.title %>
-							<br>
-							<small>
-								<i class="fa fa-file-text-o fa-fw"></i> Page
-								<%= link_to page_item, method: :delete, remote: true do %>
-									<i class="fa fa-trash-o"></i>
-								<% end %>
-							</small>
 
-						</h4>
-						
-					</div>
+		<div class="col-xs-12 col-sm-6 col-md-4" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>">
+			
+			<div class="thumbnail">
+			
+                <% if page_item.pageable.photo %>
+                    <%= image_tag page_item.pageable.photo.image_url(:small_thumb), class: "img-responsive"%>
+                <% else %>
+                    <%= image_tag "default/large_thumb_no-thumb.png", class:  page_item.root? ? "img-responsive"  : "img-responsive handle_gallery" %>
+                <% end %>
+			
+        		<div class="caption">
+					<h4 class="list-group-item-heading">
+						<i class="fa fa-file-text-o fa-fw text-muted"></i> <%= page_item.pageable.title %>
+					</h4>
 				</div>
 			</div>
-		
+
+			<div class="btn-group btn-group-justified page-item-controls">
+				<%= link_to "Edit", root_path, class: "btn btn-link" %>	
+
+				<%= link_to "Delete", page_item, class: "btn btn-link", method: :delete, remote: true %>
+
+				<%= link_to root_path, class: "btn btn-link" do %>
+					<i class="fa fa-caret-up"></i>
+				<% end %>
+				<%= link_to root_path, class: "btn btn-link" do %>
+					<i class="fa fa-caret-down"></i>
+				<% end %>
+			</div>
+
+		</div>
+
 	<% end %>
 
 	<% if page_item.pageable_type == "Photo" %>
-
-		<div class="list-group-item" id="page_item_<%= page_item.id %>" data-position="<%= page_item.position %>">
-			<div class="row">
-				<div class="col-xs-4 col-sm-3 col-lg-2 list-item-image">
-					<%= image_tag page_item.pageable.image_url(:small_thumb), class: "img-responsive "  %>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-lg-10">
-					<h4 class="list-group-item-heading"><%= page_item.pageable.name %>
-						<br>							
-						<small>
-							<i class="fa fa-file-text-o fa-fw"></i> Photo
-							<%= link_to page_item, method: :delete, remote: true do %>
-								<i class="fa fa-trash-o"></i>
-							<% end %>
-						</small>
+		<div class="col-xs-12 col-sm-6 col-md-4" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>">
+			
+			<div class="thumbnail">
+			
+				<%= image_tag page_item.pageable.image_url(:small_thumb), class: "img-responsive "  %>
+			
+        		<div class="caption">
+					<h4 class="list-group-item-heading">
+						<i class="fa fa-picture-o fa-fw text-muted"></i> <%= page_item.pageable.name %>
+					</h4>
 				</div>
+			</div>
+			<div class="btn-group btn-group-justified page-item-controls">
+				<%= link_to "Edit", root_path, class: "btn btn-link" %>	
 
+				<%= link_to "Delete", page_item, class: "btn btn-link", method: :delete, remote: true %>
+
+				<%= link_to root_path, class: "btn btn-link" do %>
+					<i class="fa fa-caret-up"></i>
+				<% end %>
+				<%= link_to root_path, class: "btn btn-link" do %>
+					<i class="fa fa-caret-down"></i>
+				<% end %>
 			</div>
 		</div>
-					
+
 	<% end %>
 
 
 	<% if page_item.pageable_type == "Text" %>
+		<div class="col-xs-12" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>">
+			<div class="list-group-item text-item" >
+				<div class="page-header">
+					<h4 class="list-group-item-heading">
+						<i class="fa fa-pencil text-muted"></i>&nbsp;
+						Text
+					</h4>
+				</div>
+				
+				<div class="text-content">
+					<p>
+						<%= page_item.pageable.content.try(:html_safe)  %>
+	  				</p>
 
-		<div class="list-group-item" id="page_item_<%= page_item.id %>" data-position="<%= page_item.position %>">
-			<div class="page-header">
-				<h4 class="list-group-item-heading">Text</h4>
-			</div>
-			
-			<div class="text-content">
-				<p>
-					<%= page_item.pageable.content.try(:html_safe)  %>
-  				</p>
 
-	  			<br>
+					<div class="list-item-footer">
+						<%= link_to "Edit", edit_text_path(page_item.pageable, page_item_id: page_item.id), remote: true, class: "btn btn-default edit-text-btn" %>
+						<%= link_to "Remove", text_path(page_item.pageable, page_item_id: page_item.id), method: :delete, remote: true, class: "btn btn-default" %>
+						
+						<span class="pull-right">
+							<%= link_to root_path, class: "btn btn-default" do %>
+								<i class="fa fa-caret-up"></i>
+							<% end %>
+							<%= link_to root_path, class: "btn btn-default" do %>
+								<i class="fa fa-caret-down"></i>
+							<% end %>
+						</span>
 
-				<div class="list-item-footer">
-					<%= link_to "Edit", edit_text_path(page_item.pageable, page_item_id: page_item.id), remote: true, class: "btn btn-default edit-text-btn" %>
-					<%= link_to "Remove", page_item, method: :delete, remote: true, class: "btn btn-default" %>
+					</div>
+
 				</div>
 
 			</div>
-
 		</div>
-					
 	<% end %>
 
 
     
 	<% if page_item.gallery %>
-		
-			<div class="list-group-item" id="page_item_<%= page_item.id %>" data-position="<%= page_item.position %>">
-			
-			<div class="page-header">
-				<h4 class="list-group-item-heading">Gallery</h4>
-			</div>
+		 <div class="col-xs-12" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>">
+			<div class="list-group-item " >
+				
+				<div class="page-header">
+					<h4 class="list-group-item-heading">
+						<i class="fa fa-puzzle-piece text-muted"></i>&nbsp;
+						Gallery
+					</h4>
+				</div>
 
-			<span id="gallery_<%= page_item.id %>">
-				<%= nested_page_items(sub_item) if page_item.has_children? %>
-			</span>
-			<div class="list-item-footer">
-				<%= link_to "Add Photos", photos_gallery_modal_path(:page_id => page_item.page_id, :page_item_id => page_item.id ), remote: true, class: "btn btn-default" %>
-				<%= link_to "Add Pages", pages_gallery_modal_path(:page_id => page_item.page_id, :page_item_id => page_item.id ), remote: true, class: "btn btn-default" %>
-				<%= link_to "Remove Gallery", page_item, method: :delete, remote: true, class: "btn btn-default" %>
-			</div>
+				<div id="gallery_<%= page_item.id %>" class="page_sub_items">
+					<div class="row">
+						<%= nested_page_items(sub_item) if page_item.has_children? %>
+					</div>
+				</div>
+				<div class="list-item-footer">
+					<%= link_to "Add Photos", photos_gallery_modal_path(:page_id => page_item.page_id, :page_item_id => page_item.id ), remote: true, class: "btn btn-default" %>
+					<%= link_to "Add Pages", pages_gallery_modal_path(:page_id => page_item.page_id, :page_item_id => page_item.id ), remote: true, class: "btn btn-default" %>
+					<%= link_to "Remove Gallery", page_item, method: :delete, remote: true, class: "btn btn-default" %>
+
+					<span class="pull-right">
+						<%= link_to root_path, class: "btn btn-default" do %>
+							<i class="fa fa-caret-up"></i>
+						<% end %>
+						<%= link_to root_path, class: "btn btn-default" do %>
+							<i class="fa fa-caret-down"></i>
+						<% end %>
+					</span>
+				</div>
 
 			</div>
+		</div>
 	<% end %>

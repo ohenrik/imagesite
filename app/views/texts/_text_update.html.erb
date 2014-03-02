@@ -4,5 +4,13 @@
 <br>
 <div class="list-item-footer">
 	<%= link_to "Edit", edit_text_path(@text, page_item_id: @page_item), remote: true, class: "btn btn-default edit-text-btn" %>
-	<%= link_to "Remove", page_item_path(@page_item), method: :delete, remote: true, class: "btn btn-default" %>
+	<%= link_to "Remove", text_path(@text, page_item_id: @page_item), method: :delete, remote: true, class: "btn btn-default" %>
+	<span class="pull-right">
+		<%= link_to root_path, class: "btn btn-default" do %>
+			<i class="fa fa-caret-up"></i>
+		<% end %>
+		<%= link_to root_path, class: "btn btn-default" do %>
+			<i class="fa fa-caret-down"></i>
+		<% end %>
+	</span>
 </div>

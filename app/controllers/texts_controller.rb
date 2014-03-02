@@ -72,10 +72,12 @@ class TextsController < ApplicationController
   # DELETE /texts/1
   # DELETE /texts/1.json
   def destroy
+    @page_item = params[:page_item_id]
     @text.destroy
     respond_to do |format|
       format.html { redirect_to texts_url }
       format.json { head :no_content }
+      format.js { render js: "$('#page_item_#{@page_item}').remove();" }
     end
   end
 

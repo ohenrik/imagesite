@@ -65,7 +65,7 @@
                     <%= link_to 'Delete Menu', menu_path(menu), method: :delete, class: "btn btn-default", data: { confirm: 'Are you sure?' } %>
                     <div class="pull-right">
                         <%= link_to 'Edit Menu', edit_menu_path(menu), class: "btn btn-default", remote: true %>
-                        <%= link_to 'Save menu', '#', class: "btn btn-primary save-menu", data: { menu: "\#menu_container_#{menu.id}", update_url: sort_menu_items_path(menu), loading_text: "Saving menu..." }%>
+                        <%= link_to 'Save menu', '#', class: "btn btn-primary save-menu", data: { menu: "\#menu_container_#{menu.id}", update_url: sort_menu_items_path(menu), loading_text: "Saving menu...", toggle: "button" }, type: 'button' %>
                     </div>
                 </div>
             </div>

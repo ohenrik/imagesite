@@ -26,7 +26,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<% if current_user %>
 					<li>
-						<%= link_to root_url(:subdomain => current_user.subdomain) do %>
+						<%= link_to root_url(:subdomain => current_user.subdomain), data: { no_turbolink: true } do %>
 							<i class="fa fa-home fa-fw"></i> Home
 						<% end %>
 					</li>
