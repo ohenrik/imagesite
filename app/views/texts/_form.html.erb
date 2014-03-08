@@ -19,7 +19,7 @@
 
         
              
-        <%= f.text_area :content, class: "form-control rich-editor content-editor", id: "wysihtml5-content_#{ @page_item }" %>
+        <%= f.text_area :content, rows: 20, class: "form-control rich-editor content-editor", id: "wysihtml5-content_#{ @page_item }" %>
         <%= hidden_field_tag :page_item, @page_item %>    
     </div>
     <div class="list-item-footer">

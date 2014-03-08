@@ -11,7 +11,7 @@ class Page < ActiveRecord::Base
 
 
 	# Liquid methods
-	liquid_methods :page, :thumbnail, :title, :second_title, :content, :excerpt, :link
+	liquid_methods :page, :thumbnail, :title, :second_title, :content, :excerpt, :link, :items
 
 
 	def link
@@ -23,7 +23,11 @@ class Page < ActiveRecord::Base
 	end
 
 	def thumbnail
-		photo.image_url(:large_thumb)
+		if photo.nil?
+			"/assets/default/large_thumb_no-thumb.png"
+		else
+			photo.image_url(:large_thumb)
+		end
 	end
 
 	def items

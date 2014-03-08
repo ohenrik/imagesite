@@ -7,9 +7,9 @@ class MenuItem < ActiveRecord::Base
 
 	validates :name, presence: true
 
-	def item
-		menu_items.arrange(order: :position)
-	end
+	#def item
+	#	menu_items.arrange(order: :position)
+	#end
 
 	def link
 		if menuable

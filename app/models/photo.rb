@@ -11,10 +11,18 @@ class Photo < ActiveRecord::Base
 
 
 	# Liquid methods
-	liquid_methods :name, :index, :tag_to_list, :link, :large, :medium, :small, :thumbnail
+	liquid_methods :name, :index, :tag_to_list, :link, :large, :medium, :small, :thumbnail, :large_thumbnail, :medium_thumbnail, :photo_tags
 
 	def thumbnail
 		image_url(:small_thumb)
+	end
+
+	def medium_thumbnail
+		image_url(:medium_thumb)
+	end
+
+	def large_thumbnail
+		image_url(:large_thumb)
 	end
 
 	def small
@@ -26,7 +34,11 @@ class Photo < ActiveRecord::Base
 	end
 
 	def large
-		image_url(:large)
+		self.image_url(:large)
+	end
+
+	def photo_tags
+		tags
 	end
 
 	def tag_to_list

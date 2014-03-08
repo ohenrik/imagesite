@@ -20,14 +20,14 @@
 			</div>
 
 			<div class="btn-group btn-group-justified page-item-controls">
-				<%= link_to "Edit", root_path, class: "btn btn-link" %>	
+				<%= link_to "Edit", root_path, class: "btn btn-default" %>	
 
-				<%= link_to "Delete", page_item, class: "btn btn-link", method: :delete, remote: true %>
+				<%= link_to "Delete", page_item, class: "btn btn-default", method: :delete, remote: true %>
 
-				<%= link_to "#", class: "btn btn-link order-up", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() }  do %>
+				<%= link_to "#", class: "btn btn-default order-up", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() }  do %>
 					<i class="fa fa-caret-up"></i>
 				<% end %>
-				<%= link_to "#", class: "btn btn-link order-down", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() }  do %>
+				<%= link_to "#", class: "btn btn-default order-down", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() }  do %>
 					<i class="fa fa-caret-down"></i>
 				<% end %>
 			</div>
@@ -50,14 +50,14 @@
 				</div>
 			</div>
 			<div class="btn-group btn-group-justified page-item-controls">
-				<%= link_to "Edit", root_path, class: "btn btn-link" %>	
+				<%= link_to "Edit", root_path, class: "btn btn-default" %>	
 
-				<%= link_to "Delete", page_item, class: "btn btn-link", method: :delete, remote: true %>
+				<%= link_to "Delete", page_item, class: "btn btn-default", method: :delete, remote: true %>
 
-				<%= link_to "#", class: "btn btn-link order-up", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() }  do %>
+				<%= link_to "#", class: "btn btn-default order-up", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() }  do %>
 					<i class="fa fa-caret-up"></i>
 				<% end %>
-				<%= link_to "#", class: "btn btn-link order-down", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() }  do %>
+				<%= link_to "#", class: "btn btn-default order-down", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() }  do %>
 					<i class="fa fa-caret-down"></i>
 				<% end %>
 			</div>
@@ -116,11 +116,11 @@
 					</h4>
 				</div>
 
-				<div id="gallery_<%= page_item.id %>" class="page_sub_items">
-					<div class="row">
-						<%= nested_page_items(sub_item) if page_item.has_children? %>
-					</div>
+				
+				<div class="row" id="gallery_<%= page_item.id %>">
+					<%= nested_page_items(sub_item) if page_item.has_children? %>
 				</div>
+
 				<div class="list-item-footer">
 					<%= link_to "Add Photos", photos_gallery_modal_path(:page_id => page_item.page_id, :page_item_id => page_item.id ), remote: true, class: "btn btn-default" %>
 					<%= link_to "Add Pages", pages_gallery_modal_path(:page_id => page_item.page_id, :page_item_id => page_item.id ), remote: true, class: "btn btn-default" %>

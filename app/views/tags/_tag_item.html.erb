@@ -5,13 +5,12 @@
 
 	<span class="menu-item-name"><%= menu_item.name %></span>
 
-	<span class="">
-		<%= link_to edit_menu_item_path(menu_item), :remote => true, class: "text-muted" do %>
+	<span class="pull-right ">
+		<%= link_to edit_menu_item_path(menu_item), :remote => true, class: "btn btn-default" do %>
 			<i class="fa fa-pencil-square"></i>
 		<% end %>
-		<%= link_to menu_item, method: :delete, :remote => true, class: "text-muted pull-right" do %>
+		<%= link_to menu_item, method: :delete, :remote => true, class: "btn btn-default" do %>
 	  		<i class="fa fa-trash-o"></i>
 	    <% end %>
 	</span>
-
 </li>
