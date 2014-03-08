@@ -23,6 +23,7 @@ Imagesite::Application.routes.draw do
         resources :pages
 
         # Page Items
+        post 'page_items/sort_page_items' => 'page_items#sort', as: :sort_page_items
         resources :page_items
 
         # Photos
@@ -34,6 +35,7 @@ Imagesite::Application.routes.draw do
         resources :photos
 
         # Text items
+
         post 'texts/add_to_page/:id' => 'texts#add_to_page', as: :add_text_item
         get 'texts/cancel_update/:id' => 'texts#cancel_update', as: :cancel_text_update
         resources :texts

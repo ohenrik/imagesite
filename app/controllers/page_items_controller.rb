@@ -68,6 +68,17 @@ class PageItemsController < ApplicationController
     end
   end
 
+  def sort 
+    @order = params[:order]
+    @order = JSON.parse(@order)
+
+    # Updating position. This Code needs optimazation!
+    update_position(@order)
+
+    #sleep 1.5
+    render js: "setTimeout(function() { $('.save-page-items').button('reset') }, 500);" 
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_page_item
@@ -76,14 +87,12 @@ class PageItemsController < ApplicationController
 
     
     def update_position(object, parent = nil)
-
       object.each_with_index do |item, index|
-        @menu_item = MenuItem.find(item["id"])
-        @menu_item.parent_id = parent
-        @menu_item.update(:position => index + 1)
+        @page_item = PageItem.find(item["id"])
+        @page_item.parent_id = parent
+        @page_item.update(:position => (index + 1))
         update_position(item["children"], item["id"]) if !item["children"].nil? 
       end
-
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

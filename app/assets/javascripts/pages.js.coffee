@@ -89,6 +89,55 @@ $(document).ready ->
 
 
 
+	$('.order-up').click (event) ->
+		$($(this).data('page-item')).prev().insertAfter($(this).data('page-item'))
+		order = current_order()
+		$.ajax
+			type: 'post'
+			url: $(this).data('sort-url')
+			data: { order: JSON.stringify(order) }
+			dataType: 'script'
+		event.preventDefault()
+
+
+	$('.order-down').click (event) ->
+		$($(this).data('page-item')).next().insertBefore($(this).data('page-item'))
+		order = current_order()
+		$.ajax
+			type: 'post'
+			url: $(this).data('sort-url')
+			data: { order: JSON.stringify(order) }
+			dataType: 'script'
+		event.preventDefault()
+
+
+	$('.save-page-items').click (event) ->
+		event.preventDefault()
+		order = current_order()
+		$.ajax
+			type: 'post'
+			url: $(this).attr("href")
+			data: { order: JSON.stringify(order) }
+			dataType: 'script'
+
+
+
+
+	current_order = () ->
+		page_item_order = []
+		gallery_item_order = []
+		$('.page_item').each (i) ->
+			if $(this).data('gallery')
+				$('.gallery_item_' + $(this).data('id')).each ->
+					gallery_item_order.push id: $(this).data('id')
+				page_item_order.push id: $(this).data('id'), children: gallery_item_order
+			else
+				page_item_order.push id: $(this).data('id')
+		page_item_order
+		#alert page_item_order[0].children[0].id
+		
+
+
 
 		
 

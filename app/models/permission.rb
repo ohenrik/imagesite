@@ -26,7 +26,7 @@ class Permission
 			allow_param :tag, [:name]
 			allow_param :text, [:content]
 			allow :texts, [:show, :index, :new, :create, :add_to_page, :cancel_update, :edit, :update, :delete, :destroy ]
-			allow :page_items, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :update_position ]
+			allow :page_items, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :sort]
 			allow :users, [:settings, :edit, :update]
 			allow :pages, [:index, :new, :create, :edit, :update, :delete, :destroy, :add_to_page, :gallery_modal, :add_gallery, :set_thumbnail, :set_home, :add_to_menu]
 			allow :photos, [:all, :new, :create, :edit, :update, :delete, :destroy, :add_to_page, :gallery_modal, :photo_manager_modal]

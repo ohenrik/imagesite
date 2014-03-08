@@ -2,7 +2,7 @@
 	<% if page_item.pageable_type == "Page"  %>
 
 
-		<div class="col-xs-12 col-sm-6 col-md-4" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>">
+		<div class="col-xs-12 col-sm-6 col-md-4 <%= page_item.parent.nil? ? 'page_item' : "gallery_item_#{page_item.parent.id}" %> " id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>" data-gallery-id="<%= page_item.parent.try(:id) %>" >
 			
 			<div class="thumbnail">
 			
@@ -24,10 +24,10 @@
 
 				<%= link_to "Delete", page_item, class: "btn btn-link", method: :delete, remote: true %>
 
-				<%= link_to root_path, class: "btn btn-link" do %>
+				<%= link_to "#", class: "btn btn-link order-up", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() }  do %>
 					<i class="fa fa-caret-up"></i>
 				<% end %>
-				<%= link_to root_path, class: "btn btn-link" do %>
+				<%= link_to "#", class: "btn btn-link order-down", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() }  do %>
 					<i class="fa fa-caret-down"></i>
 				<% end %>
 			</div>
@@ -37,7 +37,7 @@
 	<% end %>
 
 	<% if page_item.pageable_type == "Photo" %>
-		<div class="col-xs-12 col-sm-6 col-md-4" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>">
+		<div class="col-xs-12 col-sm-6 col-md-4 <%= page_item.parent.nil? ? 'page_item' : "gallery_item_#{page_item.parent.id}"  %>" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>" data-gallery-id="<%= page_item.parent.try(:id) %>" >
 			
 			<div class="thumbnail">
 			
@@ -54,10 +54,10 @@
 
 				<%= link_to "Delete", page_item, class: "btn btn-link", method: :delete, remote: true %>
 
-				<%= link_to root_path, class: "btn btn-link" do %>
+				<%= link_to "#", class: "btn btn-link order-up", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() }  do %>
 					<i class="fa fa-caret-up"></i>
 				<% end %>
-				<%= link_to root_path, class: "btn btn-link" do %>
+				<%= link_to "#", class: "btn btn-link order-down", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() }  do %>
 					<i class="fa fa-caret-down"></i>
 				<% end %>
 			</div>
@@ -67,7 +67,7 @@
 
 
 	<% if page_item.pageable_type == "Text" %>
-		<div class="col-xs-12" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>">
+		<div class="col-xs-12 page_item" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>">
 			<div class="list-group-item text-item" >
 				<div class="page-header">
 					<h4 class="list-group-item-heading">
@@ -87,10 +87,10 @@
 						<%= link_to "Remove", text_path(page_item.pageable, page_item_id: page_item.id), method: :delete, remote: true, class: "btn btn-default" %>
 						
 						<span class="pull-right">
-							<%= link_to root_path, class: "btn btn-default" do %>
+							<%= link_to "#", class: "btn btn-default order-up", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() }  do %>
 								<i class="fa fa-caret-up"></i>
 							<% end %>
-							<%= link_to root_path, class: "btn btn-default" do %>
+							<%= link_to "#", class: "btn btn-default order-down", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() } do %>
 								<i class="fa fa-caret-down"></i>
 							<% end %>
 						</span>
@@ -106,13 +106,13 @@
 
     
 	<% if page_item.gallery %>
-		 <div class="col-xs-12" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>">
+		 <div class="col-xs-12 page_item" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>" data-gallery="true">
 			<div class="list-group-item " >
 				
 				<div class="page-header">
 					<h4 class="list-group-item-heading">
 						<i class="fa fa-puzzle-piece text-muted"></i>&nbsp;
-						Gallery
+						Gallery 
 					</h4>
 				</div>
 
@@ -127,10 +127,10 @@
 					<%= link_to "Remove Gallery", page_item, method: :delete, remote: true, class: "btn btn-default" %>
 
 					<span class="pull-right">
-						<%= link_to root_path, class: "btn btn-default" do %>
+						<%= link_to "#", class: "btn btn-default order-up", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() } do %>
 							<i class="fa fa-caret-up"></i>
 						<% end %>
-						<%= link_to root_path, class: "btn btn-default" do %>
+						<%= link_to "#", class: "btn btn-default order-down", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() } do %>
 							<i class="fa fa-caret-down"></i>
 						<% end %>
 					</span>
