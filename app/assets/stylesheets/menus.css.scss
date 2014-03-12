@@ -3,6 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "bootstrap-custom";
 
+.menus-list {
+	margin-left: 0 !important;
+}
+
 .menus {
 	.list-group-item:first-child, .list-group-item:last-child {
 		border-radius: 0;
@@ -15,7 +19,7 @@
 		padding: 10px 15px;
 	}
 	.menu_item_list {
-		margin-top: 20px;
+		margin-top: 15px;
 	}
 	.menu-footer {
 	}
@@ -25,7 +29,6 @@
 }
 .dd {
 	position: relative;
-	margin-top: 15px;
 	padding: 15px;
 	border: 1px solid $gray-lighter;
 	display: none;

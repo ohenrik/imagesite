@@ -34,7 +34,7 @@
                     <%= f.submit class: "btn btn-primary btn-lg" %>
                 <% else %>
                     <%= f.submit class: "btn btn-primary btn-lg" %>
-                    <%= link_to 'Show', @page, class: "btn btn-link" %>
+                    <%= link_to 'Show', @page, data: { no_turbolink: true }, class: "btn btn-link" %>
                 <% end %>
                 <%= link_to 'Cancel', pages_path, class: "btn btn-link" %>
             </div>

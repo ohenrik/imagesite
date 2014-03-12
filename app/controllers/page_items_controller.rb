@@ -89,7 +89,7 @@ class PageItemsController < ApplicationController
     def update_position(object, parent = nil)
       object.each_with_index do |item, index|
         @page_item = PageItem.find(item["id"])
-        @page_item.parent_id = parent
+        #@page_item.parent_id = parent
         @page_item.update(:position => (index + 1))
         update_position(item["children"], item["id"]) if !item["children"].nil? 
       end

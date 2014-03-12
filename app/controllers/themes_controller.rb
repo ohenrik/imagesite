@@ -6,14 +6,6 @@ class ThemesController < ApplicationController
 
   before_action :set_theme, only: [:show, :edit, :update, :destroy, :select_theme]
 
-  # After uploaded zip file extract the content of the file
-  after_action :extract_preview, only: [:create]
-
-  # After uploaded a new zip file delete old exctract and extract the content of the new file.
-  after_action :extract_new_preview, only: [:edit]
-
-  # After deletion of the zip file, delete the theme as well.
-  after_action :delete_extract, only: [:destroy]
 
   # GET /themes
   # GET /themes.json
@@ -34,8 +26,8 @@ class ThemesController < ApplicationController
     #@theme.user.save
     @theme.user.theme_id = @theme.id
     if @theme.user.save
-      extract_theme
-      precompile_theme_assets
+      @theme.extract_theme
+      @theme.precompile_theme_assets
       redirect_to themes_path, notice: "Theme activated!"
     else
       redirect_to themes_path, notice: "Theme not activated, something went wrong"
@@ -58,6 +50,9 @@ class ThemesController < ApplicationController
     @theme.user_id = current_user.id
     respond_to do |format|
       if @theme.save
+        # After uploaded zip file extract the content of the file
+        @theme.extract_preview
+
         format.html { redirect_to themes_url, notice: 'Theme was successfully created.' }
         format.json { render action: 'index', status: :created, location: @theme }
       else
@@ -72,6 +67,9 @@ class ThemesController < ApplicationController
   def update
     respond_to do |format|
       if @theme.update(params[:theme])
+        # After uploaded a new zip file delete old exctract and extract the content of the new file.
+        @theme.extract_new_preview
+
         format.html { redirect_to themes_url, notice: 'Theme was successfully updated.' }
         format.json { head :no_content }
       else
@@ -85,6 +83,9 @@ class ThemesController < ApplicationController
   # DELETE /themes/1.json
   def destroy
     @theme.destroy
+    # After deletion of the zip file, delete the theme as well.
+    @theme.delete_extract
+
     respond_to do |format|
       format.html { redirect_to themes_url }
       format.json { head :no_content }
@@ -95,74 +96,6 @@ class ThemesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_theme
       @theme = Theme.find(params[:id])
-    end
-
-
-# Extract the zip file
-    def extract_preview
-      file_path = File.join(Rails.public_path, @theme.zip_url)
-
-      Zip::File.open(file_path) do |zip_file|
-        zip_file.each do |file|
-          if file.name == 'preview.png' # remember to add other possible file extentions
-            f_path = File.join(File.dirname(file_path), file.name)
-            #FileUtils.mkdir_p(File.dirname(f_path))
-            zip_file.extract(file, f_path){ true }
-          end
-        end
-      end
-    end
-
-    # Dele old theme files and extract the new zip file
-    def extract_new_preview
-      delete_extract
-      extract_preview
-    end
-
-    # Delete old theme files
-    def delete_extract
-      file_path = File.join(Rails.public_path, @theme.zip_url)
-      FileUtils.rm(File.join(File.dirname(file_path), "preview.png"))
-    end
-
-    def extract_theme
-
-      # Original Zip-file
-      file_path = File.join(Rails.public_path, @theme.zip_url)
-
-      # Theme directory
-      theme_path = Rails.root.join('themes', @theme.user.subdomain, 'current_theme')
-
-      #delete old theme files
-      delete_theme(theme_path) if File.exist?(theme_path) 
-
-      Zip::File.open(file_path) do |zip_file|
-        zip_file.each do |file|
-          # set the unzip path
-          f_path = File.join(theme_path, file.name)
-          # Create the folder if it does not exists
-          FileUtils.mkdir_p(File.dirname(f_path))
-          # Unzip it!
-          zip_file.extract(file, f_path){ true }
-        end
-      end
-    end
-
-    def delete_theme(theme_path)
-      FileUtils.rm_rf(theme_path)
-    end
-
-    def precompile_theme_assets
-      theme_path = Rails.root.join('themes', @theme.user.subdomain, 'current_theme')
-      theme_assets_path = Rails.root.join('app', 'assets', 'themes', @theme.user.subdomain)
-
-      delete_theme(theme_assets_path) if File.exist?(theme_assets_path) 
-
-      # Create the directory if it does not exists
-      FileUtils.mkdir_p(theme_assets_path)
-
-      FileUtils.cp_r(File.join(theme_path, "/assets/."), theme_assets_path)
-
     end
 
 

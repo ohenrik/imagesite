@@ -1,0 +1,29 @@
+<h1>Listing public_themes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Zip</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @public_themes.each do |public_theme| %>
+      <tr>
+        <td><%= public_theme.name %></td>
+        <td><%= public_theme.zip %></td>
+        <td><%= link_to 'Show', public_theme %></td>
+        <td><%= link_to 'Edit', edit_public_theme_path(public_theme) %></td>
+        <td><%= link_to 'Destroy', public_theme, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Public theme', new_public_theme_path %>

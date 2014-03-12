@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @public_theme.name %>
+</p>
+
+<p>
+  <strong>Zip:</strong>
+  <%= @public_theme.zip %>
+</p>
+
+<%= link_to 'Edit', edit_public_theme_path(@public_theme) %> |
+<%= link_to 'Back', public_themes_path %>

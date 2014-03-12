@@ -17,7 +17,7 @@
 # Ignore local uploads
 /public/uploads/
 /themes/
-/assets/themes/.
+app/assets/themes/
 
 # Ignore database setup file
 /config/database.yml

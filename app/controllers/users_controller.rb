@@ -7,7 +7,8 @@ class UsersController < ApplicationController
   	around_filter :scope_current_tenant, only: [:home]
 
 
-	before_action :set_user, only: [:show, :edit, :update, :destroy, :settings]
+	before_action :set_user, only: [:show, :edit, :update, :destroy, :settings, :set_base_theme]
+	after_action :set_base_theme, only: [:create]
 
 	def new 
 		@user = User.new
@@ -22,7 +23,7 @@ class UsersController < ApplicationController
 		@user = current_tenant
 
 		# This is not optimal, results in two queries.
-		if @user.home_type.classify.constantize.exists?(@user.home_id)
+		if @user.home && @user.home_type.classify.constantize.exists?(@user.home_id)
 
 			# This is the same as @page = Page.find(params[:id])
 			instance_variable_set("@#{@user.home_type.downcase}", @user.home_type.classify.constantize.find(@user.home_id))
@@ -56,6 +57,29 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def set_base_theme
+		# Scope correct tenant
+		connection = @user.connection
+		original_search_path = connection.schema_search_path
+		connection.schema_search_path = "tenant#{@user.id},public"
+
+		base_theme_url = Rails.root.join('base_theme', 'base_theme.zip')
+		@theme = Theme.new(name: "Morgenstern", user_id: @user.id)
+		@theme.zip = File.open(base_theme_url)
+		@theme.save
+
+		@theme.extract_preview
+
+		# Activate the Theme
+		@user.theme_id = @theme.id
+		@user.save
+		
+		@theme.extract_theme
+		@theme.precompile_theme_assets
+
+		connection.schema_search_path = original_search_path
+	end
+
 	def destroy
 
 		# Destroy the Roles assosiations to this user in the join table.
@@ -72,12 +96,13 @@ class UsersController < ApplicationController
 
 
 
-
 private
 	# Use callbacks to share common setup or constraints between actions.
 	def set_user
 	  @user = User.find(params[:id])
 	end
+
+
 
 	## Moved string parametres into permitt class
 	# Never trust parameters from the scary internet, only allow the white list through.

@@ -2,11 +2,13 @@ class User < ActiveRecord::Base
 	has_secure_password
 
 	after_create :create_schema
+	
+
 
 	validates :username, :subdomain, :email, presence: true, uniqueness: true
 
 	# Or with your own reserved names
-	validates  :subdomain, :subdomain  => { :reserved => %w(example documentation) }
+	validates  :subdomain, :subdomain  => { :reserved => %w(example documentation doc ole olehenrik anette lobach loebach skogstrom morgenstern help business) }
 
 	before_create { generate_token(:auth_token) }
 
@@ -49,5 +51,6 @@ class User < ActiveRecord::Base
 	ensure
 	  self.class.connection.schema_search_path = original_search_path
 	end
+
 
 end

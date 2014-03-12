@@ -33,6 +33,7 @@ class Permission
 			allow :menus, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :add_item_to_menu]
 			allow :menu_items, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :sort]
 			allow :themes, [:show, :index, :edit, :update, :create, :new, :destroy, :select_theme]
+			allow :public_themes, [:index, :show]
 		end
 	end
 

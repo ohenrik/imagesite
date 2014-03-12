@@ -1,5 +1,7 @@
 Imagesite::Application.routes.draw do
 
+  resources :public_themes
+
     get "password_resets/new"
     get 'register', to: 'users#new', as: 'register'
     get 'login', to: 'sessions#new', as: 'login'
@@ -70,6 +72,7 @@ Imagesite::Application.routes.draw do
 
     end
 
+    # Users
     get "/settings/:id" => 'users#settings', as: :settings
     resources :users
 
