@@ -88,26 +88,17 @@ $(document).ready ->
 	#	connectWith: '.sortable_gallery'
 
 
+	
 
 	$(document).on 'click', '.order-up', (event) ->
 		$($(this).data('page-item')).prev().insertAfter($(this).data('page-item'))
-		order = current_order()
-		$.ajax
-			type: 'post'
-			url: $(this).data('sort-url')
-			data: { order: JSON.stringify(order) }
-			dataType: 'script'
+		sort_items()
 		event.preventDefault()
 
 
 	$(document).on 'click', '.order-down', (event) ->
 		$($(this).data('page-item')).next().insertBefore($(this).data('page-item'))
-		order = current_order()
-		$.ajax
-			type: 'post'
-			url: $(this).data('sort-url')
-			data: { order: JSON.stringify(order) }
-			dataType: 'script'
+		sort_items()
 		event.preventDefault()
 
 
@@ -121,6 +112,13 @@ $(document).ready ->
 			dataType: 'script'
 
 
+	sort_items = () ->
+		order = current_order()
+		$.ajax
+			type: 'post'
+			url: '/page_items/sort_page_items'
+			data: { order: JSON.stringify(order) }
+			dataType: 'script'
 
 
 	current_order = () ->
