@@ -14,10 +14,16 @@
         <div class="page-header">
             <h4>External link:</h4>
         </div>
-        <%= link_to new_menu_item_path(:menu_id => 1), :remote => true, class: "list-group-item add-to-menu" do %>
-           <i class="fa fa-link fa-fw text-muted"></i> 
-           New link
-           <span class="pull-right text-muted"><i class="fa fa-plus-circle"></i></span>
+        <% if !@menus.empty? %>
+            <%= link_to new_menu_item_path(:menu_id => 1), :remote => true, class: "list-group-item add-to-menu" do %>
+               <i class="fa fa-link fa-fw text-muted"></i> 
+               New link
+               <span class="pull-right text-muted"><i class="fa fa-plus-circle"></i></span>
+            <% end %>
+        <% else %>
+                <%= link_to new_menu_path, remote: true do %>
+                <div class="alert alert-info text-center"><strong>Create a menu first</strong></div>
+                <% end %>
         <% end %>
 
         <div class="page-header">
@@ -51,7 +57,7 @@
                     <span class="pull-right text-muted"><i class="fa fa-plus-circle"></i></span>
                 <% end %>
             <% end.empty? %>
-                <%= link_to photos_path  do %>
+                <%= link_to all_path  do %>
                     <div class="alert alert-info">
                         <p>
                             <strong>No tags created:</strong> Upload photos to create tags.

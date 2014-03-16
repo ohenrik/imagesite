@@ -1,0 +1,16 @@
+<%= form_for(@page_title, :remote => true) do |f| %>
+    <div class="error-container">
+        <%= render partial: 'shared/form_errors', :locals => {:item => @page_title} %>
+    </div>
+
+    <div class="form-group">
+      <%= f.text_field :title, class: "input-lg form-control", placeholder: "Title" %>
+      <%= hidden_field_tag :page_item, @page_item %>
+    </div>
+
+    <div class="list-item-footer">
+        <%= f.submit class: "btn btn-default"  %>
+        <%= link_to "Cancel", cancel_page_title_update_path(@page_title, :page_item => @page_item), remote: true, class: "btn btn-default" %>
+        <% link_to "Remove", page_item_path(@page_item), method: :delete, remote: true, class: "btn btn-default" %>
+    </div>
+<% end %>

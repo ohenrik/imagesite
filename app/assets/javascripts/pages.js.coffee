@@ -89,7 +89,7 @@ $(document).ready ->
 
 
 
-	$('.order-up').click (event) ->
+	$(document).on 'click', '.order-up', (event) ->
 		$($(this).data('page-item')).prev().insertAfter($(this).data('page-item'))
 		order = current_order()
 		$.ajax
@@ -100,7 +100,7 @@ $(document).ready ->
 		event.preventDefault()
 
 
-	$('.order-down').click (event) ->
+	$(document).on 'click', '.order-down', (event) ->
 		$($(this).data('page-item')).next().insertBefore($(this).data('page-item'))
 		order = current_order()
 		$.ajax

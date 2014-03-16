@@ -65,6 +65,42 @@
 
 	<% end %>
 
+	<% if page_item.pageable_type == "PageTitle" %>
+		<div class="col-xs-12 page_item" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>">
+			<div class="list-group-item page-title-item" >
+			
+				<div class="page-title-content">
+					<% if page_item.pageable.title.present? %>
+						<h1>
+							<%= page_item.pageable.title %>
+						</h1>
+					<% else %>
+						<h1 class="text-muted">
+							Please add title
+						</h1>
+					<% end %>
+
+					<div class="list-item-footer">
+						<%= link_to "Edit", edit_page_title_path(page_item.pageable, page_item_id: page_item.id), remote: true, class: "btn btn-default edit-text-btn" %>
+						<%= link_to "Remove", page_title_path(page_item.pageable, page_item_id: page_item.id), method: :delete, remote: true, class: "btn btn-default" %>
+						
+						<span class="pull-right">
+							<%= link_to "#", class: "btn btn-default order-up", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() }  do %>
+								<i class="fa fa-caret-up"></i>
+							<% end %>
+							<%= link_to "#", class: "btn btn-default order-down", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() } do %>
+								<i class="fa fa-caret-down"></i>
+							<% end %>
+						</span>
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	<% end %>
+
 
 	<% if page_item.pageable_type == "Text" %>
 		<div class="col-xs-12 page_item" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>">

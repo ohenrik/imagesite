@@ -1,0 +1,27 @@
+<h1>Listing page_titles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @page_titles.each do |page_title| %>
+      <tr>
+        <td><%= page_title.title %></td>
+        <td><%= link_to 'Show', page_title %></td>
+        <td><%= link_to 'Edit', edit_page_title_path(page_title) %></td>
+        <td><%= link_to 'Destroy', page_title, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Page title', new_page_title_path %>

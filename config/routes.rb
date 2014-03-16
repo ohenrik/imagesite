@@ -42,6 +42,11 @@ Imagesite::Application.routes.draw do
         get 'texts/cancel_update/:id' => 'texts#cancel_update', as: :cancel_text_update
         resources :texts
 
+        # Page Title items
+        post 'page_titles/add_to_page/:id' => 'page_titles#add_to_page', as: :add_page_title_item
+        get 'page_titles/cancel_update/:id' => 'page_titles#cancel_update', as: :cancel_page_title_update
+        resources :page_titles
+
         # Tags
         get 'tags/:tag' => 'photos#index', as: :public_filter_tag
         post 'tags/add_to_menu/:id' => 'tags#add_to_menu', as: :add_tag_to_menu

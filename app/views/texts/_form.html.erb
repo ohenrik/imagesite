@@ -2,6 +2,7 @@
     <div class="error-container">
         <%= render partial: 'shared/form_errors', :locals => {:item => @text} %>
     </div>
+    
     <div class="form-group">
         <div id="wysihtml5-content-toolbar_<%= @page_item %>" class="rich-editor-toolbar btn-toolbar" style="display: none;">
             <div class="btn-group">
@@ -16,12 +17,10 @@
             </div>
             <a class="btn btn-default" data-wysihtml5-action="change_view" href="javascript:;" unselectable="on"><i class="fa fa-code"></i></a>
         </div>
-
-        
-             
         <%= f.text_area :content, rows: 20, class: "form-control rich-editor content-editor", id: "wysihtml5-content_#{ @page_item }" %>
         <%= hidden_field_tag :page_item, @page_item %>    
     </div>
+
     <div class="list-item-footer">
         <%= f.submit class: "btn btn-default"  %>
         <%= link_to "Cancel", cancel_text_update_path(@text, :page_item => @page_item), remote: true, class: "btn btn-default" %>

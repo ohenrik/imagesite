@@ -1,4 +1,4 @@
-require 'zip'
+
 class ThemesController < ApplicationController
 
   # Scope current tenant

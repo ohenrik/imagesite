@@ -85,4 +85,7 @@
         <div class="col-sm-3">
             <%= link_to "Add Pages", pages_gallery_modal_path(:page_id => @page.id ), remote: true, class: "btn btn-default btn-block btn-lg" %>
         </div>
+        <div class="col-sm-3">
+            <%= link_to "Add Titles", add_page_title_item_path(@page), method: :post, remote: true, class: "btn btn-default btn-block btn-lg" %>
+        </div>
     </div>

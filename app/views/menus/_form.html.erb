@@ -16,7 +16,21 @@
 
     <div class="form-group">
       <%= f.label :slug, "Menu Slug" %>
-      <%= f.text_field :slug, class: "form-control" %>
+
+      <%= f.select :slug, 
+        [['Main Menu', 'main_menu'], 
+        ['Secondary Menu', 'secondary_menu'], 
+        ['Social Menu', 'social_menu'], 
+        ['Menu 4', 'menu_4'], 
+        ['Menu 5', 'menu_5'], 
+        ['Menu 6', 'menu_6'], 
+        ['Menu 7', 'menu_7'],  
+        ['Menu 8', 'menu_8'], 
+        ['Menu 9', 'menu_9'], 
+        ['Menu 10', 'menu_10'],], 
+        { :include_blank => true },
+        { :class => "form-control"} %>
+
       <span class="help-block">The slug identifies which menu slot the menu occupies in the theme.</span>
     </div>
 

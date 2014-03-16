@@ -52,5 +52,36 @@ class User < ActiveRecord::Base
 	  self.class.connection.schema_search_path = original_search_path
 	end
 
+	def full_name
+		[self.first_name, self.last_name].join(" ")
+	end
+
+
+	def created_at_unix
+	  self.created_at.to_i
+	end
+
+
+	def is_admin?
+		self.roles.find_by_role("admin").nil?
+	end
+
+	def is_member?
+		self.roles.find_by_role("member").nil?
+	end
+
+	def is_premium?
+		self.roles.find_by_role("premium").nil?
+	end
+
+	def is_trail?
+		self.roles.find_by_role("trail").nil?
+	end
+
+	def is_guest?
+		self.roles.find_by_role("guest").nil?
+	end
+
+
 
 end

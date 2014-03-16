@@ -66,11 +66,13 @@
 
     <% if @photos.empty? %>
         <div class="col-xs-12">
-            <div class="alert alert-info">
-                <p>
-                    <strong>No photos uploaded: </strong>To upload a new photo click <%= link_to 'here', new_photo_path, remote: true %>.
-                </p>
-            </div>
+            <%= link_to new_photo_path, remote: true do %>
+                <div class="alert alert-info">
+                    <p>
+                        <strong>No photos uploaded: </strong>To upload a new photo click here.
+                    </p>
+                </div>
+            <% end %>
         </div>
     <% end %>
 
