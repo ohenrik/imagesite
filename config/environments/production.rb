@@ -85,7 +85,7 @@ Imagesite::Application.configure do
   config.assets.precompile += %w( .svg .eot .woff .ttf )
 
   # Update before deployment!
-  config.action_mailer.default_url_options = { :host => ".lvh.me" }
+  config.action_mailer.default_url_options = { :host => "theatrical.co" }
 
 
 

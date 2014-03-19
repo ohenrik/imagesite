@@ -18,6 +18,7 @@ function initialize() {
   // Identify the user and pass traits
   // To enable, replace sample data with actual user traits and uncomment the line
   UserVoice.push(['identify', {
+    <% if current_user.present? %>
     email:      '<%= current_user.email %>', // User’s email address
     name:       '<%= current_user.full_name %>', // User’s real name
     created_at: <%= current_user.created_at_unix %>, // Unix timestamp for the date the user signed up
@@ -31,6 +32,7 @@ function initialize() {
     //  ltv:          1495.00, // Decimal; lifetime value of the account
     //  plan:         'Enhanced' // Plan name for the account
     //}
+    <% end %>
   }]);
 
   // Add default trigger to the bottom-right corner of the window:
