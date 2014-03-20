@@ -1,5 +1,5 @@
 # Production
-set :domain, "95.85.20.208"
+set :domain, "theatrical.co"
 set :application, "imagesite"
 set :deploy_to, "/home/rails/apps/#{application}"
 set :branch, 'master'
