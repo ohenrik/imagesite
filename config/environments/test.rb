@@ -35,4 +35,6 @@ Imagesite::Application.configure do
   config.active_support.deprecation = :stderr
 
   config.action_mailer.default_url_options = { :host => ".lvh.me" }
+
+  Imagesite::Application.config.session_store :cookie_store, key: '_imagesite_session', domain: '.lvh.me'
 end
