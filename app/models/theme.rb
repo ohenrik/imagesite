@@ -70,7 +70,7 @@ class Theme < ActiveRecord::Base
 
     def precompile_theme_assets
       theme_path = Rails.root.join('themes', self.user.subdomain, 'current_theme')
-      theme_assets_path = Rails.root.join('app', 'assets', 'themes', self.user.subdomain)
+      theme_assets_path = Rails.root.join('public', 'assets', 'themes', self.user.subdomain)
 
       delete_theme(theme_assets_path) if File.exist?(theme_assets_path) 
 
