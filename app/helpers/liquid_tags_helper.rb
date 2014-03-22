@@ -195,7 +195,7 @@ end
 
 	    	content = File.read(header_file)
 
-	    	@menu ||= Menu.find(@menu_object)
+	    	@menu ||= Menu.find_by_slug(@menu_object)
 
 	    	context.merge('menu' => @menu)
 

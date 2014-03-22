@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 		@user = current_tenant
 
 		# This is not optimal, results in two queries.
-		if @user.home && @user.home_type.classify.constantize.exists?(@user.home_id)
+		if @user.home_id.present? && @user.home_type.classify.constantize.exists?(@user.home_id)
 
 			# This is the same as @page = Page.find(params[:id])
 			instance_variable_set("@#{@user.home_type.downcase}", @user.home_type.classify.constantize.find(@user.home_id))
