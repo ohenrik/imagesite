@@ -100,3 +100,8 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
 end
+
+# Use Capistrano for deployment
+gem 'capistrano', '2.15.5', group: :development
+gem 'rvm-capistrano', group: :development
+
