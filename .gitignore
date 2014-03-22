@@ -18,6 +18,7 @@
 /public/uploads/
 /themes/
 app/assets/themes/
+public/assets/themes/
 
 # Ignore database setup file
 /config/database.yml

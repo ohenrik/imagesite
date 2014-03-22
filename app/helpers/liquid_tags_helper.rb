@@ -88,7 +88,7 @@ module LiquidTagsHelper
 	    	@subdomain = @path_array[-2]
 
 
-	    	stylesheet_link_tag "/assets/#{@subdomain}/stylesheets/#{@sheet.strip}"
+	    	stylesheet_link_tag "/assets/themes/#{@subdomain}/stylesheets/#{@sheet.strip}"
 			
 	    end
 
@@ -123,7 +123,7 @@ module LiquidTagsHelper
 	    	@subdomain = @path_array[-2]
 
 
-	    	javascript_include_tag "/assets/#{@subdomain}/javascripts/#{@sheet.strip}"
+	    	javascript_include_tag "/assets/themes/#{@subdomain}/javascripts/#{@sheet.strip}"
 			
 	    end
 
