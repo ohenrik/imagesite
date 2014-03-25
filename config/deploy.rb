@@ -31,6 +31,9 @@ after "deploy:restart", "deploy:cleanup"
 namespace :deploy do
   task :symlink_shared do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{shared_path}/public/assets/themes #{release_path}/public/assets/themes"
+    run "ln -nfs #{shared_path}/public/uploads/themes #{release_path}/public/uploads/themes"
+    run "ln -nfs #{shared_path}/public/uploads/photo #{release_path}/public/uploads/photo"
   end
 
   task :start do ; end
