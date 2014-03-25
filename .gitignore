@@ -15,12 +15,17 @@
 /log/*.log
 /tmp
 # Ignore local uploads
-/public/uploads/themes/
-/public/uploads/photo/
-/public/uploads/tmp
+public/uploads/themes/*
+!public/uploads/themes/.gitkeep
+public/uploads/photo/*
+!public/uploads/photo/.gitkeep
+public/uploads/tmp
 /themes/
 app/assets/themes/
-public/assets/themes/
+public/assets/themes/*
+!public/assets/themes/.gitkeep
+
+
 
 # Ignore database setup file
 /config/database.yml
