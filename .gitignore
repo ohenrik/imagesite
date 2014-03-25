@@ -22,6 +22,7 @@ public/uploads/tmp
 /themes/
 app/assets/themes/
 public/assets/themes/
+!public/assets/.gitkeep
 
 
 
