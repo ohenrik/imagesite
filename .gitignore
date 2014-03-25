@@ -18,6 +18,7 @@
 public/uploads/themes/
 public/uploads/photo/
 public/uploads/tmp
+!public/uploads/.gitkeep
 /themes/
 app/assets/themes/
 public/assets/themes/
