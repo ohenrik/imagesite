@@ -15,7 +15,9 @@
 /log/*.log
 /tmp
 # Ignore local uploads
-/public/uploads/
+/public/uploads/themes/
+/public/uploads/photo/
+/public/uploads/tmp
 /themes/
 app/assets/themes/
 public/assets/themes/
