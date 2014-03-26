@@ -1,4 +1,3 @@
-
 <li class="dd-item" id="item_<%= menu_item.id %>" data-id="<%= menu_item.id %>">
 	<div class="dd-handle">
 	    <i class="fa fa-bars fa-fw text-muted"></i>
@@ -12,5 +11,5 @@
 	  		<i class="fa fa-trash-o"></i>
 	    <% end %>
 	</span>
-    <%= content_tag(:ol, nested_menu_items(sub_item), class: "dd-list") if sub_item.present? %>
+    <%= content_tag(:ol, nested_menu_items(sub_item), class: "dd-list") if defined?(sub_item) %>
 </li>

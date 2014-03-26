@@ -1,2 +1,2 @@
 <% # Render the liquid template named Index %>
-<%= raw liquidize( {'photos' => @photos}, "photos") %>
+<%= raw liquidize( {'photos' => @photos, 'tag' => @tag, 'settings' => @current_tenant}, "photos") %>

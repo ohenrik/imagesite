@@ -90,11 +90,11 @@ class PagesController < ApplicationController
   end
 
   def add_to_menu
-    item = @page.menu_items.create(name: @page.title, menu_id: params[:menu_id])
+    @menu_item = @page.menu_items.create(name: @page.title, menu_id: params[:menu_id])
     respond_to do |format|
-      if item
+      if @menu_item
         format.html { redirect_to menus_path, notice: 'Menu Item successfully added' }
-        format.js { render locals: { menu_item: item } }
+        format.js { render template: 'menu_items/add_to_menu.js.erb' }
       else
         format.html { redirect_to menus_path, notice: 'An error occured, item no added to menu.' }
         format.json { render json: @menu.errors, status: :unprocessable_entity }

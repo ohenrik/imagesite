@@ -12,8 +12,8 @@ class PhotosController < ApplicationController
   # GET /photos.json
   def index
     if params[:tag] 
-      @photos = Tag.find_by_name(params[:tag]).try(:photos)
-      @photos ||= Tag.find_by_id(params[:tag]).try(:photos)
+      @tag = Tag.find_by_id(params[:tag])
+      @photos = @tag.try(:photos)
       #@photo = Photo.tagged_with(params[:tag])
     else     
       @photos = Photo.all

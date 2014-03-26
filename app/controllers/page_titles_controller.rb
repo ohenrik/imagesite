@@ -3,7 +3,7 @@ class PageTitlesController < ApplicationController
   # Find the tenant
   around_filter :scope_current_tenant
   
-  before_action :set_page_title, only: [:show, :edit, :update, :destroy, :cancel_update]
+  before_action :set_page_title, only: [:show, :edit, :update, :destroy, :cancel_update, :add_to_page]
 
   # GET /page_titles
   # GET /page_titles.json

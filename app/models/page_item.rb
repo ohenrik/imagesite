@@ -9,7 +9,7 @@ class PageItem < ActiveRecord::Base
 	liquid_methods :position, :pageable, :is_type
 
 	def is_type
-		self.gallery == true ? 'gallery' : self.pageable_type.to_s.downcase 
+		self.gallery == true ? 'Gallery' : self.pageable_type.to_s 
 	end
 
 
