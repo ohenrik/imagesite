@@ -21,7 +21,7 @@ class Permission
 			allow_param :menu_item, [:menu_id, :menuable_id, :menuable_type, :name, :description, :new_page, :ancestry, :position, :url]
 			allow_param :page_item, [:position, :page_id, :pageable_id, :pageable_type, :pageable, :gallery]
 			allow_param :photo, [:name, :image, :edit_tag_list, :description]
-			allow_param :page, [:title, :second_title, :content, :excerpt, :status, :photo_id]
+			allow_param :page, [:name, :content, :excerpt, :status, :photo_id]
 			allow_param :theme, [:zip, :name]
 			allow_param :tag, [:name]
 			allow_param :text, [:content]

@@ -1,6 +1,6 @@
 class Page < ActiveRecord::Base
 
- 	validates :title, :status, presence: true
+ 	validates :name, :status, presence: true
  	belongs_to :photo
  	has_many :menu_items, :as => :menuable, :dependent => :destroy
  	has_one :user, :as => :home
@@ -11,15 +11,11 @@ class Page < ActiveRecord::Base
 
 
 	# Liquid methods
-	liquid_methods :page, :thumbnail, :title, :second_title, :content, :excerpt, :link, :items
+	liquid_methods :thumbnail, :name, :content, :excerpt, :link, :items
 
 
 	def link
 		"/pages/#{id}"
-	end
-
-	def page
-		page
 	end
 
 	def thumbnail
