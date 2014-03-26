@@ -37,10 +37,18 @@ class ThemesController < ApplicationController
   # GET /themes/new
   def new
     @theme = Theme.new
+    respond_to do |format|
+        format.html {  }
+        format.js { render template: 'themes/edit' }
+    end
   end
 
   # GET /themes/1/edit
   def edit
+    respond_to do |format|
+        format.html {  }
+        format.js {  }
+    end 
   end
 
   # POST /themes

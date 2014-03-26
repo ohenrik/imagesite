@@ -1,46 +1,46 @@
-<div id="themes" class="clearfix">
-<%= form_for(@theme) do |f| %>
-
-  <div class="error-container">
-    <%= render partial: 'shared/form_errors', :locals => {:item => @theme} %>
-  </div>
-  
-  <div>
-    <div class="theme">
-      <% if @theme.new_record? %>
-        <%= f.label :zip, class: "theme-file-field-label" do %>
-          <table>
-              <tr>
-                  <td>
-                      Select theme zip file... (click here)
-                  </td>
-              </tr>
-          </table>
-          <% end %>
-      <% else %>
-        <%= f.label :zip, class: "theme-file-field-label hover-preview-theme-edit" do %>
-          <%= image_tag theme_preview_image(@theme), class: "theme-preview-image", size: "480x270" %>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="theme">
-      <div class="field">
-        <%= f.text_field :name, placeholder: "Theme name", class: "new-theme-name" %>
-        <%= f.file_field :zip, class: "theme-file-field" %>
-        <%= f.hidden_field :zip_cache %>
-      </div>
-      <div class="field">
-      </div>
-      <div class="actions">
-        <% if @theme.new_record? %>
-          <%= f.submit "Upload theme", class: "submit-theme-button" %>
-        <% else %>
-          <%= f.submit "Save changes", class: "submit-theme-button" %>
-          <span class="delete-theme-link">| <%= link_to 'Delete theme', @theme, method: :delete, data: { confirm: 'Are you sure?' } %></span>
-        <% end %>
-      </div>
-    </div>
-  </div>
-    
-<% end %>
+<div class="modal-header" >
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">Theme Uploader</h4>
 </div>
+
+    <%= form_for(@theme) do |f| %>
+      <div class="modal-body" >
+        <div class="error-container">
+          <%= render partial: 'shared/form_errors', :locals => {:item => @theme} %>
+        </div>
+      
+
+        <div class="theme">
+          <% if !@theme.new_record? %>
+              <%= image_tag theme_preview_image(@theme), class: "img-responsive thumbnail", size: "480x270" %>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :name, "Theme name"%>
+          <%= f.text_field :name, placeholder: "Theme name", class: "form-control" %>
+        </div>
+        
+        <div class="form-group">
+          <%= f.label :zip, "Zip"%>
+          <%= f.file_field :zip, class: "form-control" %>
+          <%= f.hidden_field :zip_cache %>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+
+        <% if @theme.new_record? %>
+          <%= f.submit "Upload theme", class: "btn btn-primary" %>
+        <% else %>
+          <%= f.submit "Save changes", class: "btn btn-primary" %>
+          <%= link_to 'Delete theme', @theme, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+        <% end %>
+
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+
+        
+    <% end %>
+

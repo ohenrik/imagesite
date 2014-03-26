@@ -1,3 +1,13 @@
+<div class="modal fade" id="normal-modal">
+
+    <div class="modal-dialog">
+        <div class="modal-content" id="normal-modal-content">
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+
+</div><!-- /.modal -->
+
 <div id="themes" class="clearfix">
     <% if current_user.theme %>
         <div class="current-theme">
@@ -41,7 +51,8 @@
             <h1 class="themes-index-header">Your Themes</h1>
         </div>
         <div class="col-xs-4">
-            <%= link_to "Upload new theme", new_theme_path, class: "btn btn-default  pull-right" %>
+            <!-- No available before after alpha  -->
+            <% link_to "Upload new theme", new_theme_path, remote: true, class: "btn btn-default  pull-right" %>
         </div>
         
         <div class="clearfix"></div>
@@ -57,7 +68,7 @@
 
                     <div class="theme-controls text-muted">
                         <%= link_to 'Activate theme', select_theme_path(theme), data: { confirm: 'Are you sure you want to activate this Theme?' }, class: "text-muted" %> | 
-                        <%= link_to 'Edit', edit_theme_path(theme), class: "text-muted" %> 
+                        <%= link_to 'Edit', edit_theme_path(theme), remote: true, class: "text-muted" %> 
                         | <%= link_to 'Delete', theme, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-muted" %>
                     </div>
 
@@ -69,7 +80,8 @@
         <% if @themes.count == 1 %>
             <div class="col-xs-12">
                 <div class="alert alert-info">
-                    <p><strong>Only one theme installed: </strong>You can choose more themes from the public themes, or upload a custom theme.</p>
+                    <p><strong>Alpha:</strong> Only one theme is currently available, more will be available soon.</p>
+                    <!-- <p><strong>Only one theme installed: </strong>You can choose more themes from the public themes, or upload a custom theme.</p> -->
                 </div>
             </div>
         <% end %>
