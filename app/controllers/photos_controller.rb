@@ -91,7 +91,7 @@ class PhotosController < ApplicationController
     @photo = Photo.new(params[:photo])
     @photo.user_id = current_user.id
 
-    @photo.name =  @photo.image.file.filename if ( @photo.name = "" && @photo.image.file)
+    @photo.name =  @photo.image.file.filename if ( @photo.name == "" && @photo.image.file)
 
     respond_to do |format|
       if @photo.save
