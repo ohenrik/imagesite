@@ -134,7 +134,7 @@ class PagesController < ApplicationController
     @user = current_user
     @user.home = @page
     if @user.save
-      redirect_to pages_path, notice: "Home screen set to #{@page.title}"
+      redirect_to pages_path, notice: "Home screen set to #{@page.name}"
     else
       redirect_to pages_path, alert: "An error occured. Home not set."
     end
