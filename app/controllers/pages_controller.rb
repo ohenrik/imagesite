@@ -90,7 +90,7 @@ class PagesController < ApplicationController
   end
 
   def add_to_menu
-    @menu_item = @page.menu_items.create(name: @page.title, menu_id: params[:menu_id])
+    @menu_item = @page.menu_items.create(name: @page.name, menu_id: params[:menu_id])
     respond_to do |format|
       if @menu_item
         format.html { redirect_to menus_path, notice: 'Menu Item successfully added' }

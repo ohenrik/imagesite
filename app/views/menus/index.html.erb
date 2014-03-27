@@ -32,7 +32,7 @@
         <div class="list-group">
             <% if Page.all.each do |page| %>
                 <%= link_to add_page_to_menu_path(:id => page.id, :menu_id => @menus.first), :remote => true, :method => :post, class: "list-group-item add-to-menu" do %>
-                    <i class="fa fa-file-text-o fa-fw text-muted"></i> <%= page.title %>
+                    <i class="fa fa-file-text-o fa-fw text-muted"></i> <%= page.name %>
                     <span class="pull-right text-muted"><i class="fa fa-plus-circle"></i></span>
                 <% end %> 
             <% end.empty? %>
