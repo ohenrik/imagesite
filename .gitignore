@@ -23,7 +23,7 @@ public/uploads/tmp
 app/assets/themes/
 public/assets/themes/
 !public/assets/.gitkeep
-
+config/aws_environment_variables.rb
 
 
 

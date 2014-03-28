@@ -43,6 +43,7 @@ namespace :deploy do
     run "ln -nfs #{shared_path}/public/uploads/themes/ #{current_path}/public/uploads/themes"
     run "ln -nfs #{shared_path}/public/uploads/photo/ #{current_path}/public/uploads/photo"
     run "ln -nfs #{shared_path}/themes/ #{current_path}/themes"
+    run "ln -nfs #{shared_path}/config/aws_environment_variables.rb #{current_path}/config/aws_environment_variables.rb"
   end
 
   task :start do ; end
