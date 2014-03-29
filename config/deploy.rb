@@ -12,7 +12,8 @@ set :default_stage, 'production'
 
 set :application, "imagesite"
 set :scm, :git
-set :repository,  "https://github.com/ohenrik/imagesite.git"
+set :repository,  "git@github.com:ohenrik/imagesite.git" #"https://github.com/ohenrik/imagesite.git"
+
 
 set :deploy_to, "/home/rails/apps/#{application}"
 set :deploy_via, :remote_cache
