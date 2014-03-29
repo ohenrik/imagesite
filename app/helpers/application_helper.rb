@@ -4,7 +4,7 @@ module ApplicationHelper
 	
 		#model_content.merge('menu' => Menu.first)
 
-		theme_root_path = "#{Rails.root}/themes/#{request.subdomain}/current_theme"
+		theme_root_path = "#{Rails.root}/themes/#{current_tenant.subdomain}/current_theme"
 		theme_file = "/templates/#{view}.html.liquid"
 
 		# Load the base theme file system for snippets to work
@@ -19,8 +19,6 @@ module ApplicationHelper
 		#file_system = Liquid::LocalFileSystem.new(content)
 		Liquid::Template.parse(content).render(model_content.merge('settings' => current_tenant), :filters => [LiquidFilters])
 	end
-
-
 
 
 end

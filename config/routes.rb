@@ -61,13 +61,8 @@ Imagesite::Application.routes.draw do
         resources :menu_items
 
 
+        # Menus 
         resources :menus
-
-        
-        
-
-        
-
 
         # Set a page as the home screen
         post 'pages/set_home/:id' => 'pages#set_home', as: :set_home_page
