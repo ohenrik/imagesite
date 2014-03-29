@@ -20,7 +20,7 @@ private
 	helper_method :current_user
 
 	def current_permission
-	  @current_permission ||= Permission.new(current_user, request.subdomain)
+	  @current_permission ||= Permission.new(current_user, request.subdomain, request.host)
 	end
 
 	def current_resource
@@ -36,18 +36,24 @@ private
 	end
 
 	def current_tenant
-		@current_tenant ||= User.includes(:home).find_by_subdomain!(request.subdomain)
+		@current_tenant ||= User.find_by_alias_domain(request.host)
+		@current_tenant ||= User.find_by_subdomain!(request.subdomain) # includes(:home).
 	end
 	helper_method :current_tenant
 
 	def scope_current_tenant(&block)
-		if request.subdomain.present? && !%w(subdomain www).include?(request.subdomain)
+		if (request.subdomain.present? or !%w(lvh.me theatrical.co).include?(request.host)) && !%w(subdomain www).include?(request.subdomain)
 			current_tenant.scope_schema("public", &block)
 		else
-			redirect_to login_url(:subdomain => false)
+			redirect_to login_url(:subdomain => false), alert: "bingo"
 		end
 	end
 	helper_method :scope_current_tenant
+
+	def get_subdomain
+		%w(lvh.me theatrical.co).include?(request.domain) ? current_user.subdomain : ""
+	end
+	helper_method :get_subdomain
 
 
 end

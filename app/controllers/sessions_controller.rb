@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       else
         cookies[:auth_token] = { value: user.auth_token, domain: "."+request.domain }
       end
-  		redirect_to all_url(:subdomain => "#{current_user.subdomain}"), notice: "You are now loged in."
+  		redirect_to all_url(:subdomain => "#{get_subdomain}"), notice: "You are now loged in."
   	else
   		flash.now.alert = "Email or password is invalid"
   		render "new"

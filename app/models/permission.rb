@@ -1,6 +1,6 @@
 class Permission
 
-	def initialize(user, subdomain)
+	def initialize(user, subdomain, host)
 		allow :static_pages, [:home, :navigation, :user_home]
 		allow :users, [:new, :create, :home]
 		allow :password_resets, [:new, :create, :update, :edit]
@@ -15,7 +15,8 @@ class Permission
 				inst.id == user.id
 			end
 		end
-		if user && user.subdomain == subdomain
+		# This checks to see if the user is loged in with the account he is trying to edit
+		if user && ((user.subdomain == subdomain) or (user.alias_domain == host))
 			allow_param :user, [:current_theme, :site_title, :site_tagline, :alias_domain, :home_type, :home_id]
 			allow_param :menu, [:name, :menu_item_id, :slug]
 			allow_param :menu_item, [:menu_id, :menuable_id, :menuable_type, :name, :description, :new_page, :ancestry, :position, :url]
