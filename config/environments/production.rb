@@ -87,7 +87,7 @@ Imagesite::Application.configure do
   # Update before deployment!
   config.action_mailer.default_url_options = { :host => "theatrical.co" }
 
-  Imagesite::Application.config.session_store :cookie_store, key: '_imagesite_session', domain: '.theatrical.co'
+  #Imagesite::Application.config.session_store :cookie_store, key: '_imagesite_session', domain: '.theatrical.co'
 
 
 

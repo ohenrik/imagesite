@@ -10,6 +10,8 @@ class UsersController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update, :destroy, :settings, :set_base_theme]
 	after_action :set_base_theme, only: [:create]
 
+	before_action :add_alias_domain, only: [:update]
+
 	def new 
 		@user = User.new
 	end
@@ -102,6 +104,11 @@ private
 	  @user = User.find(params[:id])
 	end
 
+	def add_alias_domain
+		if current_user.alias_domain != params[:user][:alias_domain]
+			
+		end
+	end
 
 
 	## Moved string parametres into permitt class
