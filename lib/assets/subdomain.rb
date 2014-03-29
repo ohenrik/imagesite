@@ -1,18 +1,12 @@
 class Subdomain
   def self.matches?(request)
-  	if Rails.env.production?
-  		if request.domain != "theatrical.co"
-    		request.domain.present? && request.domain != "theatrical.co"
+
+  		# Check to see if the user is on an alias domain or regular subdomain... or nothing
+  		if !%w(lvh.me theatrical.co).include?(request.domain)
+    		request.domain.present? && !%w(lvh.me theatrical.co).include?(request.domain)
 	    else
 	    	request.subdomain.present? && request.subdomain != "www"
 	    end
-    end
-    if Rails.env.development?
-  		if request.domain != "lvh.me"
-    		request.domain.present? && request.domain != "lvh.me"
-	    else
-	    	request.subdomain.present? && request.subdomain != "www"
-	    end
-    end
+
   end
 end
