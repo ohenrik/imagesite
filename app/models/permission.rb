@@ -11,7 +11,7 @@ class Permission
 		allow :tags, [:show]
 		allow :pages, [:show]
 		if user
-			allow :users, [:edit, :update, :settings] do |inst|
+			allow :users, [:edit, :update, :settings, :update_settings, :edit_alias_domain, :set_alias_domain ,:remove_alias_domain] do |inst|
 				inst.id == user.id
 			end
 		end

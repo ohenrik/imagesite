@@ -73,7 +73,11 @@ Imagesite::Application.routes.draw do
     end
 
     # Users
-    get "/settings/:id" => 'users#settings', as: :settings
+    get "settings/:id" => 'users#settings', as: :settings
+    patch "settings/:id/update" => 'users#update_settings', as: :update_settings
+    # User alias domain
+    patch "settings/:id/set_alias_domain" => 'users#set_alias_domain', as: :set_alias_domain
+    patch "settings/:id/remove_alias_domain" => 'users#remove_alias_domain', as: :remove_alias_domain
     resources :users
 
     root :to => 'static_pages#home'

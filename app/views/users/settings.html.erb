@@ -1,25 +1,51 @@
-<%= form_for @user do |f| %>
-
-	
-<div class="row buffer">
+<div class="row">
 	<div class="col-xs-8 col-xs-offset-2  col-sm-6 col-sm-offset-3  col-lg-4 col-lg-offset-4">
-		<%= render partial: 'shared/form_errors', :locals => {:item => @user, :container => false} %>
+		<%= form_for @user, url: update_settings_path(@user) do |f| %>
+			<%= render partial: 'shared/form_errors', :locals => {:item => @user, :container => false} %>
 
-		<div class="form-group">
-			<%= f.label :site_title %>
-			<%= f.text_field :site_title, class: "form-control"  %>
-		</div>
-		<div class="form-group">
-			<%= f.label :site_tagline %>
-			<%= f.text_field :site_tagline, class: "form-control"  %>
-		</div>
-		<div class="form-group">
-			<%= f.label :alias_domain %>
-			<%= f.text_field :alias_domain, class: "form-control"  %>
-		</div>
+			<div class="page-header">
+				<h4>Website details</h4>
+			</div>
+			<div class="form-group">
+				<%= f.label :site_title %>
+				<%= f.text_field :site_title, class: "form-control"  %>
+			</div>
+			<div class="form-group">
+				<%= f.label :site_tagline %>
+				<%= f.text_field :site_tagline, class: "form-control"  %>
+			</div>
+			<div class="form-group">
+				<%= f.label :subdomain %>
+				<%= f.text_field :subdomain, class: "form-control"  %>
+			</div>
 
-			<%= f.submit "Save", class: "btn btn-primary pull-right" %>
+			<%= f.submit "Save", class: "btn btn-primary" %>
+		<% end %>
+		
+		<% if @user.alias_domain.blank? %>
+			<%= form_for @user, url: set_alias_domain_path(@user) do |f| %>
+
+				<div class="page-header">
+					<h4>Custom domain</h4>
+				</div>
+				<%= render partial: 'shared/form_errors', :locals => {:item => @user, :container => false} %>
+
+				<div class="form-group">
+					<%= f.text_field :alias_domain, placeholder: "Your Custom Domain (e.g. example.com)", class: "form-control"  %>
+				</div>
+
+				<%= f.submit "Set Custom Domain", class: "btn btn-primary" %>
+			<% end %>
+		<% else %>
+
+			<div class="page-header">
+				<h4>Custom domain</h4>
+			</div>
+			<div class="form-group">
+				<%= text_field_tag "current", @user.alias_domain, disabled: true, class: "form-control" %>
+			</div>
+			<%= link_to 'Remove current custom domain', remove_alias_domain_path(@user), method: :patch, class: "btn btn-default btn-block" %>
+		<% end %>
 
 	</div>
 </div>
-<% end %>

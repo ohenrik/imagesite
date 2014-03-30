@@ -12,7 +12,7 @@ set :default_stage, 'production'
 
 set :application, "imagesite"
 set :scm, :git
-set :repository,  "https://github.com/ohenrik/imagesite"  # "git@github.com:ohenrik/imagesite.git"
+set :repository, "git@github.com:ohenrik/imagesite.git" # "https://github.com/ohenrik/imagesite"
 #set :ssh_options, { :forward_agent => true }
 
 set :deploy_to, "/home/rails/apps/#{application}"

@@ -1,3 +1,5 @@
+require "net/https"
+require "uri"
 class UsersController < ApplicationController
 
 
@@ -7,10 +9,8 @@ class UsersController < ApplicationController
   	around_filter :scope_current_tenant, only: [:home]
 
 
-	before_action :set_user, only: [:show, :edit, :update, :destroy, :settings, :set_base_theme]
+	before_action :set_user, only: [:show, :edit, :update, :destroy, :settings, :update_settings, :set_base_theme, :edit_alias_domain, :set_alias_domain ,:remove_alias_domain]
 	after_action :set_base_theme, only: [:create]
-
-	before_action :add_alias_domain, only: [:update]
 
 	def new 
 		@user = User.new
@@ -46,6 +46,65 @@ class UsersController < ApplicationController
 			redirect_to edit_user_url, notice: "Success! Information saved. Thank you!"
 		else
 			render "edit"
+		end
+	end
+
+	def update_settings
+		if @user.update(params[:user])
+			redirect_to settings_url, notice: "Success! Information saved. Thank you!"
+		else
+			render "settings"
+		end
+	end
+
+	def edit_alias_domain
+
+	end
+
+	def set_alias_domain
+		# Url for adding 
+		uri = URI.parse("https://api.digitalocean.com/domains/new?client_id=#{ENV['do_client_id']}&api_key=#{ENV['do_key']}&name=#{(params[:user][:alias_domain]).html_safe}&ip_address=95.85.20.208")
+		http = Net::HTTP.new(uri.host, uri.port)
+		http.use_ssl = true
+		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+		request = Net::HTTP::Get.new(uri.request_uri)
+
+		response = http.request(request)
+		response.body
+		@resp = JSON.parse(response.body)
+		if @resp['status'] == 'OK'
+			if @user.update(params[:user])
+				redirect_to settings_url, notice: "#{@resp['domain']['name']} is now your new alias domain."
+			else
+				redirect_to settings_url, alert: "Error, new domain not saved correctly. Contact support or remove the domain and try again"
+			end
+		else
+			redirect_to settings_url, alert: "Error, new domain not set. Contact support"
+		end
+	end
+
+	def remove_alias_domain
+		# Url for removing
+		uri = URI.parse("https://api.digitalocean.com/domains/#{@user.alias_domain}/destroy?client_id=#{ENV['do_client_id']}&api_key=#{ENV['do_key']}")
+		http = Net::HTTP.new(uri.host, uri.port)
+		http.use_ssl = true
+		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+		request = Net::HTTP::Get.new(uri.request_uri)
+
+		response = http.request(request)
+		response.body
+		@resp = JSON.parse(response.body)
+		if @resp['status'] == 'OK'
+			@user.alias_domain = nil
+			if @user.update(params[:user])
+				redirect_to settings_url, notice: "Alias domain is now removed"
+			else
+				redirect_to settings_url, alert: "Error, alias domain not removed correctly. Contact support."
+			end
+		else
+			redirect_to settings_url, alert: "Error, domain not removed. Contact support"
 		end
 	end
 
@@ -103,13 +162,6 @@ private
 	def set_user
 	  @user = User.find(params[:id])
 	end
-
-	def add_alias_domain
-		if current_user.alias_domain != params[:user][:alias_domain]
-			
-		end
-	end
-
 
 	## Moved string parametres into permitt class
 	# Never trust parameters from the scary internet, only allow the white list through.
