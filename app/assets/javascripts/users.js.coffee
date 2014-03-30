@@ -5,5 +5,10 @@ $(document).ready ->
 	$('.remove').click ->
 		$(this).remove()
 
+
+	
+	$('#page-set-thumbnail').click (event) ->
+		$(this).button('loading')
+
 #$(document).ready(ready)
 #$(document).on('page:load', ready)

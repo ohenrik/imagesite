@@ -59,11 +59,6 @@ $(document).ready ->
 		$(this).button('loading')
 
 
-	$('#second-title-link').click (event) ->
-		$('#second-title-holder').toggle()
-		$('#second-title-link').parent().toggle()
-		event.preventDefault()
-
 
 	#$('.page_items').nestable
 	#	rootClass: 'page_items'
@@ -91,13 +86,13 @@ $(document).ready ->
 	
 
 	$(document).on 'click', '.order-up', (event) ->
-		$($(this).data('page-item')).prev().insertAfter($(this).data('page-item'))
+		$($(this).data('page-item')).insertAfter($(this).data('page-item'))
 		sort_items()
 		event.preventDefault()
 
 
 	$(document).on 'click', '.order-down', (event) ->
-		$($(this).data('page-item')).next().insertBefore($(this).data('page-item'))
+		$($(this).data('page-item')).insertBefore($(this).data('page-item'))
 		sort_items()
 		event.preventDefault()
 
