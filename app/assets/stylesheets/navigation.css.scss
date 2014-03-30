@@ -1,15 +1,24 @@
 @import "variables";
 @import "bootstrap-custom";
-
-
 .navbar {
-	margin-top: 20px;
+	@media (max-width: $screen-sm-max) {
+		//margin-top: 20px;
+		margin-bottom: 0 !important;
+		.navbar-toggle {
+			margin-top: 30px;
+		}
+	}
+	@media (min-width: $screen-sm-min) {
+		margin-top: 20px;
+	}
+	
 	li {
 		&:hover { background-color: $gray-lighter; }
 	}
 }
+
 .logo {
-	
+
 	.theatrical-logo {
 		font-family: "theatrical";
 		color: $purple;
@@ -19,9 +28,14 @@
 	h1 {
 		margin: 10px 0 0 0;
 		color: $btext;
-		font-size: 36px;
+		font-size: 30px;
 		line-height: 69	px;
 		font-family: "neutra", sans-serif;
+	}
+	@media (min-width: $screen-md-min) {
+	h1 {
+		font-size: 36px;
+	}
 	}
 	&:hover {
 		.theatrical-logo { color: lighten($purple, 10) }
@@ -36,13 +50,9 @@
 	border: none;
 }
 .nav {
-	margin: 20px;
 	a {
 		font-size: 16px;
 		font-weight: 100;
 		font-family: $font;
 	}
-}
-.navbar-toggle {
-	margin-top: 30px;
 }
