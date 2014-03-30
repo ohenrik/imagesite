@@ -3,7 +3,7 @@ class PhotosController < ApplicationController
   # Find the tenant
   around_filter :scope_current_tenant
 
-  before_action :set_photo, only: [:show, :edit, :update, :destroy, :add_to_page]
+  before_action :set_photo, only: [:show, :edit, :update, :destroy, :add_to_page, :set_as_thumbnail]
 
 
   # Check if the tenant is in his own subdomain
@@ -47,6 +47,32 @@ class PhotosController < ApplicationController
       format.js {
         render 'page_items/gallery_modal', layout: false
       }
+    end
+  end
+
+  def thumbnail_modal
+    @photos = Photo.all.order(created_at: :desc)
+
+    # Passing page details right through 
+    @item = params[:item]
+    @item_id = params[:item_id]
+
+    respond_to do |format|
+      format.js {
+        render layout: false
+      }
+    end
+  end
+
+
+  def set_as_thumbnail
+    if params[:item].classify.constantize.exists?(params[:item_id])
+      @item = params[:item].classify.constantize.find(params[:item_id])
+      @item.photo_id = @photo.id
+      @item.save
+      redirect_to pages_url(), notice: "sucess"
+    else
+      redirect_to pages_url(), notice: "fail"
     end
   end
 

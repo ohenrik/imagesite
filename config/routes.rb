@@ -18,7 +18,6 @@ Imagesite::Application.routes.draw do
 
         # Pages
         get 'pages/gallery_modal' => 'pages#gallery_modal', as: :pages_gallery_modal
-        post 'pages/set_thumbnail/:id' => 'pages#set_thumbnail', as: :set_thumbnail
         post 'pages/add_to_menu/:id' => 'pages#add_to_menu', as: :add_page_to_menu 
         post 'pages/add_to_page/:id' => 'pages#add_to_page', as: :add_page_to_page
         post 'pages/add_gallery/:id' => 'pages#add_gallery', as: :add_gallery
@@ -30,6 +29,8 @@ Imagesite::Application.routes.draw do
 
         # Photos
         get 'photos/all' => 'photos#all', as: :all
+        get 'photos/thumbnail_modal' => 'photos#thumbnail_modal', as: :thumbnail_modal
+        post 'photos/:id/set_as_thumbnail' => 'photos#set_as_thumbnail', as: :set_thumbnail
         get 'photos/all/tags/:tag' => 'photos#all', as: :filter_tag
         get 'photos/gallery_modal' => 'photos#gallery_modal', as: :photos_gallery_modal
         get 'photos/photos_modal' => 'photos#photo_manager_modal', as: :photo_manager_modal

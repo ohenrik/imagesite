@@ -9,7 +9,7 @@ class PagesController < ApplicationController
   # GET /pages
   # GET /pages.json
   def index
-    @pages = Page.all
+    @pages = Page.all.order(updated_at: :desc)
   end
 
   def gallery_modal
@@ -40,12 +40,6 @@ class PagesController < ApplicationController
 
   # GET /pages/1/edit
   def edit
-  end
-
-  def set_thumbnail
-    @page.photo_id = params[:photo_id]
-    @page.save
-    render js: "setTimeout(function () {$('#page-set-thumbnail').button('reset')}, 500);"
   end
 
   # POST /pages

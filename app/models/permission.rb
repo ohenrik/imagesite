@@ -31,7 +31,7 @@ class Permission
 			allow :page_titles, [:show, :index, :new, :create, :add_to_page, :cancel_update, :edit, :update, :delete, :destroy ]
 			allow :page_items, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :sort]
 			allow :pages, [:index, :new, :create, :edit, :update, :delete, :destroy, :add_to_page, :gallery_modal, :add_gallery, :set_thumbnail, :set_home, :add_to_menu]
-			allow :photos, [:all, :new, :create, :edit, :update, :delete, :destroy, :add_to_page, :gallery_modal, :photo_manager_modal]
+			allow :photos, [:all, :new, :create, :edit, :update, :delete, :destroy, :add_to_page, :gallery_modal, :photo_manager_modal, :thumbnail_modal, :set_as_thumbnail]
 			allow :tags, [:index, :new, :create, :edit, :update, :delete, :destroy, :add_to_menu]
 			allow :menus, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :add_item_to_menu]
 			allow :menu_items, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :sort]

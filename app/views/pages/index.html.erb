@@ -33,6 +33,7 @@
                     <%= link_to 'Show', page, data: { no_turbolink: true }, class: "btn btn-default btn-xs" %>
                     <%= link_to 'Edit', edit_page_path(page), class: "btn btn-default btn-xs"  %>
                     <%= link_to 'Set as home', set_home_page_path(page), method: :post, class: "btn btn-default btn-xs" %>
+                    <%= link_to 'Set thumbnail', thumbnail_modal_path(:item => page.class, :item_id => page.id), remote: true, class: "btn btn-default btn-xs" %>
                 </div>
                 <%= link_to 'Delete', page, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs"  %>
             </div>
