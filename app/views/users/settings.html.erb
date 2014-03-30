@@ -34,7 +34,7 @@
 					<%= f.text_field :alias_domain, placeholder: "Your Custom Domain (e.g. example.com)", class: "form-control"  %>
 				</div>
 
-				<%= f.submit "Set Custom Domain", class: "btn btn-primary" %>
+				<%= f.submit "Set Custom Domain", class: "btn btn-primary loading", data: { :loading_text => "Loading..."} %>
 			<% end %>
 		<% else %>
 
@@ -44,7 +44,7 @@
 			<div class="form-group">
 				<%= text_field_tag "current", @user.alias_domain, disabled: true, class: "form-control" %>
 			</div>
-			<%= link_to 'Remove current custom domain', remove_alias_domain_path(@user), method: :patch, class: "btn btn-default btn-block" %>
+			<%= link_to 'Remove current custom domain', remove_alias_domain_path(@user), data: { :loading_text => "Loading..."}, method: :patch, class: "btn btn-default btn-block loading" %>
 		<% end %>
 
 	</div>

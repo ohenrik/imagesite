@@ -6,8 +6,8 @@ $(document).ready ->
 		$(this).remove()
 
 
-	
-	$('#page-set-thumbnail').click (event) ->
+
+	$('.loading').click (event) ->
 		$(this).button('loading')
 
 #$(document).ready(ready)
