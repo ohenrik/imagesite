@@ -86,25 +86,25 @@ $(document).ready ->
 	
 
 	$(document).on 'click', '.order-up', (event) ->
-		$($(this).data('page-item')).insertAfter($(this).data('page-item'))
+		$($(this).data('page-item')).prev().insertAfter($(this).data('page-item'))
 		sort_items()
 		event.preventDefault()
 
 
 	$(document).on 'click', '.order-down', (event) ->
-		$($(this).data('page-item')).insertBefore($(this).data('page-item'))
+		$($(this).data('page-item')).next().insertBefore($(this).data('page-item'))
 		sort_items()
 		event.preventDefault()
 
 
-	$('.save-page-items').click (event) ->
-		event.preventDefault()
-		order = current_order()
-		$.ajax
-			type: 'post'
-			url: $(this).attr("href")
-			data: { order: JSON.stringify(order) }
-			dataType: 'script'
+	#$('.save-page-items').click (event) ->
+	#	event.preventDefault()
+	#	order = current_order()
+	#	$.ajax
+	#		type: 'post'
+	#		url: $(this).attr("href")
+	#		data: { order: JSON.stringify(order) }
+	#		dataType: 'script'
 
 
 	sort_items = () ->

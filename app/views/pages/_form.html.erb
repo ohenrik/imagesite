@@ -10,43 +10,77 @@
 <%= form_for(@page) do |f| %>
     
     <hr>
+    <div class="row">
+        <div class="col-sm-5 col-md-4 listed-page-thumbnail">
+            <%= link_to thumbnail_modal_path(:item => @page.class, :item_id => @page.id), remote: true, class: "thumbnail" do %>
+                <% if @page.photo %>
+                    <%= image_tag @page.photo.image_url(:large_thumb).to_s, class: "img-responsive" %>
+                <% else %>
+                    <%= image_tag "default/large_thumb_no-thumb.png", class: "img-responsive" %>
+                <% end %>
+            <% end %>
+        </div>
+        
+        <div class="clearfix visible-xs"></div>
+        <div class="col-sm-7 col-md-8">
+
+            <div class="input-group">
+                <%= f.text_field :name, placeholder: "Page name...", class: "form-control input-lg" %>
+                <span class="input-group-btn"><%= f.submit "Update", class: "btn btn-primary btn-lg pull-right" %></span>
+            </div>
+
+            <h3 class="listed-page-status text-muted">
+                
+                <small>
+                    <i class="fa fa-cogs fa-fw"></i> Settings
+                    | 
+                    <%= link_to page_path(@page), data: { no_turbolink: true }, class: "text-muted" do %>
+                        <i class="fa fa-eye fa-fw"></i> Show
+                    <% end %>
+
+                    |
+                    <%= link_to @page, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-muted" do %>
+                         <i class="fa fa-trash-o"></i> Delete
+                    <% end %>
+
+                    |
+                    <%= link_to thumbnail_modal_path(:item => @page.class, :item_id => @page.id), remote: true, class: "text-muted" do %>
+                        <i class="fa fa-picture-o fa-fw"></i> Thumbnail
+                    <% end %>
+
+                    <% if @page != current_tenant.home %>
+                        |
+                        <%= link_to set_home_page_path(@page), method: :post, class: "text-muted" do %>
+                            <i class="fa fa-home fa-fw"></i> Homepage
+                        <% end %>
+                    <% end %>
+                    | <i class="fa <%= @page.status == 'published' ? 'fa-check-square' : 'fa-square-o' %>"></i> <%= @page.status.titlecase %>
+                </small>
+            </h3>
+            <p><%= truncate(@page.excerpt, :length => 350) %></p>
+        </div>
+        <!--
+        <div class="col-xs-12 col-sm-4">
+            <div class="form-group">
+               <% render 'rich_excerpt_toolbar' %>
+               <% f.text_area :excerpt, id: 'wysihtml5-excerpt', placeholder: "Enter excerpt here", class: "form-control rich-editor excerpt-editor"  %>
+            </div>
+        </div>
+        -->
+        <div class="col-xs-12 col-sm-8">
+            <!--
+            <div class="form-group">
+                <% f.select :status, options_for_select(available_statuses, @page.status || 'draft'), {} , :class => "form-control input-lg"  %>
+            </div>
+            -->
+        </div>
+    </div>
+    <hr>
 
     <div class="error-container">
         <%= render partial: 'shared/form_errors', :locals => {:item => @page} %>
     </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-8">
-            <div class="form-group">
-                <%= f.text_field :name, placeholder: "Page name...", autofocus: true, class: "form-control input-lg" %>
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-4 page-controls">
-            <div class="form-group">
-                <%= f.select :status, options_for_select(available_statuses, @page.status || 'draft'), {} , :class => "form-control input-lg"  %>
-            </div>
-            
-            <div class="form-group page-control-buttons">
-                <% if @page.new_record? %>
-                    <%= f.submit class: "btn btn-primary btn-lg" %>
-                <% else %>
-                    <%= f.submit class: "btn btn-primary btn-lg" %>
-                    <%= link_to 'Show', @page, data: { no_turbolink: true }, class: "btn btn-link" %>
-                <% end %>
-                <%= link_to 'Cancel', pages_path, class: "btn btn-link" %>
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="form-group">
-        <% render 'rich_content_toolbar' %>
-
-        <% f.text_area :content, id: 'wysihtml5-content', placeholder: "Enter content here", class: "form-control rich-editor content-editor", rows: "20" %>
-    </div>
-
-    
+   
 
     <div class="row">
         <div class="col-sm-8">
@@ -70,19 +104,24 @@
 
     <hr>
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-4">
+            <%= link_to "Add Title", add_page_title_item_path(@page), method: :post, remote: true, class: "btn btn-default btn-block btn-lg" %>
+            <br>
+        </div>
+        <div class="col-sm-4">
             <%= link_to "Add Text field", add_text_item_path(@page), method: :post, remote: true, class: "btn btn-default btn-block btn-lg" %>
+            <br>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <%= link_to "Add Gallery", add_gallery_path(@page), method: :post, remote: true, class: "btn btn-default btn-block btn-lg" %>
+            <br>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <%= link_to "Add Photos", photos_gallery_modal_path(:page_id => @page.id ), remote: true, class: "btn btn-default btn-block btn-lg" %>
+            <br>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <%= link_to "Add Pages", pages_gallery_modal_path(:page_id => @page.id ), remote: true, class: "btn btn-default btn-block btn-lg" %>
-        </div>
-        <div class="col-sm-3">
-            <%= link_to "Add Titles", add_page_title_item_path(@page), method: :post, remote: true, class: "btn btn-default btn-block btn-lg" %>
+            <br>
         </div>
     </div>

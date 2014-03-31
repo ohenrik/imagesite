@@ -15,27 +15,56 @@
 
     <% @pages.each do |page| %>
         <div class="page clearfix">
-            <%= link_to edit_page_path(page) do %>
-                <div class="col-sm-5 col-md-4 listed-page-thumbnail">
+            
+            <div class="col-sm-5 col-md-4 listed-page-thumbnail">
+                <%= link_to edit_page_path(page), class: "thumbnail" do %>
                     <% if page.photo %>
-                        <%= image_tag page.photo.image_url(:large_thumb).to_s, class: "thumb img-responsive" %>
+                        <%= image_tag page.photo.image_url(:large_thumb).to_s, class: "img-responsive" %>
                     <% else %>
-                        <%= image_tag "default/large_thumb_no-thumb.png", class: "thumb img-responsive" %>
+                        <%= image_tag "default/large_thumb_no-thumb.png", class: "img-responsive" %>
                     <% end %>
-                </div>
-            <% end %>
+                <% end %>
+            </div>
+            
             <div class="clearfix visible-xs"></div>
             <div class="col-sm-7 col-md-8">
-                <h1 class="listed-page-header"><%= page.name %></h1>
-                <h3 class="listed-page-status text-muted"><%= page.status.titlecase %></h3>
-                <p><%=h truncate(page.excerpt, :length => 350) %></p>
-                <div class="btn-group">
-                    <%= link_to 'Show', page, data: { no_turbolink: true }, class: "btn btn-default btn-xs" %>
-                    <%= link_to 'Edit', edit_page_path(page), class: "btn btn-default btn-xs"  %>
-                    <%= link_to 'Set as home', set_home_page_path(page), method: :post, class: "btn btn-default btn-xs" %>
-                    <%= link_to 'Set thumbnail', thumbnail_modal_path(:item => page.class, :item_id => page.id), remote: true, class: "btn btn-default btn-xs" %>
-                </div>
-                <%= link_to 'Delete', page, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs"  %>
+                <h2 class="listed-page-header">
+                    <%= link_to edit_page_path(page) do %>
+                        <i class="fa fa-pencil-square text-muted"></i>
+                        <%= page.name %>
+
+                    <% end %>
+                </h2>
+                <h3 class="listed-page-status text-muted">
+                    
+                    <small>
+                        <i class="fa fa-cogs fa-fw"></i> Settings
+                        | 
+                        <%= link_to page_path(page), data: { no_turbolink: true }, class: "text-muted" do %>
+                            <i class="fa fa-eye fa-fw"></i> Show
+                        <% end %>
+
+                        |
+                        <%= link_to page, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-muted" do %>
+                             <i class="fa fa-trash-o"></i> Delete
+                        <% end %>
+
+                        |
+                        <%= link_to thumbnail_modal_path(:item => page.class, :item_id => page.id), remote: true, class: "text-muted" do %>
+                            <i class="fa fa-picture-o fa-fw"></i> Thumbnail
+                        <% end %>
+
+                        <% if page != current_tenant.home %>
+                            |
+                            <%= link_to set_home_page_path(page), method: :post, class: "text-muted" do %>
+                                <i class="fa fa-home fa-fw"></i> Homepage
+                            <% end %>
+                        <% end %>
+
+                         | <i class="fa <%= page.status == 'published' ? 'fa-check-square' : 'fa-square-o' %>"></i> <%= page.status.titlecase %>
+                    </small>
+                </h3>
+                <p><%= truncate(page.excerpt, :length => 350) unless page.excerpt.blank? %></p>
             </div>
 
         </div>

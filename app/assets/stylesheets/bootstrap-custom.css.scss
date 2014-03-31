@@ -108,6 +108,11 @@ $border-radius-base:             0px !default;
 $border-radius-large:            0px !default;
 $border-radius-small:            0px !default;
 
+// Thumbnails
+$thumbnail-padding: 0px;
+$thumbnail-border: #ddd;
+
+
 .buffer {
 	margin: 40px 0 80px;
 }
@@ -118,3 +123,7 @@ $border-radius-small:            0px !default;
 
 /* Leave at the bottom */
 @import "bootstrap";
+
+.thumbnail {
+	border: 2px solid $thumbnail-border;
+}
