@@ -127,3 +127,7 @@ $thumbnail-border: #ddd;
 .thumbnail {
 	border: 2px solid $thumbnail-border;
 }
+.text-no-wrap {
+	overflow: hidden;
+	white-space: nowrap;
+}

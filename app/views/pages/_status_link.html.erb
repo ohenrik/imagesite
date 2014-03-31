@@ -1,0 +1,3 @@
+<%= link_to toggle_page_status_path(@page), remote: true, class: "text-muted", id: "toggle_status_link_#{@page.id}" do %> 
+    <i class="fa <%= @page.status == 'published' ? 'fa-check-square' : 'fa-square-o' %> fa-fw"></i> <%= @page.status.titlecase %>
+<% end %>

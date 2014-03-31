@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   # Find the tenant
   around_filter :scope_current_tenant
   
-  before_action :set_page, only: [:show, :edit, :update, :destroy, :set_thumbnail, :add_to_menu, :set_home, :add_to_page, :add_gallery]
+  before_action :set_page, only: [:show, :edit, :update, :destroy, :set_thumbnail, :add_to_menu, :set_home, :add_to_page, :add_gallery, :toggle_status]
   
 
   # GET /pages
@@ -35,7 +35,7 @@ class PagesController < ApplicationController
 
   # GET /pages/new
   def new
-    @page = Page.create(status: "draft", name: "Temporary name")
+    @page = Page.create(status: "draft", name: "New page")
   end
 
   # GET /pages/1/edit
@@ -80,6 +80,23 @@ class PagesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to pages_url }
       format.json { head :no_content }
+    end
+  end
+
+  def toggle_status
+    if @page.status == 'published'
+      @page.status = 'draft'
+      p_notice = "Page published"
+    else
+      @page.status = 'published'
+      p_notice = "Page is now draft"
+    end
+    if @page.save
+      respond_to do |format|
+        format.js { render notice: p_notice }
+      end
+    else
+      render 'edit', alert: "Could change page status"
     end
   end
 

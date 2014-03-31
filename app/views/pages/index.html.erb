@@ -40,28 +40,31 @@
                     <small>
                         <i class="fa fa-cogs fa-fw"></i> Settings
                         | 
-                        <%= link_to page_path(page), data: { no_turbolink: true }, class: "text-muted" do %>
+                        <%= link_to page_path(page), data: { no_turbolink: true }, class: "text-muted text-no-wrap" do %>
                             <i class="fa fa-eye fa-fw"></i> Show
                         <% end %>
 
                         |
-                        <%= link_to page, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-muted" do %>
-                             <i class="fa fa-trash-o"></i> Delete
+                        <%= link_to page, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-muted text-no-wrap" do %>
+                             <i class="fa fa-trash-o fa-fw"></i> Delete
                         <% end %>
 
                         |
-                        <%= link_to thumbnail_modal_path(:item => page.class, :item_id => page.id), remote: true, class: "text-muted" do %>
+                        <%= link_to thumbnail_modal_path(:item => page.class, :item_id => page.id), remote: true, class: "text-muted text-no-wrap" do %>
                             <i class="fa fa-picture-o fa-fw"></i> Thumbnail
                         <% end %>
 
                         <% if page != current_tenant.home %>
                             |
-                            <%= link_to set_home_page_path(page), method: :post, class: "text-muted" do %>
+                            <%= link_to set_home_page_path(page), data: { confirm: 'Are you sure you want this page as your home page?' }, method: :post, class: "text-muted text-no-wrap" do %>
                                 <i class="fa fa-home fa-fw"></i> Homepage
                             <% end %>
                         <% end %>
 
-                         | <i class="fa <%= page.status == 'published' ? 'fa-check-square' : 'fa-square-o' %>"></i> <%= page.status.titlecase %>
+                        |
+                        <%= link_to toggle_page_status_path(page), remote: true, class: "text-muted text-no-wrap", id: "toggle_status_link_#{page.id}" do %> 
+                            <i class="fa <%= page.status == 'published' ? 'fa-check-square' : 'fa-square-o' %> fa-fw"></i> <%= page.status.titlecase %>
+                        <% end %>
                     </small>
                 </h3>
                 <p><%= truncate(page.excerpt, :length => 350) unless page.excerpt.blank? %></p>
