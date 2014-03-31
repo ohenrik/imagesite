@@ -70,9 +70,12 @@ class PhotosController < ApplicationController
       @item = params[:item].classify.constantize.find(params[:item_id])
       @item.photo_id = @photo.id
       @item.save
-      redirect_to pages_url(), notice: "sucess"
+      #get the model name pluralized
+      model_name = @item.class.to_s.underscore.pluralize
+      #redirect to the index action of the model
+      redirect_to send("#{model_name}_path"), notice: "Thumbnail set"
     else
-      redirect_to pages_url(), notice: "fail"
+      redirect_to send("#{model_name}_path"), notice: "Error: thumbnail not set. Contact support"
     end
   end
 
