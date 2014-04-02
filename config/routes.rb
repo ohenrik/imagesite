@@ -18,6 +18,7 @@ Imagesite::Application.routes.draw do
 
         # Pages
         get 'pages/:id/toggle_status' => 'pages#toggle_status', as: :toggle_page_status
+        get 'pages/:id/settings' => 'pages#settings', as: :page_settings
         get 'pages/gallery_modal' => 'pages#gallery_modal', as: :pages_gallery_modal
         post 'pages/add_to_menu/:id' => 'pages#add_to_menu', as: :add_page_to_menu 
         post 'pages/add_to_page/:id' => 'pages#add_to_page', as: :add_page_to_page

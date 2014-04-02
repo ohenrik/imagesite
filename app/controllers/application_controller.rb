@@ -55,5 +55,9 @@ private
 	end
 	helper_method :get_subdomain
 
+	def referer
+	  env['HTTP_REFERER'] || '/'
+	end
+	helper_method :referer
 
 end

@@ -73,9 +73,9 @@ class PhotosController < ApplicationController
       #get the model name pluralized
       model_name = @item.class.to_s.underscore.pluralize
       #redirect to the index action of the model
-      redirect_to send("#{model_name}_path"), notice: "Thumbnail set"
+      redirect_to referer, notice: "Thumbnail set"
     else
-      redirect_to send("#{model_name}_path"), notice: "Error: thumbnail not set. Contact support"
+      redirect_to referer, notice: "Error: thumbnail not set. Contact support"  ## To send people dynamically to index send("#{model_name}_path"),
     end
   end
 

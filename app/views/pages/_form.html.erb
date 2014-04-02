@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="mediaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog media-modal-dialog" id="media-modal-dialog">
+    <div class="modal-dialog media-modal-dialog" id="media-modal-dialog">
 
 
     </div>
@@ -33,7 +33,9 @@
                 
                 <small>
                     
-                    <i class="fa fa-cogs fa-fw"></i> Settings
+                    <%= link_to page_settings_path(@page), remote: true, class: "text-muted text-no-wrap" do %>
+                        <i class="fa fa-cogs fa-fw"></i> Settings
+                    <% end %>
                     
                     | 
                     <%= link_to page_path(@page), data: { no_turbolink: true }, class: "text-muted text-no-wrap" do %>
@@ -64,14 +66,7 @@
             </h3>
             <p><%= truncate(@page.excerpt, :length => 350) %></p>
         </div>
-        <!--
-        <div class="col-xs-12 col-sm-4">
-            <div class="form-group">
-               <% render 'rich_excerpt_toolbar' %>
-               <% f.text_area :excerpt, id: 'wysihtml5-excerpt', placeholder: "Enter excerpt here", class: "form-control rich-editor excerpt-editor"  %>
-            </div>
-        </div>
-        -->
+
         <div class="col-xs-12 col-sm-8">
             <!--
             <div class="form-group">

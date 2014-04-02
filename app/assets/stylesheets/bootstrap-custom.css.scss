@@ -109,7 +109,7 @@ $border-radius-large:            0px !default;
 $border-radius-small:            0px !default;
 
 // Thumbnails
-$thumbnail-padding: 0px;
+//$thumbnail-padding: 0px;
 $thumbnail-border: #ddd;
 
 
@@ -124,7 +124,8 @@ $thumbnail-border: #ddd;
 /* Leave at the bottom */
 @import "bootstrap";
 
-.thumbnail {
+a.thumbnail {
+	padding: 0;
 	border: 2px solid $thumbnail-border;
 }
 .text-no-wrap {

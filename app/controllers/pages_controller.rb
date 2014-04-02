@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   # Find the tenant
   around_filter :scope_current_tenant
   
-  before_action :set_page, only: [:show, :edit, :update, :destroy, :set_thumbnail, :add_to_menu, :set_home, :add_to_page, :add_gallery, :toggle_status]
+  before_action :set_page, only: [:show, :edit, :update, :destroy, :set_thumbnail, :add_to_menu, :set_home, :add_to_page, :add_gallery, :toggle_status, :settings]
   
 
   # GET /pages
@@ -64,10 +64,10 @@ class PagesController < ApplicationController
   def update
     respond_to do |format|
       if @page.update(params[:page])
-        format.html { redirect_to pages_path, notice: 'Page was successfully updated.' }
+        format.html { redirect_to referer, notice: 'Page was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render referer }
         format.json { render json: @page.errors, status: :unprocessable_entity }
       end
     end
@@ -81,6 +81,10 @@ class PagesController < ApplicationController
       format.html { redirect_to pages_url }
       format.json { head :no_content }
     end
+  end
+
+  def settings
+
   end
 
   def toggle_status
@@ -145,9 +149,9 @@ class PagesController < ApplicationController
     @user = current_user
     @user.home = @page
     if @user.save
-      redirect_to pages_path, notice: "Home screen set to #{@page.name}"
+      redirect_to referer, notice: "Home screen set to #{@page.name}"
     else
-      redirect_to pages_path, alert: "An error occured. Home not set."
+      redirect_to referer, alert: "An error occured. Home not set."
     end
   end
 

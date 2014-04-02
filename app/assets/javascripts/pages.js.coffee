@@ -13,12 +13,6 @@ $(document).ready ->
 		alert editor.selected.getValue() #.exec("createLink", { href: "http://google.com", target: "_blank", rel: "nofollow", text: "Google" });
 		event.preventDefault()
 
-	#excerpt = new wysihtml5.Editor("wysihtml5-excerpt", # id of textarea element
-	#  toolbar: "wysihtml5-excerpt-toolbar" # id of toolbar element
-	#  stylesheets: "<%= stylesheet_path('wysiwyg') %>" # optional, css to style the editor's content
-	#  parserRules: wysihtml5ParserRules # defined in parser rules set
-	#) if $("#wysihtml5-excerpt").length > 0
-
 
 	$('#wysihtml5-content-images').click (event) ->
 		$('.page-photo-manager-background').toggle()
@@ -83,7 +77,7 @@ $(document).ready ->
 	#	connectWith: '.sortable_gallery'
 
 
-	
+	# sorting page items
 
 	$(document).on 'click', '.order-up', (event) ->
 		$($(this).data('page-item')).prev().insertAfter($(this).data('page-item'))
@@ -96,17 +90,7 @@ $(document).ready ->
 		sort_items()
 		event.preventDefault()
 
-
-	#$('.save-page-items').click (event) ->
-	#	event.preventDefault()
-	#	order = current_order()
-	#	$.ajax
-	#		type: 'post'
-	#		url: $(this).attr("href")
-	#		data: { order: JSON.stringify(order) }
-	#		dataType: 'script'
-
-
+	# sending the updated list to page_items controller.
 	sort_items = () ->
 		order = current_order()
 		$.ajax

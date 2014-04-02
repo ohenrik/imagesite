@@ -1,0 +1,49 @@
+
+	<div class="modal-header" >
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	    <h4 class="modal-title">Page Settings</h4>
+	</div>
+
+	<%= form_for @page do |f| %>
+	   
+	    <div class="modal-body clearfix" >
+
+		    <div class="error-container">
+		        <%= render partial: 'shared/form_errors', :locals => {:item => @page} %>
+		    </div>
+
+	        <div class="form-group">
+	       		<%= f.label :excerpt, "Description" %>
+	        	<%= render 'rich_excerpt_toolbar' %>
+	        	<%= f.text_area :excerpt, id: 'wysihtml5-excerpt', placeholder: "Enter excerpt here", class: "form-control rich-editor excerpt-editor"  %>
+	        </div>
+
+
+	  	</div>
+
+		<div class="modal-footer">
+		    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		    <%= f.submit "Save", class: "btn btn-primary" %>
+		</div>
+
+	<% end %>
+
+
+<script type="text/javascript">
+var excerpt;
+
+if ($("#wysihtml5-excerpt").length > 0) {
+  excerpt = new wysihtml5.Editor("wysihtml5-excerpt", {
+    toolbar: "wysihtml5-excerpt-toolbar",
+    stylesheets: "<%= stylesheet_path('wysiwyg') %>",
+    parserRules: wysihtml5ParserRules
+  });
+}
+</script>
+<!--
+	#excerpt = new wysihtml5.Editor("wysihtml5-excerpt", # id of textarea element
+	#  toolbar: "wysihtml5-excerpt-toolbar" # id of toolbar element
+	#  stylesheets: "<%= stylesheet_path('wysiwyg') %>" # optional, css to style the editor's content
+	#  parserRules: wysihtml5ParserRules # defined in parser rules set
+	#) if $("#wysihtml5-excerpt").length > 0
+	-->

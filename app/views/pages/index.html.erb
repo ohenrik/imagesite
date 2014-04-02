@@ -38,7 +38,9 @@
                 <h3 class="listed-page-status text-muted">
                     
                     <small>
-                        <i class="fa fa-cogs fa-fw"></i> Settings
+                        <%= link_to page_settings_path(page), remote: true, class: "text-muted text-no-wrap" do %>
+                            <i class="fa fa-cogs fa-fw"></i> Settings
+                        <% end %>
                         | 
                         <%= link_to page_path(page), data: { no_turbolink: true }, class: "text-muted text-no-wrap" do %>
                             <i class="fa fa-eye fa-fw"></i> Show
