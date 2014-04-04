@@ -112,18 +112,21 @@ $border-radius-small:            0px !default;
 //$thumbnail-padding: 0px;
 $thumbnail-border: #ddd;
 
-
+/* Leave at the bottom */
+@import "bootstrap";
 .buffer {
 	margin: 40px 0 80px;
 }
 .space-down {
 	margin-bottom: 30px;
 }
+.sm-space-down {
+	margin-bottom: 15px;
+}
+.xs-space-down {
+	margin-bottom: 5px;
+}
 .img-responsive{width:100%;}
-
-/* Leave at the bottom */
-@import "bootstrap";
-
 a.thumbnail {
 	padding: 0;
 	border: 2px solid $thumbnail-border;

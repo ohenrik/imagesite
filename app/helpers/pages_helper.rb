@@ -13,10 +13,4 @@ module PagesHelper
 
 	end
 
-	def gallery_items(sub_items)
-	  	sub_items.map do |gallery_item, sub_item|
-	    	render(gallery_item, :sub_item => sub_item )
-
-		end.join.html_safe
-	end
 end

@@ -1,0 +1,55 @@
+	<% if page_item.pageable_type == "Text" %>
+		<div class="col-xs-12 page_item space-down" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>">
+			<br>
+			<%= form_for(page_item) do |f| %>
+
+			    <div class="form-group xs-space-down">
+			        <div id="wysihtml5-content-toolbar_<%= page_item.id %>" class="rich-editor-toolbar btn-toolbar" style="display: none;">
+			            <div class="btn-group">
+			                <a class="btn btn-default" data-wysihtml5-command="bold"><i class="fa fa-bold fa-fw"></i></a>
+			                <a class="btn btn-default" data-wysihtml5-command="italic"><i class="fa fa-italic fa-fw"></i></a>
+			                <a class="btn btn-default" data-wysihtml5-command="underline"><i class="fa fa-underline fa-fw"></i></a>
+			                <a class="btn btn-default" data-wysihtml5-command="justifyLeft"><i class="fa fa-align-left fa-fw"></i></a>
+			                <a class="btn btn-default" data-wysihtml5-command="justifyCenter"><i class="fa fa-align-center fa-fw"></i></a>
+			                <a class="btn btn-default" data-wysihtml5-command="justifyRight"><i class="fa fa-align-right fa-fw"></i></a>  
+			                <a class="btn btn-default" data-wysihtml5-command="insertOrderedList"><i class="fa fa-list-ol fa-fw"></i></a>
+			                <a class="btn btn-default" data-wysihtml5-command="insertUnorderedList"><i class="fa fa-list-ul fa-fw"></i></a>
+			            </div>
+			            <a class="btn btn-default pull-right" data-wysihtml5-action="change_view" href="javascript:;" unselectable="on"><i class="fa fa-code"></i></a>
+			        </div>
+			        <%= f.text_area :content, rows: 15, class: "form-control rich-editor content-editor", id: "wysihtml5-content_#{ page_item.id }", plaseholder: "Write content here..." %>  
+			    </div>
+		
+				<div class="">
+					<%= f.submit "Save", class: "btn btn-default"  %>
+					<%= link_to page_item_settings_path(page_item), remote: true, class: "btn btn-default" do %>
+						<i class="fa fa-cogs"></i> Settings
+					<% end %>
+					<%= link_to page_item_path(page_item), method: :delete, remote: true, class: "btn btn-default" do %>
+						<i class="fa fa-trash-o"></i> Delete
+					<% end %>
+
+					<span class="pull-right">
+						<%= link_to "#", class: "btn btn-default order-up", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() }  do %>
+							<i class="fa fa-caret-up"></i>
+						<% end %>
+						<%= link_to "#", class: "btn btn-default order-down", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() } do %>
+							<i class="fa fa-caret-down"></i>
+						<% end %>
+					</span>
+
+				</div>
+			<% end %>
+			<br>
+			
+			<script type="text/javascript">
+
+				  editor_<%= page_item.id %> = new wysihtml5.Editor("wysihtml5-content_<%= page_item.id %>", {
+				    toolbar: "wysihtml5-content-toolbar_<%= page_item.id %>",
+				    parserRules: wysihtml5ParserRules
+				  });
+				
+			</script>
+		</div>
+
+	<% end %>

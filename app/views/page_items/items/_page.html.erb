@@ -1,0 +1,40 @@
+<% if page_item.pageable_type == "Page"  %>
+
+
+	<div class="col-xs-12 col-sm-6 col-md-4 <%= page_item.parent.nil? ? 'page_item' : "gallery_item_#{page_item.parent.id}" %> " id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>" data-gallery-id="<%= page_item.parent.try(:id) %>" >
+		
+		<div class="thumbnail">
+		
+            <% if page_item.pageable.photo %>
+                <%= image_tag page_item.pageable.photo.image_url(:small_thumb), class: "img-responsive"%>
+            <% else %>
+                <%= image_tag "default/large_thumb_no-thumb.png", class:  page_item.root? ? "img-responsive"  : "img-responsive handle_gallery" %>
+            <% end %>
+		
+    		<div class="caption">
+				<h4 class="list-group-item-heading">
+					<i class="fa fa-file-text-o fa-fw text-muted"></i> <%= page_item.title %>
+				</h4>
+			</div>
+		</div>
+
+		<%= link_to page_item_settings_path(page_item), remote: true, class: "btn btn-default" do %>
+			<i class="fa fa-cogs"></i> <span class="hidden-xs">Settings</span>
+		<% end %>
+
+		<%= link_to page_item, class: "btn btn-default", method: :delete, remote: true do %>
+			<i class="fa fa-trash-o"></i> <span class="hidden-xs">Delete</span>
+		<% end %>
+
+		<span class="pull-right">
+			<%= link_to "#", class: "btn btn-default order-up", data: { page_item: "#page_item_#{page_item.id}"}  do %>
+				<i class="fa fa-caret-up"></i>
+			<% end %>
+			<%= link_to "#", class: "btn btn-default order-down", data: { page_item: "#page_item_#{page_item.id}"}  do %>
+				<i class="fa fa-caret-down"></i>
+			<% end %>
+		</span>
+
+	</div>
+
+<% end %>

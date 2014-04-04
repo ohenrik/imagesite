@@ -1,9 +1,10 @@
 class PageItem < ActiveRecord::Base
-  belongs_to :page
-  belongs_to :pageable, polymorphic: true
+	belongs_to :page
+	belongs_to :pageable, polymorphic: true
 
+	after_initialize :title
 
-  has_ancestry
+	has_ancestry
 
  	# Liquid methods
 	liquid_methods :position, :pageable, :is_type
@@ -14,7 +15,8 @@ class PageItem < ActiveRecord::Base
 
 
 	def title
-		read_attribute(:title).presence || pageable.name
+		read_attribute(:title).presence || pageable.try(:name)
 	end
+
 
 end

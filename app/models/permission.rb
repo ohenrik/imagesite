@@ -20,7 +20,7 @@ class Permission
 			allow_param :user, [:current_theme, :site_title, :site_tagline, :alias_domain, :home_type, :home_id]
 			allow_param :menu, [:name, :menu_item_id, :slug]
 			allow_param :menu_item, [:menu_id, :menuable_id, :menuable_type, :name, :description, :new_page, :ancestry, :position, :url]
-			allow_param :page_item, [:position, :page_id, :pageable_id, :item_link_boolean, :item_link, :item_class, :description, :title, :pageable_type, :pageable, :gallery]
+			allow_param :page_item, [:position, :page_id, :pageable_id, :no_item_link, :item_link, :item_class, :description, :title, :content, :pageable_type, :pageable, :gallery]
 			allow_param :photo, [:name, :image, :edit_tag_list, :description]
 			allow_param :page, [:name, :content, :excerpt, :status, :photo_id]
 			allow_param :theme, [:zip, :name]

@@ -1,0 +1,30 @@
+<% if page_item.pageable_type == "PageTitle" %>
+	<div class="col-xs-12 page_item" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>">
+		<%= form_for(page_item) do |f| %>
+			<div class="xs-space-down">
+				<div class="input-group input-group-lg">
+					<%= f.label :title, class: "input-group-addon" %>
+					<%= f.text_field :title, class: "form-control" %>
+				</div>
+			</div>
+			<div class="">
+				<%= f.submit "Save", class: "btn btn-default"  %>
+				<%= link_to page_item_settings_path(page_item), remote: true, class: "btn btn-default" do %>
+					<i class="fa fa-cogs"></i> Settings
+				<% end %>
+				<%= link_to page_item_path(page_item), method: :delete, remote: true, class: "btn btn-default" do %>
+					<i class="fa fa-trash-o"></i> Delete
+				<% end %>
+				<span class="pull-right">
+					<%= link_to "#", class: "btn btn-default order-up", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() }  do %>
+						<i class="fa fa-caret-up"></i>
+					<% end %>
+					<%= link_to "#", class: "btn btn-default order-down", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() } do %>
+						<i class="fa fa-caret-down"></i>
+					<% end %>
+				</span>
+			</div>
+		<% end %>
+		<br>
+	</div>
+<% end %>

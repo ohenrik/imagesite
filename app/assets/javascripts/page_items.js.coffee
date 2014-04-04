@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).ready ->
 
-	$(document).on 'change', '#page_item_item_link_boolean', (event) ->
+	$(document).on 'change', '#page_item_no_item_link', (event) ->
 		if $('#custom_link_field').attr("disabled")
 			$('#custom_link_field').removeAttr('disabled')
 		else

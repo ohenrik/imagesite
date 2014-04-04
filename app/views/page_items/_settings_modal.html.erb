@@ -19,12 +19,12 @@
 	    <% if %w(Page Photo).include?(@page_item.pageable_type) %>
 			<div class="form-group">
 				<%= f.label :item_link, "Custom link:" %>
-				<%= f.text_field :item_link, placeholder: "http://", class: "form-control", id: "custom_link_field", disabled: @page_item.item_link_boolean %>
+				<%= f.text_field :item_link, placeholder: "http://", class: "form-control", id: "custom_link_field", disabled: @page_item.no_item_link %>
 			</div>
 
 			<div class="form-group">
-				<%= f.check_box :item_link_boolean %>
-				<%= f.label :item_link_boolean, "No link" %>
+				<%= f.check_box :no_item_link %>
+				<%= f.label :no_item_link, "No link" %>
 			</div>
 
 			<div class="form-group">
