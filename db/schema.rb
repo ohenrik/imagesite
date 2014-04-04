@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140404170320) do
+ActiveRecord::Schema.define(version: 20140404221343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,12 +61,6 @@ ActiveRecord::Schema.define(version: 20140404170320) do
 
   add_index "page_items", ["page_id"], name: "index_page_items_on_page_id", using: :btree
   add_index "page_items", ["pageable_id", "pageable_type"], name: "index_page_items_on_pageable_id_and_pageable_type", using: :btree
-
-  create_table "page_titles", force: true do |t|
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "pages", force: true do |t|
     t.string   "name"
@@ -132,12 +126,6 @@ ActiveRecord::Schema.define(version: 20140404170320) do
 
   create_table "tags", force: true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "texts", force: true do |t|
-    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

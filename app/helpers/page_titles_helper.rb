@@ -1,2 +1,0 @@
-module PageTitlesHelper
-end

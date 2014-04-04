@@ -1,9 +1,0 @@
-$('#<%= "page_item_#{@page_item}" %>').find('.text-content').html('<%= escape_javascript(render( "form", :formats => [:html])) %>');
-var editor_<%= @page_item %>;
-
-if ($("#wysihtml5-content_<%= @page_item %>").length > 0) {
-  editor_<%= @page_item %> = new wysihtml5.Editor("wysihtml5-content_<%= @page_item %>", {
-    toolbar: "wysihtml5-content-toolbar_<%= @page_item %>",
-    parserRules: wysihtml5ParserRules
-  });
-}
