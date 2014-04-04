@@ -14,13 +14,13 @@
 			
         		<div class="caption">
 					<h4 class="list-group-item-heading">
-						<i class="fa fa-file-text-o fa-fw text-muted"></i> <%= page_item.pageable.name %>
+						<i class="fa fa-file-text-o fa-fw text-muted"></i> <%= page_item.title %>
 					</h4>
 				</div>
 			</div>
 
 			<div class="btn-group btn-group-justified page-item-controls">
-				<%= link_to "Edit", root_path, class: "btn btn-default" %>	
+				<%= link_to "Settings", page_item_settings_path(page_item), remote: true, class: "btn btn-default" %>	
 
 				<%= link_to "Delete", page_item, class: "btn btn-default", method: :delete, remote: true %>
 
@@ -45,12 +45,12 @@
 			
         		<div class="caption">
 					<h4 class="list-group-item-heading">
-						<i class="fa fa-picture-o fa-fw text-muted"></i> <%= page_item.pageable.name %>
+						<i class="fa fa-picture-o fa-fw text-muted"></i> <%= page_item.title %>
 					</h4>
 				</div>
 			</div>
 			<div class="btn-group btn-group-justified page-item-controls">
-				<%= link_to "Edit", root_path, class: "btn btn-default" %>	
+				<%= link_to "Settings", page_item_settings_path(page_item), remote: true, class: "btn btn-default" %>	
 
 				<%= link_to "Delete", page_item, class: "btn btn-default", method: :delete, remote: true %>
 
@@ -82,6 +82,7 @@
 
 					<div class="list-item-footer">
 						<%= link_to "Edit", edit_page_title_path(page_item.pageable, page_item_id: page_item.id), remote: true, class: "btn btn-default edit-text-btn" %>
+						<%= link_to "Settings", page_item_settings_path(page_item), remote: true, class: "btn btn-default" %>
 						<%= link_to "Remove", page_title_path(page_item.pageable, page_item_id: page_item.id), method: :delete, remote: true, class: "btn btn-default" %>
 						
 						<span class="pull-right">
@@ -120,6 +121,7 @@
 
 					<div class="list-item-footer">
 						<%= link_to "Edit", edit_text_path(page_item.pageable, page_item_id: page_item.id), remote: true, class: "btn btn-default edit-text-btn" %>
+						<%= link_to "Settings", page_item_settings_path(page_item), remote: true, class: "btn btn-default" %>
 						<%= link_to "Remove", text_path(page_item.pageable, page_item_id: page_item.id), method: :delete, remote: true, class: "btn btn-default" %>
 						
 						<span class="pull-right">
@@ -154,12 +156,21 @@
 
 				
 				<div class="row" id="gallery_<%= page_item.id %>">
-					<%= nested_page_items(sub_item) if page_item.has_children? %>
+					<% if page_item.has_children? %>
+						<%= nested_page_items(sub_item) %>
+					<% else %>
+						<div class="col-xs-12" id="empty_gallery_<%= page_item.id %>">
+							<div class="alert alert-info">
+								<strong>No items added:</strong> Add photos or pages with the buttons bellow.
+							</div>
+						</div>
+					<% end %>
 				</div>
 
 				<div class="list-item-footer">
 					<%= link_to "Add Photos", photos_gallery_modal_path(:page_id => page_item.page_id, :page_item_id => page_item.id ), remote: true, class: "btn btn-default" %>
 					<%= link_to "Add Pages", pages_gallery_modal_path(:page_id => page_item.page_id, :page_item_id => page_item.id ), remote: true, class: "btn btn-default" %>
+					<%= link_to "Settings", page_item_settings_path(page_item), remote: true, class: "btn btn-default" %>
 					<%= link_to "Remove Gallery", page_item, method: :delete, remote: true, class: "btn btn-default" %>
 
 					<span class="pull-right">

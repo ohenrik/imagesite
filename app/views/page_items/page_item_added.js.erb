@@ -1,1 +1,5 @@
 $('#<%= @page_item.parent.nil? ? "page_items" : "gallery_#{@page_item.parent.id}"  %>').append('<%= escape_javascript(render( :partial => "page_items/page_item", locals: { page_item: @page_item }, :formats => [:html])) %>');
+<% if @page_item.is_only_child? %>
+	// Remove the empty emssage if it exists
+	$('#empty_gallery_<%= @page_item.parent.id %>').remove();
+<% end %>

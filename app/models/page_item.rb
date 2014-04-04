@@ -13,4 +13,8 @@ class PageItem < ActiveRecord::Base
 	end
 
 
+	def title
+		read_attribute(:title).presence || pageable.name
+	end
+
 end

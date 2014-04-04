@@ -26,6 +26,7 @@ Imagesite::Application.routes.draw do
         resources :pages
 
         # Page Items
+        get 'page_items/:id/settings' => 'page_items#settings', as: :page_item_settings
         post 'page_items/sort_page_items' => 'page_items#sort', as: :sort_page_items
         resources :page_items
 

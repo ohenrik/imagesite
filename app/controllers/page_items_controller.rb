@@ -3,7 +3,7 @@ class PageItemsController < ApplicationController
   # Find the tenant
   around_filter :scope_current_tenant
 
-  before_action :set_page_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_page_item, only: [:show, :edit, :update, :destroy, :settings]
 
 
   # GET /page_items
@@ -47,10 +47,10 @@ class PageItemsController < ApplicationController
   def update
     respond_to do |format|
       if @page_item.update(params[:page_item])
-        format.html { redirect_to @page_item, notice: 'Page item was successfully updated.' }
+        format.html { redirect_to edit_page_path(@page_item.page), notice: 'Page item was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { redirect_to edit_page_path(@page_item.page) }
         format.json { render json: @page_item.errors, status: :unprocessable_entity }
       end
     end
@@ -66,6 +66,10 @@ class PageItemsController < ApplicationController
       format.json { head :no_content }
       format.js { render js: "$('#page_item_#{@page_item.id}').remove();" }
     end
+  end
+
+  def settings
+    
   end
 
   def sort 

@@ -40,9 +40,11 @@
 		font-size: 36px;
 	}
 	}
-	&:hover {
-		.theatrical-logo { color: lighten($purple, 10) }
-
+	&:hover, &:active {
+		.theatrical-logo { 
+			color: lighten($purple, 10);
+			text-decoration: none;
+		}
 	}
 	a {
 		&:hover, &:active { text-decoration: none;}
