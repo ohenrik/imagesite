@@ -36,6 +36,7 @@ class PagesController < ApplicationController
   # GET /pages/new
   def new
     @page = Page.create(status: "draft", name: "New page")
+    redirect_to edit_page_path(@page)
   end
 
   # GET /pages/1/edit
@@ -53,7 +54,7 @@ class PagesController < ApplicationController
         format.html { redirect_to pages_path, notice: 'Page was successfully created.' }
         format.json { render action: 'index', status: :created, location: @page }
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'index' }
         format.json { render json: @page.errors, status: :unprocessable_entity }
       end
     end
