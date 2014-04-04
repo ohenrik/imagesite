@@ -22,7 +22,7 @@ Imagesite::Application.routes.draw do
         get 'pages/gallery_modal' => 'pages#gallery_modal', as: :pages_gallery_modal
         post 'pages/add_to_menu/:id' => 'pages#add_to_menu', as: :add_page_to_menu 
         post 'pages/add_to_page/:id' => 'pages#add_to_page', as: :add_page_to_page
-        post 'pages/add_gallery/:id' => 'pages#add_gallery', as: :add_gallery
+        post 'pages/:id/add_other_page_item' => 'pages#add_other_page_item', as: :add_other_page_item
         resources :pages
 
         # Page Items
@@ -39,17 +39,6 @@ Imagesite::Application.routes.draw do
         get 'photos/photos_modal' => 'photos#photo_manager_modal', as: :photo_manager_modal
         post 'photos/add_to_page/:id' => 'photos#add_to_page', as: :add_photo_to_page
         resources :photos
-
-        # Text items
-
-        post 'texts/add_to_page/:id' => 'texts#add_to_page', as: :add_text_item
-        get 'texts/cancel_update/:id' => 'texts#cancel_update', as: :cancel_text_update
-        resources :texts
-
-        # Page Title items
-        post 'page_titles/add_to_page/:id' => 'page_titles#add_to_page', as: :add_page_title_item
-        get 'page_titles/cancel_update/:id' => 'page_titles#cancel_update', as: :cancel_page_title_update
-        resources :page_titles
 
         # Tags
         get 'tags/:tag' => 'photos#index', as: :public_filter_tag

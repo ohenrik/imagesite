@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   # Find the tenant
   around_filter :scope_current_tenant
   
-  before_action :set_page, only: [:show, :edit, :update, :destroy, :set_thumbnail, :add_to_menu, :set_home, :add_to_page, :add_gallery, :toggle_status, :settings]
+  before_action :set_page, only: [:show, :edit, :update, :destroy, :set_thumbnail, :add_to_menu, :set_home, :add_to_page, :add_other_page_item, :toggle_status, :settings]
   
 
   # GET /pages
@@ -131,8 +131,8 @@ class PagesController < ApplicationController
   end
 
 
-  def add_gallery
-    @page_item = PageItem.create(page_id: @page.id, position: params[:position], gallery: 1)
+  def add_other_page_item
+    @page_item = PageItem.create(page_id: @page.id, position: params[:position], other_type: params[:other_type])
     respond_to do |format|
       if @page_item
         format.html { redirect_to edit_page_path(@page), notice: 'Item successfully added' }

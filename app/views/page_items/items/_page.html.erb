@@ -1,7 +1,6 @@
 <% if page_item.pageable_type == "Page"  %>
 
-
-	<div class="col-xs-12 col-sm-6 col-md-4 <%= page_item.parent.nil? ? 'page_item' : "gallery_item_#{page_item.parent.id}" %> " id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>" data-gallery-id="<%= page_item.parent.try(:id) %>" >
+	<div class="col-xs-12 col-sm-6 col-md-4 <%= page_item.parent.nil? ? 'page_item' : "gallery_item_#{page_item.parent.id}" %> space-down" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>" data-gallery-id="<%= page_item.parent.try(:id) %>" >
 		
 		<div class="thumbnail">
 		

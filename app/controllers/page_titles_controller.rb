@@ -82,19 +82,7 @@ class PageTitlesController < ApplicationController
   end
 
 
-  def add_to_page
-    @page_title = PageTitle.create
-    @page_item = PageItem.create(page_id: params[:id], position: params[:position], pageable: @page_title)
-    respond_to do |format|
-      if @page_item
-        format.html { redirect_to edit_page_path(params[:id]), notice: 'Item successfully added' }
-        format.js { render 'page_items/page_item_added', layout: false } #render locals: { page_item: item } }
-      else
-        format.html { redirect_to edit_page_path(params[:id]), notice: 'An error occured, item no added to menu.' }
-        format.json { render json: @page.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
