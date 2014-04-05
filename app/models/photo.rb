@@ -17,7 +17,6 @@ class Photo < ActiveRecord::Base
 		image_url(:small_thumb)
 	end
 
-
 	def medium_thumbnail
 		image_url(:medium_thumb)
 	end
