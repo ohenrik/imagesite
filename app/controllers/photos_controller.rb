@@ -163,7 +163,7 @@ class PhotosController < ApplicationController
 
 
   def add_to_page
-    @page_item = @photo.page_items.create(page_id: params[:page_id], position: params[:position], ancestry: params[:page_item_id])
+    @page_item = @photo.sub_items.create(page_id: params[:page_id], ancestry: params[:page_item_id])
     respond_to do |format|
       if @page_item
         format.html { redirect_to edit_page_path(params[:page_id]), notice: 'Item successfully added' }

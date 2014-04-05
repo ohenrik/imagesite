@@ -5,7 +5,8 @@ class PageItem < ActiveRecord::Base
 	after_initialize :title
 
 	has_ancestry
-
+	acts_as_list scope: [:ancestry]
+	
  	# Liquid methods
 	liquid_methods :position, :pageable, :is_type, :title, :description, :item_class, :item_link, :no_item_link, :content
 
@@ -21,6 +22,5 @@ class PageItem < ActiveRecord::Base
 	def description
 		read_attribute(:description).presence || pageable.try(:description)
 	end
-
 
 end

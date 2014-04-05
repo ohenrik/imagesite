@@ -67,8 +67,9 @@ gem 'wysihtml5-rails'
 gem 'font-awesome-sass'
 gem 'sanitize-rails', :require => 'sanitize/rails'
 
-# Navigation
+# Navigation and page_items
 gem 'ancestry'
+gem 'acts_as_list'
 
 # Settings
 gem 'rails-settings-cached'

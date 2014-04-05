@@ -94,7 +94,7 @@ class PageItemsController < ApplicationController
       object.each_with_index do |item, index|
         @page_item = PageItem.find(item["id"])
         #@page_item.parent_id = parent
-        @page_item.update(:position => (index + 1))
+        PageItem.update_all({:position => (index + 1)}, {id: item["id"]})
         update_position(item["children"], item["id"]) if !item["children"].nil? 
       end
     end

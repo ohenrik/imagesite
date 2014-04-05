@@ -7,7 +7,7 @@ class Photo < ActiveRecord::Base
 	has_many :taggings, dependent: :destroy
 	has_many :tags, through: :taggings
 	belongs_to :user
-	has_many :page_items, :as => :pageable, :dependent => :destroy
+	has_many :sub_items, :as => :pageable, :class_name => "PageItem", :dependent => :destroy
 
 
 	# Liquid methods

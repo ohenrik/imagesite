@@ -5,8 +5,11 @@ class Page < ActiveRecord::Base
  	has_many :menu_items, :as => :menuable, :dependent => :destroy
  	has_one :user, :as => :home
 
- 	has_many :page_items, :as => :pageable, :dependent => :destroy
- 	has_many :sub_items, :foreign_key => "page_id", :class_name => "PageItem", :dependent => :destroy
+ 	# This page is a sub_item under these pages
+ 	has_many :sub_items, :as => :pageable, :class_name => "PageItem", :dependent => :destroy
+
+ 	# This page has these sub_items as its page items.
+ 	has_many :page_items, :foreign_key => "page_id", :dependent => :destroy
  	
 
 
@@ -27,7 +30,7 @@ class Page < ActiveRecord::Base
 	end
 
 	def items
-		sub_items.arrange(order: :position)
+		page_items.arrange(order: :position)
 	end
 
 end

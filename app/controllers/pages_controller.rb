@@ -119,7 +119,9 @@ class PagesController < ApplicationController
   end
 
   def add_to_page
-    @page_item = @page.page_items.create(page_id: params[:page_id], position: params[:position], ancestry: params[:page_item_id])
+    # @page in this case is the page selected to be added to the parent page of id = params[:page_id]
+    # This is why @page.sub_items creates a new child of the page with id = params[:page_id]
+    @page_item = @page.sub_items.create(page_id: params[:page_id], ancestry: params[:page_item_id])
     respond_to do |format|
       if @page_item
         format.html { redirect_to edit_page_path(params[:page_id]), notice: 'Item successfully added' }
@@ -133,7 +135,7 @@ class PagesController < ApplicationController
 
 
   def add_other_page_item
-    @page_item = PageItem.create(page_id: @page.id, position: params[:position], other_type: params[:other_type])
+    @page_item = PageItem.create(page_id: @page.id, other_type: params[:other_type])
     respond_to do |format|
       if @page_item
         format.html { redirect_to edit_page_path(@page), notice: 'Item successfully added' }
