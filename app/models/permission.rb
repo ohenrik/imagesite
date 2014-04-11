@@ -22,8 +22,9 @@ class Permission
 			allow_param :menu_item, [:menu_id, :menuable_id, :menuable_type, :name, :description, :new_page, :ancestry, :position, :url]
 			allow_param :page_item, [:position, :page_id, :pageable_id, :no_item_link, :item_link, :item_class, :description, :title, :content, :pageable_type, :pageable, :gallery]
 			allow_param :photo, [:name, :image, :edit_tag_list, :description]
-			allow_param :page, [:name, :content, :excerpt, :status, :photo_id]
+			allow_param :page, [:name, :content, :excerpt, :status, :photo_id, :layout_id, :template_id]
 			allow_param :theme, [:zip, :name]
+			allow_param :code_file, [:theme_id, :name, :code, :hierarchy, :created_at, :updated_at, :snippet_type => []]
 			allow_param :tag, [:name]
 			allow_param :text, [:content]
 			allow_param :page_title, [:title]
@@ -35,6 +36,7 @@ class Permission
 			allow :menus, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :add_item_to_menu]
 			allow :menu_items, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :sort]
 			allow :themes, [:show, :index, :edit, :update, :create, :new, :destroy, :select_theme]
+			allow :code_files, [:show, :index, :edit, :update, :create, :new, :destroy]
 			allow :public_themes, [:index, :show]
 		end
 	end

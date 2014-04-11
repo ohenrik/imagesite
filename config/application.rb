@@ -24,7 +24,7 @@ module Imagesite
     # config.i18n.default_locale = :de
     
     config.autoload_paths += %W(#{config.root}/lib/assets)
-
+    config.assets.precompile += %w( password_resets.js sessions.js users.js code_files.js galleries.js menu_items.js menus.js navigation.js page_items.js pages.js photos.js public_themes.js tags.js themes.js)
 
     #config.assets.paths << "#{Rails.root}/public/uploads/themes/#{User.subdomain}/#{User.theme.id}/assets/stylesheets"
     #config.assets.paths << "#{Rails.root}/public/uploads/themes/#{User.subdomain}/#{User.theme.id}/assets/images"

@@ -19,4 +19,4 @@
 //= require jquery.validate
 //= require jquery.validate.additional-methods
 //= require turbolinks
-//= require_tree .
+//= require_tree './always_run/.'

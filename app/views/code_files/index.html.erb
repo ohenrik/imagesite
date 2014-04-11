@@ -1,0 +1,33 @@
+
+<div class="row">
+
+    <div class="col-xs-12 col-sm-8">
+
+        <div class="page-header">
+            <h3>Theme files</h3>
+        </div>
+        <% @code_files.each do |code_file| %>
+            <div>
+                <%= link_to edit_theme_code_file_path(code_file.theme.id, code_file.id), class: "btn btn-link" do %>
+                    <%= code_file.name %>
+                <% end %>
+                <span class="label label-default"><%= code_file.hierarchy %></span>
+                
+                <%= link_to theme_code_file_path(code_file.theme.id, code_file.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" do %>
+                    <i class="fa fa-trash-o"></i> Delete
+                <% end %>
+            </div>
+        <% end %>
+
+
+
+    </div>
+
+    <div class="col-xs-12 col-sm-4">
+        <div class="well">
+            <%= link_to 'New Code file', new_theme_code_file_path, class: "btn btn-primary" %>
+        </div>
+    </div>
+
+</div>
+

@@ -4,7 +4,9 @@ class Theme < ActiveRecord::Base
 	mount_uploader :zip, ThemeUploader
 
 	belongs_to :user
-
+  has_many :code_files
+  accepts_nested_attributes_for :code_files
+  
 	# Validaties theme upload
 	validates :zip, :name, presence: true
 

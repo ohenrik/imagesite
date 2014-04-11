@@ -47,8 +47,9 @@ Imagesite::Application.routes.draw do
 
         # Themes
         get 'themes/select_theme/:id' => 'themes#select_theme', as: :select_theme
-        resources :themes
-
+        resources :themes do
+          resources :code_files
+        end
         # Menu Items
         post 'menu_items/sort_menu_items/:id' => 'menu_items#sort', as: :sort_menu_items
         resources :menu_items

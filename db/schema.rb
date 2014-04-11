@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140404221343) do
+ActiveRecord::Schema.define(version: 20140409162911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "code_files", force: true do |t|
+    t.integer  "theme_id"
+    t.string   "name"
+    t.text     "code"
+    t.string   "hierarchy"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "snippet_type", array: true
+  end
+
+  add_index "code_files", ["theme_id"], name: "index_code_files_on_theme_id", using: :btree
 
   create_table "menu_items", force: true do |t|
     t.integer  "menu_id"
@@ -70,10 +82,13 @@ ActiveRecord::Schema.define(version: 20140404221343) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "photo_id"
-    t.string   "template"
+    t.integer  "layout_id"
+    t.integer  "template_id"
   end
 
+  add_index "pages", ["layout_id"], name: "index_pages_on_layout_id", using: :btree
   add_index "pages", ["photo_id"], name: "index_pages_on_photo_id", using: :btree
+  add_index "pages", ["template_id"], name: "index_pages_on_template_id", using: :btree
 
   create_table "photos", force: true do |t|
     t.string   "name"
@@ -113,6 +128,11 @@ ActiveRecord::Schema.define(version: 20140404221343) do
 
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", using: :btree
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
+
+  create_table "snippets_templates", id: false, force: true do |t|
+    t.integer "template_id", null: false
+    t.integer "snippet_id",  null: false
+  end
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"

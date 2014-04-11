@@ -1,2 +1,2 @@
 <% # Render the liquid template named Show %>
-<%= raw liquidize({'page' => @page}, "page") %>
+<%= raw liquidize({'page' => @page}, @page.layout_id , @page.template_id) %>

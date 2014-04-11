@@ -1,0 +1,41 @@
+<%= form_for([@theme, @code_file]) do |f| %>
+<div class="row">
+
+    <div class="col-xs-12 col-sm-8">
+        <div class="form-group">
+            <%= f.text_area :code, placeholder: "Enter code here", class: "form-control code-textarea default", id: "code_area"  %>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-4">
+        <div class="well">
+            <div class="form-group">
+                <%= f.label :name, "File name" %>
+                <%= f.text_field :name, class: "form-control" %>
+            </div>
+            <div class="form-group">
+                <%= f.label :hierarchy %>
+                <%= @code_file.hierarchy %>
+                <%= f.select :hierarchy, options_for_select([["Layout", "layout"],["Template", "template"],["Snippet", "snippet"],["Asset", "asset"],["Other", "other"]], @code_file.hierarchy), {}, { class: "form-control"} %>
+            </div>
+            <div class="form-group">
+              <%= f.label :snippet_type, "Snippet for:" %>
+              <%= f.select :snippet_type, [["Page", "page"],["Photo", "photo"], ["Text", "text"], ["Title", "title"]], {}, {:multiple => true, class: "form-control"} %>
+            </div>
+            <div class="actions">
+                <%= f.submit "Save", class: "btn btn-primary" %>
+                <%= link_to 'Cancel', theme_code_files_path, class: "btn btn-default" %>
+            </div>
+        </div>
+        
+        <div class="page-header">
+            <h2>Help</h2>
+        </div>
+        <p>
+            For fullscreen press Ctrl+Enter
+        </p>
+        
+    </div>
+
+</div>
+<% end %>

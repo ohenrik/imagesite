@@ -77,6 +77,13 @@
 	#	connectWith: '.sortable_gallery'
 
 
+	$(document).on 'change', '#page_item_no_item_link', (event) ->
+		if $('#custom_link_field').attr("disabled")
+			$('#custom_link_field').removeAttr('disabled')
+		else
+			$('#custom_link_field').attr("disabled", "disabled")
+
+
 	# sorting page items
 
 	$(document).on 'click', '.order-up', (event) ->

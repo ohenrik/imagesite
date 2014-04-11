@@ -1,0 +1,20 @@
+// Place all the styles related to the CodeFiles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.CodeMirror {
+	border: 1px solid #ddd;
+	height: auto !important;
+	min-height: 300px;
+}
+.CodeMirror-scroll {
+  overflow-y: hidden;
+  overflow-x: auto;
+  min-height: 300px;
+}
+div.CodeMirror-code > div {
+	border-left: 3px solid transparent;
+}
+div.CodeMirror-code > div:hover   {
+	//background-color: #ddd !important;
+	//border-left: 3px solid 	#ddd; //#7D599F
+}

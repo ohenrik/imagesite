@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Theme:</strong>
+  <%= @code_file.theme %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @code_file.name %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @code_file.code %>
+</p>
+
+<p>
+  <strong>Hierarchy:</strong>
+  <%= @code_file.hierarchy %>
+</p>
+
+<%= link_to 'Edit', edit_code_file_path(@code_file) %> |
+<%= link_to 'Back', code_files_path %>
