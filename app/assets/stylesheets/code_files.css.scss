@@ -10,9 +10,10 @@
   overflow-y: hidden;
   overflow-x: auto;
   min-height: 300px;
+  max-height: 1000px;
 }
 div.CodeMirror-code > div {
-	border-left: 3px solid transparent;
+	//border-left: 3px solid transparent;
 }
 div.CodeMirror-code > div:hover   {
 	//background-color: #ddd !important;

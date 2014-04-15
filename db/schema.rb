@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140409162911) do
+ActiveRecord::Schema.define(version: 20140415172315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,9 @@ ActiveRecord::Schema.define(version: 20140409162911) do
     t.string   "hierarchy"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "snippet_type", array: true
+    t.string   "available_to", array: true
+    t.string   "static_file"
+    t.integer  "available_in", array: true
   end
 
   add_index "code_files", ["theme_id"], name: "index_code_files_on_theme_id", using: :btree

@@ -13,7 +13,7 @@ class Theme < ActiveRecord::Base
 
 	# After deletion of the zip file, delete the theme as well.
 	#after_destroy :delete_extract
-
+  liquid_methods :id
 
 	# Extract the zip file
     def extract_preview

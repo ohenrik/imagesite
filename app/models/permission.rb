@@ -10,6 +10,7 @@ class Permission
 		allow :photos, [:index, :show]
 		allow :tags, [:show]
 		allow :pages, [:show]
+		allow :code_files, [:show]
 		if user
 			allow :users, [:edit, :update, :settings, :update_settings, :edit_alias_domain, :set_alias_domain ,:remove_alias_domain] do |inst|
 				inst.id == user.id
@@ -24,7 +25,7 @@ class Permission
 			allow_param :photo, [:name, :image, :edit_tag_list, :description]
 			allow_param :page, [:name, :content, :excerpt, :status, :photo_id, :layout_id, :template_id]
 			allow_param :theme, [:zip, :name]
-			allow_param :code_file, [:theme_id, :name, :code, :hierarchy, :created_at, :updated_at, :snippet_type => []]
+			allow_param :code_file, [:theme_id, :name, :code, :hierarchy, :created_at, :updated_at, :static_file, :available_to => [], :available_in => []]
 			allow_param :tag, [:name]
 			allow_param :text, [:content]
 			allow_param :page_title, [:title]

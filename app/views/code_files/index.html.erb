@@ -6,26 +6,81 @@
         <div class="page-header">
             <h3>Theme files</h3>
         </div>
-        <% @code_files.each do |code_file| %>
-            <div>
-                <%= link_to edit_theme_code_file_path(code_file.theme.id, code_file.id), class: "btn btn-link" do %>
-                    <%= code_file.name %>
-                <% end %>
-                <span class="label label-default"><%= code_file.hierarchy %></span>
-                
-                <%= link_to theme_code_file_path(code_file.theme.id, code_file.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" do %>
-                    <i class="fa fa-trash-o"></i> Delete
-                <% end %>
-            </div>
-        <% end %>
+        <table class="table table-striped">
+            <!--
+                <thead>
+                    <th>File name:</th>
+                    <th>File type:</th>
+                    <th></th>
+                </thead>
+            -->
+            <tbody>
+                <% @code_files.group_by(&:hierarchy).each do |hierarchy, code_files| %>
 
+                    <% code_files.each do |code_file| %>
+                        <tr>
+                            <td>
+                                <% if code_file.static_file.blank? %>
+                                    <%= link_to code_file.name, edit_theme_code_file_path(code_file.theme.id, code_file.id), class: "" %>
+                                <% else %>
+                                    <i class="fa fa-file"></i>
+                                    <%= code_file.name %> 
+                                <% end %>
+                            </td>
+                            <td>
+                                <span class="label label-default"><%= code_file.hierarchy %></span>
+                            </td>
+                            <td>     
+                                <%= link_to theme_code_file_path(code_file.theme.id, code_file.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "" do %>
+                                    <i class="fa fa-trash-o"></i> Delete
+                                <% end %>
+                            </td>
+                        </tr>
+                    <% end %>
 
+                <% end %>
+            </tbody>
+        </table>
 
     </div>
 
     <div class="col-xs-12 col-sm-4">
+        <div class="page-header">
+            <h3>New file</h3>
+        </div>
         <div class="well">
-            <%= link_to 'New Code file', new_theme_code_file_path, class: "btn btn-primary" %>
+            <%= form_for([@theme, @code_file]) do |f| %>
+                <div class="error-container">
+                    <%= render partial: 'shared/form_errors', :locals => {:item => @code_file} %>
+                </div>
+                <div class="form-group">
+                    <%= f.label :name, "File name" %>
+                    <%= f.text_field :name, class: "form-control" %>
+                </div>
+                
+                <div class="form-group">
+                    <%= f.label :hierarchy %>
+                    <%= f.select :hierarchy, options_for_select([["Layout", "layout"],["Template", "template"],["Snippet", "snippet"],["Asset", "asset"]], @code_file.hierarchy), {}, { class: "form-control"} %>
+                </div>
+                
+                <div class="form-group" id="static_file_fields">
+                    <%= f.label :static_file %> 
+                    <%= f.file_field :static_file, class: "" %>
+                    <br>
+                </div>
+
+
+                <% if @code_file.hierarchy == 'snippet' %>
+                    <div class="form-group">
+                      <%= f.label :snippet_type, "Snippet for:" %>
+                      <%= f.select :snippet_type, [["Page", "page"],["Photo", "photo"], ["Text", "text"], ["Title", "title"]], {:include_blank => true }, {:multiple => true, class: "form-control"} %>
+                    </div>
+                <% end %>
+
+                <%= f.submit "Cancel", :type => "reset", class: "btn btn-default" %>
+                <%= f.submit "New file", class: "btn btn-primary pull-right" %>
+
+            <% end %>
         </div>
     </div>
 

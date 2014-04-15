@@ -8,26 +8,70 @@
     </div>
 
     <div class="col-xs-12 col-sm-4">
+        <div class="error-container">
+            <%= render partial: 'shared/form_errors', :locals => {:item => @code_file} %>
+        </div>
         <div class="well">
             <div class="form-group">
                 <%= f.label :name, "File name" %>
                 <%= f.text_field :name, class: "form-control" %>
             </div>
+            
             <div class="form-group">
                 <%= f.label :hierarchy %>
-                <%= @code_file.hierarchy %>
                 <%= f.select :hierarchy, options_for_select([["Layout", "layout"],["Template", "template"],["Snippet", "snippet"],["Asset", "asset"],["Other", "other"]], @code_file.hierarchy), {}, { class: "form-control"} %>
             </div>
-            <div class="form-group">
-              <%= f.label :snippet_type, "Snippet for:" %>
-              <%= f.select :snippet_type, [["Page", "page"],["Photo", "photo"], ["Text", "text"], ["Title", "title"]], {}, {:multiple => true, class: "form-control"} %>
-            </div>
-            <div class="actions">
-                <%= f.submit "Save", class: "btn btn-primary" %>
-                <%= link_to 'Cancel', theme_code_files_path, class: "btn btn-default" %>
-            </div>
+            
+            <% if @code_file.hierarchy == 'snippet' %>
+                <div class="form-group">
+                  <%= f.label :available_to, "Snippet for:" %>
+                  <%= f.select :available_to, [["Page", "page"],["Photo", "photo"], ["Text", "text"], ["Title", "title"]], {:include_blank => true }, {:multiple => true, class: "form-control"} %>
+                </div>
+            <% end %>
+
+
+            
+            <%= link_to 'Cancel', theme_code_files_path, class: "btn btn-default" %>
+            <%= f.submit "Save", class: "btn btn-primary pull-right" %>
+    
         </div>
         
+        <div class="page-header">
+            <h3>Theme files</h3>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <th>File name:</th>
+                <th>File type:</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <% @code_files.group_by(&:hierarchy).each do |hierarchy, code_files| %>
+                    <% code_files.each do |code_file| %>
+                        <tr <%= current_page?(:controller => 'code_files', :action => 'edit', :id =>  code_file.id) ? 'class=info' : "" %>>
+                            <td>
+                                <% if code_file.static_file.blank? %>
+                                    <%= link_to code_file.name, edit_theme_code_file_path(code_file.theme.id, code_file.id), class: "" %>
+                                <% else %>
+                                    <i class="fa fa-file"></i>
+                                    <%= code_file.name %> 
+                                <% end %>
+                            </td>
+                            <td>
+                                <span class="label <%= current_page?(:controller => 'code_files', :action => 'edit', :id =>  code_file.id) ? 'label-info' : "label-default" %>"><%= code_file.hierarchy %></span>
+                            </td>
+                            <td>     
+                                <%= link_to theme_code_file_path(code_file.theme.id, code_file.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-info" do %>
+                                    <i class="fa fa-trash-o"></i> Delete
+                                <% end %>
+                            </td>
+                        </tr>
+                    <% end %>
+
+                <% end %>
+            </tbody>
+        </table>
+
         <div class="page-header">
             <h2>Help</h2>
         </div>

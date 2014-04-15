@@ -24,7 +24,7 @@ app/assets/themes/
 public/assets/themes/
 !public/assets/.gitkeep
 config/aws_environment_variables.rb
-
+public/cache/
 
 
 # Ignore database setup file

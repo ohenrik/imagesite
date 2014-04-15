@@ -1,29 +1,49 @@
 class CodeFilesController < ApplicationController
 
+  caches_page :show # magic happens here
+
+
   # Scope current tenant
   around_filter :scope_current_tenant
 
-  before_action :set_code_file, only: [:show, :edit, :update, :destroy]
+  before_action :set_code_file, only: [:edit, :update, :destroy]
 
   # GET /code_files
   # GET /code_files.json
   def index
+    @code_file = CodeFile.new
+    @theme = Theme.find(params[:theme_id])
     @code_files = CodeFile.where(theme_id: params[:theme_id]).all
   end
 
   # GET /code_files/1
   # GET /code_files/1.json
   def show
+    # Uses ! to indicate that the controller should return 404 when the requested record is not an asset or not found.
+    @code_file = CodeFile.find_by!(id: params[:id], hierarchy: 'asset')
+    respond_to do |format|
+      if @code_file.static_file.blank?
+        format.css { render :text => @code_file.code, :content_type => "text/css" }
+        format.js { render :text => @code_file.code, :content_type => "text/javascript" }
+        format.any { render :text => @code_file.code }
+      else
+        format.css { redirect_to @code_file.static_file.url, :type => "text/css", :disposition => 'inline' }
+        format.js { redirect_to @code_file.static_file.url, :type => "text/javascript", :disposition => 'inline' }
+        format.any { redirect_to @code_file.static_file.url, :disposition => 'inline' }
+      end
+    end
   end
 
   # GET /code_files/new
   def new
+    @code_files = CodeFile.where(theme_id: params[:theme_id]).all
     @code_file = CodeFile.new
     @theme = Theme.find(params[:theme_id])
   end
 
   # GET /code_files/1/edit
   def edit
+    @code_files = CodeFile.where(theme_id: params[:theme_id]).all
     @theme = Theme.find(params[:theme_id])
   end
 
@@ -35,10 +55,15 @@ class CodeFilesController < ApplicationController
     @code_file.theme_id = params[:theme_id]
     respond_to do |format|
       if @code_file.save
-        format.html { redirect_to edit_theme_code_file_url(id: @code_file.id, theme: @code_file.theme_id), notice: 'Code file was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @code_file }
+        if @code_file.static_file.blank?
+          format.html { redirect_to edit_theme_code_file_url(id: @code_file.id, theme: @code_file.theme_id), notice: 'Code file was successfully created.' }
+          format.json { redirect_to edit_theme_code_file_url(id: @code_file.id, theme: @code_file.theme_id), status: :created, location: @code_file }
+        else
+          format.html { redirect_to theme_code_files_path, notice: 'Code file was successfully created.' }
+          format.json { redirect_to theme_code_files_path, status: :created, location: @code_file }
+        end
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to theme_code_files_path }
         format.json { render json: @code_file.errors, status: :unprocessable_entity }
       end
     end
@@ -49,6 +74,7 @@ class CodeFilesController < ApplicationController
   def update
     respond_to do |format|
       if @code_file.update(params[:code_file])
+        expire_page action: 'show', id: @code_file.id
         format.html { redirect_to edit_theme_code_file_url, notice: 'Code file was successfully updated.' }
         format.json { head :no_content }
       else

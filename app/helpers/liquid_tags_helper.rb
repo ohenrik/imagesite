@@ -14,52 +14,63 @@ module LiquidTagsHelper
 
 	Liquid::Template.register_tag('random', Random)
 
-	#
-	# Layoutfiles
-	#
-	class LayoutFile < Liquid::Tag
-		def initialize(tag_name, file_name, tokens)
-			super
-			@file_name = file_name
-		end
-
-
-	    def render(context)
-	    	@path = Liquid::Template.file_system
-	    	header_file = @path.root.to_s + "/layout/#{@file_name.strip}.html.liquid"
-
-	    	content = File.read(header_file)
-
-	    	Liquid::Template.parse(content).render(context)
-	    end
-
-	end
-
-	Liquid::Template.register_tag('layout_file', LayoutFile)
-
 
 	#
 	# Partials
 	#
-	class PartialFile < Liquid::Tag
-		def initialize(tag_name, file_name, tokens)
+	class SnippetFile < Liquid::Tag
+		# Include the stylesheet tag link helper
+		include ActionView::Helpers::AssetTagHelper
+
+		def initialize(tag_name, variables, tokens)
+			@variables = variables.split(" ")
+
+			@file_name = @variables[0]
+
 			super
-			@file_name = file_name
 		end
 
-
 	    def render(context)
-	    	@path = Liquid::Template.file_system
-	    	header_file = @path.root.to_s + "/partials/#{@file_name.strip}.html.liquid"
 
-	    	content = File.read(header_file)
+	    	content = CodeFile.find_by(hierarchy: 'snippet', name: @file_name.to_s, theme_id: context["theme_id"])
 
-	    	Liquid::Template.parse(content).render(context)
+	    	Liquid::Template.parse(content.code).render(context)
+			
 	    end
 
 	end
 
-	Liquid::Template.register_tag('partial_file', PartialFile)
+	Liquid::Template.register_tag('snippet_file', SnippetFile)
+
+
+	#
+	# Static_asset
+	#
+	class AssetPath < Liquid::Tag
+
+		# Include the stylesheet tag link helper
+		include ActionView::Helpers::AssetTagHelper
+
+		def initialize(tag_name, variables, tokens)
+			@variables = variables.split(" ")
+
+			@file_name = @variables[0]
+
+			super
+		end
+
+
+	    def render(context)
+
+	    	asset = CodeFile.find_by!(hierarchy: 'asset', name: @file_name.to_s, theme_id: context["theme_id"])
+
+	    	"/themes/#{context["theme_id"]}/code_files/#{asset.id}"
+			
+	    end
+
+	end
+
+	Liquid::Template.register_tag('asset_path', AssetPath)
 
 
 	#
@@ -70,10 +81,10 @@ module LiquidTagsHelper
 		# Include the stylesheet tag link helper
 		include ActionView::Helpers::AssetTagHelper
 
+		def initialize(tag_name, variables, tokens)
+			@variables = variables.split(" ")
 
-		def initialize(tag_name, sheet, tokens)
-
-			@sheet = sheet
+			@file_name = @variables[0]
 
 			super
 		end
@@ -81,14 +92,9 @@ module LiquidTagsHelper
 
 	    def render(context)
 
-	    	@path = Liquid::Template.file_system.root
-	    	
-	    	#derrive request subdomain from Liquid filesystem! 
-	    	@path_array = @path.to_s.split("/")
-	    	@subdomain = @path_array[-2]
+	    	sheet = CodeFile.find_by!(hierarchy: 'asset', name: @file_name.to_s, theme_id: context["theme_id"])
 
-
-	    	stylesheet_link_tag "/assets/themes/#{@subdomain}/stylesheets/#{@sheet.strip}"
+	    	stylesheet_link_tag "/themes/#{context["theme_id"]}/code_files/#{sheet.id}"
 			
 	    end
 
@@ -105,10 +111,10 @@ module LiquidTagsHelper
 		# Include the stylesheet tag link helper
 		include ActionView::Helpers::AssetTagHelper
 
+		def initialize(tag_name, variables, tokens)
+			@variables = variables.split(" ")
 
-		def initialize(tag_name, sheet, tokens)
-
-			@sheet = sheet
+			@file_name = @variables[0]
 
 			super
 		end
@@ -116,14 +122,9 @@ module LiquidTagsHelper
 
 	    def render(context)
 
-	    	@path = Liquid::Template.file_system.root
-	    	
-	    	#derrive request subdomain from Liquid filesystem! 
-	    	@path_array = @path.to_s.split("/")
-	    	@subdomain = @path_array[-2]
+	    	sheet = CodeFile.find_by!(hierarchy: 'asset', name: @file_name.to_s, theme_id: context["theme_id"])
 
-
-	    	javascript_include_tag "/assets/themes/#{@subdomain}/javascripts/#{@sheet.strip}"
+	    	javascript_include_tag "/themes/#{context["theme_id"]}/code_files/#{sheet.id}"
 			
 	    end
 
@@ -184,19 +185,14 @@ module LiquidTagsHelper
 		end
 
 	    def render(context)
-	    	#@path = Liquid::Template.file_system
-	    	#header_file = @path.root.to_s + "/partials/#{@file_name.strip}.html.liquid"
 
-	    	#content = File.read(header_file)
-	    	current_tenant
-
-	    	content = CodeFile.find_by_hierarchy_and_name('snippet', @file_name.to_s).code
+	    	content = CodeFile.find_by(hierarchy: 'snippet', name: @file_name.to_s, theme_id: context["theme_id"])
 
 	    	@menu ||= Menu.find_by_slug(@menu_object)
 
 	    	context.merge('menu' => @menu)
 
-	    	Liquid::Template.parse(content).render(context)
+	    	Liquid::Template.parse(content.code).render(context)
 
 	    end
 

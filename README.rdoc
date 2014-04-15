@@ -3,13 +3,15 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-Things you may want to cover:
+** Versions
+Ruby 2.1.1 
+Rails 4.0.2 (should be 4.0.4 because server is running on 4.0.4)
 
-* Ruby version
+** System dependencies
+Depends on Image Magic
 
-* System dependencies
-
-* Configuration
+** Configuration
+Remember to manually transfer the Environment variables for the aws keys and digital ocean keys
 
 * Database creation
 

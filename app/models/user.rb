@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 	belongs_to :home, polymorphic: true
 
 
-	liquid_methods :first_name, :last_name, :username, :email, :site_title, :site_tagline
+	liquid_methods :first_name, :last_name, :username, :email, :site_title, :site_tagline, :theme
 
 
 	def send_password_reset

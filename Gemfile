@@ -94,6 +94,10 @@ gem 'bootstrap-sass', '~> 3.1.1'
 # jquery validation
 gem 'jquery-validation-rails'
 
+# caching
+gem 'actionpack-page_caching'
+gem 'actionpack-action_caching'
+
 ## Test gems
 gem "rspec-rails", :group => [:test, :development]
 group :test do 

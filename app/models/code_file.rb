@@ -5,4 +5,8 @@ class CodeFile < ActiveRecord::Base
 	#has_and_belongs_to_many :templates, class_name: "CodeFile", foreign_key: "template_id", join_table: "templates_snippets", association_foreign_key: "snippet_id"
 	#has_and_belongs_to_many :snippets, class_name: "CodeFile", foreign_key: "snippet_id", join_table: "templates_snippets", association_foreign_key: "template_id"
 
+	validates :name, :hierarchy, presence: true
+
+	mount_uploader :static_file, StaticFileUploader
+
 end

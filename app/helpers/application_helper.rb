@@ -10,9 +10,17 @@ module ApplicationHelper
 		Liquid::Template.file_system = Liquid::LocalFileSystem.new(theme_root_path)
 
 		if current_tenant.theme.present?
+			if layout_id
+				layout_code = current_tenant.theme.code_files.find(layout_id).code
+			else
+				layout_code = current_tenant.theme.code_files.where(hierarchy: 'layout').first.code
+			end
 
-			layout_code = current_tenant.theme.code_files.find(layout_id).code
-			template_code = current_tenant.theme.code_files.find(template_id).code
+			if template_id
+				template_code = current_tenant.theme.code_files.find(template_id).code
+			else
+				template_code = current_tenant.theme.code_files.where(hierarchy: 'template', name: (controller.controller_name + "_" + controller.action_name + ".html" )).first.code
+			end
 		else
 			#content = "No theme chosen yet for this subdomain"
 			layout_code = "No layout or theme chosen yet for this page"
@@ -22,15 +30,11 @@ module ApplicationHelper
 		#file_system = Liquid::LocalFileSystem.new(content)
 
 		# Render the template file
-		templ = Liquid::Template.parse(template_code).render(model_content.merge('settings' => current_tenant), :filters => [LiquidFilters])
+		templ = Liquid::Template.parse(template_code).render(model_content.merge('settings' => current_tenant, 'theme_id' => current_tenant.theme.id), :filters => [LiquidFilters])
 		# Render the Layout file
-		Liquid::Template.parse(layout_code).render(model_content.merge('template_content' => templ, 'settings' => current_tenant), :filters => [LiquidFilters])
+		Liquid::Template.parse(layout_code).render(model_content.merge('template_content' => templ, 'settings' => current_tenant, 'theme_id' => current_tenant.theme.id), :filters => [LiquidFilters])
 	end
 
-	def current_tenant
-		@current_tenant ||= User.find_by_alias_domain(request.host)
-		@current_tenant ||= User.find_by_subdomain!(request.subdomain) # includes(:home).
-	end
 
 
 end
