@@ -1,7 +1,5 @@
 class PublicThemesController < ApplicationController
   
-  # Find the tenant
-  around_filter :scope_current_tenant
 
   before_action :set_public_theme, only: [:show, :edit, :update, :destroy]
 

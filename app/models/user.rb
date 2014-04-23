@@ -8,13 +8,14 @@ class User < ActiveRecord::Base
 	validates :username, :subdomain, :email, presence: true, uniqueness: true
 
 	# Or with your own reserved names
-	validates  :subdomain, :subdomain  => { :reserved => %w(example documentation doc ole olehenrik anette lobach loebach skogstrom morgenstern help business) }
+	validates  :subdomain, :subdomain  => { :reserved => %w(example documentation doc ole olehenrik anette lobach loebach skogstrom morgenstern help business mail docs) }
 
 	before_create { generate_token(:auth_token) }
 
 	has_and_belongs_to_many :roles
 	has_many :photos
 	has_many :themes
+	has_many :public_themes
 	belongs_to :theme
 	belongs_to :home, polymorphic: true
 

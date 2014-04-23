@@ -7,18 +7,22 @@
             <h3>Theme files</h3>
         </div>
         <table class="table table-striped">
-            <!--
+            
                 <thead>
+                    <th>Hierarchy:</th>
                     <th>File name:</th>
-                    <th>File type:</th>
+                    <th>Display name:</th>
                     <th></th>
                 </thead>
-            -->
+           
             <tbody>
                 <% @code_files.group_by(&:hierarchy).each do |hierarchy, code_files| %>
 
                     <% code_files.each do |code_file| %>
                         <tr>
+                            <td>
+                                <span class="label label-default"><%= code_file.hierarchy %></span>
+                            </td>
                             <td>
                                 <% if code_file.static_file.blank? %>
                                     <%= link_to code_file.name, edit_theme_code_file_path(code_file.theme.id, code_file.id), class: "" %>
@@ -28,7 +32,7 @@
                                 <% end %>
                             </td>
                             <td>
-                                <span class="label label-default"><%= code_file.hierarchy %></span>
+                                <%= code_file.display_name %>
                             </td>
                             <td>     
                                 <%= link_to theme_code_file_path(code_file.theme.id, code_file.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "" do %>

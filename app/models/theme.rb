@@ -8,7 +8,7 @@ class Theme < ActiveRecord::Base
   accepts_nested_attributes_for :code_files
   
 	# Validaties theme upload
-	validates :zip, :name, presence: true
+	validates :name, presence: true
 
 
 	# After deletion of the zip file, delete the theme as well.

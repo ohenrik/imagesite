@@ -1,7 +1,5 @@
 Imagesite::Application.routes.draw do
 
-  resources :public_themes
-
     get "password_resets/new"
     get 'register', to: 'users#new', as: 'register'
     get 'login', to: 'sessions#new', as: 'login'
@@ -12,6 +10,12 @@ Imagesite::Application.routes.draw do
 
     resources :password_resets
 
+
+    # Public Themes
+    resources :public_themes do 
+      resources :public_code_files
+    end
+    
 
    #Check for subdomain
     constraints(Subdomain) do
@@ -50,6 +54,8 @@ Imagesite::Application.routes.draw do
         resources :themes do
           resources :code_files
         end
+
+
         # Menu Items
         post 'menu_items/sort_menu_items/:id' => 'menu_items#sort', as: :sort_menu_items
         resources :menu_items

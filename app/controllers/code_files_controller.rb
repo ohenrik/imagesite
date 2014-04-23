@@ -1,26 +1,29 @@
 class CodeFilesController < ApplicationController
 
-  caches_page :show # magic happens here
-
-
   # Scope current tenant
   around_filter :scope_current_tenant
 
   before_action :set_code_file, only: [:edit, :update, :destroy]
+
+  #caches_action :show, expire: 5.minutes
 
   # GET /code_files
   # GET /code_files.json
   def index
     @code_file = CodeFile.new
     @theme = Theme.find(params[:theme_id])
-    @code_files = CodeFile.where(theme_id: params[:theme_id]).all
+    @code_files = CodeFile.where(theme_id: params[:theme_id])
   end
 
   # GET /code_files/1
   # GET /code_files/1.json
   def show
     # Uses ! to indicate that the controller should return 404 when the requested record is not an asset or not found.
-    @code_file = CodeFile.find_by!(id: params[:id], hierarchy: 'asset')
+    if params[:format]
+      @code_file = CodeFile.find_by!(name: "#{params[:id]}.#{params[:format]}", hierarchy: 'asset')
+    else
+      @code_file = CodeFile.find_by!(name: "#{params[:id]}", hierarchy: 'asset')
+    end
     respond_to do |format|
       if @code_file.static_file.blank?
         format.css { render :text => @code_file.code, :content_type => "text/css" }
@@ -43,7 +46,7 @@ class CodeFilesController < ApplicationController
 
   # GET /code_files/1/edit
   def edit
-    @code_files = CodeFile.where(theme_id: params[:theme_id]).all
+    @code_files = CodeFile.where(theme_id: params[:theme_id])
     @theme = Theme.find(params[:theme_id])
   end
 
@@ -74,7 +77,7 @@ class CodeFilesController < ApplicationController
   def update
     respond_to do |format|
       if @code_file.update(params[:code_file])
-        expire_page action: 'show', id: @code_file.id
+        #expire_action controller: 'code_files', action: 'show', id: @code_file.id
         format.html { redirect_to edit_theme_code_file_url, notice: 'Code file was successfully updated.' }
         format.json { head :no_content }
       else
@@ -82,6 +85,11 @@ class CodeFilesController < ApplicationController
         format.json { render json: @code_file.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+
+  def custom_cache_path
+    "#{current_tenant.subdomain}/#{@code_file.name}"
   end
 
   # DELETE /code_files/1
@@ -99,6 +107,7 @@ class CodeFilesController < ApplicationController
     def set_code_file
       @code_file = CodeFile.find(params[:id])
     end
+
 
     ## Never trust parameters from the scary internet, only allow the white list through.
     #def code_file_params

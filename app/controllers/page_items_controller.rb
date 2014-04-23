@@ -92,10 +92,9 @@ class PageItemsController < ApplicationController
     
     def update_position(object, parent = nil)
       object.each_with_index do |item, index|
-        #@page_item = PageItem.find(item["id"])
-        #@page_item.parent_id = parent
-        PageItem.where({id: item["id"]}).update_all({:position => (index + 1), :ancestry => parent.to_s})
-        update_position(item["children"], item["id"]) if !item["children"].nil? 
+        # there is a bug here, that changes the id of the item
+        PageItem.where({id: item["id"]}).update_all({:position => (index + 1), :ancestry => parent})
+        update_position(item["children"], item["id"]) if item["children"].present? 
       end
     end
 

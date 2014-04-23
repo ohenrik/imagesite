@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140415172315) do
+ActiveRecord::Schema.define(version: 20140423182908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,8 @@ ActiveRecord::Schema.define(version: 20140415172315) do
     t.datetime "updated_at"
     t.string   "available_to", array: true
     t.string   "static_file"
-    t.integer  "available_in", array: true
+    t.string   "available_in", array: true
+    t.string   "display_name"
   end
 
   add_index "code_files", ["theme_id"], name: "index_code_files_on_theme_id", using: :btree
@@ -71,6 +72,7 @@ ActiveRecord::Schema.define(version: 20140415172315) do
     t.boolean  "no_item_link"
     t.string   "other_type"
     t.text     "content"
+    t.string   "design"
   end
 
   add_index "page_items", ["page_id"], name: "index_page_items_on_page_id", using: :btree
@@ -103,9 +105,25 @@ ActiveRecord::Schema.define(version: 20140415172315) do
 
   add_index "photos", ["user_id"], name: "index_photos_on_user_id", using: :btree
 
+  create_table "public_code_files", force: true do |t|
+    t.integer  "public_theme_id"
+    t.string   "name"
+    t.string   "display_name"
+    t.text     "code"
+    t.string   "hierarchy"
+    t.string   "available_to",    array: true
+    t.string   "available_in",    array: true
+    t.string   "static_file"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "public_code_files", ["public_theme_id"], name: "index_public_code_files_on_public_theme_id", using: :btree
+
   create_table "public_themes", force: true do |t|
     t.string   "name"
-    t.string   "zip"
+    t.integer  "user_id"
+    t.string   "thumbnail"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -154,10 +172,10 @@ ActiveRecord::Schema.define(version: 20140415172315) do
 
   create_table "themes", force: true do |t|
     t.string   "name"
-    t.string   "zip"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "thumbnail"
   end
 
   add_index "themes", ["user_id"], name: "index_themes_on_user_id", using: :btree

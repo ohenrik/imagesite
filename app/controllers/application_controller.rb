@@ -36,13 +36,14 @@ private
 	end
 
 	def current_tenant
-		@current_tenant ||= User.find_by_alias_domain(request.host)
+		@current_tenant = User.find_by_alias_domain(request.host) unless %w(lvh.me theatrical.co theatrical.no theatrical.de).include?(request.domain)
+		
 		@current_tenant ||= User.find_by_subdomain!(request.subdomain) # includes(:home).
 	end
 	helper_method :current_tenant
 
 	def scope_current_tenant(&block)
-		if (request.subdomain.present? or !%w(lvh.me theatrical.co).include?(request.host)) && !%w(subdomain www).include?(request.subdomain)
+		if (request.subdomain.present? or !%w(lvh.me theatrical.co theatrical.no theatrical.de).include?(request.domain)) && !%w(subdomain www).include?(request.subdomain)
 			current_tenant.scope_schema("public", &block)
 		else
 			redirect_to login_url(:subdomain => false), alert: "bingo"
@@ -51,7 +52,7 @@ private
 	helper_method :scope_current_tenant
 
 	def get_subdomain
-		%w(lvh.me theatrical.co).include?(request.domain) ? current_user.subdomain : ""
+		%w(lvh.me theatrical.co theatrical.no theatrical.de).include?(request.domain) ? current_user.subdomain : ""
 	end
 	helper_method :get_subdomain
 

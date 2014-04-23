@@ -16,16 +16,41 @@
                 <%= f.label :name, "File name" %>
                 <%= f.text_field :name, class: "form-control" %>
             </div>
-            
+
             <div class="form-group">
-                <%= f.label :hierarchy %>
-                <%= f.select :hierarchy, options_for_select([["Layout", "layout"],["Template", "template"],["Snippet", "snippet"],["Asset", "asset"],["Other", "other"]], @code_file.hierarchy), {}, { class: "form-control"} %>
+                <%= f.label :display_name %>
+                <%= f.text_field :display_name, class: "form-control" %>
+                <div class="help-block">The name users see when selecting designs.</div>
             </div>
             
-            <% if @code_file.hierarchy == 'snippet' %>
+            <div class="form-group">
+                <strong>Hierarchy</strong><br> 
+                <%= text_field_tag :hierarchy, @code_file.hierarchy, class: "form-control", disabled: "disabled" %>
+                <div class="help-block">Hierarchy can't changed after the file is created.</div>
+            </div>
+
+            <% if %w(template snippet).include?(@code_file.hierarchy) %>
                 <div class="form-group">
-                  <%= f.label :available_to, "Snippet for:" %>
-                  <%= f.select :available_to, [["Page", "page"],["Photo", "photo"], ["Text", "text"], ["Title", "title"]], {:include_blank => true }, {:multiple => true, class: "form-control"} %>
+                  <%= f.label :available_in, "Available in #{@code_file.hierarchy_up}:" %>
+                  <%= f.select :available_in, CodeFile.where(theme_id: @code_file.theme.id, hierarchy: @code_file.hierarchy_up ).map {|t| [t.name, t.id.to_s]}, {:include_blank => "- Hidden file -" }, {:multiple => true, class: "form-control"} %>
+                  <div class="help-block">Determines in what <%= @code_file.hierarchy_up.pluralize %> the file can be used.</div>
+                </div>
+
+            <% end %>
+
+            <% if %w(template layout).include?(@code_file.hierarchy) %>
+                <div class="form-group">
+                  <%= f.label :available_to, "Available to:" %>
+                  <%= f.select :available_to, [["Pages", "page"],["Photos", "photo"]], {:include_blank => "- Hidden file -" }, {:multiple => true, class: "form-control"} %>
+                  <div class="help-block">Determines what content the file can be used in.</div>
+                </div>
+            <% end %>
+            
+            <% if %w(snippet).include?(@code_file.hierarchy) %>
+                <div class="form-group">
+                  <%= f.label :available_to, "Available to:" %>
+                  <%= f.select :available_to, [["Pages", "page"],["Photos", "photo"], ["Text", "text"], ["Titles", "title"]], {:include_blank => "- Hidden file -" }, {:multiple => true, class: "form-control"} %>
+                  <div class="help-block">Determines what content the file can be used in.</div>
                 </div>
             <% end %>
 

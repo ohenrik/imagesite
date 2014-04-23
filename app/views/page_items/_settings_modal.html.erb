@@ -12,6 +12,11 @@
 	    </div>
 
 		<div class="form-group">
+			<%= f.label :design, "Custom design:" %>
+			<%= f.select :design, CodeFile.where(theme_id: current_tenant.theme.id, hierarchy: 'snippet' ).where( "? = ANY(available_to)", @page_item.is_type.downcase.split(',') ).map {|t| [t.display_name, t.name]}, {:include_blank => "- Default -" }, {class: "form-control"} %>
+		</div>
+
+		<div class="form-group">
 			<%= f.label :item_class, "Custom class:" %>
 			<%= f.text_field :item_class, class: "form-control" %>
 		</div>

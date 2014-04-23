@@ -25,18 +25,25 @@ module LiquidTagsHelper
 		def initialize(tag_name, variables, tokens)
 			@variables = variables.split(" ")
 
-			@file_name = @variables[0]
+			
+			@default_name = @variables[0]
+			@file_name = @variables[1]
 
 			super
 		end
 
 	    def render(context)
 
-	    	content = CodeFile.find_by(hierarchy: 'snippet', name: @file_name.to_s, theme_id: context["theme_id"])
+	    	if !@file_name.present? && (context[@file_name.strip]).present? 
+	    		content = CodeFile.find_by(hierarchy: 'snippet', name: context[@file_name.strip], theme_id: context["theme_id"])
+	    	else
+	    		content = CodeFile.find_by(hierarchy: 'snippet', name: @default_name, theme_id: context["theme_id"])
+    		end 
 
 	    	Liquid::Template.parse(content.code).render(context)
 			
 	    end
+
 
 	end
 
@@ -62,9 +69,9 @@ module LiquidTagsHelper
 
 	    def render(context)
 
-	    	asset = CodeFile.find_by!(hierarchy: 'asset', name: @file_name.to_s, theme_id: context["theme_id"])
+	    	#asset = CodeFile.find_by!(hierarchy: 'asset', name: @file_name.to_s, theme_id: context["theme_id"])
 
-	    	"/themes/#{context["theme_id"]}/code_files/#{asset.id}"
+	    	"/themes/#{context["theme_id"]}/code_files/#{@file_name.strip}"
 			
 	    end
 
@@ -92,9 +99,9 @@ module LiquidTagsHelper
 
 	    def render(context)
 
-	    	sheet = CodeFile.find_by!(hierarchy: 'asset', name: @file_name.to_s, theme_id: context["theme_id"])
+	    	#sheet = CodeFile.find_by!(hierarchy: 'asset', name: @file_name.to_s, theme_id: context["settings.theme.id"])
 
-	    	stylesheet_link_tag "/themes/#{context["theme_id"]}/code_files/#{sheet.id}"
+	    	stylesheet_link_tag "/themes/#{context["theme_id"]}/code_files/#{@file_name.strip}"
 			
 	    end
 
@@ -122,9 +129,9 @@ module LiquidTagsHelper
 
 	    def render(context)
 
-	    	sheet = CodeFile.find_by!(hierarchy: 'asset', name: @file_name.to_s, theme_id: context["theme_id"])
+	    	#sheet = CodeFile.find_by!(hierarchy: 'asset', name: @file_name.to_s, theme_id: context["theme_id"])
 
-	    	javascript_include_tag "/themes/#{context["theme_id"]}/code_files/#{sheet.id}"
+	    	javascript_include_tag "/themes/#{context["theme_id"]}/code_files/#{@file_name.strip}"
 			
 	    end
 
