@@ -26,8 +26,8 @@ class ThemesController < ApplicationController
     #@theme.user.save
     @theme.user.theme_id = @theme.id
     if @theme.user.save
-      @theme.extract_theme
-      @theme.precompile_theme_assets
+      #@theme.extract_theme
+      #@theme.precompile_theme_assets
       redirect_to themes_path, notice: "Theme activated!"
     else
       redirect_to themes_path, notice: "Theme not activated, something went wrong"
@@ -76,7 +76,7 @@ class ThemesController < ApplicationController
     respond_to do |format|
       if @theme.update(params[:theme])
         # After uploaded a new zip file delete old exctract and extract the content of the new file.
-        @theme.extract_new_preview
+        # @theme.extract_new_preview
 
         format.html { redirect_to themes_url, notice: 'Theme was successfully updated.' }
         format.json { head :no_content }
@@ -92,7 +92,7 @@ class ThemesController < ApplicationController
   def destroy
     @theme.destroy
     # After deletion of the zip file, delete the theme as well.
-    @theme.delete_extract
+    # @theme.delete_extract
 
     respond_to do |format|
       format.html { redirect_to themes_url }

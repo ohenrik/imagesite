@@ -34,7 +34,7 @@ module LiquidTagsHelper
 
 	    def render(context)
 
-	    	if !@file_name.present? && (context[@file_name.strip]).present? 
+	    	if @file_name.present? && (context[@file_name.strip]).present? 
 	    		content = CodeFile.find_by(hierarchy: 'snippet', name: context[@file_name.strip], theme_id: context["theme_id"])
 	    	else
 	    		content = CodeFile.find_by(hierarchy: 'snippet', name: @default_name, theme_id: context["theme_id"])

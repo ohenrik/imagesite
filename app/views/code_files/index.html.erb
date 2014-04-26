@@ -49,6 +49,26 @@
     </div>
 
     <div class="col-xs-12 col-sm-4">
+
+        <div class="page-header">
+            <h3>Thumbnail</h3>
+        </div>
+        <%= form_for(@theme) do |f| %>
+            <div class="input-group">
+                <%= f.label :thumbnail do %>
+                    <% if @theme.thumbnail.present? %>
+                        <%= image_tag @theme.thumbnail_url, class: "theme-preview-image img-responsive" %>
+                    <% else %>
+                        <%= image_tag "default/large_thumb_no-thumb.png", class: "theme-preview-image img-responsive" %>
+                    <% end %>
+                <% end %>
+              <%= f.file_field :thumbnail, class: "form-control" %>
+              <%= f.submit class: "btn btn-primary pull-right" %>
+            </div>
+            
+        <% end %>
+
+
         <div class="page-header">
             <h3>New file</h3>
         </div>

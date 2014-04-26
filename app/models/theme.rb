@@ -1,7 +1,7 @@
 require 'zip'
 class Theme < ActiveRecord::Base
 
-	mount_uploader :zip, ThemeUploader
+	mount_uploader :thumbnail, ThemeThumbnailUploader
 
 	belongs_to :user
   has_many :code_files

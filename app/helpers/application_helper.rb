@@ -19,7 +19,9 @@ module ApplicationHelper
 			if template_id
 				template_code = current_tenant.theme.code_files.find(template_id).code
 			else
-				template_code = current_tenant.theme.code_files.where(hierarchy: 'template', name: (controller.controller_name + "_" + controller.action_name + ".html" )).first.code
+				template = current_tenant.theme.code_files.where(hierarchy: 'template', name: (controller.controller_name + "_" + controller.action_name + ".html" )).first
+				template ||= current_tenant.theme.code_files.where(hierarchy: 'template', name: "pages_show.html").first
+				template_code = template.try(:code)
 			end
 		else
 			#content = "No theme chosen yet for this subdomain"

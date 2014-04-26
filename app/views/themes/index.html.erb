@@ -15,7 +15,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-6 pull-left">
                     <p>
                         <% if current_user.theme %>
-                            <%= image_tag theme_preview_image(current_user.theme), class: "theme-preview-image img-responsive" %>
+                            <%= image_tag current_user.theme.thumbnail_url, class: "theme-preview-image img-responsive" %>
                         <% else %>
                             <%= image_tag "default/large_thumb_no-thumb.png", class: "theme-preview-image img-responsive" %>
                         <% end %>

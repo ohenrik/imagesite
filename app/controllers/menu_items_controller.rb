@@ -99,7 +99,7 @@ class MenuItemsController < ApplicationController
 
     def update_position(object, parent = nil)
       object.each_with_index do |item, index|
-        MenuItem.where({id: item["id"]}).update_all({:position => (index + 1), :ancestry => parent.to_s})
+        MenuItem.where({id: item["id"]}).update_all({:position => (index + 1), :ancestry => parent})
         update_position(item["children"], item["id"]) if !item["children"].nil? 
       end
     end
