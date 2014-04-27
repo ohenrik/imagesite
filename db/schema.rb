@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140423182908) do
+ActiveRecord::Schema.define(version: 20140427151723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,29 +104,6 @@ ActiveRecord::Schema.define(version: 20140423182908) do
   end
 
   add_index "photos", ["user_id"], name: "index_photos_on_user_id", using: :btree
-
-  create_table "public_code_files", force: true do |t|
-    t.integer  "public_theme_id"
-    t.string   "name"
-    t.string   "display_name"
-    t.text     "code"
-    t.string   "hierarchy"
-    t.string   "available_to",    array: true
-    t.string   "available_in",    array: true
-    t.string   "static_file"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "public_code_files", ["public_theme_id"], name: "index_public_code_files_on_public_theme_id", using: :btree
-
-  create_table "public_themes", force: true do |t|
-    t.string   "name"
-    t.integer  "user_id"
-    t.string   "thumbnail"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "roles", force: true do |t|
     t.string   "role"

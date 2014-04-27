@@ -12,9 +12,9 @@ Imagesite::Application.routes.draw do
 
 
     # Public Themes
-    resources :public_themes do 
-      resources :public_code_files
-    end
+    #resources :public_themes do 
+    #  resources :public_code_files
+    #end
     
 
    #Check for subdomain
@@ -50,7 +50,11 @@ Imagesite::Application.routes.draw do
         resources :tags
 
         # Themes
-        get 'themes/select_theme/:id' => 'themes#select_theme', as: :select_theme
+        get 'themes/:id/select_theme' => 'themes#select_theme', as: :select_theme
+        get 'themes/:id/publish_theme' => 'themes#publish_theme', as: :publish_theme
+        get 'themes/:id/install_theme' => 'themes#install_theme', as: :install_theme
+        get 'public_themes' => 'themes#public_index', as: :public_themes
+        delete 'public_theme/:id/delete' => 'themes#public_destroy', as: :delete_public_theme
         resources :themes do
           resources :code_files
         end

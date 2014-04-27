@@ -40,8 +40,8 @@ class Permission
 			allow :tags, [:index, :new, :create, :edit, :update, :delete, :destroy, :add_to_menu]
 			allow :menus, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :add_item_to_menu]
 			allow :menu_items, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :sort]
-			allow :themes, [:show, :index, :edit, :update, :create, :new, :destroy, :select_theme]
-			allow :code_files, [:show, :index, :edit, :update, :create, :new, :destroy]
+			allow :themes, [:show, :index, :edit, :update, :create, :new, :destroy, :select_theme, :publish_theme, :install_theme, :public_index, :public_destroy]
+			allow :code_files, [:show, :index, :edit, :update, :create, :new, :destroy, :public_index, :public_edit]
 
 		end
 	end

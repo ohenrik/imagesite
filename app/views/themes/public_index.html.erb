@@ -1,0 +1,61 @@
+<div class="modal fade" id="normal-modal">
+
+    <div class="modal-dialog">
+        <div class="modal-content" id="normal-modal-content">
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+
+</div><!-- /.modal -->
+
+<div id="themes" class="clearfix">
+    
+    <div class="row all-themes">
+
+        <div class="col-xs-8">
+            <h1 class="themes-index-header">Available themes</h1>
+        </div>
+        <div class="col-xs-4">
+            <!-- No available before after alpha  -->
+            <% link_to "Upload new theme", new_theme_path, remote: true, class: "btn btn-default  pull-right" %>
+        </div>
+        
+        <div class="clearfix"></div>
+        
+        <% @themes.each do |theme| %>
+            <div class="col-xs-12 col-sm-6  col-md-4">
+
+                <%= image_tag theme.thumbnail_url, class: "theme-preview-image img-responsive"%>
+
+                <h3 class="theme-header"><%= theme.name %></h3>
+
+                <div class="theme-controls text-muted">
+                    <%= link_to 'Install Theme', install_theme_path(theme), data: { no_turbolink: true, confirm: 'Are you sure you want to install this Theme?' }, class: "text-muted" %> | 
+                    <%= link_to 'Edit', theme_code_files_path(theme), class: "text-muted" %> 
+                    | <%= link_to 'Delete', delete_public_theme_path(theme), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-muted" %>
+                </div>
+                <br>
+            </div>
+
+        <% end %>
+        
+        <% if @themes.count == 1 %>
+
+            <div class="col-xs-12">
+                <div class="alert alert-info">
+                    <p><strong>Alpha:</strong> Only one theme is currently available, more will be available soon.</p>
+                    <!-- <p><strong>Only one theme installed: </strong>You can choose more themes from the public themes, or upload a custom theme.</p> -->
+                </div>
+            </div>
+        <% end %>
+
+        <% if @themes.empty? %>
+            <div class="col-xs-12">
+                <div class="alert alert-info">
+                    <p><strong>No themes: </strong>Please choose a theme from the public themes here, or upload a custom theme here.</p>
+                </div>
+            </div>
+        <% end %>
+    </div>
+
+</div>

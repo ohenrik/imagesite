@@ -106,6 +106,12 @@
 
             <% end %>
         </div>
+
+        <div class="page-header">
+            <h3>Publish Theme</h3>
+        </div>
+        <%= link_to "Publish Theme", publish_theme_path(@theme), data: { no_turbolink: true }, class: "btn btn-default btn-block" %>
+        <div class="help-block">Attention: This will copy <%= @theme.name %> to Public Themes.</div>
     </div>
 
 </div>

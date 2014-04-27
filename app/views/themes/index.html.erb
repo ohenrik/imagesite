@@ -65,14 +65,13 @@
             <% if theme.user.theme_id != theme.id %>
                 <div class="col-xs-12 col-sm-6  col-md-4">
 
-                    <% theme.zip_url %>
-                    <%= image_tag theme_preview_image(theme), class: "theme-preview-image img-responsive"%>
+                    <%= image_tag theme.thumbnail_url, class: "theme-preview-image img-responsive"%>
 
                     <h3 class="theme-header"><%= theme.name %></h3>
 
                     <div class="theme-controls text-muted">
                         <%= link_to 'Activate theme', select_theme_path(theme), data: { confirm: 'Are you sure you want to activate this Theme?' }, class: "text-muted" %> | 
-                        <%= link_to 'Edit', edit_theme_path(theme), remote: true, class: "text-muted" %> 
+                        <%= link_to 'Edit', theme_code_files_path(theme), class: "text-muted" %> 
                         | <%= link_to 'Delete', theme, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-muted" %>
                     </div>
 
