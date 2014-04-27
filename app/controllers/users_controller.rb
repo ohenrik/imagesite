@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
 
 	before_action :set_user, only: [:show, :edit, :update, :destroy, :settings, :update_settings, :set_base_theme, :edit_alias_domain, :set_alias_domain ,:remove_alias_domain]
-	after_action :set_base_theme, only: [:create]
+	#after_action :set_base_theme, only: [:create]
 
 	def new 
 		@user = User.new
@@ -120,25 +120,25 @@ class UsersController < ApplicationController
 
 	def set_base_theme
 		# Scope correct tenant
-		connection = @user.connection
-		original_search_path = connection.schema_search_path
-		connection.schema_search_path = "tenant#{@user.id},public"
+		#connection = @user.connection
+		#original_search_path = connection.schema_search_path
+		#connection.schema_search_path = "tenant#{@user.id},public"
 
-		base_theme_url = Rails.root.join('base_theme', 'base_theme.zip')
-		@theme = Theme.new(name: "Morgenstern", user_id: @user.id)
-		@theme.zip = File.open(base_theme_url)
-		@theme.save
+		#base_theme_url = Rails.root.join('base_theme', 'base_theme.zip')
+		#@theme = Theme.new(name: "Morgenstern", user_id: @user.id)
+		#@theme.zip = File.open(base_theme_url)
+		#@theme.save
 
-		@theme.extract_preview
+		#@theme.extract_preview
 
-		# Activate the Theme
-		@user.theme_id = @theme.id
-		@user.save
-		
-		@theme.extract_theme
-		@theme.precompile_theme_assets
+		## Activate the Theme
+		#@user.theme_id = @theme.id
+		#@user.save
+		#
+		#@theme.extract_theme
+		#@theme.precompile_theme_assets
 
-		connection.schema_search_path = original_search_path
+		#connection.schema_search_path = original_search_path
 	end
 
 	def destroy
