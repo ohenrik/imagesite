@@ -124,7 +124,7 @@ class ThemesController < ApplicationController
     transfer_theme()
   end
 
-  def transfer_theme
+  def transfer_theme()
 
     # New public theme
     @public_theme = Theme.new
@@ -139,7 +139,7 @@ class ThemesController < ApplicationController
 
     # Start Copying the Theme
     @public_theme.name = @theme.name
-    @public_theme.user_id = @theme.user_id
+    @public_theme.user_id = current_tenant.id
     @public_theme.remote_thumbnail_url = @theme.thumbnail_url
 
     # Unscope the tenant again before saving public theme
