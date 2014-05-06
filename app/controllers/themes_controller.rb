@@ -28,8 +28,8 @@ class ThemesController < ApplicationController
     #@theme.user.current_theme = @theme.id
     #@theme.user.current_theme_folder = File.join(Rails.public_path, File.dirname(@theme.zip_url), "theme_files")
     #@theme.user.save
-    @theme.user.theme_id = @theme.id
-    if @theme.user.save
+    @current_tenant.theme_id = @theme.id
+    if @current_tenant.save
       #@theme.extract_theme
       #@theme.precompile_theme_assets
       redirect_to themes_path, notice: "Theme - #{@theme.name} - activated!"
@@ -113,18 +113,18 @@ class ThemesController < ApplicationController
   end
 
   def publish_theme
-    @origin = "tenant#{current_tenant.id},public"
-    @destination = "public"
-    transfer_theme()
+    origin = "tenant#{current_tenant.id},public"
+    destination = "public"
+    transfer_theme(origin, destination)
   end
 
   def install_theme
-    @origin = "public"
-    @destination = "tenant#{current_tenant.id},public"
-    transfer_theme()
+    origin = "public"
+    destination = "tenant#{current_tenant.id},public"
+    transfer_theme(origin, destination)
   end
 
-  def transfer_theme()
+  def transfer_theme(origin, destination)
 
     # New public theme
     @public_theme = Theme.new
@@ -132,7 +132,7 @@ class ThemesController < ApplicationController
     # Scope correct tenant
     connection = Theme.connection
     original_search_path = connection.schema_search_path
-    connection.schema_search_path = @origin
+    connection.schema_search_path = origin
 
     #Find the original local theme
     @theme = Theme.find(params[:id])
@@ -143,20 +143,20 @@ class ThemesController < ApplicationController
     @public_theme.remote_thumbnail_url = @theme.thumbnail_url
 
     # Unscope the tenant again before saving public theme
-    connection.schema_search_path = @destination
+    connection.schema_search_path = destination
 
     # Save the new public theme
     if @public_theme.save
       # Then copy each Code_file / Scope in to the tenant to get the code files
-      connection.schema_search_path = @origin
+      connection.schema_search_path = origin
       @theme.code_files.each do |code_file|
         # Scope out again
         
 
         # Copy the code file
-        connection.schema_search_path = @destination
+        connection.schema_search_path = destination
         @public_code_file = CodeFile.new(theme_id: @public_theme.id)
-        connection.schema_search_path = @origin
+        connection.schema_search_path = origin
 
         @public_code_file.name =  code_file.name
         @public_code_file.display_name =  code_file.display_name
@@ -168,7 +168,7 @@ class ThemesController < ApplicationController
           @public_code_file.remote_static_file_url = code_file.static_file_url
         end
 
-        connection.schema_search_path = @destination
+        connection.schema_search_path = destination
         @public_code_file.save
         connection.schema_search_path = original_search_path
         

@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-	def liquidize(model_content, layout_id = nil, template_id = nil)
+	def liquidize(model_content, layout_name = nil, template_name = nil)
 	
 		#model_content.merge('menu' => Menu.first)
 
@@ -10,14 +10,14 @@ module ApplicationHelper
 		Liquid::Template.file_system = Liquid::LocalFileSystem.new(theme_root_path)
 
 		if current_tenant.theme.present?
-			if layout_id
-				layout_code = current_tenant.theme.code_files.find(layout_id).code
+			if current_tenant.theme.code_files.find_by(:name => layout_name.to_s).present?
+				layout_code = current_tenant.theme.code_files.find_by(:name => layout_name.to_s).code
 			else
 				layout_code = current_tenant.theme.code_files.where(hierarchy: 'layout').first.code
 			end
 
-			if template_id
-				template_code = current_tenant.theme.code_files.find(template_id).code
+			if current_tenant.theme.code_files.find_by(:name => template_name.to_s).present?
+				template_code = current_tenant.theme.code_files.find_by(:name => template_name.to_s).code
 			else
 				template = current_tenant.theme.code_files.where(hierarchy: 'template', name: (controller.controller_name + "_" + controller.action_name + ".html" )).first
 				template ||= current_tenant.theme.code_files.where(hierarchy: 'template', name: "pages_show.html").first
