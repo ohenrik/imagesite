@@ -23,18 +23,24 @@ module ApplicationHelper
 				template ||= current_tenant.theme.code_files.where(hierarchy: 'template', name: "pages_show.html").first
 				template_code = template.try(:code)
 			end
+
+			templ = Liquid::Template.parse(template_code).render(model_content.merge('settings' => current_tenant, 'theme_id' => current_tenant.theme.id), :filters => [LiquidFilters])
+			# Render the Layout file
+			Liquid::Template.parse(layout_code).render(model_content.merge('template_content' => templ, 'settings' => current_tenant, 'theme_id' => current_tenant.theme.id), :filters => [LiquidFilters])
+
 		else
 			#content = "No theme chosen yet for this subdomain"
 			layout_code = "No layout or theme chosen yet for this page"
 			template_code = "No template chosen for the page yet"
+			templ = Liquid::Template.parse(template_code).render(model_content.merge('settings' => current_tenant), :filters => [LiquidFilters])
+			# Render the Layout file
+			Liquid::Template.parse(layout_code).render(model_content.merge('template_content' => templ, 'settings' => current_tenant), :filters => [LiquidFilters])
+
 		end
 
 		#file_system = Liquid::LocalFileSystem.new(content)
 
 		# Render the template file
-		templ = Liquid::Template.parse(template_code).render(model_content.merge('settings' => current_tenant, 'theme_id' => current_tenant.theme.id), :filters => [LiquidFilters])
-		# Render the Layout file
-		Liquid::Template.parse(layout_code).render(model_content.merge('template_content' => templ, 'settings' => current_tenant, 'theme_id' => current_tenant.theme.id), :filters => [LiquidFilters])
 	end
 
 

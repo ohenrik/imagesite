@@ -11,7 +11,7 @@ class Photo < ActiveRecord::Base
 
 
 	# Liquid methods
-	liquid_methods :name, :index, :tags, :link, :large, :medium, :small, :thumbnail, :large_thumbnail, :medium_thumbnail, :photo_tags
+	liquid_methods :name, :index, :tags, :link, :large, :medium, :small, :thumbnail, :large_thumbnail, :medium_thumbnail, :tag_array
 
 	def thumbnail
 		image_url(:small_thumb)
@@ -57,6 +57,9 @@ class Photo < ActiveRecord::Base
 		params[:action]
 	end
 
+	def tag_array
+		tags.map {|tag| tag.name}
+	end
 
 
 

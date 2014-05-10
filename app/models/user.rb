@@ -2,8 +2,6 @@ class User < ActiveRecord::Base
 	has_secure_password
 
 	after_create :create_schema
-	
-
 
 	validates :username, :subdomain, :email, presence: true, uniqueness: true
 
@@ -62,25 +60,10 @@ class User < ActiveRecord::Base
 	  self.created_at.to_i
 	end
 
-
-	def is_admin?
-		self.roles.find_by_role("admin").nil?
-	end
-
-	def is_member?
-		self.roles.find_by_role("member").nil?
-	end
-
-	def is_premium?
-		self.roles.find_by_role("premium").nil?
-	end
-
-	def is_trail?
-		self.roles.find_by_role("trail").nil?
-	end
-
-	def is_guest?
-		self.roles.find_by_role("guest").nil?
+	%w[member admin premium trail].each do |is_role|
+		define_method("#{is_role}?") do 
+			return true if self.roles.where(role: is_role).present?
+		end
 	end
 
 

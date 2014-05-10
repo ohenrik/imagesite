@@ -24,10 +24,27 @@
 				<%= f.label :username, "Username:" %>
 				<%= f.text_field :username, class: "form-control"  %>
 			</div>
+
 			<%= f.submit "Save changes", class: "btn btn-primary" %>
 		<% end %>
 		<br>
+		<% if @user.admin? %>
+		<div class="page-header">
+			<h4>Roles</h4>
+		</div>
+		<%= form_for @user do |f| %>
+			
+				<div class="form-group">
+					<% Role.all.each do |role| %>
+						<%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role), id: dom_id(role) %>
+						<%= label_tag dom_id(role), role.role.titleize %>
+						<br>
+					<% end %>
+				</div>
+			<%= f.submit "Update roles", class: "btn btn-primary" %>
+		<% end %>
 
+		<% end %>
 		<%= form_for @user do |f| %>
 			<%= render partial: 'shared/form_errors', :locals => {:item => @user, :container => false} %>
 			<div class="page-header">

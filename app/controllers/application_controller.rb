@@ -20,7 +20,7 @@ private
 	helper_method :current_user
 
 	def current_permission
-	  @current_permission ||= Permission.new(current_user, request.subdomain, request.host)
+	  @current_permission ||= Permissions.permission_for(current_user, request.subdomain, request.host)
 	end
 
 	def current_resource

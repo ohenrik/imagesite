@@ -1,0 +1,50 @@
+<div class="page-header">
+	<h1>
+		All users
+	</h1>
+</div>
+<table class="table table-striped">
+	<th>ID</th>
+	<th>Username</th>
+	<th>Subdomain</th>
+	<th>Alias Domain</th>
+	<th>Roles</th>
+	<th>First Name</th>
+	<th>Last Name</th>
+	<th></th>
+	<% @users.each do |user| %>
+		<tr>
+			<td>
+				<%= user.id %>
+			</td>			
+			<td>
+				<%= user.username %>
+			</td>
+			<td>
+				<%= user.subdomain %>
+			</td>
+			<td>
+				<%= user.alias_domain %>
+			</td>
+			<td>
+				<%= user.roles.map { |role| role.role }.join(", ") %>
+			</td>
+			<td>
+				<%= user.first_name %>
+			</td>
+			<td>
+				<%= user.last_name %>
+			</td>
+			<td>
+				<span class="pull-right">
+					<%= link_to edit_user_path(user), class: "btn btn-default btn-xs" do %>
+						<i class="fa fa-user"></i> Edit
+					<% end %>
+					<%= link_to user_path(user), method: :delete, :confirm=>'Are you sure? This action is destructive and irreversible.', class: "btn btn-danger btn-xs" do %>
+						<i class="fa fa-exclamation-triangle"></i> Delete
+					<% end %>
+				</span>
+			</td>
+		</tr>
+	<% end %>
+</table>

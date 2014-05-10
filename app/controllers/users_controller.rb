@@ -12,6 +12,11 @@ class UsersController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update, :destroy, :settings, :update_settings, :set_base_theme, :edit_alias_domain, :set_alias_domain ,:remove_alias_domain]
 	#after_action :set_base_theme, only: [:create]
 
+
+	def index
+		@users = User.all
+	end
+
 	def new 
 		@user = User.new
 	end
