@@ -14,7 +14,7 @@ class PhotosController < ApplicationController
     if params[:tag] 
       @tag = Tag.find_by_id(params[:tag])
       @photos = @tag.try(:photos)
-      render 'index'
+      render 'index', layout: false
     else     
       redirect_to action: 'all'
     end
