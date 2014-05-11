@@ -1,11 +1,110 @@
-<p id="notice"><%= notice %></p>
+    <div class="modal fade" id="menu-modal">
 
-<p>
-  <h1><%= @menu.name %></h1>
-  <% @menu.menu_items.each do |menu_item| %>
-  	<%= link_to menu_item.name, polymorphic_url(menu_item.menuable)%><br>
-  <% end %>
-</p>
+        <div class="modal-dialog">
+            <div class="modal-content" id="menu-modal-content">
 
-<%= link_to 'Edit', edit_menu_path(@menu) %> |
-<%= link_to 'Back', menus_path %>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+
+    </div><!-- /.modal -->
+<div class="row space-down menus">
+
+
+    <div class="col-xs-12 col-sm-4 pull-left menu_item_list">
+        <div class="page-header">
+            <h4>External link:</h4>
+        </div>
+        <% if !@menus.empty? %>
+            <%= link_to new_menu_item_path(:menu_id => @menu.id), :remote => true, class: "list-group-item add-to-menu" do %>
+               <i class="fa fa-link fa-fw text-muted"></i> 
+               New link
+               <span class="pull-right text-muted"><i class="fa fa-plus-circle"></i></span>
+            <% end %>
+        <% else %>
+                <%= link_to new_menu_path, remote: true do %>
+                <div class="alert alert-info text-center"><strong>Create a menu first</strong></div>
+                <% end %>
+        <% end %>
+
+        <div class="page-header">
+            <h4>Pages:</h4>
+        </div>
+        <div class="list-group">
+            <% if Page.all.each do |page| %>
+                <%= link_to add_page_to_menu_path(:id => page.id, :menu_id => @menu.id), :remote => true, :method => :post, class: "list-group-item add-to-menu" do %>
+                    <i class="fa fa-file-text-o fa-fw text-muted"></i> <%= page.name %>
+                    <span class="pull-right text-muted"><i class="fa fa-plus-circle"></i></span>
+                <% end %> 
+            <% end.empty? %>
+                <%= link_to pages_path  do %>
+                    <div class="alert alert-info">
+                        <p>
+                            <strong>No pages created:</strong> Create new pages here.
+                        </p>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+
+        <div class="page-header">
+            <h4>Tags:</h4>
+        </div>
+        <div class="list-group">
+            <% if Tag.all.each do |tag| %>
+                <%= link_to add_tag_to_menu_path(:id => tag.id, :menu_id => @menu.id), :remote => true, :method => :post, class: "list-group-item add-to-menu" do %>
+                    <i class="fa fa-tags fa-fw text-muted"></i> 
+                    <%= tag.name %></i>
+                    <span class="pull-right text-muted"><i class="fa fa-plus-circle"></i></span>
+                <% end %>
+            <% end.empty? %>
+                <%= link_to all_path  do %>
+                    <div class="alert alert-info">
+                        <p>
+                            <strong>No tags created:</strong> Upload photos to create tags.
+                        </p>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-8 pull-right">
+        <div class="page-header">
+            <ul class="nav nav-pills menus-list">
+                <% @menus.each do |menu| %>
+                <li class="<%= "active" if current_page?(menu) %>">
+                    <%= link_to menu.name, menu  %>
+                </li>   
+                <% end %>
+                <li><%= link_to 'New Menu', new_menu_path, remote: true %></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-8 pull-right">
+        
+            <div class="dd" id="menu_container_<%= @menu.id %>" >
+                <ol id="menu_<%= @menu.id %>" class=" dd-list list-group">
+                    <% if @menu.menu_items.blank? %>
+                    	<div class="alert alert-info text-center">Menu is empty.</div>
+                    <% end %>
+                    <%= nested_menu_items(@menu.menu_items.arrange(:order => :position)) %>
+                </ol>
+                
+                <div class="menu-footer clearfix">
+                    <%= link_to 'Delete Menu', menu_path(@menu), method: :delete, class: "btn btn-default", data: { confirm: 'Are you sure?' } %>
+                    <div class="pull-right">
+                        <%= link_to 'Edit Menu', edit_menu_path(@menu), class: "btn btn-default", remote: true %>
+                        <%= link_to 'Save menu', '#', class: "btn btn-primary save-menu", data: { menu: "\#menu_container_#{@menu.id}", update_url: sort_menu_items_path(@menu), loading_text: "Saving menu...", toggle: "button" }, type: 'button' %>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+    
+    <div class="col-xs-12 col-sm-8 pull-right" id="tester">
+
+    </div>
+
+</div>

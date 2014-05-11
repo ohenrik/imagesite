@@ -72,7 +72,7 @@ Imagesite::Application.routes.draw do
         post 'pages/set_home/:id' => 'pages#set_home', as: :set_home_page
 
         # User selected Home screen
-        get "/" => 'users#home'
+        get "/" => 'users#home', as: :front_page
 
     end
 

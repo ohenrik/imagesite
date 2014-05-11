@@ -30,7 +30,11 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.json
   def show
-    render layout: "theme"
+    if @page.status == 'draft'
+      redirect_to front_page_path
+    else
+      render layout: false
+    end
   end
 
   # GET /pages/new

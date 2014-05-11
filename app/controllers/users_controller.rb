@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 			# this is the same as render 'pages/show', layout: false
 			render "#{@user.home_type.downcase.pluralize}/show", layout: false
 		else
-			redirect_to photos_path
+			redirect_to pages_path, notice: "No front page selected. Please select a page or create a new front page."
 		end
 
 	end

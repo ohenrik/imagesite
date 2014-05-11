@@ -8,12 +8,19 @@ class MenusController < ApplicationController
   # GET /menus
   # GET /menus.json
   def index
+    @menu = Menu.first
     @menus = Menu.all
+    if @menu.present?
+      redirect_to action: 'show', id: @menu
+    else
+      @menu = Menu.new
+    end
   end
 
   # GET /menus/1
   # GET /menus/1.json
   def show
+    @menus = Menu.all
   end
 
   # GET /menus/new

@@ -14,58 +14,10 @@
         <div class="page-header">
             <h4>External link:</h4>
         </div>
-        <% if !@menus.empty? %>
-            <%= link_to new_menu_item_path(:menu_id => 1), :remote => true, class: "list-group-item add-to-menu" do %>
-               <i class="fa fa-link fa-fw text-muted"></i> 
-               New link
-               <span class="pull-right text-muted"><i class="fa fa-plus-circle"></i></span>
-            <% end %>
-        <% else %>
-                <%= link_to new_menu_path, remote: true do %>
-                <div class="alert alert-info text-center"><strong>Create a menu first</strong></div>
-                <% end %>
+        <%= link_to new_menu_path, remote: true do %>
+        <div class="alert alert-info text-center"><strong>Create a menu first</strong></div>
         <% end %>
 
-        <div class="page-header">
-            <h4>Pages:</h4>
-        </div>
-        <div class="list-group">
-            <% if Page.all.each do |page| %>
-                <%= link_to add_page_to_menu_path(:id => page.id, :menu_id => @menus.first), :remote => true, :method => :post, class: "list-group-item add-to-menu" do %>
-                    <i class="fa fa-file-text-o fa-fw text-muted"></i> <%= page.name %>
-                    <span class="pull-right text-muted"><i class="fa fa-plus-circle"></i></span>
-                <% end %> 
-            <% end.empty? %>
-                <%= link_to pages_path  do %>
-                    <div class="alert alert-info">
-                        <p>
-                            <strong>No pages created:</strong> Create new pages here.
-                        </p>
-                    </div>
-                <% end %>
-            <% end %>
-        </div>
-
-        <div class="page-header">
-            <h4>Tags:</h4>
-        </div>
-        <div class="list-group">
-            <% if Tag.all.each do |tag| %>
-                <%= link_to add_tag_to_menu_path(:id => tag.id, :menu_id => @menus.first), :remote => true, :method => :post, class: "list-group-item add-to-menu" do %>
-                    <i class="fa fa-tags fa-fw text-muted"></i> 
-                    <%= tag.name %></i>
-                    <span class="pull-right text-muted"><i class="fa fa-plus-circle"></i></span>
-                <% end %>
-            <% end.empty? %>
-                <%= link_to all_path  do %>
-                    <div class="alert alert-info">
-                        <p>
-                            <strong>No tags created:</strong> Upload photos to create tags.
-                        </p>
-                    </div>
-                <% end %>
-            <% end %>
-        </div>
     </div>
 
     <div class="col-xs-12 col-sm-8 pull-right">
