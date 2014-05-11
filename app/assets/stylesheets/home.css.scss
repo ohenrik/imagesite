@@ -9,19 +9,6 @@
 		background-repeat: no-repeat;
 		background-position: center top;
 	}
-	.message {
-		position: relative;
-	}
-	.theatrical-logo-big {
-		text-align: center;
-		font-family: theatrical;
-		font-size: 400px;
-		line-height: 100%;
-		color: $white;
-	}
-	.theatrical-big {
-		display: none;
-	} 
 
 
 /* Small devices (tablets, 768px and up) */
@@ -35,46 +22,6 @@
 		background-repeat: no-repeat;
 		background-position: center top;
 	}
-	.message {
-		position: relative;
-	}
-	.theatrical-logo-big {
-		position: absolute;
-		left: -40px;
-		top: 0;
-		font-family: theatrical;
-		width: 330px;
-		height: 345px;
-		font-size: 400px;
-		line-height: 100%;
-		color: $white;
-	}
-	.theatrical-big {
-		display: block;
-		position: absolute;
-		left: 310px;
-		top: 30px;
-		font-family: neutra, sans-serif;
-		font-size: 90px;
-		line-height: 100%;
-		font-weight: 100;
-		color: $white;
-	} 
-	.icon {
-		font-size: 200px;
-		color: $purple;
-	}
-	.sales-text {
-		margin: 70px 0;
-		h1 {
-			font-size: 48px;
-			margin-bottom: 0;
-		}
-		p {
-			font-size: 16px;
-			color: $gray-light;
-		}
-	} 
 }
 
 /* Medium devices (desktops, 992px and up) */
@@ -87,46 +34,6 @@
 		background-repeat: no-repeat;
 		background-position: center top;
 	}
-	.message {
-		position: relative;
-	}
-	.theatrical-logo-big {
-		position: absolute;
-		left: -40px;
-		top: 0;
-		font-family: theatrical;
-		width: 430px;
-		height: 445px;
-		font-size: 500px;
-		line-height: 100%;
-		color: $white;
-	}
-	.theatrical-big {
-		position: absolute;
-		left: 390px;
-		top: 50px;
-		font-family: neutra, sans-serif;
-		font-size: 110px;
-		line-height: 100%;
-		font-weight: 100;
-		color: $white;
-		
-	}
-	.icon {
-		font-size: 260px;
-		color: $purple;
-	}
-	.sales-text {
-		margin: 100px 0;
-		h1 {
-			font-size: 60px;
-			margin-bottom: 0;
-		}
-		p {
-			font-size: 20px;
-			color: $gray-light;
-		}
-	} 
 }
 
 /* Large devices (large desktops, 1200px and up) */
@@ -138,45 +45,5 @@
 		background-image: image-url("home_grid.png");
 		background-repeat: no-repeat;
 		background-position: center top;
-	}
-	.message {
-		position: relative;
-	}
-	.theatrical-logo-big {
-		position: absolute;
-		left: 0;
-		top: 0;
-		font-family: theatrical;
-		width: 430px;
-		height: 445px;
-		font-size: 600px;
-		line-height: 100%;
-		color: $white;
-	}
-	.theatrical-big {
-		display: block;
-		position: absolute;
-		left: 500px;
-		top: 80px;
-		font-family: neutra, sans-serif;
-		font-size: 130px;
-		line-height: 100%;
-		font-weight: 100;
-		color: $white;
-	}
-	.icon {
-		font-size: 300px;
-		color: $purple;
-	}
-	.sales-text {
-		margin: 120px 0;
-		h1 {
-			font-size: 72px;
-			margin-bottom: 0;
-		}
-		p {
-			font-size: 24px;
-			color: $gray-light;
-		}
 	}
 }

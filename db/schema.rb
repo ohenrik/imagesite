@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140427151723) do
+ActiveRecord::Schema.define(version: 20140511162438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,11 +88,15 @@ ActiveRecord::Schema.define(version: 20140427151723) do
     t.integer  "photo_id"
     t.integer  "layout_id"
     t.integer  "template_id"
+    t.string   "template_name"
+    t.string   "layout_name"
   end
 
   add_index "pages", ["layout_id"], name: "index_pages_on_layout_id", using: :btree
+  add_index "pages", ["layout_name"], name: "index_pages_on_layout_name", using: :btree
   add_index "pages", ["photo_id"], name: "index_pages_on_photo_id", using: :btree
   add_index "pages", ["template_id"], name: "index_pages_on_template_id", using: :btree
+  add_index "pages", ["template_name"], name: "index_pages_on_template_name", using: :btree
 
   create_table "photos", force: true do |t|
     t.string   "name"

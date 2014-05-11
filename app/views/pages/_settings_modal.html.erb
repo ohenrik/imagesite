@@ -9,13 +9,13 @@
 	    <div class="modal-body clearfix" >
 
             <div class="form-group">
-                <%= f.label :layout_id %>
-                <%= f.collection_select :layout_id, current_tenant.theme.code_files.where(:hierarchy => 'layout').where( "? = ANY(available_to)", 'page'), :name, :display_name, {include_blank: "- Default -"}, {class: "form-control"} %>
+                <%= f.label :layout_name %>
+                <%= f.collection_select :layout_name, current_tenant.theme.code_files.where(:hierarchy => 'layout').where( "? = ANY(available_to)", 'page'), :name, :display_name, {include_blank: "- Default -"}, {class: "form-control"} %>
             </div>
 
             <div class="form-group">
-                <%= f.label :template_id %>
-                <%= f.collection_select :template_id, current_tenant.theme.code_files.where(:hierarchy => 'template').where( "? = ANY(available_to)", 'page'), :name, :display_name, {include_blank: "- Default -"}, {class: "form-control"} %>
+                <%= f.label :template_name %>
+                <%= f.collection_select :template_name, current_tenant.theme.code_files.where(:hierarchy => 'template').where( "? = ANY(available_to)", 'page'), :name, :display_name, {include_blank: "- Default -"}, {class: "form-control"} %>
             </div>
 
 		    <div class="error-container">

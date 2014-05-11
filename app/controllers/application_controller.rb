@@ -46,7 +46,7 @@ private
 		if (request.subdomain.present? or !%w(lvh.me theatrical.co theatrical.no theatrical.de).include?(request.domain)) && !%w(subdomain www).include?(request.subdomain)
 			current_tenant.scope_schema("public", &block)
 		else
-			redirect_to login_url(:subdomain => false), alert: "bingo"
+			redirect_to login_url(:subdomain => false), alert: "Error scoping current tenant"
 		end
 	end
 	helper_method :scope_current_tenant

@@ -14,11 +14,10 @@ class PhotosController < ApplicationController
     if params[:tag] 
       @tag = Tag.find_by_id(params[:tag])
       @photos = @tag.try(:photos)
-      #@photo = Photo.tagged_with(params[:tag])
+      render 'index'
     else     
-      @photos = Photo.all
+      redirect_to action: 'all'
     end
-    render layout: "theme"
   end
 
   def photo_manager_modal
@@ -85,7 +84,6 @@ class PhotosController < ApplicationController
     if params[:tag] 
       @photos = Tag.find_by_name(params[:tag]).try(:photos)
       @photos ||= Tag.find_by_id(params[:tag]).try(:photos)
-      #@photo = Photo.tagged_with(params[:tag])
     else     
       @photos = Photo.all
     end

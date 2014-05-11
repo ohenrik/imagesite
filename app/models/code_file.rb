@@ -7,6 +7,8 @@ class CodeFile < ActiveRecord::Base
 
 	validates :name, :hierarchy, presence: true
 	validates :name, format: {:with => /\A[^\\:*?"$&+,:;=?@~\[\]`<>%#|\/]+\z/, message: "Does not allow any of these characters ^ : * ? $ & + , : ; = ? @ ~ ] [ ` < > % # | \ / "}
+	validates :name, :uniqueness => {:case_sensitive => true, :scope => :theme_id}
+
 
 	mount_uploader :static_file, StaticFileUploader
 

@@ -13,7 +13,7 @@ module Permissions
 				allow_param :menu_item, [:menu_id, :menuable_id, :menuable_type, :name, :description, :new_page, :ancestry, :position, :url]
 				allow_param :page_item, [:position, :page_id, :pageable_id, :no_item_link, :design, :item_link, :item_class, :description, :title, :content, :pageable_type, :pageable, :gallery]
 				allow_param :photo, [:name, :image, :edit_tag_list, :description]
-				allow_param :page, [:name, :content, :excerpt, :status, :photo_id, :layout_id, :template_id]
+				allow_param :page, [:name, :content, :excerpt, :status, :photo_id, :layout_name, :template_name]
 				allow_param :theme, [:name, :thumbnail]
 				allow_param :code_file, [:theme_id, :name, :display_name, :code, :hierarchy, :created_at, :updated_at, :static_file, :available_in => [], :available_to => []]
 				allow_param :tag, [:name]
