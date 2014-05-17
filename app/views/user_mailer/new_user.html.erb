@@ -1,0 +1,18 @@
+<% if @user.first_name or @user.last_name %>
+<p>Dear <%= @user.full_name %></p>
+<% end %>
+<p>
+Welcome to Theatrical.co
+</p>
+<p>
+Here are some quick facts abour your account:<br>
+Username: <%= @user.username %><br>
+Subdomain: <%= @user.subdomain %><br>
+Password: <%= link_to new_password_reset_url do %> If you ever forget you password click here.<% end %> (same link is found beneath the login form).<br>
+</p>
+<p>
+If you did not sign up to Theatrical.co please disregard this email.
+</p>
+<p>
+<%= link_to "http://theatrical.co" do%>Theatrical.co<% end %>
+</p>

@@ -84,6 +84,18 @@ Imagesite::Application.configure do
   # Precompile additional assets
   config.assets.precompile += %w( .svg .eot .woff .ttf )
 
+
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :port           => 587,
+    :address        => 'smtp.mailgun.org',
+    :user_name      => ENV["MAILGUN_USERNAME"],
+    :password       => ENV["MAILGUN_PASSWORD"],
+    :domain         => ENV['MAILGUN_EMAIL'],
+    :authentication => :plain
+  }
+
   # Update before deployment!
   config.action_mailer.default_url_options = { :host => "theatrical.co" }
 

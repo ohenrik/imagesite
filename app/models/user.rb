@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
 		generate_token(:password_reset_token)
 		self.password_reset_sent_at = Time.zone.now
 		save!
-		UserMailer.password_reset(self).deliver
+		
 	end
 
 	def generate_token(column)
@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
 	end
 
 	def full_name
-		[self.first_name, self.last_name].join(" ")
+		[self.try(:first_name), self.try(:last_name)].join(" ")
 	end
 
 
