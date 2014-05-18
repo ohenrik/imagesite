@@ -39,7 +39,7 @@ Imagesite::Application.configure do
   }
 
   # Update before deploy
-  config.action_mailer.default_url_options = { :host => "lvh.me:3000" }
+  config.action_mailer.default_url_options = { :host => "lvh.me", :port => 3000 }
 
 
   #Imagesite::Application.config.session_store :cookie_store, key: '_imagesite_session', domain: '.lvh.me'

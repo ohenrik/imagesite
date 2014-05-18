@@ -98,6 +98,9 @@ gem 'jquery-validation-rails'
 gem 'actionpack-page_caching'
 gem 'actionpack-action_caching'
 
+# HTML email gem for inlining css
+gem 'roadie'
+
 ## Test gems
 gem "rspec-rails", :group => [:test, :development]
 group :test do 

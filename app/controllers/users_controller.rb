@@ -117,7 +117,7 @@ class UsersController < ApplicationController
 		@user = User.new(params[:user])
 		@user.roles << Role.find_by_role("member")
 		if @user.save
-			UserMailer.new_user(@user).deliver 
+			@user.new_user_mail
 			redirect_to root_url, notice: "Thank you for registering."
 		else
 			render "new"

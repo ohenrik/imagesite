@@ -28,6 +28,10 @@ class User < ActiveRecord::Base
 		UserMailer.password_reset(self).deliver
 	end
 
+	def new_user_mail
+		UserMailer.new_user(self).deliver 
+	end
+
 	def generate_token(column)
 		begin
 			self[column] = SecureRandom.urlsafe_base64
