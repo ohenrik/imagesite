@@ -25,6 +25,13 @@ class UsersController < ApplicationController
 
 	end
 
+	def confirm_user
+		@user = User.find_by(confirm_email_token: params[:token])
+		@user.confirmed_email_at = Time.zone.now
+		@user.save!
+		redirect_to login_url, notice: "#{@user.email} is now confirmed. You can now log in."
+	end
+
 	def home
 		# Multitenant rails app. This refers to user who owns the subdomain visited.
 		@user = current_tenant
@@ -116,8 +123,9 @@ class UsersController < ApplicationController
 	def create 
 		@user = User.new(params[:user])
 		@user.roles << Role.find_by_role("member")
+		@user.subdomain = @user.subdomain.downcase
 		if @user.save
-			@user.new_user_mail
+			@user.try(:new_user_mail)
 			redirect_to root_url, notice: "Thank you for registering."
 		else
 			render "new"

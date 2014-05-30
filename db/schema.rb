@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140511162438) do
+ActiveRecord::Schema.define(version: 20140530214255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -179,6 +179,9 @@ ActiveRecord::Schema.define(version: 20140511162438) do
     t.string   "alias_domain"
     t.integer  "home_id"
     t.string   "home_type"
+    t.string   "confirm_email_token"
+    t.datetime "confirm_email_sent_at"
+    t.datetime "confirmed_email_at"
   end
 
   add_index "users", ["theme_id"], name: "index_users_on_theme_id", using: :btree

@@ -54,7 +54,7 @@ gem 'unicorn'
 #gem 'activerecord-session_store'
 
 #My gems
-gem 'carrierwave'
+
 
 # remember to install Image Magic for this gem to work! Or you will recieve "No such file or directory error"
 gem 'mini_magick'
@@ -72,13 +72,20 @@ gem 'ancestry'
 gem 'acts_as_list'
 
 # Settings
-gem 'rails-settings-cached'
+# gem 'rails-settings-cached'
 
+# Jquery upload (multiple file upload)
+gem 'jquery-fileupload-rails'
 
 #For s3 storage of images (using carriewave)
+gem 'carrierwave'
+#gem 'carrierwave_direct'
+#gem 's3_direct_upload'
 gem 'fog'
-gem 'unf' 
+gem 'unf'
 
+# Background processing (also needed for carrierwave direct)
+gem 'sidekiq'
 
 #gem "therubyracer"
 #gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS

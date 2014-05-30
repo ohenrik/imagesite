@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 	validates :username, :subdomain, :email, presence: true, uniqueness: true
 
 	# Or with your own reserved names
-	validates  :subdomain, :subdomain  => { :reserved => %w(example documentation doc ole olehenrik anette lobach loebach skogstrom morgenstern help business mail docs) }
+	validates  :subdomain, :subdomain  => { :reserved => %w(example image documentation doc ole olehenrik anette lobach loebach skogstrom morgenstern help business mail docs) }
 
 	before_create { generate_token(:auth_token) }
 
@@ -29,6 +29,9 @@ class User < ActiveRecord::Base
 	end
 
 	def new_user_mail
+		generate_token(:confirm_email_token)
+		self.confirm_email_sent_at = Time.zone.now
+		save!
 		UserMailer.new_user(self).deliver 
 	end
 

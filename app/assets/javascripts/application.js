@@ -18,5 +18,7 @@
 //= require parser_rules/advanced
 //= require jquery.validate
 //= require jquery.validate.additional-methods
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
 //= require turbolinks
 //= require_tree './always_run/.'

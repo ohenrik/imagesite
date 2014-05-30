@@ -3,7 +3,7 @@ Welcome to Theatrical.co
 Here are some quick facts abour your account:
 Username: <%= @user.username %>
 Subdomain: <%= @user.subdomain %>
-Password: If you ever forget you password follow this link: <%= new_password_reset_url  %> 
+Password: If you ever forget you password follow this link: <%= confirm_user_url(@user.confirm_email_token)  %> 
 (same link is found beneath the login form).
 
 If you did not sign up to Theatrical.co please disregard this email.

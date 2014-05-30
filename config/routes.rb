@@ -82,6 +82,7 @@ Imagesite::Application.routes.draw do
     # User alias domain
     patch "settings/:id/set_alias_domain" => 'users#set_alias_domain', as: :set_alias_domain
     patch "settings/:id/remove_alias_domain" => 'users#remove_alias_domain', as: :remove_alias_domain
+    get 'confirm_user/:token' => 'users#confirm_user', as: :confirm_user
     resources :users
 
     root :to => 'static_pages#home'

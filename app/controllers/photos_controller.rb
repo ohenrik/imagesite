@@ -81,6 +81,7 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def all
+    @photo = Photo.new
     if params[:tag] 
       @photos = Tag.find_by_name(params[:tag]).try(:photos)
       @photos ||= Tag.find_by_id(params[:tag]).try(:photos)
@@ -116,7 +117,7 @@ class PhotosController < ApplicationController
   # POST /photos.json
   def create
     @photo = Photo.new(params[:photo])
-    @photo.user_id = current_user.id
+    @photo.user_id = current_tenant.id
 
     @photo.name =  @photo.image.file.filename if ( @photo.name == "" && @photo.image.file)
 
@@ -124,9 +125,11 @@ class PhotosController < ApplicationController
       if @photo.save
         format.html { redirect_to all_url, notice: 'Photo was successfully created.' }
         format.json { render action: 'all', status: :created, location: @photo }
+        format.js {}
       else
         format.html { redirect_to all_url, alert: 'Error: Photo not uploaded please select a image file.' }
         format.json { render json: @photo.errors, status: :unprocessable_entity }
+        format.js {}
       end
     end
   end

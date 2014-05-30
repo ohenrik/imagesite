@@ -73,12 +73,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
 
-  def default_url
-      "no-thumb.png"
-  end
-
-
-
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

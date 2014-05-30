@@ -2,7 +2,7 @@ module Permissions
 	class GuestPermission < BasePermission
 		def initialize()
 			allow :static_pages, [:home, :navigation, :user_home]
-			allow :users, [:new, :create, :home]
+			allow :users, [:new, :create, :home, :confirm_user]
 			allow :password_resets, [:new, :create, :update, :edit]
 			allow_param :password_reset, [:email, :password, :password_confirmation]
 			allow_param :user, [:first_name, :last_name, :username, :subdomain, :email, :password, :password_confirmation]
