@@ -107,6 +107,8 @@ gem 'actionpack-action_caching'
 
 # HTML email gem for inlining css
 gem 'roadie'
+#gem 'nokogiri'
+#gem 'premailer-rails'
 
 ## Test gems
 gem "rspec-rails", :group => [:test, :development]
