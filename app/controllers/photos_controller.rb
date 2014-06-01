@@ -22,11 +22,9 @@ class PhotosController < ApplicationController
 
   def photo_manager_modal
     @photos = Photo.all.order(created_at: :desc)
-
     # Passing page details right through 
     @page_id = params[:page_id]
     @page_item_id = params[:page_item_id]
-
     respond_to do |format|
       format.js {
         render 'photo_manager_modal', layout: false

@@ -71,7 +71,13 @@ class UsersController < ApplicationController
 
 	def edit_alias_domain
 
-	end
+	end  
+	# DELETE /pages/1
+	# DELETE /pages/1.json
+	def destroy
+		@user.destroy
+		redirect_to home_url
+  	end
 
 	def set_alias_domain
 		# Url for adding 
