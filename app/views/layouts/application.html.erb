@@ -3,8 +3,11 @@
 <head>
   <title>Theatrical</title>
   <%= favicon_link_tag 'favicons/favicon.png' %>
+	<script type="text/javascript">
+		PAYMILL_PUBLIC_KEY= '<%= ENV['paymill_public'] %>';
+	</script>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", params[:controller], "data-turbolinks-track" => true  %>
+  <%= javascript_include_tag "https://bridge.paymill.com/", "application", params[:controller], "data-turbolinks-track" => true  %>
   <% if params[:action] != 'home' %>
   	<script><%= render :file => "layouts/uservoice.js" %></script>
   <% end %>

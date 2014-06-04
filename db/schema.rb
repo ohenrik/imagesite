@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140530214255) do
+ActiveRecord::Schema.define(version: 20140601192208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -161,6 +161,18 @@ ActiveRecord::Schema.define(version: 20140530214255) do
 
   add_index "themes", ["user_id"], name: "index_themes_on_user_id", using: :btree
 
+  create_table "user_credit_cards", force: true do |t|
+    t.string   "payment_token"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "card_type"
+    t.string   "country"
+    t.integer  "expire_month"
+    t.integer  "expire_year"
+    t.string   "last4"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email"
     t.string   "password_digest"
@@ -182,6 +194,7 @@ ActiveRecord::Schema.define(version: 20140530214255) do
     t.string   "confirm_email_token"
     t.datetime "confirm_email_sent_at"
     t.datetime "confirmed_email_at"
+    t.string   "client_token"
   end
 
   add_index "users", ["theme_id"], name: "index_users_on_theme_id", using: :btree

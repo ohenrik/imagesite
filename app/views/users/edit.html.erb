@@ -63,5 +63,41 @@
 
 				<%= f.submit "Change password", class: "btn btn-primary" %>
 		<% end %>
+
+		<%= form_for @user, html: { id: "payment-form" } do |f| %>
+			<div class="page-header">
+				<h4>
+					Credit Cards
+				</h4>
+			</div>
+			<% @user.user_credit_cards.each do |credit_card| %>
+				<%= "XXXX XXXX XXXX #{credit_card.last4}" %><br>
+				<%= credit_card.card_type.titleize %><br>
+			<% end %>
+
+			<div class="page-header">
+				<h4>Add New Card</h4>
+			</div>
+			<input class="card-amount-int" type="hidden" value="12" />
+			<input class="card-currency" type="hidden" value="EUR" />
+
+			<div class="form-row"><label>Card number</label>
+			<input class="card-number" type="text" size="20" /></div>
+
+			<div class="form-row"><label>CVC</label>
+			<input class="card-cvc" type="text" size="4" /></div>
+
+			<div class="form-row"><label>Name</label>
+			<input class="card-holdername" type="text" size="20" /></div>
+
+			<div class="form-row"><label>Expiry date (MM/YYYY)</label>
+			<input class="card-expiry-month" type="text" size="2" />
+			<span></span>
+			<input class="card-expiry-year" type="text" size="4" /></div>
+
+			<div class="payment-errors"></div>
+			<button class="submit-button" type="submit">Submit</button>
+
+		<% end %>
 	</div>
 </div>

@@ -110,6 +110,9 @@ gem 'roadie'
 #gem 'nokogiri'
 #gem 'premailer-rails'
 
+# Add Paymill for transactions
+gem 'paymill'
+
 ## Test gems
 gem "rspec-rails", :group => [:test, :development]
 group :test do 

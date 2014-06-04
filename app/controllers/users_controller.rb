@@ -28,6 +28,8 @@ class UsersController < ApplicationController
 	def confirm_user
 		@user = User.find_by(confirm_email_token: params[:token])
 		@user.confirmed_email_at = Time.zone.now
+		paymill_response = Paymill::Client.create(email: @user.email, description: @user.subdomain)
+		@user.client_token = paymill_response.id
 		@user.save!
 		redirect_to login_url, notice: "#{@user.email} is now confirmed. You can now log in."
 	end
@@ -54,6 +56,9 @@ class UsersController < ApplicationController
 	end
 
 	def update
+		if params[:paymillToken]
+			@user.add_credit_card(params[:paymillToken])
+		end
 		if @user.update(params[:user])
 			redirect_to edit_user_url, notice: "Success! Information saved. Thank you!"
 		else
@@ -130,6 +135,7 @@ class UsersController < ApplicationController
 		@user = User.new(params[:user])
 		@user.roles << Role.find_by_role("member")
 		@user.subdomain = @user.subdomain.downcase
+		@user.create_client
 		if @user.save
 			@user.try(:new_user_mail)
 			redirect_to root_url, notice: "Thank you for registering."

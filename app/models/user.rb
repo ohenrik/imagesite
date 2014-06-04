@@ -1,4 +1,6 @@
+require "paymill"
 class User < ActiveRecord::Base
+
 	has_secure_password
 
 	after_create :create_schema
@@ -14,12 +16,42 @@ class User < ActiveRecord::Base
 	has_many :photos
 	has_many :themes
 	has_many :public_themes
+	has_many :user_credit_cards
 	belongs_to :theme
 	belongs_to :home, polymorphic: true
 
 
 	liquid_methods :first_name, :last_name, :username, :email, :site_title, :site_tagline, :theme
 
+	def create_client(description = nil)
+		paymill_response = Paymill::Client.create(email: self.email, description: description)
+		self.client_token = paymill_response.id
+		self.save
+	end
+
+	def add_credit_card(token)
+		payment_object = Paymill::Payment.create token: token, client: self.client_token
+
+		self.user_credit_cards.create payment_token: payment_object.id, 
+			card_type: payment_object.card_type, 
+			country: payment_object.country, 
+			expire_month: payment_object.expire_month.to_i,
+			expire_year: payment_object.expire_year.to_i,
+			last4: payment_object.last4
+		 
+	end
+
+	def charge_credit_card(amount, card = self.user_credit_cards.first.payment_token)
+		Paymill::Transaction.create amount: amount, 
+		currency: "USD",
+	    client: self.client_token,
+	    payment: card,
+	    description: "Test Transaction"
+	end
+
+	def purchase_product()
+		#Paymill::Transaction.create amount: 4200, currency: "EUR", client: "client_c781b1d2f7f0f664b4d9", payment: "pay_2f82a672574647cd911d", description: "Test Transaction"
+	end
 
 	def send_password_reset
 		generate_token(:password_reset_token)
