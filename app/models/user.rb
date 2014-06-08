@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
 	end
 
 	def send_new_user_email
-		UserMailer.new_user(user.id).deliver
+		UserMailer.new_user(self.id).deliver
 	end
 
 	def generate_token(column)
