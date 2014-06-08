@@ -76,6 +76,20 @@ class PhotosController < ApplicationController
     end
   end
 
+  def remove_thumbnail
+    if params[:item].classify.constantize.exists?(params[:item_id])
+      @item = params[:item].classify.constantize.find(params[:item_id])
+      @item.photo_id = nil
+      @item.save
+      #get the model name pluralized
+      model_name = @item.class.to_s.underscore.pluralize
+      #redirect to the index action of the model
+      redirect_to referer, notice: "Thumbnail removed"
+    else
+      redirect_to referer, notice: "Error: thumbnail not removed. Contact support"  ## To send people dynamically to index send("#{model_name}_path"),
+    end
+  end
+
   # GET /photos
   # GET /photos.json
   def all
@@ -121,11 +135,11 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to all_url, notice: 'Photo was successfully created.' }
+        format.html { redirect_to referer, notice: 'Photo was successfully created.' }
         format.json { render action: 'all', status: :created, location: @photo }
         format.js {}
       else
-        format.html { redirect_to all_url, alert: 'Error: Photo not uploaded please select a image file.' }
+        format.html { redirect_to referer, alert: 'Error: Photo not uploaded please select a image file.' }
         format.json { render json: @photo.errors, status: :unprocessable_entity }
         format.js {}
       end
@@ -137,10 +151,10 @@ class PhotosController < ApplicationController
   def update
     respond_to do |format|
       if @photo.update(params[:photo])
-        format.html { redirect_to all_url, notice: 'Photo was successfully updated.' }
+        format.html { redirect_to referer, notice: 'Photo was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { redirect_to all_url, alert: 'Error: Photo not edited please select a image file.' }
+        format.html { redirect_to referer, alert: 'Error: Photo not edited please select a image file.' }
         format.json { render json: @photo.errors, status: :unprocessable_entity }
       end
     end
@@ -154,7 +168,7 @@ class PhotosController < ApplicationController
   def destroy
     @photo.destroy
     respond_to do |format|
-      format.html { redirect_to all_url }
+      format.html { redirect_to referer }
       format.json { head :no_content }
     end
   end

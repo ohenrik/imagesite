@@ -8,3 +8,5 @@
 <%= render partial: 'page_items/items/photo', locals: { page_item: page_item } if page_item.is_type == 'Photo'  %>
 
 <%= render partial: 'page_items/items/page', locals: { page_item: page_item } if page_item.is_type == 'Page'  %>
+
+<%= render partial: 'page_items/items/person', locals: { page_item: page_item } if page_item.is_type == 'Person' %>

@@ -1,5 +1,9 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy]
+
+  # Find the tenant
+  around_filter :scope_current_tenant
+
+  before_action :set_person, only: [:show, :edit, :update, :destroy, :add_to_page, :add_to_menu]
 
   # GET /people
   # GET /people.json
@@ -10,6 +14,7 @@ class PeopleController < ApplicationController
   # GET /people/1
   # GET /people/1.json
   def show
+    render layout: false
   end
 
   # GET /people/new
@@ -24,11 +29,11 @@ class PeopleController < ApplicationController
   # POST /people
   # POST /people.json
   def create
-    @person = Person.new(person_params)
+    @person = Person.new(params[:person])
 
     respond_to do |format|
       if @person.save
-        format.html { redirect_to @person, notice: 'Person was successfully created.' }
+        format.html { redirect_to people_path, notice: 'Person was successfully created.' }
         format.json { render action: 'show', status: :created, location: @person }
       else
         format.html { render action: 'new' }
@@ -41,8 +46,8 @@ class PeopleController < ApplicationController
   # PATCH/PUT /people/1.json
   def update
     respond_to do |format|
-      if @person.update(person_params)
-        format.html { redirect_to @person, notice: 'Person was successfully updated.' }
+      if @person.update(params[:person])
+        format.html { redirect_to edit_person_path(@person), notice: 'Person was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -58,6 +63,49 @@ class PeopleController < ApplicationController
     respond_to do |format|
       format.html { redirect_to people_url }
       format.json { head :no_content }
+    end
+  end
+
+  def gallery_modal
+    @people = Person.all.order(first_name: :asc)
+
+    # Passing page details right through 
+    @page_id = params[:page_id]
+    @page_item_id = params[:page_item_id]
+
+
+    respond_to do |format|
+      format.js {
+        render 'page_items/gallery_modal', layout: false
+      }
+    end
+  end
+
+  def add_to_page
+    # @page in this case is the page selected to be added to the parent page of id = params[:page_id]
+    # This is why @page.sub_items creates a new child of the page with id = params[:page_id]
+    @page_item = @person.sub_items.create(page_id: params[:page_id], ancestry: params[:page_item_id])
+    respond_to do |format|
+      if @page_item
+        format.html { redirect_to edit_page_path(params[:page_id]), notice: 'Item successfully added' }
+        format.js { render 'page_items/page_item_added', layout: false } #render locals: { page_item: item } }
+      else
+        format.html { redirect_to edit_page_path(params[:page_id]), notice: 'An error occured, item no added to menu.' }
+        format.json { render json: @menu.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def add_to_menu
+    @menu_item = @person.menu_items.create(name: @person.name, menu_id: params[:menu_id])
+    respond_to do |format|
+      if @menu_item
+        format.html { redirect_to menus_path, notice: 'Menu Item successfully added' }
+        format.js { render template: 'menu_items/add_to_menu.js.erb' }
+      else
+        format.html { redirect_to menus_path, notice: 'An error occured, item no added to menu.' }
+        format.json { render json: @menu.errors, status: :unprocessable_entity }
+      end
     end
   end
 

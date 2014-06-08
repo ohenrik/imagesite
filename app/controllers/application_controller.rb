@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 private
 
 	def current_user
-		@current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
+		@current_user ||= User.find_by!(auth_token: cookies[:auth_token]) if cookies[:auth_token]
 	end
 	helper_method :current_user
 
@@ -36,9 +36,9 @@ private
 	end
 
 	def current_tenant
-		@current_tenant = User.find_by_alias_domain(request.host) unless %w(lvh.me theatrical.co theatrical.no theatrical.de).include?(request.domain)
+		@current_tenant = User.find_by(alias_domain: request.host) unless %w(lvh.me theatrical.co theatrical.no theatrical.de).include?(request.domain)
 		
-		@current_tenant ||= User.find_by_subdomain!(request.subdomain) # includes(:home).
+		@current_tenant ||= User.find_by!(subdomain: request.subdomain) # includes(:home).
 	end
 	helper_method :current_tenant
 

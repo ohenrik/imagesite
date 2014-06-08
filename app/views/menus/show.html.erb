@@ -47,6 +47,26 @@
         </div>
 
         <div class="page-header">
+            <h4>People:</h4>
+        </div>
+        <div class="list-group">
+            <% if Person.all.each do |person| %>
+                <%= link_to add_person_to_menu_path(:id => person.id, :menu_id => @menu.id), :remote => true, :method => :post, class: "list-group-item add-to-menu" do %>
+                    <i class="fa fa-file-text-o fa-fw text-muted"></i> <%= person.name %>
+                    <span class="pull-right text-muted"><i class="fa fa-plus-circle"></i></span>
+                <% end %> 
+            <% end.empty? %>
+                <%= link_to person_path  do %>
+                    <div class="alert alert-info">
+                        <p>
+                            <strong>No People added:</strong> Add new people here.
+                        </p>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+
+        <div class="page-header">
             <h4>Tags:</h4>
         </div>
         <div class="list-group">

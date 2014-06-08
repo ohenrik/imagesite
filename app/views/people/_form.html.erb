@@ -11,39 +11,59 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
+  <div class="person row">
+      <div class="col-xs-10 col-xs-offset-1  col-sm-6 col-sm-offset-3  col-md-4 col-md-offset-4">
+        <br>
+        <div class="person-thumbnail">
+          <%= link_to thumbnail_modal_path(:item => @person.class, :item_id => @person.id), remote: true do %>
+            <% if @person.photo %>
+                <%= image_tag @person.photo.image_url(:thumb).to_s, class: "img-responsive img-circle" %>
+            <% else %>
+                <%= image_tag "default/thumb_no-thumb.png", class: "img-responsive img-circle" %>
+            <% end %>
+          <% end %>
+        </div>
+        <br>
+        <div class="person-fields">
+            <% unless @person.new_record? %>
+              <h2 class="text-center">
+                <%= @person.name %>
+              </h2>
+            <% end %>
+            <hr>
+            <div class="form-group">
+              <%= f.label :first_name %><br>
+              <%= f.text_field :first_name, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :last_name %><br>
+              <%= f.text_field :last_name, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :title %><br>
+              <%= f.text_field :title, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :description %><br>
+              <%= f.text_area :description, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :email %><br>
+              <%= f.text_field :email, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :phone %><br>
+              <%= f.text_field :phone, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :mobile_phone %><br>
+              <%= f.text_field :mobile_phone, class: "form-control" %>
+            </div>
+              <%= link_to "Back", people_path, class: "btn btn-link" %>
+              <%= link_to "Delete", @person, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" unless @person.new_record? %>
+              <%= f.submit class: "btn btn-primary pull-right" %>
+        </div>
+      </div>
   </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %><br>
-    <%= f.text_field :phone %>
-  </div>
-  <div class="field">
-    <%= f.label :mobile_phone %><br>
-    <%= f.text_field :mobile_phone %>
-  </div>
-  <div class="field">
-    <%= f.label :photo_id %><br>
-    <%= f.text_field :photo_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
 <% end %>

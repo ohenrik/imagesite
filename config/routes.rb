@@ -1,6 +1,5 @@
 Imagesite::Application.routes.draw do
 
-  resources :people
 
     get "password_resets/new"
     get 'register', to: 'users#new', as: 'register'
@@ -40,11 +39,17 @@ Imagesite::Application.routes.draw do
         get 'photos/all' => 'photos#all', as: :all
         get 'photos/thumbnail_modal' => 'photos#thumbnail_modal', as: :thumbnail_modal
         post 'photos/:id/set_as_thumbnail' => 'photos#set_as_thumbnail', as: :set_thumbnail
+        post 'photos/remove_as_thumbnail' => 'photos#remove_thumbnail', as: :remove_thumbnail
         get 'photos/all/tags/:tag' => 'photos#all', as: :filter_tag
         get 'photos/gallery_modal' => 'photos#gallery_modal', as: :photos_gallery_modal
         get 'photos/photos_modal' => 'photos#photo_manager_modal', as: :photo_manager_modal
         post 'photos/add_to_page/:id' => 'photos#add_to_page', as: :add_photo_to_page
         resources :photos
+
+        # People
+        post 'people/add_to_menu/:id' => 'people#add_to_menu', as: :add_person_to_menu 
+        get 'people/gallery_modal' => 'people#gallery_modal', as: :people_gallery_modal
+        resources :people
 
         # Tags
         get 'tags/:tag' => 'photos#index', as: :public_filter_tag
@@ -64,6 +69,7 @@ Imagesite::Application.routes.draw do
 
         # Menu Items
         post 'menu_items/sort_menu_items/:id' => 'menu_items#sort', as: :sort_menu_items
+        post 'people/add_to_page/:id' => 'people#add_to_page', as: :add_person_to_page
         resources :menu_items
 
 

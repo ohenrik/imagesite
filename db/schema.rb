@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140601192208) do
+ActiveRecord::Schema.define(version: 20140604213720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "code_files", force: true do |t|
     t.integer  "theme_id"
@@ -97,6 +98,21 @@ ActiveRecord::Schema.define(version: 20140601192208) do
   add_index "pages", ["photo_id"], name: "index_pages_on_photo_id", using: :btree
   add_index "pages", ["template_id"], name: "index_pages_on_template_id", using: :btree
   add_index "pages", ["template_name"], name: "index_pages_on_template_name", using: :btree
+
+  create_table "people", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "title"
+    t.text     "description"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "mobile_phone"
+    t.integer  "photo_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "people", ["photo_id"], name: "index_people_on_photo_id", using: :btree
 
   create_table "photos", force: true do |t|
     t.string   "name"

@@ -1,41 +1,57 @@
-<h1>Listing people</h1>
+<div class="row people">
+    <div class="col-xs-12 new-link">
 
-<table>
-  <thead>
-    <tr>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>Mobile phone</th>
-      <th>Photo</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+    </div>
 
-  <tbody>
-    <% @people.each do |person| %>
-      <tr>
-        <td><%= person.first_name %></td>
-        <td><%= person.last_name %></td>
-        <td><%= person.title %></td>
-        <td><%= person.description %></td>
-        <td><%= person.email %></td>
-        <td><%= person.phone %></td>
-        <td><%= person.mobile_phone %></td>
-        <td><%= person.photo %></td>
-        <td><%= link_to 'Show', person %></td>
-        <td><%= link_to 'Edit', edit_person_path(person) %></td>
-        <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <div class="clearfix">
+        <div class="person col-xs-6  col-sm-4 col-lg-3">
+            <%= link_to new_person_path, class: "" do %>
+                <%= image_tag "default/thumb_no-thumb.png", class: "img-responsive  img-circle" %>
+            <% end %>
+            <br>
+            <h3 class="listed-page-header text-center">
+                <%= link_to new_person_path, class: "text-muted" do %>
+                    New Person...
+                <% end %>
+            </h3>
+        </div>
+      <% @people.each do |person| %>
+            <div class="person col-xs-6  col-sm-4 col-lg-3">
+                <%= link_to edit_person_path(person), class: "" do %>
+                    <% if person.photo %>
+                        <%= image_tag person.photo.image_url(:thumb).to_s, class: "img-responsive img-circle" %>
+                    <% else %>
+                        <%= image_tag "default/thumb_no-thumb.png", class: "img-responsive  img-circle" %>
+                    <% end %>
+                <% end %>
+                <br>
+                <h3 class="listed-page-header text-center">
+                    <%= link_to edit_person_path(person) do %>
+                        <%= person.name %>
+                    <% end %>
+                </h3>
+            </div>
+            <% if (@people.index(person)+2) % 4 == 0 %>
+                <div class="clearfix visible-lg"></div>
+            <% end %>
+            <% if (@people.index(person)+2) % 3 == 0 %>
+                <div class="clearfix visible-sm visible-md"></div>
+            <% end %>
+            <% if (@people.index(person)+2) % 2 == 0 %>
+                <div class="clearfix visible-xs"></div>
+            <% end %>
+      <% end %>
+    </div>
+    <% if @people.empty? %>
+        <div class="col-xs-12">
+            <%= link_to new_person_path do %>
+                <div class="alert alert-info">
+                    <p>
+                        <strong>No people created: </strong>To add new person click here.
+                    </p>
+                </div>
+            <% end %>
+        </div>
     <% end %>
-  </tbody>
-</table>
 
-<br>
-
-<%= link_to 'New Person', new_person_path %>
+</div>

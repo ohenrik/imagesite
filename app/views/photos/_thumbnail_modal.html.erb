@@ -23,6 +23,7 @@
 	</div>
 
 	<div class="modal-footer">
+		<%= link_to "Remove thumbnail", remove_thumbnail_path(item: @item, item_id: @item_id), method: :post, class: "btn btn-default"%>
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	</div>
   

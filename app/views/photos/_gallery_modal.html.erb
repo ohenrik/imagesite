@@ -16,7 +16,7 @@
                             <%= link_to add_photo_to_page_path(id: photo.id, page_id: @page_id, page_item_id: @page_item_id), remote: true, method: :post, class: "thumbnail" do %>
                                 <%= image_tag photo.image_url(:large_thumb), class: "img-responsive" %>
                             <% end %>
-                            <span class="photo-name"><%= photo.name %></span>
+                            <h4><%= photo.name %></h4>
                         </div>
                 <% end %>
             </div>

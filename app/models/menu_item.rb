@@ -2,7 +2,8 @@ class MenuItem < ActiveRecord::Base
 	belongs_to :menu
 	belongs_to :menuable, :polymorphic => true
 	has_ancestry
-
+	acts_as_list scope: [:ancestry]
+	
 	liquid_methods :name, :ancestry, :menuable_type, :menuable_id, :menuable, :position, :item, :link, :has_child, :url, :new_page
 
 	validates :name, presence: true
