@@ -86,6 +86,8 @@ gem 'unf'
 
 # Background processing (also needed for carrierwave direct)
 gem 'sidekiq'
+gem 'sinatra', '>= 1.3.0', :require => nil
+
 
 #gem "therubyracer"
 #gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS

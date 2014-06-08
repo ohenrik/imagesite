@@ -1,3 +1,4 @@
+require 'sidekiq/web'
 Imagesite::Application.routes.draw do
 
 
@@ -11,7 +12,7 @@ Imagesite::Application.routes.draw do
 
     resources :password_resets
 
-
+    mount Sidekiq::Web => '/sidekiq'
     # Public Themes
     #resources :public_themes do 
     #  resources :public_code_files
