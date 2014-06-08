@@ -134,8 +134,10 @@ class UsersController < ApplicationController
 		@user = User.new(params[:user])
 		@user.roles << Role.find_by_role("member")
 		@user.subdomain = @user.subdomain.downcase
+		@user.generate_token(:confirm_email_token)
+		@user.confirm_email_sent_at = Time.zone.now
 		if @user.save
-			NewUserMailWorker.perform_async(@user.id)
+			@user.delay.send_new_user_email 
 			#CreateSchemaWorker.perform_async(@user.id)
 			redirect_to root_url, notice: "Thank you for registering."
 		else
