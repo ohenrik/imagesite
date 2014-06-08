@@ -129,4 +129,5 @@ end
 # Use Capistrano for deployment
 gem 'capistrano', '2.15.5', group: :development
 gem 'rvm-capistrano', group: :development
+gem 'capistrano-sidekiq' , group: :development
 

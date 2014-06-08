@@ -4,6 +4,7 @@ set :rvm_type, :user
 
 # Bundler support
 require 'bundler/capistrano'
+require 'capistrano/sidekiq'
 
 # Stages
 require 'capistrano/ext/multistage'
