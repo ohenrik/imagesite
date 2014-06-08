@@ -6,6 +6,6 @@ class NewUserMailWorker
 	user.generate_token(:confirm_email_token)
 	user.confirm_email_sent_at = Time.zone.now
 	user.save!
-	UserMailer.new_user(user.id).deliver 
+	user.send_new_user_email 
   end
 end
