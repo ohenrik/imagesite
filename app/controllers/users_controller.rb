@@ -136,7 +136,7 @@ class UsersController < ApplicationController
 		@user.subdomain = @user.subdomain.downcase
 		if @user.save
 			NewUserMailWorker.perform_async(@user.id)
-			CreateSchemaWorker.perform_async(@user.id)
+			#CreateSchemaWorker.perform_async(@user.id)
 			redirect_to root_url, notice: "Thank you for registering."
 		else
 			render "new"

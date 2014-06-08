@@ -1,6 +1,9 @@
 require "paymill"
 class User < ActiveRecord::Base
 
+	# create schema
+	after_create :create_schema
+
 	has_secure_password
 
 	validates :username, :subdomain, :email, presence: true, uniqueness: true
@@ -66,11 +69,7 @@ class User < ActiveRecord::Base
 
 	# Multitenancy! 
 	def create_schema
-		c = User.connection
-    	schemas = c.select_values("select * from pg_namespace where nspname != 'information_schema' AND nspname NOT LIKE 'pg%'")
-    	unless schemas.include?("tenant#{self.id}")
-			self.class.connection.execute("create schema tenant#{self.id}")
-		end
+		self.class.connection.execute("create schema tenant#{self.id}")
 		self.scope_schema do
 			load Rails.root.join("db/schema.rb")
 			self.class.connection.execute("drop table #{self.class.table_name}")
