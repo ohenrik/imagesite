@@ -3,8 +3,6 @@ class User < ActiveRecord::Base
 
 	has_secure_password
 
-	after_create :create_schema
-
 	validates :username, :subdomain, :email, presence: true, uniqueness: true
 
 	# Or with your own reserved names
@@ -60,13 +58,6 @@ class User < ActiveRecord::Base
 		UserMailer.password_reset(self).deliver
 	end
 
-	def new_user_mail
-		generate_token(:confirm_email_token)
-		self.confirm_email_sent_at = Time.zone.now
-		save!
-		UserMailer.new_user(self).deliver 
-	end
-
 	def generate_token(column)
 		begin
 			self[column] = SecureRandom.urlsafe_base64
@@ -75,7 +66,15 @@ class User < ActiveRecord::Base
 
 	# Multitenancy! 
 	def create_schema
-		CreateSchemaWorker.perform_async(self.id)
+		c = User.connection
+    	schemas = c.select_values("select * from pg_namespace where nspname != 'information_schema' AND nspname NOT LIKE 'pg%'")
+    	unless schemas.include?("tenant#{self.id}")
+			self.class.connection.execute("create schema tenant#{self.id}")
+		end
+		self.scope_schema do
+			load Rails.root.join("db/schema.rb")
+			self.class.connection.execute("drop table #{self.class.table_name}")
+		end
 	end
 
 	def scope_schema(*paths)

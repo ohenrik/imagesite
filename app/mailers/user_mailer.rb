@@ -11,9 +11,9 @@ class UserMailer < ActionMailer::Base
     mail :to => user.email, :subject => "Password Reset"
   end
 
-  def new_user(user)
-    @user = user
-    mail :to => user.email, :subject => "Welcome to Theatrical.co"
+  def new_user(user_id)
+    @user = User.find(user_id)
+    mail :to => @user.email, :subject => "Welcome to Theatrical.co"
   end
 
   
