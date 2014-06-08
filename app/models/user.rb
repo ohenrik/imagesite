@@ -75,11 +75,7 @@ class User < ActiveRecord::Base
 
 	# Multitenancy! 
 	def create_schema
-	  self.class.connection.execute("create schema tenant#{id}")
-	  scope_schema do
-	    load Rails.root.join("db/schema.rb")
-	    self.class.connection.execute("drop table #{self.class.table_name}")
-	  end
+		CreateSchemaWorker.perform_async(self.id)
 	end
 
 	def scope_schema(*paths)

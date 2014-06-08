@@ -15,13 +15,18 @@
       <div class="col-xs-10 col-xs-offset-1  col-sm-6 col-sm-offset-3  col-md-4 col-md-offset-4">
         <br>
         <div class="person-thumbnail">
-          <%= link_to thumbnail_modal_path(:item => @person.class, :item_id => @person.id), remote: true do %>
-            <% if @person.photo %>
-                <%= image_tag @person.photo.image_url(:thumb).to_s, class: "img-responsive img-circle" %>
+          
+            <% if @person.photo.present? %>
+              <%= link_to thumbnail_modal_path(:item => @person.class, :item_id => @person.id), remote: true do %>
+                  <%= image_tag @person.photo.image_url(:thumb).to_s, class: "img-responsive img-circle" %>
+              <% end %>
+            <% elsif @person.new_record? %>
+              <%= image_tag "default/thumb_no-thumb.png", class: "img-responsive img-circle" %>
             <% else %>
-                <%= image_tag "default/thumb_no-thumb.png", class: "img-responsive img-circle" %>
+              <%= link_to thumbnail_modal_path(:item => @person.class, :item_id => @person.id), remote: true do %>
+                  <%= image_tag "default/thumb_no-thumb.png", class: "img-responsive img-circle" %>
+              <% end %>
             <% end %>
-          <% end %>
         </div>
         <br>
         <div class="person-fields">

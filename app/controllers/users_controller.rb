@@ -28,10 +28,9 @@ class UsersController < ApplicationController
 	def confirm_user
 		@user = User.find_by(confirm_email_token: params[:token])
 		@user.confirmed_email_at = Time.zone.now
-		paymill_response = Paymill::Client.create(email: @user.email, description: @user.subdomain)
-		@user.client_token = paymill_response.id
+		CreateClientWorker.perform_async(@user.id)
 		@user.save!
-		redirect_to login_url, notice: "#{@user.email} is now confirmed. You can now log in."
+		redirect_to login_url, notice: "#{@user.email} is now confirmed. You can now log in!"
 	end
 
 	def home
@@ -135,9 +134,8 @@ class UsersController < ApplicationController
 		@user = User.new(params[:user])
 		@user.roles << Role.find_by_role("member")
 		@user.subdomain = @user.subdomain.downcase
-		@user.create_client
 		if @user.save
-			@user.try(:new_user_mail)
+			NewUserMailWorker.perform_async(@user.id)
 			redirect_to root_url, notice: "Thank you for registering."
 		else
 			render "new"

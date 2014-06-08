@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
   def create
   	user = User.find_by_username(params[:username])
     user ||= User.find_by_email(params[:username])
-  	if user && user.authenticate(params[:password])
+  	if user && user.authenticate(params[:password]) && user.confirmed_email_at.present?
       # session[:user_id] = user.id
   		if params[:remember_me]
         cookies.permanent[:auth_token] = { value: user.auth_token, domain: "."+request.domain }
@@ -16,7 +16,10 @@ class SessionsController < ApplicationController
         cookies[:auth_token] = { value: user.auth_token, domain: "."+request.domain }
       end
   		redirect_to pages_url(:subdomain => "#{get_subdomain}"), notice: "You are now loged in."
-  	else
+  	elsif user.confirmed_email_at.blank? && user.authenticate(params[:password])
+      flash.now.alert = "Please confirm your email address before login in. Check your email."
+      render "new"
+    else
   		flash.now.alert = "Email or password is invalid"
   		render "new"
   	end
