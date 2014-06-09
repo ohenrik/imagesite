@@ -137,7 +137,7 @@ class UsersController < ApplicationController
 		@user.generate_token(:confirm_email_token)
 		@user.confirm_email_sent_at = Time.zone.now
 		if @user.save
-			@user.delay.send_new_user_email 
+			@user.send_new_user_email 
 			#CreateSchemaWorker.perform_async(@user.id)
 			redirect_to root_url, notice: "Thank you for registering."
 		else
