@@ -34,7 +34,7 @@ Imagesite::Application.configure do
     :address        => 'smtp.mailgun.org',
     :user_name      => ENV["MAILGUN_USERNAME"],
     :password       => ENV["MAILGUN_PASSWORD"],
-    :domain         => ENV['MAILGUN_EMAIL'],
+    #:domain         => ENV['MAILGUN_EMAIL'],
     :authentication => :plain
   }
 
