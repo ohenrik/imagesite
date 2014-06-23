@@ -10,6 +10,9 @@ module Permissions
 			# Photos
 			allow :photos, [:index, :show]
 
+			# Event
+			allow :events, [:show]
+
 			# Users
 			allow :users, [:new, :create, :home, :confirm_user]
 			allow_param :user, [:first_name, :last_name, :username, :subdomain, :email, :password, :password_confirmation]

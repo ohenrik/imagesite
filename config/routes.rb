@@ -12,7 +12,8 @@ Imagesite::Application.routes.draw do
 
     resources :password_resets
 
-    mount Sidekiq::Web => '/sidekiq'
+    #mount Sidekiq::Web => '/sidekiq'
+    
     # Public Themes
     #resources :public_themes do 
     #  resources :public_code_files
@@ -51,6 +52,9 @@ Imagesite::Application.routes.draw do
         post 'people/add_to_menu/:id' => 'people#add_to_menu', as: :add_person_to_menu 
         get 'people/gallery_modal' => 'people#gallery_modal', as: :people_gallery_modal
         resources :people
+
+        # Events
+        resources :events
 
         # Tags
         get 'tags/:tag' => 'photos#index', as: :public_filter_tag

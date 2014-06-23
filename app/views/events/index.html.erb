@@ -1,0 +1,67 @@
+<div class="row pages">
+    <div class="col-xs-12 new-link">
+        <%= link_to new_event_path, class: "btn btn-default pull-right" do %>
+            <i class="fa fa-file-text-o"></i> New Event
+        <% end %>
+    </div>
+    <% @events.each do |event| %>
+        <div class="event clearfix">
+            
+            <div class="col-sm-5 col-md-4 listed-page-thumbnail">
+                <%= link_to edit_event_path(event), class: "thumbnail" do %>
+                    <% if event.photo %>
+                        <%= image_tag event.photo.image_url(:large_thumb).to_s, class: "img-responsive" %>
+                    <% else %>
+                        <%= image_tag "default/large_thumb_no-thumb.png", class: "img-responsive" %>
+                    <% end %>
+                <% end %>
+            </div>
+            
+            <div class="clearfix visible-xs"></div>
+            <div class="col-sm-7 col-md-8">
+                <h2 class="listed-page-header">
+                    <%= link_to edit_event_path(event) do %>
+                        <i class="fa fa-pencil-square text-muted"></i>
+                        <%= event.name %>
+
+                    <% end %>
+                </h2>
+                <h3 class="listed-page-status text-muted">
+                    
+                    <small>
+                        Start:
+                        <%= event.start_date.strftime('%d.%m.%Y') unless event.start_date.blank?%> 
+                        <%= " - " + event.start_time.strftime('%H:%M') unless event.start_time.blank?%>
+                        
+                        <%= " | End: " + event.end_date.strftime('%d.%m.%Y') unless event.end_date.blank?%>
+                        <%= " - " + event.end_time.strftime('%H:%M') unless event.end_time.blank?%>
+                        |
+                        <%= link_to event, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-muted text-no-wrap" do %>
+                             <i class="fa fa-trash-o fa-fw"></i> Delete
+                        <% end %>
+
+                        |
+                        <%= link_to thumbnail_modal_path(:item => event.class, :item_id => event.id), remote: true, class: "text-muted text-no-wrap" do %>
+                            <i class="fa fa-picture-o fa-fw"></i> Thumbnail
+                        <% end %>
+                    </small>
+                </h3>
+                <p><%= truncate(event.description, :length => 350) unless event.description.blank? %></p>
+            </div>
+
+        </div>
+        
+    <% end %>
+
+    <% if @events.empty? %>
+        <div class="col-xs-12">
+            <%= link_to new_event_path do %>
+                <div class="alert alert-info">
+                    <p>
+                        <strong>No events created: </strong>To create a new event click here.
+                    </p>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+</div>

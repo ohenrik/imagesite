@@ -22,8 +22,12 @@ module Permissions
 				allow_param :page_item, [:position, :page_id, :pageable_id, :no_item_link, :design, :item_link, :item_class, :description, :title, :content, :pageable_type, :pageable, :gallery]
 
 				# Photo
-				allow :photos, [:all, :new, :create, :edit, :update, :delete, :destroy, :add_to_page, :gallery_modal, :photo_manager_modal, :thumbnail_modal, :set_as_thumbnail, :remove_thumbnail]
+				allow :photos, [:all, :new, :create, :edit, :update, :destroy, :add_to_page, :gallery_modal, :photo_manager_modal, :thumbnail_modal, :set_as_thumbnail, :remove_thumbnail]
 				allow_param :photo, [:name, :image, :edit_tag_list, :description]
+
+				# Event
+				allow :events, [:new, :index, :create, :edit, :update, :destroy, :gallery_modal, :add_to_page, :add_to_menu]
+				allow_param :event, [:name, :description, :location, :status, :start_date, :end_date, :start_time, :end_time, :photo_id]
 
 				# Tag
 				allow :tags, [:index, :new, :create, :edit, :update, :delete, :destroy, :add_to_menu]
