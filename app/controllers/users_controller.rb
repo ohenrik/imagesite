@@ -169,13 +169,10 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
-
-		# Destroy the Roles assosiations to this user in the join table.
-		# user.roles.clear
-
-
-		# Destroy the user details
+		@user.destroy
+		@user.drop_schema
 		
+		redirect_to referer
 	end
 
 	def current_resource

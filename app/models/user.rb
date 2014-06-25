@@ -80,6 +80,10 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	def drop_schema
+		self.class.connection.execute("drop schema tenant#{self.id} cascade")
+	end
+
 	def scope_schema(*paths)
 	  original_search_path = self.class.connection.schema_search_path
 	  self.class.connection.schema_search_path = ["tenant#{id}", *paths].join(",")
