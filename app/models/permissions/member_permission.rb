@@ -29,6 +29,10 @@ module Permissions
 				allow :events, [:new, :index, :create, :edit, :update, :destroy, :gallery_modal, :add_to_page, :add_to_menu]
 				allow_param :event, [:name, :description, :location, :status, :start_date, :end_date, :start_time, :end_time, :photo_id]
 
+				# Offer
+				allow :offers, [:new, :create, :edit, :update, :destroy]
+				allow_param :event, [:name, :price, :currency, :capacity, :offerable_id, :offerable_type] 
+
 				# Tag
 				allow :tags, [:index, :new, :create, :edit, :update, :delete, :destroy, :add_to_menu]
 				allow_param :tag, [:name]

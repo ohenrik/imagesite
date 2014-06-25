@@ -1,6 +1,10 @@
 <br>
 <%= form_for(@event) do |f| %>
+
 <div class="row">
+<div class="error-container">
+    <%= render partial: 'shared/form_errors', :locals => {:item => @event} %>
+</div>
     <div class="col-sm-5 col-md-4 listed-page-thumbnail">
         <%= link_to thumbnail_modal_path(:item => @event.class, :item_id => @event.id), remote: true, class: "thumbnail" do %>
             <% if @event.photo %>
@@ -111,12 +115,7 @@
 
     </div>
 </div>
-            <hr>
-
-
-    <div class="error-container">
-        <%= render partial: 'shared/form_errors', :locals => {:item => @event} %>
-    </div>
+<hr>
 
 
 <% end %>

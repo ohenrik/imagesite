@@ -2,6 +2,8 @@ require 'sidekiq/web'
 Imagesite::Application.routes.draw do
 
 
+  resources :productions
+
   resources :offers
 
     get "password_resets/new"
