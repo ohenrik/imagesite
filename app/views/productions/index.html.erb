@@ -1,31 +1,56 @@
-<h1>Listing productions</h1>
+<div class="row productions">
+    <div class="col-xs-12 new-link">
+        <div class="pull-right">
+            <%= link_to new_production_path, class: "btn btn-default" do %>
+                <i class="fa fa-bullhorn"></i> New Production
+            <% end %>
+            <%= link_to new_event_path, class: "btn btn-default" do %>
+                <i class="fa fa-ticket"></i> New Event
+            <% end %>
+        </div>
+    </div>
+    <% if @productions.each do |production| %>
+        <div class="event clearfix">
+            
+            <div class="col-sm-5 col-md-4 listed-page-thumbnail">
+                <%= link_to edit_production_path(production), class: "thumbnail" do %>
+                    <% if production.photo %>
+                        <%= image_tag production.photo.image_url(:large_thumb).to_s, class: "img-responsive" %>
+                    <% else %>
+                        <%= image_tag "default/large_thumb_no-thumb.png", class: "img-responsive" %>
+                    <% end %>
+                <% end %>
+            </div>
+            
+            <div class="clearfix visible-xs"></div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Photo</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+            <div class="col-sm-7 col-md-8">
+                <h2 class="listed-page-header">
+                    <%= link_to edit_production_path(production) do %>
+                        <i class="fa fa-pencil-square text-muted"></i>
+                        <%= production.name %>
 
-  <tbody>
-    <% @productions.each do |production| %>
-      <tr>
-        <td><%= production.name %></td>
-        <td><%= production.description %></td>
-        <td><%= production.photo %></td>
-        <td><%= link_to 'Show', production %></td>
-        <td><%= link_to 'Edit', edit_production_path(production) %></td>
-        <td><%= link_to 'Destroy', production, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+                    <% end %>
+                </h2>
+                <h3 class="listed-page-status text-muted">
+                    
+                    <small>
+                        Events: <%= production.events.count %>
+                        
+                    </small>
+                </h3>
+                <p><%= truncate(production.description, :length => 350) unless production.description.blank? %></p>
+            </div>
+        </div>
+    <% end.empty? %>
+        <div class="col-xs-12">
+            <%= link_to new_event_path do %>
+                <div class="alert alert-info">
+                    <p>
+                        <strong>No productions created: </strong>To create a new production click here.
+                    </p>
+                </div>
+            <% end %>
+        </div>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Production', new_production_path %>
+</div>

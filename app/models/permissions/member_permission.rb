@@ -25,13 +25,21 @@ module Permissions
 				allow :photos, [:all, :new, :create, :edit, :update, :destroy, :add_to_page, :gallery_modal, :photo_manager_modal, :thumbnail_modal, :set_as_thumbnail, :remove_thumbnail]
 				allow_param :photo, [:name, :image, :edit_tag_list, :description]
 
-				# Event
-				allow :events, [:new, :index, :create, :edit, :update, :destroy, :gallery_modal, :add_to_page, :add_to_menu]
-				allow_param :event, [:name, :description, :location, :status, :start_date, :end_date, :start_time, :end_time, :photo_id]
-
 				# Offer
 				allow :offers, [:new, :create, :edit, :update, :destroy]
-				allow_param :event, [:name, :price, :currency, :capacity, :offerable_id, :offerable_type] 
+				offer_attributes = [:name, :price, :currency, :capacity, :offerable_id, :offerable_type] 
+				allow_param :offer, offer_attributes
+
+				# Event
+				allow :events, [:new, :index, :create, :edit, :update, :destroy, :gallery_modal, :add_to_page, :add_to_menu]
+				offer_attributes << [:id, :_destroy]
+				event_attributes = [:name, :description, :venue, :capacity, :address, :status, :start_date, :end_date, :start_time, :end_time, :photo_id, offers_attributes: offer_attributes]
+				allow_param :event, event_attributes
+
+				# Production
+				allow :productions, [:new, :index, :show, :create, :edit, :update, :destroy]
+				event_attributes << [:id, :_destroy]
+				allow_param :production, [:name, :photo_id, :description, events_attributes: event_attributes] 
 
 				# Tag
 				allow :tags, [:index, :new, :create, :edit, :update, :delete, :destroy, :add_to_menu]

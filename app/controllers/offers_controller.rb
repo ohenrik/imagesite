@@ -1,4 +1,9 @@
 class OffersController < ApplicationController
+
+  # Find the tenant
+  around_filter :scope_current_tenant
+
+
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
 
   # GET /offers
@@ -56,8 +61,9 @@ class OffersController < ApplicationController
   def destroy
     @offer.destroy
     respond_to do |format|
-      format.html { redirect_to offers_url }
+      format.html { redirect_to referer }
       format.json { head :no_content }
+      format.js { }
     end
   end
 

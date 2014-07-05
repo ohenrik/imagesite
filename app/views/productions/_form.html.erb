@@ -1,29 +1,77 @@
+<br>
 <%= form_for(@production) do |f| %>
-  <% if @production.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@production.errors.count, "error") %> prohibited this production from being saved:</h2>
 
-      <ul>
-      <% @production.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<div class="row">
+    <div class="error-container">
+        <%= render partial: 'shared/form_errors', :locals => {:item => @production} %>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :photo_id %><br>
-    <%= f.text_field :photo_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="col-sm-5 col-md-4 listed-page-thumbnail">
+        <%= link_to thumbnail_modal_path(:item => @production.class, :item_id => @production.id), remote: true, class: "thumbnail" do %>
+            <% if @production.photo %>
+                <%= image_tag @production.photo.image_url(:large_thumb).to_s, class: "img-responsive" %>
+            <% else %>
+                <%= image_tag "default/large_thumb_no-thumb.png", class: "img-responsive" %>
+            <% end %>
+        <% end %>
+    </div>
+        
+    <div class="clearfix visible-xs"></div>
+    <div class="col-sm-7 col-md-8">
+
+        <div class="input-group">
+            <%= f.text_field :name, placeholder: "#{@production.class.to_s.titleize} name...", class: "form-control input-lg" %>
+            <div class="input-group-btn">
+                <%= f.submit class: "btn btn-primary btn-lg" %>
+            </div>
+        </div>
+
+        <h3 class="listed-page-status text-muted">
+            
+            <small>
+                <%= link_to @event, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-muted text-no-wrap" do %>
+                     <i class="fa fa-trash-o fa-fw"></i> Delete
+                <% end %>
+            </small>
+        </h3>
+
+    </div>
+    <div class="col-xs-12">
+
+    </div>
+</div>
+<br>
+<div class="form-group">
+    <div class="form-group xs-space-down">
+        <div id="wysihtml5-content-toolbar" class="rich-editor-toolbar btn-toolbar" style="display: none;">
+            <div class="btn-group">
+                <a class="btn btn-default" data-wysihtml5-command="bold"><i class="fa fa-bold fa-fw"></i></a>
+                <a class="btn btn-default" data-wysihtml5-command="italic"><i class="fa fa-italic fa-fw"></i></a>
+                <a class="btn btn-default" data-wysihtml5-command="underline"><i class="fa fa-underline fa-fw"></i></a>
+                <a class="btn btn-default" data-wysihtml5-command="justifyLeft"><i class="fa fa-align-left fa-fw"></i></a>
+                <a class="btn btn-default" data-wysihtml5-command="justifyCenter"><i class="fa fa-align-center fa-fw"></i></a>
+                <a class="btn btn-default" data-wysihtml5-command="justifyRight"><i class="fa fa-align-right fa-fw"></i></a>  
+                <a class="btn btn-default" data-wysihtml5-command="insertOrderedList"><i class="fa fa-list-ol fa-fw"></i></a>
+                <a class="btn btn-default" data-wysihtml5-command="insertUnorderedList"><i class="fa fa-list-ul fa-fw"></i></a>
+            </div>
+            <a class="btn btn-default pull-right" data-wysihtml5-action="change_view" href="javascript:;" unselectable="on"><i class="fa fa-code"></i></a>
+        </div>
+        <%= f.text_area :description, rows: 15, class: "form-control rich-editor content-editor", id: "wysihtml5-content", plaseholder: "Write description here..." %>
+    </div>
+</div>
+
+<br>
+
+<div id="event_offers">
+
+    <!-- This is where events happen -->
+    <%= f.fields_for :events do |events| %>
+        <%= render 'event', f: events %>
+    <% end %>
+    
+    <%= link_to_add_fields "Add event", f, :events, "btn btn-link pull-right" %>
+    
+</div>
+
 <% end %>
+

@@ -52,7 +52,7 @@ private
 	helper_method :scope_current_tenant
 
 	def get_subdomain
-		%w(lvh.me theatrical.co theatrical.no theatrical.de).include?(request.domain) ? current_user.subdomain : ""
+		%w(lvh.me theatrical.co theatrical.no theatrical.de).include?(request.domain) ? current_tenant.subdomain : ""
 	end
 	helper_method :get_subdomain
 

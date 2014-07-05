@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.all.order(production_id: :asc, name: :asc)
   end
 
   # GET /events/1
@@ -27,7 +27,7 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
+    @event = Event.new(params[:event])
 
     respond_to do |format|
       if @event.save
@@ -44,7 +44,7 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1.json
   def update
     respond_to do |format|
-      if @event.update(event_params)
+      if @event.update(params[:event])
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { head :no_content }
       else
@@ -64,6 +64,7 @@ class EventsController < ApplicationController
     end
   end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
@@ -71,7 +72,7 @@ class EventsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def event_params
-      params.require(:event).permit(:name, :description, :location, :start_date, :end_date, :start_time, :end_time, :photo_id)
-    end
+    #def event_params
+    #  params.require(:event).permit(:name, :description, :location, :start_date, :end_date, :start_time, :end_time, :photo_id)
+    #end
 end

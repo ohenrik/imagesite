@@ -1,11 +1,6 @@
 require 'sidekiq/web'
 Imagesite::Application.routes.draw do
 
-
-  resources :productions
-
-  resources :offers
-
     get "password_resets/new"
     get 'register', to: 'users#new', as: 'register'
     get 'login', to: 'sessions#new', as: 'login'
@@ -57,8 +52,18 @@ Imagesite::Application.routes.draw do
         get 'people/gallery_modal' => 'people#gallery_modal', as: :people_gallery_modal
         resources :people
 
+
+        # Production
+        resources :productions
+
+
         # Events
         resources :events
+
+        # Offers
+        resources :offers
+        
+
 
         # Tags
         get 'tags/:tag' => 'photos#index', as: :public_filter_tag
@@ -80,6 +85,7 @@ Imagesite::Application.routes.draw do
         post 'menu_items/sort_menu_items/:id' => 'menu_items#sort', as: :sort_menu_items
         post 'people/add_to_page/:id' => 'people#add_to_page', as: :add_person_to_page
         resources :menu_items
+
 
 
         # Menus 

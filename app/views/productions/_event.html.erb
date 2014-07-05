@@ -1,0 +1,106 @@
+
+
+<% event = f.object %> 
+    <div id="event_<%= event.id %>">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <%= f.text_field :name, placeholder: "Event name (if applicable)", class: "form-control" %>
+            </div>
+            <div class="panel-body" id="event_body_<%= event.id %>">
+                <div class="row">
+                    <div class="col-sm-6  form-group">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <%= f.label :start_date, "Start date" %>
+                            </div>
+                            <div class="col-xs-7 col-md-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <%= f.text_field :start_date, value: ( event.start_date.strftime('%d.%m.%Y') unless event.start_date.blank?), placeholder: "Start date", class: "form-control date-field" %>
+                                </div>
+                            </div>
+                            <div class="col-xs-5 col-md-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                    <%= f.text_field :start_time, value: ( event.start_time.strftime('%H:%M') unless event.start_time.blank?), placeholder: "Start time", class: "form-control time-field" %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6  form-group">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <%= f.label :end_date, "End date" %>
+                            </div>
+                            <div class="col-xs-7 col-md-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <%= f.text_field :end_date, value: ( event.end_date.strftime('%d.%m.%Y') unless event.end_date.blank?), placeholder: "End date", class: "form-control date-field" %>
+                                </div>
+                            </div>
+                            <div class="col-xs-5 col-md-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                    <%= f.text_field :end_time, value: ( event.end_time.strftime('%H:%M') unless event.end_time.blank?), placeholder: "End time", class: "form-control time-field" %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    
+                    <div class="col-xs-12 col-md-6">
+                        <div class=" form-group">
+                            <%= f.label :address %><br>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                <%= f.text_field :address, class: "form-control"  %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class=" form-group">
+                            <%= f.label :venue %><br>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-university"></i></span>
+                                <%= f.text_field :venue, class: "form-control"  %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-2">
+                        <div class=" form-group">
+                            <%= f.label :capacity %><br>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                                <%= f.text_field :capacity, class: "form-control"  %>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <br>
+
+                
+                <div id="event_<%= event.id %>_offers">
+                    <!-- This is where offers happen -->
+                    <%= f.fields_for :offers do |offers| %>
+                        <%= render 'offer', f: offers %>
+                    <% end %>
+                    <%= link_to_add_fields "Add offer", f, :offers, "btn btn-link pull-right" %>
+                </div>
+                
+                
+                
+                
+                <% if event.id.present? %>
+                    <%= f.hidden_field :_destroy %>
+                    <%= link_to '#', class: "remove_fields", data: { type_id: "#event_#{event.id}" } do %>
+                        <i class="fa fa-trash-o"></i> Delete
+                    <% end %>
+                <% end %>
+            </div><!-- Event panel body -->
+        </div> <!-- Event panel -->
+    </div>

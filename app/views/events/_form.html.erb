@@ -36,42 +36,23 @@
                 <%= " - " + @event.end_time.strftime('%H:%M') unless @event.end_time.blank?%>
 
                 |
-                <%= link_to @event, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-muted text-no-wrap" do %>
-                     <i class="fa fa-trash-o fa-fw"></i> Delete
+                <% if @event.production.present? %>
+                    <%= link_to edit_production_path(@event.production), class: "text-muted text-no-wrap" do %>
+                        <i class="fa fa-bullhorn fa-fw"></i><%= @event.production.name %>
+                    <% end %>
+                <% else %>
+                    <i class="fa fa-bullhorn fa-fw"></i> Independent event
                 <% end %>
 
                 |
-                <%= link_to thumbnail_modal_path(:item => @event.class, :item_id => @event.id), remote: true, class: "text-muted text-no-wrap" do %>
-                    <i class="fa fa-picture-o fa-fw"></i> Thumbnail
+                <%= link_to @event, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-muted text-no-wrap" do %>
+                     <i class="fa fa-trash-o fa-fw"></i> Delete
                 <% end %>
-
             </small>
         </h3>
-        <div class="form-group">
-            <%= f.text_area :description, placeholder: "Event Description", rows: 5, class: "form-control"  %>
-        </div>
+
     </div> <!-- End of list page thumbnail -->
     <div class="col-xs-12">
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class=" form-group">
-                    <%= f.label :venue %><br>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                        <%= f.text_field :venue, class: "form-control"  %>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-8">
-                <div class=" form-group">
-                    <%= f.label :address %><br>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                        <%= f.text_field :address, class: "form-control"  %>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="row">
             <div class="col-sm-6  form-group">
                 <div class="row">
@@ -112,10 +93,34 @@
                 </div>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class=" form-group">
+                    <%= f.label :venue %><br>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-university"></i></span>
+                        <%= f.text_field :venue, class: "form-control"  %>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <div class=" form-group">
+                    <%= f.label :address %><br>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                        <%= f.text_field :address, class: "form-control"  %>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <%= f.label :description %>
+                    <%= f.text_area :description, placeholder: "Event Description", rows: 5, class: "form-control"  %>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <hr>
-
 
 <% end %>
