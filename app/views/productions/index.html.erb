@@ -4,9 +4,6 @@
             <%= link_to new_production_path, class: "btn btn-default" do %>
                 <i class="fa fa-bullhorn"></i> New Production
             <% end %>
-            <%= link_to new_event_path, class: "btn btn-default" do %>
-                <i class="fa fa-ticket"></i> New Event
-            <% end %>
         </div>
     </div>
     <% if @productions.each do |production| %>
@@ -44,7 +41,7 @@
         </div>
     <% end.empty? %>
         <div class="col-xs-12">
-            <%= link_to new_event_path do %>
+            <%= link_to new_production_path do %>
                 <div class="alert alert-info">
                     <p>
                         <strong>No productions created: </strong>To create a new production click here.
