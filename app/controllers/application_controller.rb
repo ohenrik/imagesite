@@ -38,7 +38,7 @@ private
 	def current_tenant
 		@current_tenant = User.find_by(alias_domain: request.host) unless %w(lvh.me theatrical.co theatrical.no theatrical.de).include?(request.domain)
 		
-		@current_tenant ||= User.find_by!(subdomain: request.subdomain) # includes(:home).
+		@current_tenant ||= User.find_by(subdomain: request.subdomain) # includes(:home).
 	end
 	helper_method :current_tenant
 
@@ -52,7 +52,8 @@ private
 	helper_method :scope_current_tenant
 
 	def get_subdomain
-		%w(lvh.me theatrical.co theatrical.no theatrical.de).include?(request.domain) ? current_tenant.subdomain : ""
+		subdomain = current_tenant.try(:subdomain) || current_user.subdomain
+		%w(lvh.me theatrical.co theatrical.no theatrical.de).include?(request.domain) ? subdomain : ""
 	end
 	helper_method :get_subdomain
 
