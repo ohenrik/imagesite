@@ -7,12 +7,16 @@
     </div>
 
     <div class="col-sm-5 col-md-4 listed-page-thumbnail">
-        <%= link_to thumbnail_modal_path(:item => @production.class, :item_id => @production.id), remote: true, class: "thumbnail" do %>
-            <% if @production.photo %>
-                <%= image_tag @production.photo.image_url(:large_thumb).to_s, class: "img-responsive" %>
-            <% else %>
-                <%= image_tag "default/large_thumb_no-thumb.png", class: "img-responsive" %>
+        <% unless @production.new_record? %>
+            <%= link_to thumbnail_modal_path(:item => @production.class, :item_id => @production.id), remote: true, class: "thumbnail" do %>
+                <% if @production.photo %>
+                    <%= image_tag @production.photo.image_url(:large_thumb).to_s, class: "img-responsive" %>
+                <% else %>
+                    <a class="thumbnail"><%= image_tag "default/large_thumb_no-thumb.png", class: "img-responsive" %></a>
+                <% end %>
             <% end %>
+        <% else %>
+            <%= image_tag "default/large_thumb_no-thumb.png", class: "img-responsive" %>
         <% end %>
     </div>
         

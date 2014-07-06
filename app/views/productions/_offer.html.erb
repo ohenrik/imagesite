@@ -37,5 +37,7 @@
 		<%= link_to '#', class: "remove_fields", data: { type_id: "#offer_#{offer.id}" } do %>
 			<i class="fa fa-trash-o"></i> Delete
 		<% end %>
-	<% end %>	
+    <% else %>
+        <span class="text-muted"><i class="fa fa-trash-o"></i> Leave empty to delete offer</span>
+    <% end %>
 </div>

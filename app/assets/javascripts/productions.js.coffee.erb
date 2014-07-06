@@ -20,8 +20,9 @@ $(document).ready ->
 
 
 	editor = new wysihtml5.Editor("wysihtml5-content",
-	  toolbar: "wysihtml5-content-toolbar"
-	  parserRules: wysihtml5ParserRules
+		toolbar: "wysihtml5-content-toolbar"
+		parserRules: wysihtml5ParserRules
+		stylesheets: ['<%= asset_path "wysiwyg.css" %>']
 	)
 
 	$('form').on 'click', '.add_fields', (event) ->

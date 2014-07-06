@@ -39,7 +39,7 @@ class ProductionsController < ApplicationController
 
     respond_to do |format|
       if @production.save
-        format.html { redirect_to @production, notice: 'Production was successfully created.' }
+        format.html { redirect_to action 'edit', notice: 'Production was successfully created.' }
         format.json { render action: 'edit', status: :created, location: @production }
       else
         format.html { render action: 'new' }

@@ -48,7 +48,8 @@
 
 				  editor_<%= page_item.id %> = new wysihtml5.Editor("wysihtml5-content_<%= page_item.id %>", {
 				    toolbar: "wysihtml5-content-toolbar_<%= page_item.id %>",
-				    parserRules: wysihtml5ParserRules
+				    parserRules: wysihtml5ParserRules,
+				    stylesheets: ['<%= asset_path "wysiwyg.css" %>']
 				  });
 				
 			</script>
