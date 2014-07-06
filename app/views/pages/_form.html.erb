@@ -123,6 +123,10 @@
             <br>
         </div>
         <div class="col-sm-4">
+            <%= link_to "Add Productions", productions_gallery_modal_path(:page_id => @page.id ), remote: true, class: "btn btn-default btn-block btn-lg" %>
+            <br>
+        </div>
+        <div class="col-sm-4">
             <%= link_to "Add Pages", pages_gallery_modal_path(:page_id => @page.id ), remote: true, class: "btn btn-default btn-block btn-lg" %>
             <br>
         </div>

@@ -26,7 +26,7 @@ Imagesite::Application.routes.draw do
         get 'pages/:id/toggle_status' => 'pages#toggle_status', as: :toggle_page_status
         get 'pages/:id/settings' => 'pages#settings', as: :page_settings
         get 'pages/gallery_modal' => 'pages#gallery_modal', as: :pages_gallery_modal
-        post 'pages/add_to_menu/:id' => 'pages#add_to_menu', as: :add_page_to_menu 
+        post 'pages/:id/add_to_menu/:menu_id' => 'pages#add_to_menu', as: :add_page_to_menu 
         post 'pages/add_to_page/:id' => 'pages#add_to_page', as: :add_page_to_page
         post 'pages/:id/add_other_page_item' => 'pages#add_other_page_item', as: :add_other_page_item
         resources :pages
@@ -48,12 +48,16 @@ Imagesite::Application.routes.draw do
         resources :photos
 
         # People
-        post 'people/add_to_menu/:id' => 'people#add_to_menu', as: :add_person_to_menu 
+        post 'people/:id/add_to_menu/:menu_id' => 'people#add_to_menu', as: :add_person_to_menu 
         get 'people/gallery_modal' => 'people#gallery_modal', as: :people_gallery_modal
+        post 'people/add_to_page/:id' => 'people#add_to_page', as: :add_person_to_page
         resources :people
 
 
         # Production
+        post 'productions/:id/add_to_menu/:menu_id' => 'productions#add_to_menu', as: :add_production_to_menu 
+        get 'productions/gallery_modal' => 'productions#gallery_modal', as: :productions_gallery_modal
+        post 'productions/add_to_page/:id' => 'productions#add_to_page', as: :add_production_to_page
         resources :productions
 
 
@@ -67,7 +71,7 @@ Imagesite::Application.routes.draw do
 
         # Tags
         get 'tags/:tag' => 'photos#index', as: :public_filter_tag
-        post 'tags/add_to_menu/:id' => 'tags#add_to_menu', as: :add_tag_to_menu
+        post 'tags/:id/add_to_menu/:menu_id' => 'tags#add_to_menu', as: :add_tag_to_menu
         resources :tags
 
         # Themes
@@ -83,7 +87,6 @@ Imagesite::Application.routes.draw do
 
         # Menu Items
         post 'menu_items/sort_menu_items/:id' => 'menu_items#sort', as: :sort_menu_items
-        post 'people/add_to_page/:id' => 'people#add_to_page', as: :add_person_to_page
         resources :menu_items
 
 

@@ -47,6 +47,26 @@
         </div>
 
         <div class="page-header">
+            <h4>Productions:</h4>
+        </div>
+        <div class="list-group">
+            <% if Production.all.each do |production| %>
+                <%= link_to add_production_to_menu_path(:id => production.id, :menu_id => @menu.id), :remote => true, :method => :post, class: "list-group-item add-to-menu" do %>
+                    <i class="fa fa-bullhorn fa-fw text-muted"></i> <%= production.name %>
+                    <span class="pull-right text-muted"><i class="fa fa-plus-circle"></i></span>
+                <% end %> 
+            <% end.empty? %>
+                <%= link_to new_production_path  do %>
+                    <div class="alert alert-info">
+                        <p>
+                            <strong>No Production created:</strong> Create new production here.
+                        </p>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+
+        <div class="page-header">
             <h4>People:</h4>
         </div>
         <div class="list-group">

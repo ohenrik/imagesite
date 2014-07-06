@@ -2,7 +2,7 @@ class ProductionsController < ApplicationController
 
   # Find the tenant
   around_filter :scope_current_tenant
-  before_action :set_production, only: [:show, :edit, :update, :destroy]
+  before_action :set_production, only: [:show, :edit, :update, :destroy, :add_to_page, :add_to_menu]
 
   # GET /productions
   # GET /productions.json
@@ -72,6 +72,47 @@ class ProductionsController < ApplicationController
     end
   end
 
+  def gallery_modal
+    @productions = Production.all.order(created_at: :desc)
+
+    # Passing page details right through 
+    @page_id = params[:page_id]
+    @page_item_id = params[:page_item_id]
+
+
+    respond_to do |format|
+      format.js {
+        render 'page_items/gallery_modal', layout: false
+      }
+    end
+  end
+
+  def add_to_page
+    @page_item = @production.sub_items.create(page_id: params[:page_id], ancestry: params[:page_item_id])
+    respond_to do |format|
+      if @page_item
+        format.html { redirect_to edit_page_path(params[:page_id]), notice: 'Item successfully added' }
+        format.js { render 'page_items/page_item_added', layout: false } #render locals: { page_item: item } }
+      else
+        format.html { redirect_to edit_page_path(params[:page_id]), notice: 'An error occured, item no added to menu.' }
+        format.json { render json: @menu.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def add_to_menu
+    @menu_item = @production.menu_items.create(name: @production.name, menu_id: params[:menu_id])
+    respond_to do |format|
+      if @menu_item
+        format.html { redirect_to menus_path, notice: 'Menu Item successfully added' }
+        format.js { render template: 'menu_items/add_to_menu.js.erb' }
+      else
+        format.html { redirect_to menus_path, notice: 'An error occured, item no added to menu.' }
+        format.json { render json: @menu.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_production
@@ -79,7 +120,7 @@ class ProductionsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def production_params
-      params.require(:production).permit(:name, :description, :photo_id)
-    end
+    #def production_params
+    #  params.require(:production).permit(:name, :description, :photo_id)
+    #end
 end
