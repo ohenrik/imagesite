@@ -13,6 +13,9 @@ module Permissions
 			# Event
 			allow :events, [:show]
 
+			# Production 
+			allow :productions, [:show]
+
 			# Users
 			allow :users, [:new, :create, :home, :confirm_user]
 			allow_param :user, [:first_name, :last_name, :username, :subdomain, :email, :password, :password_confirmation]

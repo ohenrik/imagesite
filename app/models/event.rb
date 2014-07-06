@@ -7,11 +7,17 @@ class Event < ActiveRecord::Base
 
   accepts_nested_attributes_for :offers, allow_destroy: true
 
+  liquid_methods :venue, :start_date, :start_time, :end_date, :end_time, :link
+
   #validates :name, presence: true
 
     #def photo
     #    read_attribute(:photo).present? || production.try(:photo)
     #end
+
+    def link
+      "/events/#{id}"
+    end  
   
     def start_datetime
     	if !start_time.blank?

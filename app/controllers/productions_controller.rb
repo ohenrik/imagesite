@@ -14,6 +14,7 @@ class ProductionsController < ApplicationController
   # GET /productions/1
   # GET /productions/1.json
   def show
+    render action: 'show', layout: false
   end
 
   # GET /productions/new

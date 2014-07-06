@@ -11,8 +11,20 @@ class Production < ActiveRecord::Base
 
   accepts_nested_attributes_for :events, allow_destroy: true
 
+  # Liquid methods
+  liquid_methods :thumbnail, :name, :description, :link, :events, :photo
+
+
 	def link
 		"/productions/#{id}"
 	end
+
+  def thumbnail
+    if photo.blank?
+      "/assets/default/large_thumb_no-thumb.png"
+    else
+      photo.image_url(:medium)
+    end
+  end
 
 end

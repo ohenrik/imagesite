@@ -37,7 +37,7 @@ module Permissions
 				allow_param :event, event_attributes
 
 				# Production
-				allow :productions, [:new, :index, :show, :create, :edit, :update, :destroy, :add_to_page, :gallery_modal, :add_to_menu]
+				allow :productions, [:new, :index, :create, :edit, :update, :destroy, :add_to_page, :gallery_modal, :add_to_menu]
 				event_attributes << [:id, :_destroy]
 				allow_param :production, [:name, :photo_id, :description, events_attributes: event_attributes] 
 
