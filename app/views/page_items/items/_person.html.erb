@@ -2,9 +2,13 @@
 	<div class="col-xs-12 col-sm-6 col-md-4 <%= page_item.parent.nil? ? 'page_item' : "gallery_item_#{page_item.parent.id}" %> space-down" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>" data-gallery-id="<%= page_item.parent.try(:id) %>" >
 		
 		<div class="thumbnail">
-		
-			<%= image_tag page_item.pageable.photo.image_url(:small_thumb), class: "img-responsive "  %>
-		
+			
+           	<% if page_item.pageable.photo %>
+                <%= image_tag page_item.pageable.photo.image_url(:small_thumb), class: "img-responsive"  %>
+            <% else %>
+                <%= image_tag "default/large_thumb_no-thumb.png", class:  "img-responsive" %>
+            <% end %>
+
     		<div class="caption">
 				<h4 class="list-group-item-heading">
 					<i class="fa fa-users fa-fw text-muted"></i> <%= page_item.title %>
