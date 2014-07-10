@@ -33,6 +33,7 @@
       <%= f.text_field :name, class: "photo-name-field", :placeholder => "Title", autofocus: "true" %>
 
       <%= f.text_field :edit_tag_list, class: "photo-tag-field", :placeholder => "Tags" %>
+      <div class="help-block">Seperate tags using commas (example: "Tag1, Tag2").</div>
       <% #if allow_param? :photos, :description %>
         <%= f.text_area :description, class: "description-field", :placeholder => "Short description" %>
       <% #end %>

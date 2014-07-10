@@ -7,16 +7,18 @@
     </div>
 
     <div class="col-sm-5 col-md-4 listed-page-thumbnail">
-        <% unless @production.new_record? %>
+        <% if !@production.new_record? %>
             <%= link_to thumbnail_modal_path(:item => @production.class, :item_id => @production.id), remote: true, class: "thumbnail" do %>
-                <% if @production.photo %>
+                <% if @production.photo.present? %>
                     <%= image_tag @production.photo.image_url(:large_thumb).to_s, class: "img-responsive" %>
                 <% else %>
-                    <a class="thumbnail"><%= image_tag "default/large_thumb_no-thumb.png", class: "img-responsive" %></a>
+                    <%= image_tag "default/large_thumb_no-thumb.png", class: "img-responsive" %>
                 <% end %>
             <% end %>
         <% else %>
-            <%= image_tag "default/large_thumb_no-thumb.png", class: "img-responsive" %>
+            <a class="thumbnail" href="">
+                <%= image_tag "default/large_thumb_no-thumb.png", class: "img-responsive" %>
+            </a>
         <% end %>
     </div>
         
@@ -33,7 +35,7 @@
         <h3 class="listed-page-status text-muted">
             
             <small>
-                <%= link_to @event, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-muted text-no-wrap" do %>
+                <%= link_to @production, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-muted text-no-wrap" do %>
                      <i class="fa fa-trash-o fa-fw"></i> Delete
                 <% end %>
             </small>
