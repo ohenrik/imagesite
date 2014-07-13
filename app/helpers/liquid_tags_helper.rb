@@ -207,6 +207,31 @@ module LiquidTagsHelper
 
 	Liquid::Template.register_tag('get_menu', GetMenu)
 
+
+	class TicketFormTag < Liquid::Block
+		
+		#include ActionView::Helpers::FormTagHelper
+		include ActionView::Context
+		include ActionView::Helpers::FormHelper
+		include ActionController::RequestForgeryProtection::ClassMethods
+
+
+		def initialize(tag_name, markup, tokens)
+
+			super
+			@variables = markup.split(",")
+		end
+
+		def render(context)
+			form_tag("tickets/purchase", authenticity_token: false) do
+				super.html_safe
+			end
+		end
+	end
+
+	Liquid::Template.register_tag('ticket_form', TicketFormTag)
+
+
 end
 
 

@@ -62,7 +62,7 @@
                         <% end %>
                     </small>
                 </h3>
-                <p><%= truncate(page.excerpt, :length => 350) unless page.excerpt.blank? %></p>
+                <p><%= raw page.excerpt.truncate(350) unless page.excerpt.blank? %></p>
             </div>
 
         </div>

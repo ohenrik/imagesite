@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140710191223) do
+ActiveRecord::Schema.define(version: 20140712153016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -224,6 +224,19 @@ ActiveRecord::Schema.define(version: 20140710191223) do
   end
 
   add_index "themes", ["user_id"], name: "index_themes_on_user_id", using: :btree
+
+  create_table "tickets", force: true do |t|
+    t.string   "name"
+    t.decimal  "price"
+    t.string   "currency"
+    t.integer  "offer_id"
+    t.integer  "customer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tickets", ["customer_id"], name: "index_tickets_on_customer_id", using: :btree
+  add_index "tickets", ["offer_id"], name: "index_tickets_on_offer_id", using: :btree
 
   create_table "user_credit_cards", force: true do |t|
     t.string   "payment_token"

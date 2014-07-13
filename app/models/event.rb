@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
 
   accepts_nested_attributes_for :offers, allow_destroy: true
 
-  liquid_methods :venue, :start_date, :start_time, :end_date, :end_time, :link
+  liquid_methods :venue, :start_date, :start_time, :end_date, :end_time, :link, :offers
 
   #validates :name, presence: true
 
