@@ -1,0 +1,64 @@
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-link"></i> Insert Link</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="well well-sm clearfix"> 
+                            <div class="form-group">
+                                <label for="href-input">Link</label>
+                                <input id="href-input" data-wysihtml5-dialog-field="href" value="http://" placeholder="http://" class="form-control">
+                                <div class="help-block">
+                                    <label>
+                                        <input id="target-input"type="checkbox" > Open in new window/tab
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="text-input">Link text</label>
+                                <input id="text-input"  value="" placeholder="Link text..." class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="title-input">Title</label>
+                                <input id="title-input"  value="" placeholder="Title text..." class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="alt-input" >Alt</label>
+                                <input id="alt-input"   value="" placeholder="Alt text..." class="form-control">
+                            </div>
+
+                            <div class="pull-right">
+                                <a id="editorInsertLink" class="btn btn-primary" data-dismiss="modal">Insert Link</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-8">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% items.each do |item| %>
+                                    <tr data-link="<%= send("#{item.class.name.downcase}_url", item) %>" data-name="<%= item.name %>" class="wysihtml5-select-link">
+                                        <td><i class="fa fa-bullhorn text-muted"></i> <%= item.name %></td>
+                                        <td><%= item.class.name %></td>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>

@@ -35,3 +35,27 @@ $(document).ready ->
 		$(this).prev('input[type=hidden]').val('1')
 		$($(this).data("type-id")).hide()
 		event.preventDefault()
+
+	$('.table').dataTable
+	 	sPaginationType: "bootstrap"
+	 	iDisplayLength: 10
+
+
+
+	$('.wysihtml5-select-link').click (event) ->
+		$('#href-input').val($(this).data('link'))
+		$('#title-input').val($(this).data('name'))
+		$('#href-input').focus()
+		event.preventDefault()
+
+
+
+	$(document).on 'click', '#editorInsertLink', (event) ->
+		if $('#target-input').is(':checked')
+			eval("editor").composer.commands.exec("createLink", { href: $('#href-input').val(), target: "_blank", rel: "nofollow", text: $('#text-input').val() });
+		else
+			eval("editor").composer.commands.exec("createLink", { href: $('#href-input').val(), rel: "nofollow", text: $('#text-input').val() });
+		event.preventDefault()
+
+
+

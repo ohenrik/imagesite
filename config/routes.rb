@@ -70,6 +70,10 @@ Imagesite::Application.routes.draw do
 
         # Offers
         resources :offers
+
+
+        # Shared 
+        get 'shared/editor_link_modal' => 'shared#editor_link_modal', as: :editor_link_modal
         
 
 

@@ -14,6 +14,9 @@
 			                <a class="btn btn-default" data-wysihtml5-command="justifyRight"><i class="fa fa-align-right fa-fw"></i></a>  
 			                <a class="btn btn-default" data-wysihtml5-command="insertOrderedList"><i class="fa fa-list-ol fa-fw"></i></a>
 			                <a class="btn btn-default" data-wysihtml5-command="insertUnorderedList"><i class="fa fa-list-ul fa-fw"></i></a>
+			                <%= link_to editor_link_modal_path(editor: "editor_#{page_item.id}"), remote: true, class: "btn btn-default" do %>
+			                	<i class="fa fa-link fa-fw"></i> <span class="hidden-xs">Link</span>
+			                <% end %>
 			            </div>
 			            <a class="btn btn-default pull-right" data-wysihtml5-action="change_view" href="javascript:;" unselectable="on"><i class="fa fa-code"></i></a>
 			        </div>

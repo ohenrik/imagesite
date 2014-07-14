@@ -1,31 +1,35 @@
-<h1>Listing customers</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Email</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @customers.each do |customer| %>
-      <tr>
-        <td><%= customer.first_name %></td>
-        <td><%= customer.last_name %></td>
-        <td><%= customer.email %></td>
-        <td><%= link_to 'Show', customer %></td>
-        <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
-        <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
 <br>
+<div calss="form-inline">
+    <table class="dataTables_wrapper table table-striped">
+        <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Tickets bought</th>
+            <th>Revenue</th>
+            <th><%= link_to 'New Customer', new_customer_path, class: "pull-right" %></th>
+        </tr>
+        </thead>
 
-<%= link_to 'New Customer', new_customer_path %>
+        <tbody>
+            <% @customers.each do |customer| %>
+                <tr>
+                    <td><%= customer.first_name %></td>
+                    <td><%= customer.last_name %></td>
+                    <td><%= customer.email %></td>
+                    <td><%= customer.tickets.count %></td>
+                    <td><%= customer.tickets.count %></td>
+                    <td>
+                        <span class="pull-right">
+                            <%= link_to 'Show', customer, class: "btn btn-default btn-sm" %>
+                            <%= link_to 'Edit', edit_customer_path(customer), class: "btn btn-default btn-sm"  %>
+                            <%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-sm"  %>
+                        </span>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+</div>

@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/rweng/jquery-datatables-rails.git
+  revision: ee838ffc755e7c205a416870efb4f27400eb2c53
+  specs:
+    jquery-datatables-rails (2.1.10.0.3)
+      jquery-rails
+      sass-rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -304,6 +312,7 @@ DEPENDENCIES
   font-awesome-sass
   guard-rspec
   jbuilder (~> 1.2)
+  jquery-datatables-rails!
   jquery-fileupload-rails
   jquery-rails
   jquery-turbolinks

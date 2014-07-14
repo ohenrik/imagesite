@@ -214,7 +214,7 @@ module LiquidTagsHelper
 		include ActionView::Context
 		include ActionView::Helpers::FormHelper
 		include ActionController::RequestForgeryProtection::ClassMethods
-
+		include ApplicationHelper  
 
 		def initialize(tag_name, markup, tokens)
 

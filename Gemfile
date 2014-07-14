@@ -62,10 +62,13 @@ gem 'mini_magick'
 gem 'liquid'
 gem 'rubyzip'
 
-# HTml editor
+# Html editor
 gem 'wysihtml5-rails'
 gem 'font-awesome-sass'
 gem 'sanitize-rails', :require => 'sanitize/rails'
+
+# Tables with sort and search
+gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
 
 # Navigation and page_items
 gem 'ancestry'

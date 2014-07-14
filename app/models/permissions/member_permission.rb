@@ -39,6 +39,8 @@ module Permissions
 				allow_param :menu_item, [:menu_id, :menuable_id, :menuable_type, :name, :description, :new_page, :ancestry, :position, :url]
 
 
+				# Shared
+				allow :shared, [:editor_link_modal]
 
 				# Tickets
 				allow :customers, [:index, :show, :new, :create, :edit, :update, :delete, :destroy]
