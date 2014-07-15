@@ -5,6 +5,7 @@ class SharedController < ApplicationController
 
  	def editor_link_modal
  		@editor = params[:editor]
+ 		@text = params[:text]
 
  		@items = Page.all + Production.all + Person.all
  		#@items.merge(Production.pluck(:id))
