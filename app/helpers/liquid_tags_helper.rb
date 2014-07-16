@@ -213,20 +213,22 @@ module LiquidTagsHelper
 		#include ActionView::Helpers::FormTagHelper
 		include ActionView::Context
 		include ActionView::Helpers::FormHelper
-		include ActionController::RequestForgeryProtection::ClassMethods
-		include ApplicationHelper  
+
+		attr_reader :controller
 
 		def initialize(tag_name, markup, tokens)
-
 			super
-			@variables = markup.split(",")
+			
 		end
 
 		def render(context)
-			form_tag("tickets/purchase", authenticity_token: false) do
-				super.html_safe
+			@controller = context.registers[:controller]
+			form_tag("#") do
+				super(context).html_safe
 			end
 		end
+
+		delegate :form_authenticity_token, :request_forgery_protection_token, :protect_against_forgery?, to: :controller
 	end
 
 	Liquid::Template.register_tag('ticket_form', TicketFormTag)

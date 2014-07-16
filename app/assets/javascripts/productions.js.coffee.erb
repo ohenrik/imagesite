@@ -19,11 +19,11 @@ $(document).ready ->
 		datepicker:false
 
 
-	editor = new wysihtml5.Editor("wysihtml5-content",
-		toolbar: "wysihtml5-content-toolbar"
-		parserRules: wysihtml5ParserRules
-		stylesheets: ['<%= asset_path "wysiwyg.css" %>']
-	)
+	#editor = new wysihtml5.Editor("wysihtml5-content",
+	#	toolbar: "wysihtml5-content-toolbar"
+	#	parserRules: wysihtml5ParserRules
+	#	stylesheets: ['<%= asset_path "wysiwyg.css" %>']
+	#)
 
 	$('form').on 'click', '.add_fields', (event) ->
 		time = new Date().getTime()
@@ -41,21 +41,6 @@ $(document).ready ->
 	 	iDisplayLength: 10
 
 
-
-	$('.wysihtml5-select-link').click (event) ->
-		$('#href-input').val($(this).data('link'))
-		$('#title-input').val($(this).data('name'))
-		$('#href-input').focus()
-		event.preventDefault()
-
-
-
-	$(document).on 'click', '#editorInsertLink', (event) ->
-		if $('#target-input').is(':checked')
-			eval("editor").composer.commands.exec("createLink", { href: $('#href-input').val(), target: "_blank", rel: "nofollow", text: $('#text-input').val() });
-		else
-			eval("editor").composer.commands.exec("createLink", { href: $('#href-input').val(), rel: "nofollow", text: $('#text-input').val() });
-		event.preventDefault()
 
 
 
