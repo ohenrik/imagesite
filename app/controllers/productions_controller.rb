@@ -1,5 +1,7 @@
 class ProductionsController < ApplicationController
 
+  
+
   # Find the tenant
   around_filter :scope_current_tenant
   before_action :set_production, only: [:show, :edit, :update, :destroy, :add_to_page, :add_to_menu]
@@ -8,6 +10,7 @@ class ProductionsController < ApplicationController
   # GET /productions.json
   def index
     @productions = Production.all
+    @controller = self
     @events = Event.where(production_id: nil)
   end
 

@@ -1,10 +1,6 @@
 require 'sidekiq/web'
 Imagesite::Application.routes.draw do
 
-  resources :tickets
-
-  resources :customers
-
     get "password_resets/new"
     get 'register', to: 'users#new', as: 'register'
     get 'login', to: 'sessions#new', as: 'login'
@@ -71,6 +67,12 @@ Imagesite::Application.routes.draw do
         # Offers
         resources :offers
 
+        # Messages
+        resources :messages
+
+        resources :tickets
+
+        resources :customers
 
         # Shared 
         get 'shared/editor_link_modal' => 'shared#editor_link_modal', as: :editor_link_modal

@@ -210,9 +210,10 @@ module LiquidTagsHelper
 
 	class TicketFormTag < Liquid::Block
 		
-		#include ActionView::Helpers::FormTagHelper
+		include ActionView::Helpers::FormTagHelper
 		include ActionView::Context
-		include ActionView::Helpers::FormHelper
+
+		#include ActionView::Helpers::FormHelper
 
 		attr_reader :controller
 
@@ -222,16 +223,64 @@ module LiquidTagsHelper
 		end
 
 		def render(context)
+			
 			@controller = context.registers[:controller]
-			form_tag("#") do
+			
+			form_tag('#') do
+
 				super(context).html_safe
+
 			end
+
 		end
 
 		delegate :form_authenticity_token, :request_forgery_protection_token, :protect_against_forgery?, to: :controller
 	end
 
 	Liquid::Template.register_tag('ticket_form', TicketFormTag)
+
+
+	class FormTag < Liquid::Block
+		
+		attr_reader :controller
+
+		include ActionView::Helpers::FormTagHelper
+		include ActionView::Context
+		include AbstractController::Helpers
+
+		def initialize(tag_name, markup, tokens)
+			super
+
+			@markup =  markup
+		    @attributes = {}
+		    markup.scan(Liquid::TagAttributes) do |key, value|
+		    	@attributes[key.to_sym] = value
+		    	# for stripping qoutes use .gsub!(/^\"|\"?$/, '').gsub!(/^\'|\'?$/, '')
+		    end 
+
+		end
+
+		def render(context)
+			@controller = context.registers[:controller]
+
+			form_tag( remove_quotes(@attributes[:url]), class: remove_quotes(@attributes[:class]), authenticity_token: false) do
+				
+				super(context).html_safe
+
+			end
+		end
+
+		# , authenticity_token: false
+
+		def remove_quotes(string)
+			string ? string.gsub!(/^\"|\"?$/, '').gsub!(/^\'|\'?$/, '') : nil
+		end
+
+		delegate :form_authenticity_token, :request_forgery_protection_token, :protect_against_forgery?, to: :controller
+
+	end
+
+	Liquid::Template.register_tag('form', FormTag)
 
 
 end

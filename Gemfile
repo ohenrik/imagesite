@@ -60,6 +60,8 @@ gem 'unicorn'
 gem 'mini_magick'
 
 gem 'liquid'
+
+
 gem 'rubyzip'
 
 # Html editor

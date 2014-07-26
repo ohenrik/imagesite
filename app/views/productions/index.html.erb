@@ -34,6 +34,7 @@
                     <small>
                         Events: <%= production.events.count %>
                         |
+                        <%= production %>
                         <%= link_to @production, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-muted text-no-wrap" do %>
                              <i class="fa fa-trash-o fa-fw"></i> Delete
                         <% end %>

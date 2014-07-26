@@ -7,6 +7,7 @@ $(document).ready ->
 		htmlMode: true
 		theme: 'default'
 		lineNumbers: true
+		viewportMargin: Infinity
 		indentUnit: 4
 		keyMap: 'sublime'
 		matchBrackets: true
@@ -21,6 +22,17 @@ $(document).ready ->
 			Esc: (cm) ->
 				cm.setOption "fullScreen", false
 				return
+
+			"Ctrl-S": (cm) ->
+				alert("your mom")
+				cm.save()
+				return
+
+			"Cmd-S": (cm) ->
+				alert("my mom")
+				cm.save()
+				return
+      
 	)
 
 

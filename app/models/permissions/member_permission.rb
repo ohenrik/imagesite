@@ -38,6 +38,10 @@ module Permissions
 				allow :menu_items, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :sort]
 				allow_param :menu_item, [:menu_id, :menuable_id, :menuable_type, :name, :description, :new_page, :ancestry, :position, :url]
 
+				# Messages
+				allow :messages, [:index, :show, :new, :edit, :destroy, :delete, :update]
+				allow_param :message, [:subject, :content, :sender_email, :sender_name, :sender_id, :sender_type, :receiver_id, :receiver_type, :message_type]
+
 
 				# Shared
 				allow :shared, [:editor_link_modal]

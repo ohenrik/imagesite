@@ -10,6 +10,9 @@ module Permissions
 			# Photos
 			allow :photos, [:index, :show]
 
+			# Messages
+			allow :messages, [:create]
+
 			# Event
 			allow :events, [:show]
 

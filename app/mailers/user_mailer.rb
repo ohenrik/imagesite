@@ -16,5 +16,10 @@ class UserMailer < ActionMailer::Base
     mail :to => @user.email, :subject => "Welcome to Theatrical.co"
   end
 
+
+  def contact(email, subject, message)
+    @message = message
+    mail :to => email, :subject => (subject || "Message from Theatrical.co")
+  end
   
 end

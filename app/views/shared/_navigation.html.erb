@@ -43,6 +43,7 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cogs"></i> Site <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><%= link_to customers_url(:subdomain => get_subdomain) do %><i class="fa fa-child fa-fw"></i> Customers<% end %></li>
+							<li><%= link_to messages_url(:subdomain => get_subdomain) do %><i class="fa fa-envelope fa-fw"></i> Messages<% end %></li>
 							<li><%= link_to themes_url(:subdomain => get_subdomain) do %><i class="fa fa-tint fa-fw"></i> Themes<% end %></li>
 							<li><%= link_to edit_user_url(current_user, :subdomain => get_subdomain ) do %><i class="fa fa-user fa-fw"></i> Site owner<% end %></li>
 							<li><%= link_to settings_url(current_user, :subdomain => get_subdomain) do %><i class="fa fa-cog fa-fw"></i> Site Settings<% end %></li>

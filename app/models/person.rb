@@ -4,7 +4,8 @@ class Person < ActiveRecord::Base
   has_many :menu_items, :as => :menuable, :dependent => :destroy
 
 	# Liquid methods
-	liquid_methods :thumbnail, :name, :description, :link, :photo, :first_name, :last_name, :email, :title
+	liquid_methods :thumbnail, :name, :description, :link, :photo, :first_name, :last_name, :email, :title, :id
+
 
 	def name
 		return [self.try(:first_name), self.try(:last_name)].join(" ")
