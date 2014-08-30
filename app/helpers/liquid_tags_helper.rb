@@ -300,7 +300,7 @@ module LiquidTagsHelper
 
     end
 
-    delegate :form_authenticity_token, :request_forgery_protection_token, :protect_against_forgery?, to: :controller
+    #delegate :form_authenticity_token, :request_forgery_protection_token, :protect_against_forgery?, to: :controller
   end
 
   Liquid::Template.register_tag('ticket_form', TicketFormTag)
