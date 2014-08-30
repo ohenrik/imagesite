@@ -1,368 +1,373 @@
 module LiquidTagsHelper
 
 
-	class Random < Liquid::Tag
-	  def initialize(tag_name, max, tokens)
-	     super
-	     @max = max.to_i
-	  end
-
-	  def render(context)
-	    rand(@max).to_s
-	  end
-	end
-
-	Liquid::Template.register_tag('random', Random)
-
-
-	class Param < ::Liquid::Tag
-
-      def render(context)
-        controller  = context.registers[:controller]
-        name        = controller.send(:request_forgery_protection_token).to_s
-        value       = controller.send(:form_authenticity_token)
-
-        %(<input type="hidden" name="#{name}" value="#{value}">)
-      end
-
+  class Random < Liquid::Tag
+    def initialize(tag_name, max, tokens)
+      super
+      @max = max.to_i
     end
 
-    class Meta < ::Liquid::Tag
+    def render(context)
+      rand(@max).to_s
+    end
+  end
 
-      def render(context)
-        controller  = context.registers[:controller]
-        name        = controller.send(:request_forgery_protection_token).to_s
-        value       = controller.send(:form_authenticity_token)
+  Liquid::Template.register_tag('random', Random)
 
-        %{
+
+  class Param < ::Liquid::Tag
+
+    def render(context)
+      controller = context.registers[:controller]
+      name = controller.send(:request_forgery_protection_token).to_s
+      value = controller.send(:form_authenticity_token)
+
+      %(<input type="hidden" name="#{name}" value="#{value}">)
+    end
+
+  end
+
+  class Meta < ::Liquid::Tag
+
+    def render(context)
+      controller = context.registers[:controller]
+      name = controller.send(:request_forgery_protection_token).to_s
+      value = controller.send(:form_authenticity_token)
+
+      %{
           <meta name="csrf-param" content="#{name}">
           <meta name="csrf-token" content="#{value}">
         }
-      end
-
     end
+
+  end
 
 
   Liquid::Template.register_tag('csrf_param', Param)
   Liquid::Template.register_tag('csrf_meta', Meta)
 
-	class LinkTag < Liquid::Tag
-		
-		#include ActionView::Context
-		include ActionView::Helpers::UrlHelper
-		attr_accessor :output_buffer
+  class LinkTag < Liquid::Tag
 
-		def initialize(tag_name, markup, tokens)
-			super
+    #include ActionView::Context
+    include ActionView::Helpers::UrlHelper
+    attr_accessor :output_buffer
 
-			@markup =  markup
-		    @attributes = {}
-		    markup.scan(Liquid::TagAttributes) do |key, value|
-		    	@attributes[key.to_sym] = value
-		    	# for stripping qoutes use .gsub!(/^\"|\"?$/, '').gsub!(/^\'|\'?$/, '')
-		    end 
+    def initialize(tag_name, markup, tokens)
+      super
 
-		end
+      @markup = markup
+      @attributes = {}
+      markup.scan(Liquid::TagAttributes) do |key, value|
+        @attributes[key.to_sym] = value
+        # for stripping qoutes use .gsub!(/^\"|\"?$/, '').gsub!(/^\'|\'?$/, '')
+      end
 
-		def render(context)
-			link_to( remove_quotes(@attributes[:url]), method: :post, class: remove_quotes(@attributes[:class])) do
-				
-				super(context).html_safe
+    end
 
-			end
-		end
+    def render(context)
+      link_to(remove_quotes(@attributes[:url]), method: :post, class: remove_quotes(@attributes[:class])) do
 
-		def remove_quotes(string)
-			string ? string.gsub!(/^\"|\"?$/, '').gsub!(/^\'|\'?$/, '') : nil
-		end
+        super(context).html_safe
 
-	end
+      end
+    end
 
-	Liquid::Template.register_tag('link_to', LinkTag)
+    def remove_quotes(string)
+      string ? string.gsub!(/^\"|\"?$/, '').gsub!(/^\'|\'?$/, '') : nil
+    end
 
-	#
-	# Partials
-	#
-	class SnippetFile < Liquid::Tag
-		# Include the stylesheet tag link helper
-		include ActionView::Helpers::AssetTagHelper
+  end
 
-		def initialize(tag_name, variables, tokens)
-			@variables = variables.split(" ")
+  Liquid::Template.register_tag('link_to', LinkTag)
 
-			
-			@default_name = @variables[0]
-			@file_name = @variables[1]
+  #
+  # Partials
+  #
+  class SnippetFile < Liquid::Tag
+    # Include the stylesheet tag link helper
+    include ActionView::Helpers::AssetTagHelper
 
-			super
-		end
+    def initialize(tag_name, variables, tokens)
+      @variables = variables.split(" ")
 
-	    def render(context)
 
-	    	if @file_name.present? && (context[@file_name.strip]).present? 
-	    		content = CodeFile.find_by(hierarchy: 'snippet', name: context[@file_name.strip], theme_id: context["theme_id"])
-	    	else
-	    		content = CodeFile.find_by(hierarchy: 'snippet', name: @default_name, theme_id: context["theme_id"])
-    		end 
+      @default_name = @variables[0]
+      @file_name = @variables[1]
 
-	    	Liquid::Template.parse(content.code).render(context)
-			
-	    end
+      super
+    end
 
+    def render(context)
 
-	end
+      if @file_name.present? && (context[@file_name.strip]).present?
+        content = CodeFile.find_by(hierarchy: 'snippet', name: context[@file_name.strip], theme_id: context["theme_id"])
+      else
+        content = CodeFile.find_by(hierarchy: 'snippet', name: @default_name, theme_id: context["theme_id"])
+      end
 
-	Liquid::Template.register_tag('snippet_file', SnippetFile)
+      Liquid::Template.parse(content.code).render(context)
 
+    end
 
-	#
-	# Static_asset
-	#
-	class AssetPath < Liquid::Tag
 
-		# Include the stylesheet tag link helper
-		include ActionView::Helpers::AssetTagHelper
+  end
 
-		def initialize(tag_name, variables, tokens)
-			@variables = variables.split(" ")
+  Liquid::Template.register_tag('snippet_file', SnippetFile)
 
-			@file_name = @variables[0]
 
-			super
-		end
+  #
+  # Static_asset
+  #
+  class AssetPath < Liquid::Tag
 
+    # Include the stylesheet tag link helper
+    include ActionView::Helpers::AssetTagHelper
 
-	    def render(context)
+    def initialize(tag_name, variables, tokens)
+      @variables = variables.split(" ")
 
-	    	#asset = CodeFile.find_by!(hierarchy: 'asset', name: @file_name.to_s, theme_id: context["theme_id"])
+      @file_name = @variables[0]
 
-	    	"/themes/#{context["theme_id"]}/code_files/#{@file_name.strip}"
-			
-	    end
+      super
+    end
 
-	end
 
-	Liquid::Template.register_tag('asset_path', AssetPath)
+    def render(context)
 
+      #asset = CodeFile.find_by!(hierarchy: 'asset', name: @file_name.to_s, theme_id: context["theme_id"])
 
-	#
-	# CSS
-	#
-	class CssTag < Liquid::Tag
+      "/themes/#{context["theme_id"]}/code_files/#{@file_name.strip}"
 
-		# Include the stylesheet tag link helper
-		include ActionView::Helpers::AssetTagHelper
+    end
 
-		def initialize(tag_name, variables, tokens)
-			@variables = variables.split(" ")
+  end
 
-			@file_name = @variables[0]
+  Liquid::Template.register_tag('asset_path', AssetPath)
 
-			super
-		end
 
+  #
+  # CSS
+  #
+  class CssTag < Liquid::Tag
 
-	    def render(context)
+    # Include the stylesheet tag link helper
+    include ActionView::Helpers::AssetTagHelper
 
-	    	#sheet = CodeFile.find_by!(hierarchy: 'asset', name: @file_name.to_s, theme_id: context["settings.theme.id"])
+    def initialize(tag_name, variables, tokens)
+      @variables = variables.split(" ")
 
-	    	stylesheet_link_tag "/themes/#{context["theme_id"]}/code_files/#{@file_name.strip}"
-			
-	    end
+      @file_name = @variables[0]
 
-	end
+      super
+    end
 
-	Liquid::Template.register_tag('css_tag', CssTag)
 
+    def render(context)
 
-		#
-	# CSS
-	#
-	class JavaScriptiTag < Liquid::Tag
+      #sheet = CodeFile.find_by!(hierarchy: 'asset', name: @file_name.to_s, theme_id: context["settings.theme.id"])
 
-		# Include the stylesheet tag link helper
-		include ActionView::Helpers::AssetTagHelper
+      stylesheet_link_tag "/themes/#{context["theme_id"]}/code_files/#{@file_name.strip}"
 
-		def initialize(tag_name, variables, tokens)
-			@variables = variables.split(" ")
+    end
 
-			@file_name = @variables[0]
+  end
 
-			super
-		end
+  Liquid::Template.register_tag('css_tag', CssTag)
 
 
-	    def render(context)
+  #
+  # CSS
+  #
+  class JavaScriptiTag < Liquid::Tag
 
-	    	#sheet = CodeFile.find_by!(hierarchy: 'asset', name: @file_name.to_s, theme_id: context["theme_id"])
+    # Include the stylesheet tag link helper
+    include ActionView::Helpers::AssetTagHelper
 
-	    	javascript_include_tag "/themes/#{context["theme_id"]}/code_files/#{@file_name.strip}"
-			
-	    end
+    def initialize(tag_name, variables, tokens)
+      @variables = variables.split(" ")
 
-	end
+      @file_name = @variables[0]
 
-	Liquid::Template.register_tag('javascript_tag', JavaScriptiTag)
+      super
+    end
 
 
+    def render(context)
 
+      #sheet = CodeFile.find_by!(hierarchy: 'asset', name: @file_name.to_s, theme_id: context["theme_id"])
 
-	#
-	# image_tag
-	#
-	class ImageTag < Liquid::Tag
+      javascript_include_tag "/themes/#{context["theme_id"]}/code_files/#{@file_name.strip}"
 
-		# Include the stylesheet tag link helper
-		include ActionView::Helpers::AssetTagHelper
+    end
 
-		def initialize(tag_name, image_attributes, tokens)
-			@image_attributes = image_attributes.tr('"', '').split(",")
-			@image_path = @image_attributes[0]
-			@alt = @image_attributes[1]
-			@title = @image_attributes[2]
-			@width = @image_attributes[3]
-			@height = @image_attributes[4]
-			super
-		end
+  end
 
-	    def render(context)
+  Liquid::Template.register_tag('javascript_tag', JavaScriptiTag)
 
-	    	@path = Liquid::Template.file_system.root
-	    	
-	    	#derrive request subdomain from Liquid filesystem! 
-	    	@path_array = @path.to_s.split("/")
-	    	@subdomain = @path_array[-2]
 
-	    	image_tag("/assets/#{@subdomain}/images/#{@image_path.strip}", alt: @alt.strip, title: @title.strip, height: @height.try(:strip), width: @width.try(:strip))
+  #
+  # image_tag
+  #
+  class ImageTag < Liquid::Tag
 
-	    end	
+    # Include the stylesheet tag link helper
+    include ActionView::Helpers::AssetTagHelper
 
-	end
+    def initialize(tag_name, image_attributes, tokens)
+      @image_attributes = image_attributes.tr('"', '').split(",")
+      @image_path = @image_attributes[0]
+      @alt = @image_attributes[1]
+      @title = @image_attributes[2]
+      @width = @image_attributes[3]
+      @height = @image_attributes[4]
+      super
+    end
 
-	Liquid::Template.register_tag('image_tag', ImageTag)
+    def render(context)
 
+      @path = Liquid::Template.file_system.root
 
-		#
-	# CSS
-	#
+      #derrive request subdomain from Liquid filesystem!
+      @path_array = @path.to_s.split("/")
+      @subdomain = @path_array[-2]
 
-	class GetMenu < Liquid::Tag
-		include ApplicationHelper
-		def initialize(tag_name, variables, tokens)
+      image_tag("/assets/#{@subdomain}/images/#{@image_path.strip}", alt: @alt.strip, title: @title.strip, height: @height.try(:strip), width: @width.try(:strip))
 
-			@variables = variables.split(" ")
+    end
 
-			@menu_object = @variables[0]
-			@file_name = @variables[1]
+  end
 
-			super
-		end
+  Liquid::Template.register_tag('image_tag', ImageTag)
 
-	    def render(context)
 
-	    	content = CodeFile.find_by(hierarchy: 'snippet', name: @file_name.to_s, theme_id: context["theme_id"])
+  #
+  # CSS
+  #
 
-	    	@menu ||= Menu.find_by_slug(@menu_object)
+  class GetMenu < Liquid::Tag
+    include ApplicationHelper
 
-	    	context.merge('menu' => @menu)
+    def initialize(tag_name, variables, tokens)
 
-	    	Liquid::Template.parse(content.code).render(context)
+      @variables = variables.split(" ")
 
-	    end
+      @menu_object = @variables[0]
+      @file_name = @variables[1]
 
-	end
+      super
+    end
 
-	Liquid::Template.register_tag('get_menu', GetMenu)
+    def render(context)
 
+      content = CodeFile.find_by(hierarchy: 'snippet', name: @file_name.to_s, theme_id: context["theme_id"])
 
-	class TicketFormTag < Liquid::Block
-		
-		include ActionView::Helpers::FormTagHelper
-		include ActionView::Context
+      @menu ||= Menu.find_by_slug(@menu_object)
 
-		#include ActionView::Helpers::FormHelper
+      context.merge('menu' => @menu)
 
-		attr_reader :controller
+      Liquid::Template.parse(content.code).render(context)
 
-		def initialize(tag_name, markup, tokens)
-			super
-			
-		end
+    end
 
-		def render(context)
-			
-			@controller = context.registers[:controller]
-			
-			form_tag('#') do
+  end
 
-				super(context).html_safe
+  Liquid::Template.register_tag('get_menu', GetMenu)
 
-			end
 
-		end
+  class TicketFormTag < Liquid::Block
 
-		delegate :form_authenticity_token, :request_forgery_protection_token, :protect_against_forgery?, to: :controller
-	end
+    include ActionView::Helpers::FormTagHelper
+    include ActionView::Context
 
-	Liquid::Template.register_tag('ticket_form', TicketFormTag)
+    #include ActionView::Helpers::FormHelper
 
+    attr_reader :controller
 
-	class FormTag < Liquid::Block
-		
-		attr_reader :controller
+    def initialize(tag_name, markup, tokens)
+      super
 
-		include ActionView::Helpers::FormTagHelper
-		include ActionView::Context
-		include AbstractController::Helpers
+    end
 
-		
-		def initialize(tag_name, markup, tokens)
-			super
+    def render(context)
 
-			@markup =  markup
-		    @attributes = {}
-		    markup.scan(Liquid::TagAttributes) do |key, value|
-		    	@attributes[key.to_sym] = value
-		    	# for stripping qoutes use .gsub!(/^\"|\"?$/, '').gsub!(/^\'|\'?$/, '')
-		    end 
+      @controller = context.registers[:controller]
 
-		end
+      form_tag('#') do
 
-		def render(context)
-			@controller = context.registers[:controller]
-	        controller  = context.registers[:controller]
-	        name        = controller.send(:request_forgery_protection_token).to_s
-	        value       = controller.send(:form_authenticity_token)
-    	        %{
+        super(context).html_safe
+
+      end
+
+    end
+
+    delegate :form_authenticity_token, :request_forgery_protection_token, :protect_against_forgery?, to: :controller
+  end
+
+  Liquid::Template.register_tag('ticket_form', TicketFormTag)
+
+
+  class FormTag < Liquid::Block
+
+    attr_reader :controller
+
+    include ActionView::Helpers::FormTagHelper
+    include ActionView::Context
+    include AbstractController::Helpers
+
+
+    def initialize(tag_name, markup, tokens)
+      super
+
+      @markup = markup
+      @attributes = {}
+      markup.scan(Liquid::TagAttributes) do |key, value|
+        @attributes[key.to_sym] = value
+        # for stripping qoutes use .gsub!(/^\"|\"?$/, '').gsub!(/^\'|\'?$/, '')
+      end
+
+    end
+
+    def render(context)
+      @controller = context.registers[:controller]
+      controller = context.registers[:controller]
+      name = controller.send(:request_forgery_protection_token).to_s
+      value = controller.send(:form_authenticity_token)
+      %{
 		          <meta name="csrf-param" content="#{name}">
 		          <meta name="csrf-token" content="#{value}">
 		        }
-			form_tag( remove_quotes(@attributes[:url]), class: remove_quotes(@attributes[:class]), authenticity_token: false) do
-				
-				super(context).html_safe
+      form_tag(remove_quotes(@attributes[:url]), class: remove_quotes(@attributes[:class])) do
+        super(context).html_safe
+      end
+    end
+
+    def remove_quotes(string)
+      string ? string.gsub!(/^\"|\"?$/, '').gsub!(/^\'|\'?$/, '') : nil
+    end
 
 
-	
-			end
-		end
-		delegate :form_authenticity_token, :request_forgery_protection_token, :protect_against_forgery?, to: :controller
-		# , authenticity_token: false
+  end
 
-		def remove_quotes(string)
-			string ? string.gsub!(/^\"|\"?$/, '').gsub!(/^\'|\'?$/, '') : nil
-		end
-
-		
-
-	end
-
-	Liquid::Template.register_tag('form', FormTag)
-
-
+  Liquid::Template.register_tag('form', FormTag)
 
 
 end
 
+
+Liquid::Block.class_eval do
+  # This delegates missing - including private & protected - methods (like protect_against_forgery?) to controller.
+  def method_missing(*args)
+    begin
+      if controller.respond_to?(args.first, true)
+        controller.send(args.first)
+      else
+        super
+      end
+    rescue
+      super
+    end
+  end
+end
 
 
 
