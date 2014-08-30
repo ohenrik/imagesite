@@ -42,6 +42,14 @@ module Permissions
 				allow :messages, [:index, :show, :new, :edit, :destroy, :delete, :update]
 				allow_param :message, [:subject, :content, :sender_email, :sender_name, :sender_id, :sender_type, :receiver_id, :receiver_type, :message_type]
 
+				# Carts
+				allow :carts, [:index, :show, :new, :edit, :destroy, :delete, :updates]
+				allow_param :cart, []
+
+				# Line Items
+				allow :line_items, [:index, :show, :new, :edit, :destroy, :delete, :update]
+				allow_param :line_item, [:cart_id, :offer_id]
+
 
 				# Shared
 				allow :shared, [:editor_link_modal]

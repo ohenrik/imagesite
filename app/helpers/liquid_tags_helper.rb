@@ -15,6 +15,71 @@ module LiquidTagsHelper
 	Liquid::Template.register_tag('random', Random)
 
 
+	class Param < ::Liquid::Tag
+
+      def render(context)
+        controller  = context.registers[:controller]
+        name        = controller.send(:request_forgery_protection_token).to_s
+        value       = controller.send(:form_authenticity_token)
+
+        %(<input type="hidden" name="#{name}" value="#{value}">)
+      end
+
+    end
+
+    class Meta < ::Liquid::Tag
+
+      def render(context)
+        controller  = context.registers[:controller]
+        name        = controller.send(:request_forgery_protection_token).to_s
+        value       = controller.send(:form_authenticity_token)
+
+        %{
+          <meta name="csrf-param" content="#{name}">
+          <meta name="csrf-token" content="#{value}">
+        }
+      end
+
+    end
+
+
+  Liquid::Template.register_tag('csrf_param', Param)
+  Liquid::Template.register_tag('csrf_meta', Meta)
+
+	class LinkTag < Liquid::Tag
+		
+		#include ActionView::Context
+		include ActionView::Helpers::UrlHelper
+		attr_accessor :output_buffer
+
+		def initialize(tag_name, markup, tokens)
+			super
+
+			@markup =  markup
+		    @attributes = {}
+		    markup.scan(Liquid::TagAttributes) do |key, value|
+		    	@attributes[key.to_sym] = value
+		    	# for stripping qoutes use .gsub!(/^\"|\"?$/, '').gsub!(/^\'|\'?$/, '')
+		    end 
+
+		end
+
+		def render(context)
+			link_to( remove_quotes(@attributes[:url]), method: :post, class: remove_quotes(@attributes[:class])) do
+				
+				super(context).html_safe
+
+			end
+		end
+
+		def remove_quotes(string)
+			string ? string.gsub!(/^\"|\"?$/, '').gsub!(/^\'|\'?$/, '') : nil
+		end
+
+	end
+
+	Liquid::Template.register_tag('link_to', LinkTag)
+
 	#
 	# Partials
 	#
@@ -140,6 +205,8 @@ module LiquidTagsHelper
 	Liquid::Template.register_tag('javascript_tag', JavaScriptiTag)
 
 
+
+
 	#
 	# image_tag
 	#
@@ -248,6 +315,7 @@ module LiquidTagsHelper
 		include ActionView::Context
 		include AbstractController::Helpers
 
+		
 		def initialize(tag_name, markup, tokens)
 			super
 
@@ -262,25 +330,35 @@ module LiquidTagsHelper
 
 		def render(context)
 			@controller = context.registers[:controller]
-
+	        controller  = context.registers[:controller]
+	        name        = controller.send(:request_forgery_protection_token).to_s
+	        value       = controller.send(:form_authenticity_token)
+    	        %{
+		          <meta name="csrf-param" content="#{name}">
+		          <meta name="csrf-token" content="#{value}">
+		        }
 			form_tag( remove_quotes(@attributes[:url]), class: remove_quotes(@attributes[:class]), authenticity_token: false) do
 				
 				super(context).html_safe
 
+
+	
 			end
 		end
-
+		delegate :form_authenticity_token, :request_forgery_protection_token, :protect_against_forgery?, to: :controller
 		# , authenticity_token: false
 
 		def remove_quotes(string)
 			string ? string.gsub!(/^\"|\"?$/, '').gsub!(/^\'|\'?$/, '') : nil
 		end
 
-		delegate :form_authenticity_token, :request_forgery_protection_token, :protect_against_forgery?, to: :controller
+		
 
 	end
 
 	Liquid::Template.register_tag('form', FormTag)
+
+
 
 
 end

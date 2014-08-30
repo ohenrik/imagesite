@@ -67,6 +67,12 @@ Imagesite::Application.routes.draw do
         # Offers
         resources :offers
 
+        # Cart
+        resources :carts
+
+        # Line Items
+        resources :line_items
+
         # Messages
         resources :messages
 
