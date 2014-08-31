@@ -10,8 +10,6 @@ class ProductionsController < ApplicationController
   # GET /productions.json
   def index
     @productions = Production.all
-    @controller = self
-    @events = Event.where(production_id: nil)
   end
 
   # GET /productions/1

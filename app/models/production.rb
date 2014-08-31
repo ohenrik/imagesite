@@ -1,6 +1,6 @@
 class Production < ActiveRecord::Base
   belongs_to :photo
-  has_many :events, :dependent => :destroy
+  has_many :events, :order => "end_date ASC, end_time ASC", :dependent => :destroy
   has_many :offers, :as => :offerable, :class_name => "Offer", :dependent => :destroy
 
 

@@ -12,13 +12,12 @@
                     <th>Hierarchy:</th>
                     <th>File name:</th>
                     <th>Display name:</th>
+                    <th>Updated at:</th>
                     <th></th>
                 </thead>
            
             <tbody>
-                <% @code_files.group_by(&:hierarchy).each do |hierarchy, code_files| %>
-
-                    <% code_files.each do |code_file| %>
+                <% @code_files.order(updated_at: :desc).each do |code_file| %>
                         <tr>
                             <td>
                                 <span class="label label-default"><%= code_file.hierarchy %></span>
@@ -34,14 +33,15 @@
                             <td>
                                 <%= code_file.display_name %>
                             </td>
+                            <td>
+                                <%= code_file.updated_at.strftime('%d.%m.%Y %H:%m') unless code_file.updated_at.blank? %>
+                            </td>
                             <td>     
                                 <%= link_to theme_code_file_path(code_file.theme.id, code_file.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "" do %>
                                     <i class="fa fa-trash-o"></i> Delete
                                 <% end %>
                             </td>
                         </tr>
-                    <% end %>
-
                 <% end %>
             </tbody>
         </table>

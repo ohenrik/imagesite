@@ -1,43 +1,33 @@
-<h1>Listing messages</h1>
+<div calss="form-inline">
+    <table class="dataTables_wrapper table table-striped">
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Content</th>
+          <th>Sender email</th>
+          <th>Sender name</th>
+          <th>Sent at</th>
+          <th></th>
+        </tr>
+      </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Subject</th>
-      <th>Content</th>
-      <th>Sender email</th>
-      <th>Sender name</th>
-      <th>Sender</th>
-      <th>Sender type</th>
-      <th>Receiver</th>
-      <th>Receiver type</th>
-      <th>Message type</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @messages.each do |message| %>
-      <tr>
-        <td><%= message.subject %></td>
-        <td><%= message.content %></td>
-        <td><%= message.sender_email %></td>
-        <td><%= message.sender_name %></td>
-        <td><%= message.sender_id %></td>
-        <td><%= message.sender_type %></td>
-        <td><%= message.receiver_id %></td>
-        <td><%= message.receiver_type %></td>
-        <td><%= message.message_type %></td>
-        <td><%= link_to 'Show', message %></td>
-        <td><%= link_to 'Edit', edit_message_path(message) %></td>
-        <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Message', new_message_path %>
+      <tbody>
+        <% @messages.each do |message| %>
+          <tr>
+            <td><%= message.subject %></td>
+            <td><%= message.content %></td>
+            <td><%= message.sender_email %></td>
+            <td><%= message.sender_name %></td>
+            <td><%= message.created_at.strftime('%d.%m.%Y %H:%m') unless message.created_at.blank? %></td>
+            <td>
+                <span class="pull-right">
+                  <%= link_to 'Show', message, class: "btn btn-default" %>
+                  <%= link_to 'Edit', edit_message_path(message), class: "btn btn-default"  %>
+                  <%= link_to 'Destroy', message, method: :delete, class: "btn btn-default" , data: { confirm: 'Are you sure?' } %>
+                </span>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>

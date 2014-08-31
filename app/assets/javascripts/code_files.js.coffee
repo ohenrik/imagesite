@@ -24,12 +24,12 @@ $(document).ready ->
 				return
 
 			"Ctrl-S": (cm) ->
-				alert("your mom")
+				#alert("your mom")
 				cm.save()
 				return
 
 			"Cmd-S": (cm) ->
-				alert("my mom")
+				#alert("my mom")
 				cm.save()
 				return
       

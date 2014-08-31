@@ -4,7 +4,7 @@ class Theme < ActiveRecord::Base
 	mount_uploader :thumbnail, ThemeThumbnailUploader
 
 	belongs_to :user
-  has_many :code_files, dependent: :destroy
+  has_many :code_files, :order => "updated_at DESC", dependent: :destroy
   accepts_nested_attributes_for :code_files
   
 	# Validaties theme upload
