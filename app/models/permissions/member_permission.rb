@@ -47,7 +47,7 @@ module Permissions
 				allow_param :cart, []
 
 				# Line Items
-				allow :line_items, [:index, :show, :new, :edit, :destroy, :delete, :update]
+				allow :line_items, [:index, :show, :create, :new, :edit, :destroy, :delete, :update]
 				allow_param :line_item, [:cart_id, :offer_id]
 
 
@@ -55,8 +55,8 @@ module Permissions
 				allow :shared, [:editor_link_modal]
 
 				# Tickets
-				allow :customers, [:index, :show, :new, :create, :edit, :update, :delete, :destroy]
-				allow_param :customer, [:name, :price, :currency, :offer_id, :customer_id]
+				allow :tickets, [:index, :show, :new, :create, :edit, :update, :delete, :destroy]
+				allow_param :ticket, [:name, :price, :currency, :offer_id, :customer_id]
 
 				# Offer
 				allow :offers, [:new, :create, :edit, :update, :destroy]

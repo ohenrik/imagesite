@@ -63,7 +63,7 @@ class ThemesController < ApplicationController
     respond_to do |format|
       if @theme.save
         # After uploaded zip file extract the content of the file
-        @theme.extract_preview
+        #@theme.extract_preview
 
         format.html { redirect_to themes_url, notice: 'Theme was successfully created.' }
         format.json { render action: 'index', status: :created, location: @theme }

@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   # Find the tenant
   around_filter :scope_current_tenant
 
-  protect_from_forgery :except => [:create]
+  #protect_from_forgery :except => [:create]
   
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 

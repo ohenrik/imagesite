@@ -1,20 +1,6 @@
 module LiquidTagsHelper
 
 
-  class Random < Liquid::Tag
-    def initialize(tag_name, max, tokens)
-      super
-      @max = max.to_i
-    end
-
-    def render(context)
-      rand(@max).to_s
-    end
-  end
-
-  Liquid::Template.register_tag('random', Random)
-
-
   class Param < ::Liquid::Tag
 
     def render(context)
@@ -26,6 +12,9 @@ module LiquidTagsHelper
     end
 
   end
+
+  Liquid::Template.register_tag('csrf_param', Param)
+
 
   class Meta < ::Liquid::Tag
 
@@ -42,11 +31,10 @@ module LiquidTagsHelper
 
   end
 
-
-  Liquid::Template.register_tag('csrf_param', Param)
   Liquid::Template.register_tag('csrf_meta', Meta)
 
-  class LinkTag < Liquid::Tag
+
+  class LinkTag < Liquid::Block
 
     #include ActionView::Context
     include ActionView::Helpers::UrlHelper
@@ -58,15 +46,16 @@ module LiquidTagsHelper
       @markup = markup
       @attributes = {}
       markup.scan(Liquid::TagAttributes) do |key, value|
-        @attributes[key.to_sym] = value
+        @attributes[key.to_sym] = value.gsub!(/^\"|\"?$/, '').gsub!(/^\'|\'?$/, '')
         # for stripping qoutes use .gsub!(/^\"|\"?$/, '').gsub!(/^\'|\'?$/, '')
       end
 
     end
 
     def render(context)
-      link_to(remove_quotes(@attributes[:url]), method: :post, class: remove_quotes(@attributes[:class])) do
-
+      method = @attributes[:url] || :get
+      link_to(remove_quotes(@attributes[:url]), method: method, class: remove_quotes(@attributes[:class]), title: @attributes[:title]) do
+        #<a href="/line_items" data-method="post" title="Add to Cart">
         super(context).html_safe
 
       end
@@ -274,36 +263,6 @@ module LiquidTagsHelper
   Liquid::Template.register_tag('get_menu', GetMenu)
 
 
-  class TicketFormTag < Liquid::Block
-
-    include ActionView::Helpers::FormTagHelper
-    include ActionView::Context
-
-    #include ActionView::Helpers::FormHelper
-
-    attr_reader :controller
-
-    def initialize(tag_name, markup, tokens)
-      super
-
-    end
-
-    def render(context)
-
-      @controller = context.registers[:controller]
-
-      form_tag('#') do
-
-        super(context).html_safe
-
-      end
-
-    end
-
-    #delegate :form_authenticity_token, :request_forgery_protection_token, :protect_against_forgery?, to: :controller
-  end
-
-  Liquid::Template.register_tag('ticket_form', TicketFormTag)
 
 
   class FormTag < Liquid::Block
@@ -329,13 +288,7 @@ module LiquidTagsHelper
 
     def render(context)
       @controller = context.registers[:controller]
-      controller = context.registers[:controller]
-      name = controller.send(:request_forgery_protection_token).to_s
-      value = controller.send(:form_authenticity_token)
-      %{
-		          <meta name="csrf-param" content="#{name}">
-		          <meta name="csrf-token" content="#{value}">
-		        }
+
       form_tag(remove_quotes(@attributes[:url]), class: remove_quotes(@attributes[:class])) do
         super(context).html_safe
       end
@@ -345,15 +298,13 @@ module LiquidTagsHelper
       string ? string.gsub!(/^\"|\"?$/, '').gsub!(/^\'|\'?$/, '') : nil
     end
 
-
   end
 
   Liquid::Template.register_tag('form', FormTag)
 
-
 end
 
-
+# Important for form CSRF, making controller available
 Liquid::Block.class_eval do
   # This delegates missing - including private & protected - methods (like protect_against_forgery?) to controller.
   def method_missing(*args)

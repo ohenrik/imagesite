@@ -112,6 +112,9 @@ gem 'jquery-validation-rails'
 gem 'actionpack-page_caching'
 gem 'actionpack-action_caching'
 
+# Rails encode Emails
+gem 'actionview-encoded_mail_to'
+
 # HTML email gem for inlining css
 gem 'roadie'
 #gem 'nokogiri'

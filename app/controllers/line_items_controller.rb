@@ -3,6 +3,7 @@ class LineItemsController < ApplicationController
   # Find the tenant
   around_filter :scope_current_tenant
 
+  #include CurrentCart
 
   before_action :set_cart, only: [:create]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
@@ -30,7 +31,7 @@ class LineItemsController < ApplicationController
   # POST /line_items
   # POST /line_items.json
   def create
-    offer = Offer.find(params[:id])
+    offer = Offer.find(params[:offer_id])
     @line_item = @cart.line_items.build(offer: offer)
 
     respond_to do |format|
@@ -74,6 +75,12 @@ class LineItemsController < ApplicationController
       @line_item = LineItem.find(params[:id])
     end
 
+    def set_cart
+      @cart = Cart.find(session[:cart_id])
+    rescue ActiveRecord::RecordNotFound
+      @cart = Cart.create
+      session[:cart_id] = @cart.id
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     #def line_item_params
     #  params.require(:line_item).permit(:cart_id, :offer_id)

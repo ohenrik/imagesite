@@ -1,18 +1,44 @@
 <% content_for :front_page do %>
+<div class="container">
+	<div class="alert alert-warning" role="alert">
+		Coming soon! Sign up bellow to get more information.
+		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	</div>
+</div>
 <div class="jumbatron">
 	<div class="container">
 		<div class="message-space">
-			<h1 class="primary-message"><span class="text-no-wrap">Let's work together.</span></h1>
-			<h2 class="secondary-message">
-				We take care of your website, so you can do what you do best
+			<h1 class="primary-message text-center"><span class="text-no-wrap">Let's work</span> together.</h1>
+			<h2 class="secondary-message text-center">
+				We take care of your website, so you can take care of business.
 			</h2>
-
-
 		</div>
+
+		<div class="row">
+		  <div class="col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">
+		    <div class="input-group">
+		      <input type="text" class="form-control" placeholder="your@email.com">
+		      <span class="input-group-btn">
+		        <button class="btn btn-default" type="button">Keep me updated</button>
+		      </span>
+		    </div><!-- /input-group -->
+		    <p class="help-block">Ps. your email is safe with us.</p>
+		  </div><!-- /.col-lg-6 -->
+		</div><!-- /.row -->
+		<br>
 	</div>
 </div>
 
 <div class="container">
+	<br>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="text-center">
+				<p class="">Questions? Don't hesitate to contact us at <%= mail_to "info@theatrical.co", "info@theatrical.co", encode: "javascript" %></p>
+			</div>
+		</div>	
+	</div>
+	<!--
 	<div class="row">
 		<div class="icon col-sm-4">
 			<i class="fa fa-ticket fa-fw"></i>
@@ -43,6 +69,6 @@
 			<p>Help your audience keep track and find your events.</p>
 		</div>
 	</div>
-
+	-->
 </div>
 <% end %>
