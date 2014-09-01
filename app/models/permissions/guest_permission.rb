@@ -32,7 +32,7 @@ module Permissions
 			allow :tags, [:show]
 
 			# Static pages
-			allow :static_pages, [:home, :navigation, :user_home]
+			allow :static_pages, [:home, :pre_launch_news]
 
 			# Code Files
 			allow :code_files, [:show]

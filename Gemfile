@@ -123,6 +123,9 @@ gem 'roadie'
 # Add Paymill for transactions
 gem 'paymill'
 
+# Mailchimp
+gem 'gibbon'
+
 ## Test gems
 gem "rspec-rails", :group => [:test, :development]
 group :test do 

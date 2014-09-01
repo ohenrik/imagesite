@@ -6,6 +6,7 @@ Imagesite::Application.routes.draw do
     get 'login', to: 'sessions#new', as: 'login'
     get 'logout', to: 'sessions#destroy', as: 'logout'
     get 'home', to: 'static_pages#home', as: 'home'
+    post 'pre_launch_news', to: 'static_pages#pre_launch_news', as: 'pre_launch_news'
 
     resources :sessions
 

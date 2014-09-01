@@ -1,7 +1,7 @@
 <% content_for :front_page do %>
 <div class="container">
 	<div class="alert alert-warning" role="alert">
-		Coming soon! Sign up bellow to get more information.
+		Coming soon! Sign up bellow to get more information about when we launch and product features.
 		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 	</div>
 </div>
@@ -15,15 +15,25 @@
 		</div>
 
 		<div class="row">
-		  <div class="col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">
-		    <div class="input-group">
-		      <input type="text" class="form-control" placeholder="your@email.com">
-		      <span class="input-group-btn">
-		        <button class="btn btn-default" type="button">Keep me updated</button>
-		      </span>
-		    </div><!-- /input-group -->
-		    <p class="help-block">Ps. your email is safe with us.</p>
-		  </div><!-- /.col-lg-6 -->
+			<%= form_tag("/pre_launch_news", method: 'post') do %>
+			  	<div class="col-sm-3 col-sm-offset-2 col-lg-3 col-lg-offset-2">
+				    <div class="form-group">
+			    		<%= text_field_tag :name, nil, class: "form-control", placeholder: "My name..."%> 
+			    	</div>
+			    </div>
+		    	<div class="col-sm-3 col-lg-3">
+		    		<div class="form-group">
+				    	<%= text_field_tag :email, nil, class: "form-control", placeholder: "my@email.com"%> 
+				    	<p class="help-block">Ps. your email is safe with us.</p>
+			    	</div>
+		    	</div>
+		    	<div class="col-sm-2 col-lg-2">
+			    	<div class="form-group">
+				    	<button class="btn btn-default btn-block" type="submit">Update me.</button>
+				    </div><!-- /input-group -->
+
+			    </div>
+		    <% end %>
 		</div><!-- /.row -->
 		<br>
 	</div>
