@@ -34,6 +34,34 @@ module LiquidTagsHelper
   Liquid::Template.register_tag('csrf_meta', Meta)
 
 
+  class JqueryTag < ::Liquid::Tag
+    # Include the stylesheet tag link helper
+    include ActionView::Helpers::AssetTagHelper
+
+
+    def render(context)
+      return javascript_include_tag("/assets/jquery")
+    end
+
+  end
+
+  Liquid::Template.register_tag('jquery_tag', JqueryTag)
+
+  class UjsTag < ::Liquid::Tag
+    # Include the stylesheet tag link helper
+    include ActionView::Helpers::AssetTagHelper
+
+
+    def render(context)
+      return javascript_include_tag("/assets/jquery_ujs")
+
+    end
+
+  end
+
+  Liquid::Template.register_tag('jquery_ujs_tag', UjsTag)
+
+
   class LinkTag < Liquid::Block
 
     #include ActionView::Context
