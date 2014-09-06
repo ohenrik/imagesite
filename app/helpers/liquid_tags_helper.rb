@@ -35,6 +35,7 @@ module LiquidTagsHelper
 
 
   class JqueryTag < ::Liquid::Tag
+    include ActionView::Helpers::AssetTagHelper
 
     def render(context)
       helpers.javascript_include_tag("jquery")
@@ -49,6 +50,7 @@ module LiquidTagsHelper
   Liquid::Template.register_tag('jquery_tag', JqueryTag)
 
   class UjsTag < ::Liquid::Tag
+    include ActionView::Helpers::AssetTagHelper
 
     def render(context)
       helpers.javascript_include_tag 'jquery_ujs'

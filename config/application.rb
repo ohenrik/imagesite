@@ -27,7 +27,7 @@ module Imagesite
     
     
     config.autoload_paths += %W(#{config.root}/lib/assets)
-    config.assets.precompile += %w( password_resets.js sessions.js users.js code_files.js galleries.js menu_items.js menus.js navigation.js page_items.js pages.js photos.js public_themes.js tags.js themes.js productions.js events.js offers.js customers.js tickets.js messages.js)
+    config.assets.precompile += %w( password_resets.js sessions.js users.js code_files.js galleries.js menu_items.js menus.js navigation.js page_items.js pages.js photos.js public_themes.js tags.js themes.js productions.js events.js offers.js customers.js tickets.js messages.js jquery.js jquery_ujs.js)
     # config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/cache"
 
 
