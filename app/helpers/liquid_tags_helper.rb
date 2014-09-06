@@ -35,12 +35,13 @@ module LiquidTagsHelper
 
 
   class JqueryTag < ::Liquid::Tag
-    # Include the stylesheet tag link helper
-    include ActionView::Helpers::AssetTagHelper
-
 
     def render(context)
-      return javascript_include_tag("/assets/jquery")
+      helpers.javascript_include_tag("jquery")
+    end
+
+    def helpers
+      @helpers ||= ActionController::Base.helpers
     end
 
   end
@@ -48,13 +49,14 @@ module LiquidTagsHelper
   Liquid::Template.register_tag('jquery_tag', JqueryTag)
 
   class UjsTag < ::Liquid::Tag
-    # Include the stylesheet tag link helper
-    include ActionView::Helpers::AssetTagHelper
-
 
     def render(context)
-      return javascript_include_tag("/assets/jquery_ujs")
+      helpers.javascript_include_tag 'jquery_ujs'
 
+    end
+
+    def helpers
+      @helpers ||= ActionController::Base.helpers
     end
 
   end
