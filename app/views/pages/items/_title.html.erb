@@ -1,6 +1,7 @@
+
 <% if page_item.is_type == "Title" %>
 	<div class="col-xs-12 page_item <%= page_item.parent.nil? ? 'page_item' : "strucure_item_#{page_item.parent.id}" %>" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>"  data-structure-id="<%= page_item.parent.try(:id) %>">
-		<%= form_for(page_item) do |f| %>
+		<%= f.fields_for :page_items, page_item do |f| %>
 			<div class="xs-space-down">
 				<div class="input-group input-group-lg">
 					<%= f.label :title, "Header", class: "input-group-addon" %>
@@ -8,9 +9,6 @@
 				</div>
 			</div>
 			<div class="">
-				<%= f.button type: 'submit', class: "btn btn-default" do %>
-					<i class="fa fa-floppy-o"></i> Save
-				<% end %>
 				<%= link_to page_item_settings_path(page_item), remote: true, class: "btn btn-default" do %>
 					<i class="fa fa-cogs"></i> <span class="hidden-xs">Settings</span>
 				<% end %>

@@ -97,10 +97,19 @@
         
     </div>
 
+    <!-- This is where page_items happen -->
+    <div class="row" id="page_items">
+        <%= nested_page_items(@page.items, f) %>
+    </div>
+
+
+
 <% end %>
 
+
+    <hr>
     <div class="row" id="page_items">
-        <%= nested_page_items(@page.items) %>
+        <%#= nested_page_items(@page.items) %>
     </div>
 
 

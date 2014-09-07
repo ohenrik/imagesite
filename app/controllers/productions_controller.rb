@@ -89,18 +89,6 @@ class ProductionsController < ApplicationController
     end
   end
 
-  def add_to_page
-    @page_item = @production.sub_items.create(page_id: params[:page_id], ancestry: params[:page_item_id])
-    respond_to do |format|
-      if @page_item
-        format.html { redirect_to edit_page_path(params[:page_id]), notice: 'Item successfully added' }
-        format.js { render 'page_items/page_item_added', layout: false } #render locals: { page_item: item } }
-      else
-        format.html { redirect_to edit_page_path(params[:page_id]), notice: 'An error occured, item no added to menu.' }
-        format.json { render json: @menu.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   def add_to_menu
     @menu_item = @production.menu_items.create(name: @production.name, menu_id: params[:menu_id])

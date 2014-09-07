@@ -4,10 +4,10 @@ module PagesHelper
 		[['Published', 'published'], ['Draft', 'draft']]
 	end
 
-	def nested_page_items(page_items)
+	def nested_page_items(page_items, f)
 
 	  	page_items.map do |item, sub_item|
-	    	render(item, :sub_item => sub_item )
+	    	render("pages/page_item", page_item: item, :sub_item => sub_item, f: f )
 
 		end.join.html_safe
 

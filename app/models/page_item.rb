@@ -6,6 +6,8 @@ class PageItem < ActiveRecord::Base
 
 	has_ancestry
 	acts_as_list scope: [:ancestry]
+
+
 	
  	# Liquid methods
 	liquid_methods :position, :pageable, :is_type, :title, :description, :item_class, :link, :no_item_link, :content, :design, :item_children

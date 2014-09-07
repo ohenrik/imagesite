@@ -124,11 +124,11 @@ class PagesController < ApplicationController
 
 
   def add_page_item
-    @page_item = @page.page_items.create(pageable_id: params[:item_id], pageable_type: params[:item_type], other_type: params[:other_type], ancestry: params[:page_item_id])
+    @page_item = @page.page_items.build(pageable_id: params[:item_id], pageable_type: params[:item_type], other_type: params[:other_type], ancestry: params[:page_item_id])
     respond_to do |format|
       if @page_item
         format.html { redirect_to edit_page_path(@page.id), notice: 'Item successfully added' }
-        format.js { render 'page_items/page_item_added', layout: false } 
+        format.js { render 'pages/page_item_added', locals: {f: @page_item}, layout: false } 
       else
         format.html { redirect_to edit_page_path(@page.id), notice: 'An error occured, item no added to menu.' }
         format.json { render json: @menu.errors, status: :unprocessable_entity }

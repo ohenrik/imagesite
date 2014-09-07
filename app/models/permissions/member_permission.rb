@@ -13,13 +13,17 @@ module Permissions
 				allow :people, [:index, :show, :new, :create, :edit, :update, :destroy, :gallery_modal, :add_to_menu]
 				allow_param :person, [:first_name, :last_name, :title, :description, :email, :phone, :mobile_phone, :photo_id] 
 
-				# Page
-				allow :pages, [:index, :new, :create, :edit, :update, :delete, :destroy, :settings, :toggle_status, :add_page_item, :gallery_modal, :add_other_page_item, :set_thumbnail, :set_home, :add_to_menu]
-				allow_param :page, [:name, :content, :excerpt, :status, :photo_id, :layout_name, :template_name]
+
 
 				# Page Item
 				allow :page_items, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :settings, :sort]
-				allow_param :page_item, [:position, :page_id, :pageable_id, :pageable_type, :no_item_link, :design, :item_link, :item_class, :description, :title, :content, :pageable, :gallery]
+				page_item_attributes = [:position, :page_id, :pageable_id, :pageable_type, :no_item_link, :design, :item_link, :item_class, :description, :title, :content, :pageable, :gallery]
+				allow_param :page_item, page_item_attributes
+
+				# Page
+				allow :pages, [:index, :new, :create, :edit, :update, :delete, :destroy, :settings, :toggle_status, :add_page_item, :gallery_modal, :add_other_page_item, :set_thumbnail, :set_home, :add_to_menu]
+				page_item_attributes << [:id, :_destroy]
+				allow_param :page, [:name, :content, :excerpt, :status, :photo_id, :layout_name, :template_name, page_items_attributes: page_item_attributes]
 
 
 				# Photo

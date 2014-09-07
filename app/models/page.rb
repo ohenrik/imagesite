@@ -14,6 +14,7 @@ class Page < ActiveRecord::Base
  	belongs_to :layout, :foreign_key => "layout_id" , :class_name => "CodeFile"
  	belongs_to :template, :foreign_key => "template_id" , :class_name => "CodeFile"
 
+ 	accepts_nested_attributes_for :page_items, allow_destroy: true
 
 	# Liquid methods
 	liquid_methods :thumbnail, :name, :content, :excerpt, :link, :items

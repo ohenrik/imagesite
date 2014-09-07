@@ -1,3 +1,4 @@
+
 <% if page_item.is_type == "Structure" %>
 	 <div class="col-xs-12 page_item <%= page_item.parent.nil? ? 'page_item' : "strucure_item_#{page_item.parent.id}" %> " id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>" data-structure="true"  data-structure-id="<%= page_item.parent.try(:id) %>">
 		<div class="list-group-item " >
@@ -12,7 +13,7 @@
 			
 			<div class="row" id="structure_<%= page_item.id %>">
 				<% if page_item.has_children? %>
-					<%= nested_page_items(page_item.children) %>
+					<%= nested_page_items(page_item.children, f) %>
 				<% else %>
 					<div class="col-xs-12" id="empty_structure_<%= page_item.id %>">
 						<div class="alert alert-info">
