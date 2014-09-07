@@ -34,7 +34,7 @@ class Photo < ActiveRecord::Base
 	end
 
 	def large
-		self.image_url(:large)
+		image_url(:large)
 	end
 
 	def photo_tags

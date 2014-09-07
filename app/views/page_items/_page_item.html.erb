@@ -3,7 +3,7 @@
 
 <%= render partial: 'page_items/items/content', locals: { page_item: page_item } if page_item.is_type == 'Text'  %>
 
-<%= render partial: 'page_items/items/gallery', locals: { page_item: page_item } if page_item.is_type == 'Gallery'  %>
+<%= render partial: 'page_items/items/structure', locals: { page_item: page_item } if page_item.is_type == 'Structure'  %>
 
 <%= render partial: 'page_items/items/photo', locals: { page_item: page_item } if page_item.is_type == 'Photo'  %>
 

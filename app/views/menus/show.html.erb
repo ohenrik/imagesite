@@ -10,7 +10,8 @@
 <div class="row space-down menus">
 
 
-    <div class="col-xs-12 col-sm-4 pull-left menu_item_list">
+
+    <div class="col-xs-12 col-sm-4 menu_item_list  pull-right">
         <div class="page-header">
             <h4>External link:</h4>
         </div>
@@ -108,7 +109,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-sm-8 pull-right">
+    <div class="col-xs-12 col-sm-8  pull-left">
         <div class="page-header">
             <ul class="nav nav-pills menus-list">
                 <% @menus.each do |menu| %>
@@ -121,12 +122,12 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-sm-8 pull-right">
+    <div class="col-xs-12 col-sm-8 pull-left">
         
             <div class="dd" id="menu_container_<%= @menu.id %>" >
                 <ol id="menu_<%= @menu.id %>" class=" dd-list list-group">
                     <% if @menu.menu_items.blank? %>
-                    	<div class="alert alert-info text-center">Menu is empty.</div>
+                        <div class="alert alert-info text-center">Menu is empty.</div>
                     <% end %>
                     <%= nested_menu_items(@menu.menu_items.arrange(:order => :position)) %>
                 </ol>
@@ -141,7 +142,6 @@
             </div>
 
     </div>
-
     
     <div class="col-xs-12 col-sm-8 pull-right" id="tester">
 

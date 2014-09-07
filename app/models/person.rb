@@ -17,7 +17,7 @@ class Person < ActiveRecord::Base
 
 	def thumbnail
 		if photo.nil?
-			"/assets/default/thumb_no-thumb.png"
+			ActionController::Base.helpers.image_path "default/thumb_no-thumb.png"
 		else
 			photo.image_url(:thumb)
 		end

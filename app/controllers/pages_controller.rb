@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   # Find the tenant
   around_filter :scope_current_tenant
   
-  before_action :set_page, only: [:show, :edit, :update, :destroy, :set_thumbnail, :add_to_menu, :set_home, :add_to_page, :add_other_page_item, :toggle_status, :settings]
+  before_action :set_page, only: [:show, :edit, :update, :destroy, :set_thumbnail, :add_to_menu, :set_home, :add_to_page, :add_page_item, :add_other_page_item, :toggle_status, :settings]
   
 
   # GET /pages
@@ -122,30 +122,15 @@ class PagesController < ApplicationController
     end
   end
 
-  def add_to_page
-    # @page in this case is the page selected to be added to the parent page of id = params[:page_id]
-    # This is why @page.sub_items creates a new child of the page with id = params[:page_id]
-    @page_item = @page.sub_items.create(page_id: params[:page_id], ancestry: params[:page_item_id])
+
+  def add_page_item
+    @page_item = @page.page_items.create(pageable_id: params[:item_id], pageable_type: params[:item_type], other_type: params[:other_type], ancestry: params[:page_item_id])
     respond_to do |format|
       if @page_item
-        format.html { redirect_to edit_page_path(params[:page_id]), notice: 'Item successfully added' }
-        format.js { render 'page_items/page_item_added', layout: false } #render locals: { page_item: item } }
+        format.html { redirect_to edit_page_path(@page.id), notice: 'Item successfully added' }
+        format.js { render 'page_items/page_item_added', layout: false } 
       else
-        format.html { redirect_to edit_page_path(params[:page_id]), notice: 'An error occured, item no added to menu.' }
-        format.json { render json: @menu.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-
-  def add_other_page_item
-    @page_item = PageItem.create(page_id: @page.id, other_type: params[:other_type])
-    respond_to do |format|
-      if @page_item
-        format.html { redirect_to edit_page_path(@page), notice: 'Item successfully added' }
-        format.js { render 'page_items/page_item_added', layout: false } #render locals: { page_item: item } }
-      else
-        format.html { redirect_to edit_page_path(@page), notice: 'An error occured, item no added to menu.' }
+        format.html { redirect_to edit_page_path(@page.id), notice: 'An error occured, item no added to menu.' }
         format.json { render json: @menu.errors, status: :unprocessable_entity }
       end
     end

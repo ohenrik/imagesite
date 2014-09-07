@@ -109,12 +109,12 @@
 
 	current_order = () ->
 		page_item_order = []
-		gallery_item_order = []
+		structure_item_order = []
 		$('.page_item').each (i) ->
-			if $(this).data('gallery')
-				$('.gallery_item_' + $(this).data('id')).each ->
-					gallery_item_order.push id: $(this).data('id')
-				page_item_order.push id: $(this).data('id'), children: gallery_item_order
+			if $(this).data('structure')
+				$('.structure_item_' + $(this).data('id')).each ->
+					structure_item_order.push id: $(this).data('id')
+				page_item_order.push id: $(this).data('id'), children: structure_item_order
 			else
 				page_item_order.push id: $(this).data('id')
 		page_item_order

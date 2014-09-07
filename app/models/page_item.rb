@@ -8,7 +8,7 @@ class PageItem < ActiveRecord::Base
 	acts_as_list scope: [:ancestry]
 	
  	# Liquid methods
-	liquid_methods :position, :pageable, :is_type, :title, :description, :item_class, :item_link, :no_item_link, :content, :design
+	liquid_methods :position, :pageable, :is_type, :title, :description, :item_class, :link, :no_item_link, :content, :design, :item_children
 
 	def is_type
 		return other_type if self.other_type.present?
@@ -21,6 +21,14 @@ class PageItem < ActiveRecord::Base
 
 	def description
 		read_attribute(:description).presence || pageable.try(:description)
+	end
+
+	def link
+		read_attribute(:link).presence || pageable.try(:link)
+	end
+
+	def item_children
+		children
 	end
 
 end

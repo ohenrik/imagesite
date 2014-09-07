@@ -108,22 +108,24 @@ module LiquidTagsHelper
     # Include the stylesheet tag link helper
     include ActionView::Helpers::AssetTagHelper
 
-    def initialize(tag_name, variables, tokens)
-      @variables = variables.split(" ")
+    def initialize(tag_name, markup, tokens)
 
-
-      @default_name = @variables[0]
-      @file_name = @variables[1]
-
+      @markup = markup
+      @attributes = {}
+      markup.scan(Liquid::TagAttributes) do |key, value|
+        @attributes[key.to_sym] = value
+        # for stripping qoutes use .gsub!(/^\"|\"?$/, '').gsub!(/^\'|\'?$/, '')
+      end
+      
       super
     end
 
     def render(context)
 
-      if @file_name.present? && (context[@file_name.strip]).present?
-        content = CodeFile.find_by(hierarchy: 'snippet', name: context[@file_name.strip], theme_id: context["theme_id"])
+      if (@attributes[:design]).present? && (context[@attributes[:design]]).present?
+        content = CodeFile.find_by(hierarchy: 'snippet', name: context[@attributes[:design].gsub!(/^\"|\"?$/, '').gsub!(/^\'|\'?$/, '')], theme_id: context["theme_id"])
       else
-        content = CodeFile.find_by(hierarchy: 'snippet', name: @default_name, theme_id: context["theme_id"])
+        content = CodeFile.find_by(hierarchy: 'snippet', name: @attributes[:default_design].gsub!(/^\"|\"?$/, '').gsub!(/^\'|\'?$/, ''), theme_id: context["theme_id"])
       end
 
       Liquid::Template.parse(content.code).render(context)

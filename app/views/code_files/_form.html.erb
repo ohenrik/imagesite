@@ -49,7 +49,7 @@
             <% if %w(snippet).include?(@code_file.hierarchy) %>
                 <div class="form-group">
                   <%= f.label :available_to, "Available to:" %>
-                  <%= f.select :available_to, [["Pages", "page"],["Photos", "photo"], ["Text", "text"], ["Titles", "title"], ["Person", "person"], ["Production", "production"]], {:include_blank => "- Hidden file -" }, {:multiple => true, class: "form-control"} %>
+                  <%= f.select :available_to, [["Pages", "page"],["Photos", "photo"], ["Text", "text"], ["Titles", "title"], ["Structure", "structure"], ["Person", "person"], ["Production", "production"]], {:include_blank => "- Hidden file -" }, {:multiple => true, class: "form-control"} %>
                   <div class="help-block">Determines what content the file can be used in.</div>
                 </div>
             <% end %>

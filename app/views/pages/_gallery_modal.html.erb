@@ -12,7 +12,7 @@
             <div class="row">
                 <% @pages.each do |page| %>
                         <div class="thumb col-xs-6 col-md-4">
-                            <%= link_to add_page_to_page_path(id: page.id, page_id: @page_id, page_item_id: @page_item_id), remote: true, method: :post, class: "thumbnail" do %>
+                            <%= link_to add_page_item_path(@page_id, item_id: page.id, item_type: page.class.name, page_item_id: @page_item_id), remote: true, method: :post, class: "thumbnail" do %>
                                 <% if page.photo %>
                                     <%= image_tag page.photo.image_url(:large_thumb).to_s, class: "img-responsive" %>
                                 <% else %>

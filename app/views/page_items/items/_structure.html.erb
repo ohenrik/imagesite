@@ -1,0 +1,91 @@
+<% if page_item.is_type == "Structure" %>
+	 <div class="col-xs-12 page_item" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>" data-gallery="true">
+		<div class="list-group-item " >
+			
+			<div class="page-header">
+				<h4 class="list-group-item-heading">
+					<i class="fa fa-puzzle-piece text-muted"></i>&nbsp;
+					Structure <%= "- " + page_item.design.to_s if page_item.design.present?  %>
+				</h4>
+			</div>
+
+			
+			<div class="row" id="structure_<%= page_item.id %>">
+				<% if page_item.has_children? %>
+					<%= nested_page_items(page_item.children) %>
+				<% else %>
+					<div class="col-xs-12" id="empty_structure_<%= page_item.id %>">
+						<div class="alert alert-info">
+							<strong>No items added:</strong> Add photos or pages with the buttons bellow.
+						</div>
+					</div>
+				<% end %>
+			</div>
+
+			<div class="list-item-footer">
+
+				<div class="btn-group">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						Add item <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li>
+							<%= link_to photos_gallery_modal_path(:page_id => page_item.page_id, :page_item_id => page_item.id ), remote: true do %>
+								<i class="fa fa-picture-o fa-fw"></i> <span class="hidden-xs">Photo</span>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to pages_gallery_modal_path(:page_id => page_item.page_id, :page_item_id => page_item.id ), remote: true do %>
+								<i class="fa fa-file-text-o fa-fw"></i> <span class="hidden-xs">Page</span>
+							<% end %>
+						</li>
+				        <li>
+				            <%= link_to add_page_item_path(@page, other_type: "Title", :page_item_id => page_item.id), method: :post, remote: true do %>
+				            	<i class="fa fa-header fa-fw"></i> <span class="hidden-xs">Title</span>
+			            	<% end %>
+				        </li>
+				        <li>
+				            <%= link_to add_page_item_path(@page, other_type: "Text", :page_item_id => page_item.id), method: :post, remote: true do %>
+				            	<i class="fa fa-keyboard-o fa-fw"></i> <span class="hidden-xs">Text</span>
+			            	<% end %>
+				        </li>
+				        <li>
+				            <%= link_to add_page_item_path(@page, other_type: "Structure", :page_item_id => page_item.id), method: :post, remote: true do %>
+				            	<i class="fa fa-puzzle-piece fa-fw"></i> <span class="hidden-xs">Structure</span>
+			            	<% end %>
+				        </li>
+				        <li>
+				            <%= link_to productions_gallery_modal_path(:page_id => @page.id, :page_item_id => page_item.id ), remote: true do %>
+				            	<i class="fa fa-bullhorn fa-fw"></i> <span class="hidden-xs">Production</span>
+			            	<% end %>
+				        </li>
+				        <li>
+				            <%= link_to people_gallery_modal_path(:page_id => @page.id, :page_item_id => page_item.id ), remote: true do %>
+				            	<i class="fa fa-user fa-fw"></i> <span class="hidden-xs">Person</span>
+			            	<% end %>
+				        </li>
+
+					</ul>
+				</div>
+
+
+				<%= link_to page_item_settings_path(page_item), remote: true, class: "btn btn-default" do %>
+					<i class="fa fa-cogs"></i> <span class="hidden-xs">Settings</span>
+				<% end %>
+				<%= link_to page_item, method: :delete, remote: true, class: "btn btn-default" do %>
+					<i class="fa fa-trash-o"></i> <span class="hidden-xs">Delete</span>
+				<% end %>
+
+				<span class="pull-right">
+					<%= link_to "#", class: "btn btn-default order-up", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() } do %>
+						<i class="fa fa-caret-up"></i>
+					<% end %>
+					<%= link_to "#", class: "btn btn-default order-down", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() } do %>
+						<i class="fa fa-caret-down"></i>
+					<% end %>
+				</span>
+			</div>
+
+		</div>
+	</div>
+<% end %>

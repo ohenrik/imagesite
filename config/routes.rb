@@ -27,9 +27,8 @@ Imagesite::Application.routes.draw do
         get 'pages/:id/toggle_status' => 'pages#toggle_status', as: :toggle_page_status
         get 'pages/:id/settings' => 'pages#settings', as: :page_settings
         get 'pages/gallery_modal' => 'pages#gallery_modal', as: :pages_gallery_modal
-        post 'pages/:id/add_to_menu/:menu_id' => 'pages#add_to_menu', as: :add_page_to_menu 
-        post 'pages/add_to_page/:id' => 'pages#add_to_page', as: :add_page_to_page
-        post 'pages/:id/add_other_page_item' => 'pages#add_other_page_item', as: :add_other_page_item
+        post 'pages/:id/add_to_menu/:menu_id' => 'pages#add_to_menu', as: :add_page_to_menu
+        post 'pages/:id/add_page_item' => 'pages#add_page_item', as: :add_page_item
         resources :pages
 
         # Page Items
@@ -45,13 +44,11 @@ Imagesite::Application.routes.draw do
         get 'photos/all/tags/:tag' => 'photos#all', as: :filter_tag
         get 'photos/gallery_modal' => 'photos#gallery_modal', as: :photos_gallery_modal
         get 'photos/photos_modal' => 'photos#photo_manager_modal', as: :photo_manager_modal
-        post 'photos/add_to_page/:id' => 'photos#add_to_page', as: :add_photo_to_page
         resources :photos
 
         # People
         post 'people/:id/add_to_menu/:menu_id' => 'people#add_to_menu', as: :add_person_to_menu 
         get 'people/gallery_modal' => 'people#gallery_modal', as: :people_gallery_modal
-        post 'people/add_to_page/:id' => 'people#add_to_page', as: :add_person_to_page
         resources :people
 
 

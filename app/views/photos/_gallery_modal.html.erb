@@ -11,9 +11,8 @@
         <div class="gallery-photo">
             <div class="row">
                 <% @photos.each do |photo| %>
-                    
                         <div class="thumb col-xs-6 col-md-4">
-                            <%= link_to add_photo_to_page_path(id: photo.id, page_id: @page_id, page_item_id: @page_item_id), remote: true, method: :post, class: "thumbnail" do %>
+                            <%= link_to add_page_item_path(@page_id, item_id: photo.id, item_type: photo.class.name, page_item_id: @page_item_id), remote: true, method: :post, class: "thumbnail" do %>
                                 <%= image_tag photo.image_url(:large_thumb), class: "img-responsive" %>
                             <% end %>
                             <h4><%= photo.name %></h4>

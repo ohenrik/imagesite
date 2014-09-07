@@ -107,15 +107,15 @@
     <hr>
     <div class="row">
         <div class="col-sm-4">
-            <%= link_to "Add Title", add_other_page_item_path(@page, other_type: "Title"), method: :post, remote: true, class: "btn btn-default btn-block btn-lg" %>
+            <%= link_to "Add Title", add_page_item_path(@page, other_type: "Title"), method: :post, remote: true, class: "btn btn-default btn-block btn-lg" %>
             <br>
         </div>
         <div class="col-sm-4">
-            <%= link_to "Add Text field",  add_other_page_item_path(@page, other_type: "Text"), method: :post, remote: true, class: "btn btn-default btn-block btn-lg" %>
+            <%= link_to "Add Text field",  add_page_item_path(@page, other_type: "Text"), method: :post, remote: true, class: "btn btn-default btn-block btn-lg" %>
             <br>
         </div>
         <div class="col-sm-4">
-            <%= link_to "Add Gallery",  add_other_page_item_path(@page, other_type: "Gallery"), method: :post, remote: true, class: "btn btn-default btn-block btn-lg" %>
+            <%= link_to "Add Structure",  add_page_item_path(@page, other_type: "Structure"), method: :post, remote: true, class: "btn btn-default btn-block btn-lg" %>
             <br>
         </div>
         <div class="col-sm-4">

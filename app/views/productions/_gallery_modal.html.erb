@@ -12,7 +12,7 @@
             <div class="row">
                 <% @productions.each do |production| %>
                         <div class="thumb col-xs-6 col-md-4">
-                            <%= link_to add_production_to_page_path(id: production.id, page_id: @page_id, page_item_id: @page_item_id), remote: true, method: :post, class: "thumbnail" do %>
+                            <%= link_to add_page_item_path(@page_id, item_id: production.id, item_type: production.class.name, page_item_id: @page_item_id), remote: true, method: :post, class: "thumbnail" do %>
                                 <% if production.photo %>
                                     <%= image_tag production.photo.image_url(:large_thumb).to_s, class: "img-responsive" %>
                                 <% else %>
