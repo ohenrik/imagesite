@@ -99,48 +99,18 @@
 
     <!-- This is where page_items happen -->
     <div class="row" id="page_items">
-        <%= nested_page_items(@page.items, f) %>
+        <%#= nested_page_items(@page.items, f) %>
     </div>
 
-
+    <div class="row">
+        <div class="col-sm-4">
+            <%#= link_to_add_fields "Add Structure", f, :page_items, "btn btn-link pull-right" %>
+            <%#= link_to "Add Structure",  add_page_item_path(@page, other_type: "Structure"), method: :post, remote: true, class: "btn btn-default btn-block btn-lg" %>
+            <br>
+        </div>
+    </div>
 
 <% end %>
 
 
-    <hr>
-    <div class="row" id="page_items">
-        <%#= nested_page_items(@page.items) %>
-    </div>
 
-
-    <hr>
-    <div class="row">
-        <div class="col-sm-4">
-            <%= link_to "Add Title", add_page_item_path(@page, other_type: "Title"), method: :post, remote: true, class: "btn btn-default btn-block btn-lg" %>
-            <br>
-        </div>
-        <div class="col-sm-4">
-            <%= link_to "Add Text field",  add_page_item_path(@page, other_type: "Text"), method: :post, remote: true, class: "btn btn-default btn-block btn-lg" %>
-            <br>
-        </div>
-        <div class="col-sm-4">
-            <%= link_to "Add Structure",  add_page_item_path(@page, other_type: "Structure"), method: :post, remote: true, class: "btn btn-default btn-block btn-lg" %>
-            <br>
-        </div>
-        <div class="col-sm-4">
-            <%= link_to "Add Photos", photos_gallery_modal_path(:page_id => @page.id ), remote: true, class: "btn btn-default btn-block btn-lg" %>
-            <br>
-        </div>
-        <div class="col-sm-4">
-            <%= link_to "Add Productions", productions_gallery_modal_path(:page_id => @page.id ), remote: true, class: "btn btn-default btn-block btn-lg" %>
-            <br>
-        </div>
-        <div class="col-sm-4">
-            <%= link_to "Add Pages", pages_gallery_modal_path(:page_id => @page.id ), remote: true, class: "btn btn-default btn-block btn-lg" %>
-            <br>
-        </div>
-        <div class="col-sm-4">
-            <%= link_to "Add People", people_gallery_modal_path(:page_id => @page.id ), remote: true, class: "btn btn-default btn-block btn-lg" %>
-            <br>
-        </div>
-    </div>

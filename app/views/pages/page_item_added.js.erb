@@ -1,4 +1,4 @@
-$('#<%= @page_item.parent.nil? ? "page_items" : "structure_#{@page_item.parent.id}"  %>').append('<%= escape_javascript(render( :partial => "pages/page_item", locals: { page_item: @page_item }, :formats => [:html])) %>');
+$('#<%= @page_item.parent.nil? ? "page_items" : "structure_#{@page_item.parent.id}"  %>').append('<%= escape_javascript(render( :partial => "pages/page_item", locals: { page_item: @page_item, f: f }, :formats => [:html])) %>');
 <% if(@page_item.is_only_child? && !@page_item.root?)%>
 	// Remove the empty emssage if it exists
 	$('#empty_structure_<%= @page_item.parent.id %>').remove();

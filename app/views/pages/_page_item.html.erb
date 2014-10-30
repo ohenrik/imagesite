@@ -3,14 +3,14 @@
 
 <%= render partial: 'pages/items/text', locals: { page_item: page_item, f: f } if page_item.is_type == 'Text'  %>
 
-<%= render(partial: 'pages/items/structure', locals: { page_item: page_item, f: f}) if page_item.is_type == 'Structure'  %>
+<%= render partial: 'pages/items/structure', locals: { page_item: page_item} if page_item.is_type == 'Structure'  %>
 
-<%= render partial: 'pages/items/photo', locals: { page_item: page_item} if page_item.is_type == 'Photo'  %>
+<%= render partial: 'pages/items/photo', locals: { page_item: page_item, f: f } if page_item.is_type == 'Photo'  %>
 
-<%= render partial: 'pages/items/page', locals: { page_item: page_item } if page_item.is_type == 'Page'  %>
+<%= render partial: 'pages/items/page', locals: { page_item: page_item, f: f  } if page_item.is_type == 'Page'  %>
 
-<%= render partial: 'pages/items/person', locals: { page_item: page_item} if page_item.is_type == 'Person' %>
+<%= render partial: 'pages/items/person', locals: { page_item: page_item, f: f } if page_item.is_type == 'Person' %>
 
-<%= render partial: 'pages/items/production', locals: { page_item: page_item} if page_item.is_type == 'Production' %>
+<%= render partial: 'pages/items/production', locals: { page_item: page_item, f: f } if page_item.is_type == 'Production' %>
 
 

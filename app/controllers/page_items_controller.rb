@@ -80,7 +80,7 @@ class PageItemsController < ApplicationController
     update_position(@order)
 
     #sleep 1.5
-    render js: "setTimeout(function() { $('.save-page-items').button('reset') }, 500);" 
+    render js: "#{@order}; setTimeout(function() { $('.save-page-items').button('reset') }, 500);" 
   end
 
   private

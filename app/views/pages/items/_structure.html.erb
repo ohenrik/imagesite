@@ -4,10 +4,18 @@
 		<div class="list-group-item " >
 			
 			<div class="page-header">
+				<%= f.fields_for :page_items, page_item do |f| %>
 				<h4 class="list-group-item-heading">
 					<i class="fa fa-puzzle-piece text-muted"></i>&nbsp;
 					Structure <%= "- " + page_item.design.to_s if page_item.design.present?  %>
+					<span class="pull-right">
+			            <%= f.hidden_field :_destroy %>
+			            <%= link_to '#', class: "remove_fields", data: { type_id: "#page_item_#{page_item.id}" } do %>
+			                <i class="fa fa-trash-o fa-fw"></i>
+			            <% end %>
+			        </span>
 				</h4>
+				<% end %>
 			</div>
 
 			
@@ -41,7 +49,7 @@
 							<% end %>
 						</li>
 				        <li>
-				            <%= link_to add_page_item_path(@page, other_type: "Title", :page_item_id => page_item.id), method: :post, remote: true do %>
+				            <%= link_to add_page_item_path(@page, other_type: "Title", :page_item_id => page_item.id ), method: :post, remote: true do %>
 				            	<i class="fa fa-header fa-fw"></i> <span class="hidden-xs">Title</span>
 			            	<% end %>
 				        </li>
@@ -68,14 +76,6 @@
 
 					</ul>
 				</div>
-
-
-				<%= link_to page_item_settings_path(page_item), remote: true, class: "btn btn-default" do %>
-					<i class="fa fa-cogs"></i> <span class="hidden-xs">Settings</span>
-				<% end %>
-				<%= link_to page_item, method: :delete, remote: true, class: "btn btn-default" do %>
-					<i class="fa fa-trash-o"></i> <span class="hidden-xs">Delete</span>
-				<% end %>
 
 				<span class="pull-right">
 					<%= link_to "#", class: "btn btn-default order-up", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() } do %>

@@ -12,13 +12,18 @@
     		<div class="caption">
 				<h4 class="list-group-item-heading">
 					<i class="fa fa-users fa-fw text-muted"></i> <%= page_item.title %>
+					<%= f.fields_for :page_items, page_item do |f| %>
+						<span class="pull-right">
+				            <%= f.hidden_field :_destroy %>
+				            <%= link_to '#', class: "remove_fields", data: { type_id: "#page_item_#{page_item.id}" } do %>
+				                <i class="fa fa-trash-o fa-fw"></i>
+				            <% end %>
+				        </span>
+					<% end %>
 				</h4>
 			</div>
 		</div>
 
-		<%= link_to "Settings", page_item_settings_path(page_item), remote: true, class: "btn btn-default" %>	
-
-		<%= link_to "Delete", page_item, class: "btn btn-default", method: :delete, remote: true %>
 		<span class="pull-right">
 			<%= link_to "#", class: "btn btn-default order-up", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() }  do %>
 				<i class="fa fa-caret-up"></i>

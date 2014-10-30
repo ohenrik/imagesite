@@ -19,18 +19,19 @@
 			                	<i class="fa fa-link fa-fw"></i> <span class="hidden-xs">Link</span>
 			                <% end %>
 			            </div>
-			            <a class="btn btn-default pull-right" data-wysihtml5-action="change_view" href="javascript:;" unselectable="on"><i class="fa fa-code"></i></a>
+						<span class="pull-right">
+				            <%= f.hidden_field :_destroy %>
+				            <a class="btn btn-default" data-wysihtml5-action="change_view" href="javascript:;" unselectable="on"><i class="fa fa-code"></i></a>
+				            <%= link_to '#', class: "remove_fields btn btn-default", data: { type_id: "#page_item_#{page_item.id}" } do %>
+				                <i class="fa fa-trash-o"></i>
+				            <% end %>
+				        </span>
 			        </div>
-			        <%= f.text_area :content, rows: 15, class: "form-control rich-editor content-editor", id: "wysihtml5-content_#{ page_item.id }", plaseholder: "Write content here..." %>  
+			        <%= f.text_area :content, rows: 15, class: "form-control rich-editor content-editor", id: "wysihtml5-content_#{ page_item.id }", plaseholder: "Write content here..." %> 
+
 			    </div>
 		
 				<div class="">
-					<%= link_to page_item_settings_path(page_item), remote: true, class: "btn btn-default" do %>
-						<i class="fa fa-cogs"></i> <span class="hidden-xs">Settings</span>
-					<% end %>
-					<%= link_to page_item_path(page_item), method: :delete, remote: true, class: "btn btn-default" do %>
-						<i class="fa fa-trash-o"></i> <span class="hidden-xs">Delete</span>
-					<% end %>
 
 					<span class="pull-right">
 						<%= link_to "#", class: "btn btn-default order-up", data: { page_item: "#page_item_#{page_item.id}", sort_url: sort_page_items_path() }  do %>

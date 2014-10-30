@@ -54,6 +54,12 @@
 
 
 
+
+	$(document).on 'click', '.remove_fields', (event) ->
+		$(this).prev('input[type=hidden]').val('1')
+		$($(this).data("type-id")).hide()
+		event.preventDefault()
+
 	#$('.page_items').nestable
 	#	rootClass: 'page_items'
 	#	handleClass: 'list-item-image'
@@ -111,7 +117,7 @@
 		page_item_order = []
 		structure_item_order = []
 		$('.page_item').each (i) ->
-			if $(this).data('structure')
+			if $(this).data('structure') == true
 				$('.structure_item_' + $(this).data('id')).each ->
 					structure_item_order.push id: $(this).data('id')
 				page_item_order.push id: $(this).data('id'), children: structure_item_order
@@ -120,6 +126,8 @@
 		page_item_order
 		#alert page_item_order[0].children[0].id
 		
+
+
 
 	
 

@@ -1,6 +1,6 @@
 <% if page_item.is_type == "Page"  %>
 
-	<div class="col-xs-12 col-sm-6 col-md-4 <%= page_item.parent.nil? ? 'page_item' : "strucure_item_#{page_item.parent.id}" %>  space-down" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>" data-structure-id="<%= page_item.parent.try(:id) %>" >
+	<div class="col-xs-12 col-sm-6 col-md-4 <%= page_item.parent.nil? ? 'page_item' : "structure_item_#{page_item.parent.id}" %>  space-down" id="page_item_<%= page_item.id %>" data-id="<%= page_item.id %>" data-structure-id="<%= page_item.parent.try(:id) %>" >
 		
 		<div class="thumbnail">
 		
@@ -13,17 +13,18 @@
     		<div class="caption">
 				<h4 class="list-group-item-heading">
 					<i class="fa fa-file-text-o fa-fw text-muted"></i> <%= page_item.title %>
+					<%= f.fields_for :page_items, page_item do |f| %>
+						<span class="pull-right">
+				            <%= f.hidden_field :_destroy %>
+				            <%= link_to '#', class: "remove_fields", data: { type_id: "#page_item_#{page_item.id}" } do %>
+				                <i class="fa fa-trash-o fa-fw"></i>
+				            <% end %>
+				        </span>
+					<% end %>
 				</h4>
 			</div>
 		</div>
 
-		<%= link_to page_item_settings_path(page_item), remote: true, class: "btn btn-default" do %>
-			<i class="fa fa-cogs"></i> <span class="hidden-xs">Settings</span>
-		<% end %>
-
-		<%= link_to page_item, class: "btn btn-default", method: :delete, remote: true do %>
-			<i class="fa fa-trash-o"></i> <span class="hidden-xs">Delete</span>
-		<% end %>
 
 		<span class="pull-right">
 			<%= link_to "#", class: "btn btn-default order-up", data: { page_item: "#page_item_#{page_item.id}"}  do %>

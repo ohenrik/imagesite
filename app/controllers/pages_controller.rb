@@ -128,7 +128,7 @@ class PagesController < ApplicationController
     respond_to do |format|
       if @page_item
         format.html { redirect_to edit_page_path(@page.id), notice: 'Item successfully added' }
-        format.js { render 'pages/page_item_added', locals: {f: @page_item}, layout: false } 
+        format.js { render 'page_item_added', locals: {f: params[:f]},layout: false } 
       else
         format.html { redirect_to edit_page_path(@page.id), notice: 'An error occured, item no added to menu.' }
         format.json { render json: @menu.errors, status: :unprocessable_entity }
