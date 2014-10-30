@@ -1,4 +1,4 @@
 module PhotosHelper
 
-	
+  
 end

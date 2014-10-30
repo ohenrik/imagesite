@@ -15,9 +15,9 @@ class Production < ActiveRecord::Base
   liquid_methods :thumbnail, :name, :description, :link, :events, :photos
 
   
-	def link
-		"/productions/#{id}"
-	end
+  def link
+    "/productions/#{id}"
+  end
 
   def thumbnail
     if photo.blank?
