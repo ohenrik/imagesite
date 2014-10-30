@@ -1,8 +1,8 @@
 module Permissions
-	class PremiumPermission < MemberPermission
-		def initialize(current_user, subdomain, host)
+  class PremiumPermission < MemberPermission
+    def initialize(current_user, subdomain, host)
 
-			super
-		end
-	end
+      super
+    end
+  end
 end

@@ -1,5 +1,5 @@
 class Customer < ActiveRecord::Base
-	has_many :tickets
+  has_many :tickets
 
-	validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true
 end

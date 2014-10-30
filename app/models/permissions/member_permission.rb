@@ -1,98 +1,98 @@
 module Permissions
-	class MemberPermission < GuestPermission
-		def initialize(user, subdomain, host)
-			if user
-				allow :users, [:edit, :update, :settings, :update_settings, :edit_alias_domain, :set_alias_domain ,:remove_alias_domain] do |inst|
-					inst.id == user.id
-				end
-				allow_param :user, [:current_theme, :site_title, :site_tagline, :alias_domain, :home_type, :home_id]
-			end
-			# This checks to see if the user is loged in with the account he is trying to edit
-			if user && ((user.subdomain == subdomain) or (user.alias_domain == host))
-				# Person
-				allow :people, [:index, :show, :new, :create, :edit, :update, :destroy, :gallery_modal, :add_to_menu]
-				allow_param :person, [:first_name, :last_name, :title, :description, :email, :phone, :mobile_phone, :photo_id] 
+  class MemberPermission < GuestPermission
+    def initialize(user, subdomain, host)
+      if user
+        allow :users, [:edit, :update, :settings, :update_settings, :edit_alias_domain, :set_alias_domain ,:remove_alias_domain] do |inst|
+          inst.id == user.id
+        end
+        allow_param :user, [:current_theme, :site_title, :site_tagline, :alias_domain, :home_type, :home_id]
+      end
+      # This checks to see if the user is loged in with the account he is trying to edit
+      if user && ((user.subdomain == subdomain) or (user.alias_domain == host))
+        # Person
+        allow :people, [:index, :show, :new, :create, :edit, :update, :destroy, :gallery_modal, :add_to_menu]
+        allow_param :person, [:first_name, :last_name, :title, :description, :email, :phone, :mobile_phone, :photo_id] 
 
 
 
-				# Page Item
-				allow :page_items, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :settings, :sort]
-				page_item_attributes = [:position, :page_id, :pageable_id, :pageable_type, :no_item_link, :design, :item_link, :item_class, :description, :title, :content, :pageable, :gallery]
-				allow_param :page_item, page_item_attributes
+        # Page Item
+        allow :page_items, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :settings, :sort]
+        page_item_attributes = [:position, :page_id, :pageable_id, :pageable_type, :no_item_link, :design, :item_link, :item_class, :description, :title, :content, :pageable, :gallery]
+        allow_param :page_item, page_item_attributes
 
-				# Page
-				allow :pages, [:index, :new, :create, :edit, :update, :delete, :destroy, :settings, :toggle_status, :add_page_item, :gallery_modal, :add_other_page_item, :set_thumbnail, :set_home, :add_to_menu]
-				page_item_attributes << [:id, :_destroy]
-				allow_param :page, [:name, :content, :excerpt, :status, :photo_id, :layout_name, :template_name, page_items_attributes: page_item_attributes]
-
-
-				# Photo
-				allow :photos, [:all, :new, :create, :edit, :update, :destroy, :gallery_modal, :photo_manager_modal, :thumbnail_modal, :set_as_thumbnail, :remove_thumbnail]
-				allow_param :photo, [:name, :image, :edit_tag_list, :description]
-
-				# Tag
-				allow :tags, [:index, :new, :create, :edit, :update, :delete, :destroy, :add_to_menu]
-				allow_param :tag, [:name]
-
-				# Menu
-				allow :menus, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :add_item_to_menu]
-				allow_param :menu, [:name, :menu_item_id, :slug]
-
-				# Menu item
-				allow :menu_items, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :sort]
-				allow_param :menu_item, [:menu_id, :menuable_id, :menuable_type, :name, :description, :new_page, :ancestry, :position, :url]
-
-				# Messages
-				allow :messages, [:index, :show, :new, :edit, :destroy, :delete, :update]
-				allow_param :message, [:subject, :content, :sender_email, :sender_name, :sender_id, :sender_type, :receiver_id, :receiver_type, :message_type]
-
-				# Carts
-				allow :carts, [:index, :show, :new, :edit, :destroy, :delete, :updates]
-				allow_param :cart, []
-
-				# Line Items
-				allow :line_items, [:index, :show, :create, :new, :edit, :destroy, :delete, :update]
-				allow_param :line_item, [:cart_id, :offer_id]
+        # Page
+        allow :pages, [:index, :new, :create, :edit, :update, :delete, :destroy, :settings, :toggle_status, :add_page_item, :gallery_modal, :add_other_page_item, :set_thumbnail, :set_home, :add_to_menu]
+        page_item_attributes << [:id, :_destroy]
+        allow_param :page, [:name, :content, :excerpt, :status, :photo_id, :layout_name, :template_name, page_items_attributes: page_item_attributes]
 
 
-				# Shared
-				allow :shared, [:editor_link_modal]
+        # Photo
+        allow :photos, [:all, :new, :create, :edit, :update, :destroy, :gallery_modal, :photo_manager_modal, :thumbnail_modal, :set_as_thumbnail, :remove_thumbnail]
+        allow_param :photo, [:name, :image, :edit_tag_list, :description]
 
-				# Tickets
-				allow :tickets, [:index, :show, :new, :create, :edit, :update, :delete, :destroy]
-				allow_param :ticket, [:name, :price, :currency, :offer_id, :customer_id]
+        # Tag
+        allow :tags, [:index, :new, :create, :edit, :update, :delete, :destroy, :add_to_menu]
+        allow_param :tag, [:name]
 
-				# Offer
-				allow :offers, [:new, :create, :edit, :update, :destroy]
-				offer_attributes = [:name, :price, :currency, :capacity, :offerable_id, :offerable_type] 
-				allow_param :offer, offer_attributes
+        # Menu
+        allow :menus, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :add_item_to_menu]
+        allow_param :menu, [:name, :menu_item_id, :slug]
 
-				# Customers
-				allow :customers, [:index, :show, :new, :create, :edit, :update, :delete, :destroy]
-				allow_param :customer, [:first_name, :last_name, :email]
+        # Menu item
+        allow :menu_items, [:index, :show, :new, :create, :edit, :update, :delete, :destroy, :sort]
+        allow_param :menu_item, [:menu_id, :menuable_id, :menuable_type, :name, :description, :new_page, :ancestry, :position, :url]
 
-				# Event
-				allow :events, [:new, :index, :create, :edit, :update, :destroy, :gallery_modal, :add_to_menu]
-				offer_attributes << [:id, :_destroy]
-				event_attributes = [:name, :description, :venue, :capacity, :address, :status, :start_date, :end_date, :start_time, :end_time, :photo_id, offers_attributes: offer_attributes]
-				allow_param :event, event_attributes
+        # Messages
+        allow :messages, [:index, :show, :new, :edit, :destroy, :delete, :update]
+        allow_param :message, [:subject, :content, :sender_email, :sender_name, :sender_id, :sender_type, :receiver_id, :receiver_type, :message_type]
 
-				# Production
-				allow :productions, [:new, :index, :create, :edit, :update, :destroy, :gallery_modal, :add_to_menu]
-				event_attributes << [:id, :_destroy]
-				allow_param :production, [:name, :photo_id, :description, events_attributes: event_attributes] 
+        # Carts
+        allow :carts, [:index, :show, :new, :edit, :destroy, :delete, :updates]
+        allow_param :cart, []
+
+        # Line Items
+        allow :line_items, [:index, :show, :create, :new, :edit, :destroy, :delete, :update]
+        allow_param :line_item, [:cart_id, :offer_id]
 
 
-				# Theme
-				allow :themes, [:show, :index, :edit, :update, :create, :new, :destroy, :select_theme, :publish_theme, :install_theme, :public_index, :public_destroy]
-				allow_param :theme, [:name, :thumbnail]
+        # Shared
+        allow :shared, [:editor_link_modal]
 
-				# Code_file
-				allow :code_files, [:show, :index, :edit, :update, :create, :new, :destroy, :public_index, :public_edit]
-				allow_param :code_file, [:theme_id, :name, :display_name, :code, :hierarchy, :created_at, :updated_at, :static_file, :available_in => [], :available_to => []]
+        # Tickets
+        allow :tickets, [:index, :show, :new, :create, :edit, :update, :delete, :destroy]
+        allow_param :ticket, [:name, :price, :currency, :offer_id, :customer_id]
 
-			end
-			super()
-		end
-	end
+        # Offer
+        allow :offers, [:new, :create, :edit, :update, :destroy]
+        offer_attributes = [:name, :price, :currency, :capacity, :offerable_id, :offerable_type] 
+        allow_param :offer, offer_attributes
+
+        # Customers
+        allow :customers, [:index, :show, :new, :create, :edit, :update, :delete, :destroy]
+        allow_param :customer, [:first_name, :last_name, :email]
+
+        # Event
+        allow :events, [:new, :index, :create, :edit, :update, :destroy, :gallery_modal, :add_to_menu]
+        offer_attributes << [:id, :_destroy]
+        event_attributes = [:name, :description, :venue, :capacity, :address, :status, :start_date, :end_date, :start_time, :end_time, :photo_id, offers_attributes: offer_attributes]
+        allow_param :event, event_attributes
+
+        # Production
+        allow :productions, [:new, :index, :create, :edit, :update, :destroy, :gallery_modal, :add_to_menu]
+        event_attributes << [:id, :_destroy]
+        allow_param :production, [:name, :photo_id, :description, events_attributes: event_attributes] 
+
+
+        # Theme
+        allow :themes, [:show, :index, :edit, :update, :create, :new, :destroy, :select_theme, :publish_theme, :install_theme, :public_index, :public_destroy]
+        allow_param :theme, [:name, :thumbnail]
+
+        # Code_file
+        allow :code_files, [:show, :index, :edit, :update, :create, :new, :destroy, :public_index, :public_edit]
+        allow_param :code_file, [:theme_id, :name, :display_name, :code, :hierarchy, :created_at, :updated_at, :static_file, :available_in => [], :available_to => []]
+
+      end
+      super()
+    end
+  end
 end
