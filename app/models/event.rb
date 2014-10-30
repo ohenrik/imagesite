@@ -20,11 +20,11 @@ class Event < ActiveRecord::Base
     end  
   
     def start_datetime
-    	if !start_time.blank?
-    		DateTime.new(start_date.year, start_date.month, start_date.day, start_time.hour, start_time.min, start_time.sec, start_time.zone)	
-    	else
-    		start_date
-    	end
+      if !start_time.blank?
+        DateTime.new(start_date.year, start_date.month, start_date.day, start_time.hour, start_time.min, start_time.sec, start_time.zone) 
+      else
+        start_date
+      end
     end
 
     def end_datetime

@@ -1,7 +1,7 @@
 module LiquidFilters
 
-	include ActionView::Helpers::NumberHelper
-	include ActionView::Helpers::TextHelper
+  include ActionView::Helpers::NumberHelper
+  include ActionView::Helpers::TextHelper
 
 
 

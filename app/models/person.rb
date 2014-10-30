@@ -3,27 +3,27 @@ class Person < ActiveRecord::Base
   has_many :sub_items, :as => :pageable, :class_name => "PageItem", :dependent => :destroy
   has_many :menu_items, :as => :menuable, :dependent => :destroy
 
-	# Liquid methods
-	liquid_methods :thumbnail, :name, :description, :link, :photo, :first_name, :last_name, :email, :title, :id
+  # Liquid methods
+  liquid_methods :thumbnail, :name, :description, :link, :photo, :first_name, :last_name, :email, :title, :id
 
 
-	def name
-		return [self.try(:first_name), self.try(:last_name)].join(" ")
-	end
+  def name
+    return [self.try(:first_name), self.try(:last_name)].join(" ")
+  end
 
-	def link
-		"/people/#{id}"
-	end
+  def link
+    "/people/#{id}"
+  end
 
-	def thumbnail
-		if photo.nil?
-			ActionController::Base.helpers.image_path "default/thumb_no-thumb.png"
-		else
-			photo.image_url(:thumb)
-		end
-	end
+  def thumbnail
+    if photo.nil?
+      ActionController::Base.helpers.image_path "default/thumb_no-thumb.png"
+    else
+      photo.image_url(:thumb)
+    end
+  end
 
 
-	
+  
 
 end

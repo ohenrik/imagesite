@@ -1,21 +1,21 @@
 require 'zip'
 class Theme < ActiveRecord::Base
 
-	mount_uploader :thumbnail, ThemeThumbnailUploader
+  mount_uploader :thumbnail, ThemeThumbnailUploader
 
-	belongs_to :user
+  belongs_to :user
   has_many :code_files, :order => "updated_at DESC", dependent: :destroy
   accepts_nested_attributes_for :code_files
   
-	# Validaties theme upload
-	validates :name, presence: true
+  # Validaties theme upload
+  validates :name, presence: true
 
 
-	# After deletion of the zip file, delete the theme as well.
-	#after_destroy :delete_extract
+  # After deletion of the zip file, delete the theme as well.
+  #after_destroy :delete_extract
   liquid_methods :id
 
-	# Extract the zip file
+  # Extract the zip file
     def extract_preview
       file_path = File.join(Rails.public_path, self.zip_url)
 

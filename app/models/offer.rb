@@ -1,12 +1,12 @@
 class Offer < ActiveRecord::Base
-	belongs_to :offerable, polymorphic: true
-	has_many :tickets
-	has_many :line_items
+  belongs_to :offerable, polymorphic: true
+  has_many :tickets
+  has_many :line_items
   has_many :carts, through: :line_items
   
-	liquid_methods :price, :name, :id
+  liquid_methods :price, :name, :id
 
-	before_destroy :ensure_not_referenced_by_any_line_item
+  before_destroy :ensure_not_referenced_by_any_line_item
 
 private
 
